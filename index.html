@@ -1,56 +1,33 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation</title>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-</head>
-<body>
+<audio id="musik_bg" loop></audio>
+<div id="cover">
+    <div>
+        <p>THE WEDDING OF</p>
+        <h1 id="nama_pria_cover"></h1>
+        <h1 class="gold">&</h1>
+        <h1 id="nama_wanita_cover"></h1>
+        <p id="tgl_cover"></p>
+        <button class="btn-buka" onclick="bukaUndangan()">BUKA UNDANGAN</button>
+    </div>
+</div>
 
-    <section id="cover">
-        <div class="overlay"></div>
-        <div class="content animate__animated animate__fadeIn">
-            <p>The Wedding of</p>
-            <h1 id="nama_pria_cover">Pria</h1>
-            <h1 class="ampersand">&</h1>
-            <h1 id="nama_wanita_cover">Wanita</h1>
-            <div class="line"></div>
-            <p id="tgl_cover"></p>
-            <button onclick="bukaUndangan()">Buka Undangan</button>
+<main id="main-content" class="hidden">
+    <section id="couple">
+        <h2>Mempelai</h2>
+        <div class="card">
+            <img id="foto_pria" class="mempelai-img">
+            <h3 id="nama_pria_lengkap"></h3>
+            <p id="ortu_pria"></p>
+        </div>
+        <h1 class="gold">&</h1>
+        <div class="card">
+            <img id="foto_wanita" class="mempelai-img">
+            <h3 id="nama_wanita_lengkap"></h3>
+            <p id="ortu_wanita"></p>
         </div>
     </section>
 
-    <main id="main-content" class="hidden">
-        <section class="mempelai">
-            <h2 class="section-title">Mempelai</h2>
-            <div class="mempelai-grid">
-                <div class="mempelai-box">
-                    <img id="foto_pria" src="" alt="Pria">
-                    <h3 id="nama_pria"></h3>
-                    <p id="ortu_pria"></p>
-                </div>
-                <div class="mempelai-box">
-                    <img id="foto_wanita" src="" alt="Wanita">
-                    <h3 id="nama_wanita"></h3>
-                    <p id="ortu_wanita"></p>
-                </div>
-            </div>
-        </section>
-
-        <section class="acara">
-            <div class="info-card">
-                <h2>Akad & Resepsi</h2>
-                <p id="tanggal_acara"></p>
-                <p id="jam_acara"></p>
-                <div class="line"></div>
-                <p id="lokasi_acara"></p>
-            </div>
-        </section>
-    </main>
-
-    <script src="script.js"></script>
-</body>
-</html>
+    <div class="navbar">
+        <a href="#couple">COUPLE</a>
+        <a href="#event">EVENT</a>
+    </div>
+</main>
