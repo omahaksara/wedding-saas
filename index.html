@@ -3,256 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wedding of Lesti & Fetet</title>
+    <title>Undangan Pernikahan Digital - Omahaksara</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-gold: #c5a059;
-            --soft-bg: #fdfbf7;
-            --text-dark: #333;
-        }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--soft-bg);
-            color: var(--text-dark);
-            scroll-behavior: smooth;
-        }
+        :root { --primary-gold: #c5a059; --soft-bg: #fdfbf7; --text-dark: #333; }
+        body, html { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; background-color: var(--soft-bg); color: var(--text-dark); scroll-behavior: smooth; overflow-x: hidden; }
+        
+        /* Loading Screen */
+        #loader { position: fixed; z-index: 9999; background: white; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
 
         /* Hero Section */
-        #section-cover {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://picsum.photos/1920/1080?wedding') center/cover no-repeat;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
+        #section-cover { height: 100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://picsum.photos/1920/1080?wedding') center/cover no-repeat; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; }
+        .hero-title { font-family: 'Great Vibes', cursive; font-size: 5rem; margin: 10px 0; }
+        .btn-open { margin-top: 30px; padding: 12px 30px; background-color: var(--primary-gold); color: white; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; }
 
-        .hero-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 5rem;
-            margin-bottom: 10px;
-        }
-
-        .hero-subtitle {
-            text-transform: uppercase;
-            letter-spacing: 5px;
-            font-size: 1.2rem;
-        }
-
-        .guest-box {
-            margin-top: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            padding: 20px 40px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-open {
-            margin-top: 30px;
-            padding: 12px 30px;
-            background-color: var(--primary-gold);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: 0.3s;
-            cursor: pointer;
-            border: none;
-        }
-
-        /* Section Styling */
-        section {
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .section-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
-            color: var(--primary-gold);
-            margin-bottom: 30px;
-        }
-
-        .couple-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .couple-photo {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            border: 5px solid var(--primary-gold);
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-
-        /* Event Card */
-        .event-card {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            margin: 20px auto;
-            max-width: 600px;
-        }
-
-        .event-card h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.2rem;
-            color: var(--primary-gold);
-        }
-
-        /* Gift Section */
-        .gift-box {
-            background: #fff;
-            border: 1px dashed var(--primary-gold);
-            padding: 20px;
-            margin: 10px auto;
-            max-width: 400px;
-            border-radius: 10px;
-        }
-
-        /* Floating Audio Control */
-        .audio-control {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 999;
-            background: var(--primary-gold);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        @media (max-width: 768px) {
-            .hero-title { font-size: 3.5rem; }
-            .couple-photo { width: 180px; height: 180px; }
-        }
+        section { padding: 80px 20px; text-align: center; }
+        .couple-photo { width: 200px; height: 200px; border-radius: 50%; border: 5px solid var(--primary-gold); object-fit: cover; margin-bottom: 20px; }
+        .event-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin: 20px auto; max-width: 500px; }
+        
+        .audio-control { position: fixed; bottom: 20px; right: 20px; z-index: 999; background: var(--primary-gold); color: white; width: 50px; height: 50px; border-radius: 50%; display: none; justify-content: center; align-items: center; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="audio-control" onclick="toggleMusic()" id="music-btn">
-        <span>♫</span>
+    <div id="loader"><h2>Memuat Undangan...</h2></div>
+
+    <div class="audio-control" onclick="toggleMusic()" id="music-btn">♫</div>
+    <audio id="myAudio" loop><source id="audio-src" src="" type="audio/mpeg"></audio>
+
+    <div id="main-content" style="display:none;">
+        <section id="section-cover">
+            <div style="letter-spacing: 5px; text-transform: uppercase;">The Wedding Of</div>
+            <h1 class="hero-title" id="display-couple-names">... & ...</h1>
+            <div style="margin-top: 20px; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.3);">
+                <p>Kepada Yth. Bapak/Ibu/Saudara/i</p>
+                <h2 id="guest-name">Tamu Undangan</h2>
+            </div>
+            <button class="btn-open" onclick="openInvitation()">Buka Undangan</button>
+        </section>
+
+        <section id="couple">
+            <h2 style="font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--primary-gold);">Mempelai</h2>
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; max-width: 1000px; margin: 0 auto;">
+                <div>
+                    <img id="img-pria" src="" class="couple-photo">
+                    <h2 id="name-pria" style="font-family: 'Great Vibes'; font-size: 2.5rem;"></h2>
+                    <p>Putra dari <br><span id="parents-pria"></span></p>
+                </div>
+                <div style="align-self: center; font-family: 'Great Vibes'; font-size: 3rem; color: var(--primary-gold);">&</div>
+                <div>
+                    <img id="img-wanita" src="" class="couple-photo">
+                    <h2 id="name-wanita" style="font-family: 'Great Vibes'; font-size: 2.5rem;"></h2>
+                    <p>Putri dari <br><span id="parents-wanita"></span></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="event" style="background-color: #f9f6f0;">
+            <h2 style="font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--primary-gold);">Acara</h2>
+            <div class="event-card">
+                <h3>Akad Nikah</h3>
+                <p><b id="date-akad"></b></p>
+                <hr>
+                <p id="address"></p>
+                <a id="link-maps" href="#" target="_blank" class="btn-open" style="display:inline-block; font-size: 0.8rem; text-decoration:none;">Buka Google Maps</a>
+            </div>
+        </section>
+
+        <footer style="background: var(--primary-gold); color: white; padding: 40px; text-align: center;">
+            <p>Terima Kasih</p>
+            <h2 id="footer-names" style="font-family: 'Great Vibes';"></h2>
+            <p style="font-size: 0.7rem; opacity: 0.8;">Created by Omahaksara</p>
+        </footer>
     </div>
-    <audio id="myAudio" loop>
-        <source src="https://raw.githubusercontent.com/omahaksara/invitation/main/kuclukweding.mp3" type="audio/mpeg">
-    </audio>
-
-    <section id="section-cover">
-        <div class="hero-subtitle">You're invited to</div>
-        <div class="hero-title">Lesti & Fetet</div>
-        <div class="guest-box">
-            <p>Kepada Yth. Bapak/Ibu/Saudara/i</p>
-            <h2 id="guest-name">Nama Tamu</h2>
-        </div>
-        <button class="btn-open" onclick="openInvitation()">Buka Undangan</button>
-    </section>
-
-    <section id="couple">
-        <div class="section-title">Groom & Bride</div>
-        <div class="couple-container">
-            <div>
-                <img src="https://picsum.photos/300/400?woman" class="couple-photo" alt="Lesti">
-                <h2 style="font-family: 'Great Vibes'; font-size: 2.5rem;">Rina Lestia</h2>
-                <p><b>Putri Bungsu Dari</b> <br> Bpk Asmad & Ibu Munyah/Emun (Sepatan)</p>
-            </div>
-            <div style="align-self: center; font-size: 3rem; color: var(--primary-gold); font-family: 'Great Vibes';">&</div>
-            <div>
-                <img src="https://picsum.photos/300/400?man" class="couple-photo" alt="Fetet">
-                <h2 style="font-family: 'Great Vibes'; font-size: 2.5rem;">Adi Rohmadi</h2>
-                <p><b>Putra Ketiga Dari</b> <br> Bpk Ajat Sudrajat & Ibu Eroh Kurniawati</p>
-                <p><i>Alamat: Rangkasbitung</i></p>
-            </div>
-        </div>
-    </section>
-
-    <section id="event" style="background-color: #f9f6f0;">
-        <div class="section-title">Save The Date</div>
-        <div class="event-card">
-            <h3>Akad Nikah</h3>
-            <p><b>Sabtu, 14 Juni 2025</b></p>
-            <p>10.00 WIB - Selesai</p>
-            <hr style="border: 0.5px solid #eee; margin: 20px 0;">
-            <p>Kediaman Mempelai Wanita</p>
-            <p style="font-size: 0.9rem;">Kp. Sepatan Dukuh, RT/RW 004/001, Kel. Sepatan, Kec. Sepatan, Kab. Tangerang Banten</p>
-            <a href="https://www.google.com/maps/search/Sepatan+Tangerang" target="_blank" class="btn-open" style="display:inline-block; font-size: 0.8rem; padding: 8px 20px; margin-top: 15px;">View Location</a>
-        </div>
-        <div class="event-card">
-            <h3>Resepsi</h3>
-            <p><b>Sabtu, 14 Juni 2025</b></p>
-            <p>11.00 WIB - Selesai</p>
-            <hr style="border: 0.5px solid #eee; margin: 20px 0;">
-            <p>Kediaman Mempelai Wanita</p>
-            <p style="font-size: 0.9rem;">Kp. Sepatan Dukuh, RT/RW 004/001, Kel. Sepatan, Kec. Sepatan, Kab. Tangerang Banten</p>
-        </div>
-    </section>
-
-    <section id="gift">
-        <div class="section-title">Wedding Gift</div>
-        <p style="max-width: 600px; margin: 0 auto 30px;">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.</p>
-        <div class="gift-box">
-            <strong>Adi Rohmadi</strong><br>
-            <span style="font-size: 1.2rem; color: var(--primary-gold);">7621084546</span><br>
-            <button class="btn-open" style="padding: 5px 15px; font-size: 0.7rem; margin-top: 10px;">Salin Rekening</button>
-        </div>
-        <div class="gift-box">
-            <strong>Rina Lestia</strong><br>
-            <span style="font-size: 1.2rem; color: var(--primary-gold);">1081660811</span><br>
-            <button class="btn-open" style="padding: 5px 15px; font-size: 0.7rem; margin-top: 10px;">Salin Rekening</button>
-        </div>
-    </section>
-
-    <footer style="background: var(--primary-gold); color: white; padding: 60px 20px; text-align: center;">
-        <p>Atas Kehadiran & Doa Restunya Kami Ucapkan Terima Kasih</p>
-        <h2 style="font-family: 'Great Vibes'; font-size: 3rem; margin: 20px 0;">Lesti & Fetet</h2>
-        <p style="font-size: 0.8rem; opacity: 0.8;">Created by Zeya Invitation x Omahaksara</p>
-    </footer>
 
     <script>
-        // Ambil nama tamu dari URL (misal: ?to=Budi+Santoso)
+        const webAppUrl = "https://script.google.com/macros/s/AKfycbxNJAM9Zg9Aw1iw5G1aw3ItYmjhqlcNkgbXofz2SCm0RxUi0cmfyNcGQQcok7eiVbCRLw/exec";
         const urlParams = new URLSearchParams(window.location.search);
-        const to = urlParams.get('to');
-        if (to) {
-            document.getElementById('guest-name').innerText = to.replace(/\+/g, ' ');
-        }
+        const slug = urlParams.get('u');
+        const guest = urlParams.get('to');
+
+        if (guest) document.getElementById('guest-name').innerText = guest.replace(/\+/g, ' ');
+
+        fetch(webAppUrl)
+            .then(res => res.json())
+            .then(allData => {
+                const data = allData[slug];
+                if (data) {
+                    // Isi Data
+                    document.getElementById('display-couple-names').innerText = data.pria.nama.split(' ')[0] + ' & ' + data.wanita.nama.split(' ')[0];
+                    document.getElementById('name-pria').innerText = data.pria.nama;
+                    document.getElementById('img-pria').src = data.pria.foto;
+                    document.getElementById('parents-pria').innerText = data.pria.ayah + ' & ' + data.pria.ibu;
+                    
+                    document.getElementById('name-wanita').innerText = data.wanita.nama;
+                    document.getElementById('img-wanita').src = data.wanita.foto;
+                    document.getElementById('parents-wanita').innerText = data.wanita.ayah + ' & ' + data.wanita.ibu;
+                    
+                    document.getElementById('date-akad').innerText = data.waktu.akad;
+                    document.getElementById('address').innerText = data.lokasi.alamat;
+                    document.getElementById('link-maps').href = data.lokasi.maps;
+                    document.getElementById('audio-src').src = data.fitur.musik;
+                    document.getElementById('footer-names').innerText = data.pria.nama.split(' ')[0] + ' & ' + data.wanita.nama.split(' ')[0];
+                    
+                    // Tampilkan Konten
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                    document.getElementById('myAudio').load();
+                } else {
+                    document.getElementById('loader').innerHTML = "<h2>Undangan tidak ditemukan.</h2>";
+                }
+            });
 
         const audio = document.getElementById("myAudio");
-
         function openInvitation() {
-            // Scroll otomatis ke bawah
             window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-            // Putar musik
             audio.play();
+            document.getElementById('music-btn').style.display = 'flex';
         }
 
         function toggleMusic() {
-            if (audio.paused) {
-                audio.play();
-                document.getElementById('music-btn').innerHTML = "<span>♫</span>";
-            } else {
-                audio.pause();
-                document.getElementById('music-btn').innerHTML = "<span>✖</span>";
-            }
+            if (audio.paused) { audio.play(); document.getElementById('music-btn').innerText = "♫"; }
+            else { audio.pause(); document.getElementById('music-btn').innerText = "✖"; }
         }
     </script>
 </body>
