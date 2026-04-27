@@ -1,11 +1,13 @@
 {
   "budi-ani": {
-    "nama_pria": "Budi",
-    "nama_wanita": "Ani",
-    "ortu_pria": "Bpk Joko & Ibu Siti",
-    "ortu_wanita": "Bpk Hasan & Ibu Lina",
-    "tanggal": "20 Juli 2026",
-    "jam": "09:00",
-    "lokasi": "Gedung Serbaguna"
+    "nama_pria": "Budi Santoso",
+    "nama_wanita": "Ani Wijaya",
+    "ortu_pria": "Putra dari Bpk. Joko & Ibu Siti",
+    "ortu_wanita": "Putri dari Bpk. Hasan & Ibu Lina",
+    "tanggal": "Minggu, 20 Juli 2026",
+    "jam": "09:00 - Selesai",
+    "lokasi": "Gedung Serbaguna Jakarta",
+    "foto_pria": "https://i.pravatar.cc/300?img=11",
+    "foto_wanita": "https://i.pravatar.cc/300?img=26"
   }
 }
