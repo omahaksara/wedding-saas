@@ -1,41 +1,39 @@
-function getID(){
-    const url = new URL(window.location.href);
-    return url.searchParams.get("id");
+function getID() {
+    return new URLSearchParams(window.location.search).get("id");
 }
 
 function bukaUndangan() {
-    const cover = document.getElementById("cover");
-    cover.style.transform = "translateY(-100%)";
+    document.getElementById("cover").style.transform = "translateY(-100%)";
     document.getElementById("main-content").classList.remove("hidden");
-    window.scrollTo(0, 0);
+    const audio = document.getElementById("musik_bg");
+    audio.play();
 }
 
 fetch("data.json")
     .then(res => res.json())
     .then(data => {
         const id = getID();
-        if(!id || !data[id]){
-            document.body.innerHTML = "<h1>Undangan tidak ditemukan</h1>";
-            return;
-        }
         const user = data[id];
+        if (!user) return;
 
-        // Isi Data Cover
-        document.getElementById("nama_pria_cover").innerText = user.nama_pria.split(' ')[0];
-        document.getElementById("nama_wanita_cover").innerText = user.nama_wanita.split(' ')[0];
-        document.getElementById("tgl_cover").innerText = user.tanggal;
+        // Cover Mapping
+        document.getElementById("nama_pria_cover").innerText = user.pria.panggilan;
+        document.getElementById("nama_wanita_cover").innerText = user.wanita.panggilan;
+        document.getElementById("tgl_cover").innerText = user.acara.akad.tanggal;
+        document.getElementById("cover").style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('${user.bg_cover}')`;
 
-        // Isi Data Mempelai
-        document.getElementById("nama_pria").innerText = user.nama_pria;
-        document.getElementById("foto_pria").src = user.foto_pria;
-        document.getElementById("ortu_pria").innerText = user.ortu_pria;
+        // Couple Mapping
+        document.getElementById("foto_pria").src = user.pria.foto;
+        document.getElementById("nama_pria_lengkap").innerText = user.pria.lengkap;
+        document.getElementById("ortu_pria").innerText = `Putra dari ${user.pria.ayah} & ${user.pria.ibu}`;
 
-        document.getElementById("nama_wanita").innerText = user.nama_wanita;
-        document.getElementById("foto_wanita").src = user.foto_wanita;
-        document.getElementById("ortu_wanita").innerText = user.ortu_wanita;
+        document.getElementById("foto_wanita").src = user.wanita.foto;
+        document.getElementById("nama_wanita_lengkap").innerText = user.wanita.lengkap;
+        document.getElementById("ortu_wanita").innerText = `Putri dari ${user.wanita.ayah} & ${user.wanita.ibu}`;
 
-        // Isi Data Acara
-        document.getElementById("tanggal_acara").innerText = user.tanggal;
-        document.getElementById("jam_acara").innerText = user.jam;
-        document.getElementById("lokasi_acara").innerText = user.lokasi;
+        // Event Mapping
+        document.getElementById("tgl_akad").innerText = user.acara.akad.tanggal;
+        document.getElementById("lokasi_akad").innerText = user.acara.akad.tempat;
+
+        document.getElementById("musik_bg").src = user.musik;
     });
