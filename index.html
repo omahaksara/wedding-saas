@@ -1,33 +1,188 @@
-<audio id="musik_bg" loop></audio>
-<div id="cover">
-    <div>
-        <p>THE WEDDING OF</p>
-        <h1 id="nama_pria_cover"></h1>
-        <h1 class="gold">&</h1>
-        <h1 id="nama_wanita_cover"></h1>
-        <p id="tgl_cover"></p>
-        <button class="btn-buka" onclick="bukaUndangan()">BUKA UNDANGAN</button>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation - Premium</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
-<main id="main-content" class="hidden">
-    <section id="couple">
-        <h2>Mempelai</h2>
-        <div class="card">
-            <img id="foto_pria" class="mempelai-img">
-            <h3 id="nama_pria_lengkap"></h3>
-            <p id="ortu_pria"></p>
-        </div>
-        <h1 class="gold">&</h1>
-        <div class="card">
-            <img id="foto_wanita" class="mempelai-img">
-            <h3 id="nama_wanita_lengkap"></h3>
-            <p id="ortu_wanita"></p>
-        </div>
-    </section>
+    <style>
+        :root {
+            --gold: #b08d57;
+            --light-gold: #d4af37;
+            --cream: #fdfaf7;
+            --dark: #2c2c2c;
+        }
 
-    <div class="navbar">
-        <a href="#couple">COUPLE</a>
-        <a href="#event">EVENT</a>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+
+        /* --- COVER SECTION --- */
+        #cover {
+            height: 100vh; width: 100%; position: fixed; top: 0; z-index: 1000;
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center;
+            transition: 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+        .overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); }
+        .cover-content { position: relative; color: white; text-align: center; padding: 20px; }
+        .cover-content h1 { font-family: 'Alex Brush', cursive; font-size: 4rem; margin: 10px 0; }
+        .btn-buka {
+            margin-top: 30px; padding: 15px 40px; background: var(--light-gold);
+            color: white; border: none; border-radius: 50px; font-weight: 600;
+            cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: 0.3s;
+        }
+
+        /* --- MAIN CONTENT --- */
+        .hidden { display: none; }
+        section { padding: 100px 20px; text-align: center; min-height: 100vh; }
+        .section-title { font-family: 'Alex Brush', cursive; font-size: 3.5rem; color: var(--gold); margin-bottom: 40px; }
+
+        /* --- COUPLE SECTION --- */
+        .couple-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 50px; }
+        .mempelai-card { 
+            background: white; padding: 30px; border-radius: 150px 150px 20px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid #eee; max-width: 320px;
+        }
+        .mempelai-img { 
+            width: 220px; height: 320px; object-fit: cover; 
+            border-radius: 110px 110px 10px 10px; border: 5px solid var(--light-gold);
+        }
+        .mempelai-card h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin: 20px 0 10px; color: var(--gold); }
+        .ortu { font-size: 0.85rem; color: #777; line-height: 1.6; }
+
+        /* --- EVENT CARD --- */
+        .event-card {
+            background: white; padding: 50px 30px; border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(176,141,87,0.1); border: 1px solid #f1ece2;
+            max-width: 500px; margin: 0 auto;
+        }
+        .event-card h3 { font-family: 'Playfair Display', serif; letter-spacing: 2px; color: var(--gold); margin-bottom: 20px; }
+        .event-item { margin: 15px 0; font-size: 0.95rem; }
+        .event-item i { color: var(--light-gold); margin-right: 10px; }
+
+        /* --- MUSIC & NAV --- */
+        #music-btn {
+            position: fixed; top: 20px; right: 20px; width: 45px; height: 45px;
+            background: var(--light-gold); color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 1100; animation: rotate 4s linear infinite;
+        }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .navbar {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            background: rgba(255,255,255,0.9); backdrop-filter: blur(10px);
+            padding: 12px 30px; border-radius: 50px; display: flex; gap: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 900;
+        }
+        .navbar a { text-decoration: none; color: var(--gold); font-size: 0.7rem; font-weight: bold; text-align: center; }
+        .navbar i { display: block; font-size: 1.2rem; margin-bottom: 3px; }
+    </style>
+</head>
+<body>
+
+    <audio id="audio" loop></audio>
+    <div id="music-btn" class="hidden" onclick="toggleMusic()">
+        <i class="fas fa-compact-disc"></i>
     </div>
-</main>
+
+    <div id="cover">
+        <div class="overlay"></div>
+        <div class="cover-content">
+            <p class="animate__animated animate__fadeInDown">THE WEDDING OF</p>
+            <h1 id="cp_pria">Pria</h1>
+            <h1 class="gold animate__animated animate__zoomIn">&</h1>
+            <h1 id="cp_wanita">Wanita</h1>
+            <p id="cp_tgl" class="animate__animated animate__fadeInUp"></p>
+            <button class="btn-buka" onclick="startApp()">
+                <i class="fa-solid fa-envelope-open"></i> BUKA UNDANGAN
+            </button>
+        </div>
+    </div>
+
+    <main id="main-content" class="hidden">
+        
+        <section id="couple">
+            <h2 class="section-title">Mempelai</h2>
+            <div class="couple-container">
+                <div class="mempelai-card animate__animated animate__fadeInLeft">
+                    <img id="f_pria" class="mempelai-img" src="">
+                    <h3 id="n_pria_l"></h3>
+                    <p class="ortu" id="o_pria"></p>
+                </div>
+                <div class="mempelai-card animate__animated animate__fadeInRight">
+                    <img id="f_wanita" class="mempelai-img" src="">
+                    <h3 id="n_wanita_l"></h3>
+                    <p class="ortu" id="o_wanita"></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="event" style="background:#f7f3ed">
+            <h2 class="section-title">Acara</h2>
+            <div class="event-card">
+                <h3>AKAD NIKAH</h3>
+                <div class="event-item"><i class="fas fa-calendar"></i> <span id="e_tgl"></span></div>
+                <div class="event-item"><i class="fas fa-clock"></i> <span id="e_jam"></span></div>
+                <div class="event-item"><i class="fas fa-map-marker-alt"></i> <span id="e_lok"></span></div>
+                <button class="btn-buka" style="font-size:0.8rem">LIHAT LOKASI</button>
+            </div>
+        </section>
+
+        <nav class="navbar">
+            <a href="#couple"><i class="fas fa-heart"></i>COUPLE</a>
+            <a href="#event"><i class="fas fa-calendar-alt"></i>EVENT</a>
+        </nav>
+    </main>
+
+    <script>
+        const audio = document.getElementById("audio");
+        let playing = true;
+
+        function startApp() {
+            document.getElementById("cover").style.transform = "translateY(-100%)";
+            document.getElementById("main-content").classList.remove("hidden");
+            document.getElementById("music-btn").classList.remove("hidden");
+            audio.play();
+        }
+
+        function toggleMusic() {
+            const btn = document.getElementById("music-btn");
+            if(playing) { audio.pause(); btn.style.animationPlayState = "paused"; }
+            else { audio.play(); btn.style.animationPlayState = "running"; }
+            playing = !playing;
+        }
+
+        // Fetch Data Otomatis
+        const id = new URLSearchParams(window.location.search).get("id") || "budi-ani";
+        fetch("data.json").then(res => res.json()).then(data => {
+            const d = data[id];
+            if(!d) return;
+
+            document.getElementById("cp_pria").innerText = d.pria.panggilan;
+            document.getElementById("cp_wanita").innerText = d.wanita.panggilan;
+            document.getElementById("cp_tgl").innerText = d.acara.akad.tanggal;
+            document.getElementById("cover").style.backgroundImage = `url('${d.bg_cover}')`;
+
+            document.getElementById("f_pria").src = d.pria.foto;
+            document.getElementById("n_pria_l").innerText = d.pria.lengkap;
+            document.getElementById("o_pria").innerText = `Putra dari ${d.pria.ayah} & ${d.pria.ibu}`;
+
+            document.getElementById("f_wanita").src = d.wanita.foto;
+            document.getElementById("n_wanita_l").innerText = d.wanita.lengkap;
+            document.getElementById("o_wanita").innerText = `Putri dari ${d.wanita.ayah} & ${d.wanita.ibu}`;
+
+            document.getElementById("e_tgl").innerText = d.acara.akad.tanggal;
+            document.getElementById("e_jam").innerText = d.acara.akad.jam;
+            document.getElementById("e_lok").innerText = d.acara.akad.tempat;
+            audio.src = d.musik;
+        });
+    </script>
+</body>
+</html>
