@@ -3,19 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wedding Invitation</title>
+<title>Wedding</title>
 
 <style>
 body{margin:0;font-family:sans-serif;background:#fdfaf7;text-align:center}
-section{padding:50px 20px}
-#cover{position:fixed;width:100%;height:100%;background:#000;color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:999;transition:1s}
+section{padding:60px 20px}
+
+#cover{
+position:fixed;width:100%;height:100%;
+background:url('https://picsum.photos/800/1200') center/cover;
+color:#fff;display:flex;flex-direction:column;
+justify-content:center;align-items:center;
+z-index:999;transition:1s;
+}
+
+.overlay{background:rgba(0,0,0,0.5);position:absolute;width:100%;height:100%}
+.cover-content{position:relative}
+
 .hidden{display:none}
-button{padding:10px 20px;border:none;background:#b08d57;color:#fff;border-radius:20px}
+
+button{
+padding:12px 25px;
+border:none;
+background:#b08d57;
+color:#fff;
+border-radius:30px;
+}
 
 .count{display:flex;justify-content:center;gap:10px}
 .box{background:#fff;padding:10px;border-radius:10px}
 
-.slide{display:none;width:100%;border-radius:10px}
+img{max-width:100%;border-radius:10px;margin:10px 0}
+
+.slide{display:none}
 .slide.active{display:block}
 
 .timeline{max-width:400px;margin:auto}
@@ -29,11 +49,14 @@ button{padding:10px 20px;border:none;background:#b08d57;color:#fff;border-radius
 <audio id="audio" loop></audio>
 
 <div id="cover">
+<div class="overlay"></div>
+<div class="cover-content">
 <h2>The Wedding Of</h2>
 <h1 id="nama"></h1>
 <p>Kepada Yth:</p>
 <h3 id="guest">Tamu Undangan</h3>
-<button onclick="startApp()">Buka</button>
+<button onclick="startApp()">Buka Undangan</button>
+</div>
 </div>
 
 <div id="main" class="hidden">
@@ -76,83 +99,80 @@ button{padding:10px 20px;border:none;background:#b08d57;color:#fff;border-radius
 </div>
 
 <script>
-// ambil id & tamu
 const params = new URLSearchParams(location.search);
 const id = params.get("id") || "budi-ani";
 const guest = params.get("to");
 
 if(guest) document.getElementById("guest").innerText = guest;
 
-// load JSON
-fetch("data.json").then(r=>r.json()).then(data=>{
+fetch("./data.json")
+.then(r=>r.json())
+.then(data=>{
 const d = data[id];
+if(!d){ alert("Data tidak ditemukan"); return; }
 
-document.getElementById("nama").innerText = d.pria.panggilan + " & " + d.wanita.panggilan;
+nama.innerText = d.pria.panggilan + " & " + d.wanita.panggilan;
 
-// couple
-document.getElementById("couple").innerHTML = `
-<img src="${d.pria.foto}" width="150">
+couple.innerHTML = `
+<img src="${d.pria.foto}">
 <p>${d.pria.lengkap}</p>
-<img src="${d.wanita.foto}" width="150">
+<img src="${d.wanita.foto}">
 <p>${d.wanita.lengkap}</p>
 `;
 
-// gallery
-document.getElementById("gallery").innerHTML = d.gallery.map((g,i)=>`
-<img src="${g}" class="slide ${i==0?'active':''}">
-`).join("");
+gallery.innerHTML = d.gallery.map((g,i)=>
+`<img src="${g}" class="slide ${i==0?'active':''}">`
+).join("");
 
-// musik
-document.getElementById("audio").src = d.musik;
+audio.src = d.musik;
+dana.innerText = d.gift.dana;
 
-// gift
-document.getElementById("dana").innerText = d.gift.dana;
-
-// countdown
 const target = new Date(d.acara.tanggal_iso).getTime();
 setInterval(()=>{
 const now = new Date().getTime();
 const diff = target - now;
 if(diff<=0)return;
 
-dEl("d",diff/(1000*60*60*24));
-dEl("h",(diff/(1000*60*60))%24);
-dEl("m",(diff/(1000*60))%60);
-dEl("s",(diff/1000)%60);
+d.innerText = Math.floor(diff/(1000*60*60*24));
+h.innerText = Math.floor((diff/(1000*60*60))%24);
+m.innerText = Math.floor((diff/(1000*60))%60);
+s.innerText = Math.floor((diff/1000)%60);
 },1000);
 
-function dEl(id,val){
-document.getElementById(id).innerText=Math.floor(val);
-}
 });
 
-// buka
 function startApp(){
 cover.style.opacity=0;
-setTimeout(()=>{cover.style.display="none";main.classList.remove("hidden")},1000);
-audio.play().catch(()=>document.body.onclick=()=>audio.play());
+setTimeout(()=>{
+cover.style.display="none";
+main.classList.remove("hidden");
+},1000);
+
+audio.play().catch(()=>{
+document.body.onclick=()=>audio.play();
+});
 }
 
 // slider
 let i=0;
 setInterval(()=>{
-const s=document.querySelectorAll(".slide");
-if(!s.length)return;
-s[i].classList.remove("active");
-i=(i+1)%s.length;
-s[i].classList.add("active");
+const slides=document.querySelectorAll(".slide");
+if(!slides.length)return;
+slides[i].classList.remove("active");
+i=(i+1)%slides.length;
+slides[i].classList.add("active");
 },3000);
 
-// animasi timeline
+// animasi
 window.onscroll=()=>{
 document.querySelectorAll(".item").forEach(el=>{
-if(el.getBoundingClientRect().top<window.innerHeight-50)el.classList.add("show");
+if(el.getBoundingClientRect().top<window.innerHeight-50)
+el.classList.add("show");
 });
 };
 
-// copy
 function copyRek(){
-navigator.clipboard.writeText(document.getElementById("dana").innerText);
+navigator.clipboard.writeText(dana.innerText);
 alert("Disalin");
 }
 </script>
