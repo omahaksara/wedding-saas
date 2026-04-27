@@ -2,28 +2,32 @@
   "budi-ani": {
     "pria": {
       "panggilan": "Budi",
-      "lengkap": "Budi Santoso, S.Kom",
-      "urutan_anak": "Putra Pertama",
-      "ayah": "Joko Santoso", "ibu": "Siti Aminah",
-      "foto": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500"
+      "lengkap": "Budi Santoso",
+      "ayah": "Joko Santoso",
+      "ibu": "Siti Aminah",
+      "foto": "https://picsum.photos/300/400?1"
     },
     "wanita": {
       "panggilan": "Ani",
-      "lengkap": "Ani Wijaya, S.E",
-      "urutan_anak": "Putri Kedua",
-      "ayah": "Hasan Wijaya", "ibu": "Lina Marlina",
-      "foto": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500"
+      "lengkap": "Ani Wijaya",
+      "ayah": "Hasan Wijaya",
+      "ibu": "Lina Marlina",
+      "foto": "https://picsum.photos/300/400?2"
     },
     "acara": {
-      "akad": {
-        "tanggal": "Sabtu, 20 Juli 2026",
-        "tanggal_iso": "2026/07/20 08:00:00",
-        "jam": "08:00 WIB",
-        "tempat": "Masjid Agung Jawa Tengah",
-        "map": "https://goo.gl/maps/xyz"
-      }
+      "tanggal": "Minggu, 12 Desember 2026",
+      "tanggal_iso": "2026-12-12T08:00:00+07:00",
+      "tempat": "Gedung Serbaguna",
+      "map": "https://maps.google.com"
     },
-    "bg_cover": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200",
-    "musik": "https://docs.google.com/uc?export=download&id=1wURqMhjFTlGU1f1zpaahqpTp_iYcs3XT"
+    "gallery": [
+      "https://picsum.photos/400/300?1",
+      "https://picsum.photos/400/300?2",
+      "https://picsum.photos/400/300?3"
+    ],
+    "musik": "https://raw.githubusercontent.com/omahaksara/invitation/main/kuclukweding.mp3",
+    "gift": {
+      "dana": "08527282726288"
+    }
   }
 }
