@@ -1,33 +1,73 @@
 {
-  "budi-ani": {
-    "pria": {
-      "panggilan": "Budi",
-      "lengkap": "Budi Santoso",
-      "ayah": "Joko Santoso",
-      "ibu": "Siti Aminah",
-      "foto": "https://picsum.photos/300/400?1"
+  "dani-pina": {
+    "config": {
+      "branding": "Omahaksara",
+      "slug": "dani-pina",
+      "music_url": "https://raw.githubusercontent.com/omahaksara/invitation/main/kuclukweding.mp3"
     },
-    "wanita": {
-      "panggilan": "Ani",
-      "lengkap": "Ani Wijaya",
-      "ayah": "Hasan Wijaya",
-      "ibu": "Lina Marlina",
-      "foto": "https://picsum.photos/300/400?2"
+    "hero": {
+      "title": "THE WEDDING",
+      "couple_names": "Dani & Pina",
+      "guest_label": "Kepada Yth.",
+      "guest_name": "Nama Tamu",
+      "location_label": "Di Tempat"
+    },
+    "mempelai": {
+      "pria": {
+        "panggilan": "Pajrian",
+        "lengkap": "Pajrian, S.Kom",
+        "ayah": "Bpk. Soleh",
+        "ibu": "Ibu Soleha",
+        "keterangan": "Putra Kedua Dari",
+        "foto": "https://picsum.photos/300/400?1"
+      },
+      "wanita": {
+        "panggilan": "Bela",
+        "lengkap": "Bela Lingga Pesona",
+        "ayah": "Bpk. Robi",
+        "ibu": "Ibu Zainab",
+        "keterangan": "Putri Kedua Dari",
+        "foto": "https://picsum.photos/300/400?2"
+      }
+    },
+    "quotes": {
+      "ayat": "Dan di antara tanda-tanda kekuasaan Allah ialah diciptakan-Nya untukmu pasangan hidup dari jenismu sendiri supaya kamu merasa tentram di samping-Nya dan dijadikan-Nya rasa kasih sayang di antara kamu. (QS. Ar-Rum 21)",
+      "musik_lyric": "I don't wanna close my eyes, I don't wanna fall asleep, cuz I'd miss you babe and I don't wanna miss a thing - AEROSMITH"
     },
     "acara": {
-      "tanggal": "Minggu, 12 Desember 2026",
-      "tanggal_iso": "2026-12-12T08:00:00+07:00",
-      "tempat": "Gedung Serbaguna",
-      "map": "https://maps.google.com"
+      "akad": {
+        "tanggal": "Kamis, 7 November 2024",
+        "tanggal_iso": "2024-11-07T10:00:00+07:00",
+        "jam": "10.00 WIB - Selesai",
+        "tempat": "Kediaman Mempelai Wanita",
+        "alamat": "Jl. Panjang Pendek",
+        "map": "https://maps.google.com/?q=Lokasi+Akad"
+      },
+      "resepsi": {
+        "tanggal": "Kamis, 12 Desember 2024",
+        "tanggal_iso": "2024-12-12T10:30:00+07:00",
+        "jam": "10.30 WIB - Selesai",
+        "tempat": "Di Rumah Mempelai Pria",
+        "alamat": "Jl. Panjang Pendek",
+        "map": "https://maps.google.com/?q=Lokasi+Resepsi"
+      }
     },
     "gallery": [
       "https://picsum.photos/400/300?1",
       "https://picsum.photos/400/300?2",
       "https://picsum.photos/400/300?3"
     ],
-    "musik": "https://raw.githubusercontent.com/omahaksara/invitation/main/kuclukweding.mp3",
     "gift": {
-      "dana": "08527282726288"
-    }
+      "rekening": [
+        { "bank": "Mandiri", "an": "Dani Dewantara", "no": "187435252442" },
+        { "bank": "BCA", "an": "Suriyanti", "no": "3424234235534" },
+        { "bank": "Dana", "an": "Pina", "no": "53543535657" }
+      ]
+    },
+    "turut_mengundang": [
+      "Keluarga Besar Bpk. Robi & Ibu Zainab",
+      "Keluarga Besar Bpk. Soleh & Ibu Soleha",
+      "Keluarga Besar Omahaksara"
+    ]
   }
 }
