@@ -3,154 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation - Zeya Style Premium</title>
+    <title>Wedding Invitation - Zeya Premium</title>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        :root { --gold: #b08d57; --light-gold: #d4af37; --cream: #fdfaf7; --dark: #2c2c2c; }
+        :root { --gold: #b08d57; --light-gold: #d4af37; --cream: #fdfaf7; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Montserrat', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
-        
-        /* COVER */
-        #cover { height: 100vh; width: 100%; position: fixed; top: 0; z-index: 1000; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; transition: 1.5s cubic-bezier(0.65, 0, 0.35, 1); }
-        .overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.6); }
-        .cover-content { position: relative; color: white; text-align: center; padding: 20px; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--cream); overflow-x: hidden; }
+        #cover { height: 100vh; width: 100%; position: fixed; top: 0; z-index: 1000; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; transition: 1.2s ease-in-out; }
+        .overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); }
+        .cover-content { position: relative; color: white; text-align: center; z-index: 2; padding: 20px; }
         .cover-content h1 { font-family: 'Alex Brush', cursive; font-size: 4rem; margin: 10px 0; }
-        
-        /* COUNTDOWN */
-        .countdown-container { display: flex; justify-content: center; gap: 15px; margin: 30px 0; }
-        .count-item { background: rgba(255,255,255,0.2); backdrop-filter: blur(5px); padding: 10px; border-radius: 10px; min-width: 60px; border: 1px solid rgba(255,255,255,0.3); }
-        .count-item span { display: block; font-weight: bold; font-size: 1.2rem; }
-        .count-item small { font-size: 0.6rem; text-transform: uppercase; }
-
-        /* BUTTONS */
-        .btn-buka { padding: 15px 40px; background: var(--light-gold); color: white; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); transition: 0.3s; }
-        
-        /* MAIN SECTIONS */
+        .countdown { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
+        .count-box { background: rgba(255,255,255,0.2); backdrop-filter: blur(5px); padding: 10px; border-radius: 8px; min-width: 65px; border: 1px solid rgba(255,255,255,0.3); }
+        .count-box span { display: block; font-size: 1.2rem; font-weight: bold; }
+        .btn-buka { padding: 12px 35px; background: var(--light-gold); color: white; border: none; border-radius: 30px; font-weight: 600; cursor: pointer; margin-top: 20px; }
         .hidden { display: none; }
         section { padding: 80px 20px; text-align: center; }
-        .section-title { font-family: 'Alex Brush', cursive; font-size: 3rem; color: var(--gold); margin-bottom: 30px; }
-        
-        /* COUPLE */
-        .mempelai-card { background: white; padding: 30px; border-radius: 150px 150px 20px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px; border: 1px solid #eee; }
-        .mempelai-img { width: 200px; height: 300px; object-fit: cover; border-radius: 100px 100px 10px 10px; border: 4px solid var(--light-gold); margin-bottom: 20px; }
-        .ortu-detail { font-size: 0.85rem; color: #666; line-height: 1.6; }
-        
-        /* MUSIC BTN */
-        #music-btn { position: fixed; top: 20px; right: 20px; width: 45px; height: 45px; background: var(--light-gold); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1100; animation: rotate 4s linear infinite; }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        
-        .navbar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); padding: 12px 25px; border-radius: 50px; display: flex; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); z-index: 900; }
-        .navbar a { text-decoration: none; color: var(--gold); font-size: 0.6rem; font-weight: bold; text-align: center; }
-        .navbar i { display: block; font-size: 1.1rem; margin-bottom: 3px; }
+        .mempelai-card { background: white; padding: 30px; border-radius: 150px 150px 20px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .mempelai-img { width: 200px; height: 300px; object-fit: cover; border-radius: 100px 100px 10px 10px; border: 4px solid var(--light-gold); }
+        #music-btn { position: fixed; top: 20px; right: 20px; width: 45px; height: 45px; background: var(--light-gold); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 1100; display:none; animation: spin 4s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
     <audio id="audio" loop></audio>
-    <div id="music-btn" class="hidden" onclick="toggleMusic()"><i class="fas fa-compact-disc"></i></div>
+    <div id="music-btn" onclick="toggleMusic()"><i class="fas fa-compact-disc"></i></div>
 
     <div id="cover">
         <div class="overlay"></div>
         <div class="cover-content">
-            <p class="animate__animated animate__fadeIn">THE WEDDING OF</p>
-            <h1 id="cp_pria"></h1><h1>&</h1><h1 id="cp_wanita"></h1>
-            
-            <div class="countdown-container" id="countdown">
-                <div class="count-item"><span id="days">00</span><small>Hari</small></div>
-                <div class="count-item"><span id="hours">00</span><small>Jam</small></div>
-                <div class="count-item"><span id="mins">00</span><small>Menit</small></div>
-                <div class="count-item"><span id="secs">00</span><small>Detik</small></div>
+            <p>THE WEDDING OF</p>
+            <h1 id="nama_pria">Budi</h1><h1>&</h1><h1 id="nama_wanita">Ani</h1>
+            <div class="countdown">
+                <div class="count-box"><span id="d">0</span><small>HARI</small></div>
+                <div class="count-box"><span id="h">0</span><small>JAM</small></div>
+                <div class="count-box"><span id="m">0</span><small>MENIT</small></div>
+                <div class="count-box"><span id="s">0</span><small>DETIK</small></div>
             </div>
-
-            <button class="btn-buka" onclick="startApp()"><i class="fa-solid fa-envelope-open"></i> BUKA UNDANGAN</button>
+            <button class="btn-buka" onclick="buka()"> <i class="fas fa-envelope-open"></i> BUKA UNDANGAN</button>
         </div>
     </div>
 
-    <main id="main-content" class="hidden">
+    <main id="konten" class="hidden">
         <section id="couple">
-            <h2 class="section-title">Mempelai</h2>
-            <div class="mempelai-card">
-                <img id="f_pria" class="mempelai-img">
-                <h3 id="n_pria_l" style="font-family:'Playfair Display'; color:var(--gold)"></h3>
-                <p class="ortu-detail" id="detail_pria"></p>
-            </div>
-            <div class="mempelai-card">
-                <img id="f_wanita" class="mempelai-img">
-                <h3 id="n_wanita_l" style="font-family:'Playfair Display'; color:var(--gold)"></h3>
-                <p class="ortu-detail" id="detail_wanita"></p>
-            </div>
+            <h2 style="font-family:'Alex Brush'; font-size: 3rem; color: var(--gold); margin-bottom: 30px;">Mempelai</h2>
+            <div id="mempelai_list"></div>
         </section>
-
-        <section id="event" style="background:#f7f3ed">
-            <h2 class="section-title">Acara</h2>
-            <div style="background:white; padding:40px; border-radius:20px; border:1px solid #ddd">
-                <h3 style="letter-spacing:2px; color:var(--gold)">AKAD NIKAH</h3>
-                <hr style="width:50px; margin:15px auto; border:1px solid var(--light-gold)">
-                <p id="e_tgl"></p><p id="e_jam"></p><br>
-                <p><b>Lokasi:</b></p><p id="e_lok"></p>
-                <a id="btn_peta" target="_blank"><button class="btn-buka" style="margin-top:20px; padding:10px 25px; font-size:0.8rem">GOOGLE MAPS</button></a>
-            </div>
-        </section>
-
-        <nav class="navbar">
-            <a href="#cover" onclick="location.reload()"><i class="fas fa-home"></i>HOME</a>
-            <a href="#couple"><i class="fas fa-heart"></i>COUPLE</a>
-            <a href="#event"><i class="fas fa-calendar-alt"></i>EVENT</a>
-        </nav>
     </main>
 
     <script>
         const audio = document.getElementById("audio");
-        let playing = true;
+        let play = false;
 
-        function startApp() {
+        function buka() {
             document.getElementById("cover").style.transform = "translateY(-100%)";
-            document.getElementById("main-content").classList.remove("hidden");
-            document.getElementById("music-btn").classList.remove("hidden");
-            audio.play();
+            document.getElementById("konten").classList.remove("hidden");
+            document.getElementById("music-btn").style.display = "flex";
+            audio.play().catch(() => console.log("User must interact first"));
+            play = true;
         }
 
         function toggleMusic() {
-            if(playing) { audio.pause(); document.getElementById("music-btn").style.animationPlayState = "paused"; }
-            else { audio.play(); document.getElementById("music-btn").style.animationPlayState = "running"; }
-            playing = !playing;
+            if(play) { audio.pause(); } else { audio.play(); }
+            play = !play;
         }
 
-        // FETCH DATA
         const id = new URLSearchParams(window.location.search).get("id") || "budi-ani";
-        fetch("data.json").then(res => res.json()).then(data => {
+        
+        fetch("data.json").then(r => r.json()).then(data => {
             const d = data[id];
             if(!d) return;
 
-            document.getElementById("cp_pria").innerText = d.pria.panggilan;
-            document.getElementById("cp_wanita").innerText = d.wanita.panggilan;
+            document.getElementById("nama_pria").innerText = d.pria.panggilan;
+            document.getElementById("nama_wanita").innerText = d.wanita.panggilan;
             document.getElementById("cover").style.backgroundImage = `url('${d.bg_cover}')`;
-            
-            document.getElementById("f_pria").src = d.pria.foto;
-            document.getElementById("n_pria_l").innerText = d.pria.lengkap;
-            document.getElementById("detail_pria").innerText = `${d.pria.urutan_anak} dari pasangan \n Bpk. ${d.pria.ayah} & Ibu ${d.pria.ibu}`;
-
-            document.getElementById("f_wanita").src = d.wanita.foto;
-            document.getElementById("n_wanita_l").innerText = d.wanita.lengkap;
-            document.getElementById("detail_wanita").innerText = `${d.wanita.urutan_anak} dari pasangan \n Bpk. ${d.wanita.ayah} & Ibu ${d.wanita.ibu}`;
-
-            document.getElementById("e_tgl").innerText = d.acara.akad.tanggal;
-            document.getElementById("e_jam").innerText = d.acara.akad.jam;
-            document.getElementById("e_lok").innerText = d.acara.akad.tempat;
-            document.getElementById("btn_peta").href = d.acara.akad.map;
             audio.src = d.musik;
 
-            // COUNTDOWN LOGIC
-            const target = new Date(d.acara.akad.tanggal_iso).getTime();
+            // Render Mempelai
+            const list = `
+                <div class="mempelai-card">
+                    <img src="${d.pria.foto}" class="mempelai-img">
+                    <h3 style="color:var(--gold); margin:15px 0">${d.pria.lengkap}</h3>
+                    <p style="font-size:0.8rem">${d.pria.urutan_anak} dari pasangan <br> Bpk. ${d.pria.ayah} & Ibu ${d.pria.ibu}</p>
+                </div>
+                <div class="mempelai-card">
+                    <img src="${d.wanita.foto}" class="mempelai-img">
+                    <h3 style="color:var(--gold); margin:15px 0">${d.wanita.lengkap}</h3>
+                    <p style="font-size:0.8rem">${d.wanita.urutan_anak} dari pasangan <br> Bpk. ${d.wanita.ayah} & Ibu ${d.wanita.ibu}</p>
+                </div>
+            `;
+            document.getElementById("mempelai_list").innerHTML = list;
+
+            // Countdown Logic (Perbaikan format tanggal)
+            const target = new Date(d.acara.akad.tanggal_iso.replace(/-/g, "/")).getTime();
             setInterval(() => {
                 const now = new Date().getTime();
                 const diff = target - now;
-                document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+                if(diff < 0) return;
+                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
             }, 1000);
         });
     </script>
