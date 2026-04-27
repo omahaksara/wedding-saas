@@ -1,17 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>Wedding Invitation</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
-
 <body>
 
-<h1 id="nama_pria"></h1>
-<h1 id="nama_wanita"></h1>
+    <section id="cover">
+        <div class="overlay"></div>
+        <div class="content animate__animated animate__fadeIn">
+            <p>The Wedding of</p>
+            <h1 id="nama_pria_cover">Pria</h1>
+            <h1 class="ampersand">&</h1>
+            <h1 id="nama_wanita_cover">Wanita</h1>
+            <div class="line"></div>
+            <p id="tgl_cover"></p>
+            <button onclick="bukaUndangan()">Buka Undangan</button>
+        </div>
+    </section>
 
-<p id="detail"></p>
+    <main id="main-content" class="hidden">
+        <section class="mempelai">
+            <h2 class="section-title">Mempelai</h2>
+            <div class="mempelai-grid">
+                <div class="mempelai-box">
+                    <img id="foto_pria" src="" alt="Pria">
+                    <h3 id="nama_pria"></h3>
+                    <p id="ortu_pria"></p>
+                </div>
+                <div class="mempelai-box">
+                    <img id="foto_wanita" src="" alt="Wanita">
+                    <h3 id="nama_wanita"></h3>
+                    <p id="ortu_wanita"></p>
+                </div>
+            </div>
+        </section>
 
-<script src="script.js"></script>
+        <section class="acara">
+            <div class="info-card">
+                <h2>Akad & Resepsi</h2>
+                <p id="tanggal_acara"></p>
+                <p id="jam_acara"></p>
+                <div class="line"></div>
+                <p id="lokasi_acara"></p>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
