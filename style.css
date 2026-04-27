@@ -1,33 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Montserrat:wght@300;400;600&display=swap');
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Montserrat', sans-serif; background: #f4f1ea; color: #444; overflow-x: hidden; }
+body { font-family: 'Montserrat', sans-serif; background: #fdfaf7; color: #4a4a4a; scroll-behavior: smooth; overflow-x: hidden; }
 
-/* COVER STYLE */
+/* COVER */
 #cover {
-    height: 100vh; width: 100%;
-    background: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070') no-repeat center center/cover;
+    height: 100vh; width: 100%; position: fixed; top: 0; z-index: 1000;
+    background-size: cover; background-position: center;
     display: flex; align-items: center; justify-content: center;
-    position: fixed; top: 0; z-index: 100; transition: 1s ease-in-out;
+    transition: 1.2s cubic-bezier(0.65, 0, 0.35, 1); color: white; text-align: center;
 }
-.overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.4); }
-.content { position: relative; text-align: center; color: white; padding: 20px; }
-
-h1 { font-family: 'Alex Brush', cursive; font-size: 3.5rem; }
-.ampersand { font-size: 2rem; margin: -10px 0; color: #d4af37; }
-.line { width: 60px; height: 2px; background: #d4af37; margin: 20px auto; }
-
-button {
-    margin-top: 25px; padding: 12px 30px; border-radius: 30px; border: none;
-    background: #d4af37; color: white; font-weight: 600; cursor: pointer;
+.gold { color: #d4af37; }
+.btn-buka {
+    background: #d4af37; color: white; padding: 12px 35px; border-radius: 30px;
+    border: none; cursor: pointer; font-weight: 600; margin-top: 20px;
 }
 
 /* MAIN CONTENT */
 .hidden { display: none; }
-#main-content { padding-top: 50px; }
+section { padding: 80px 20px; text-align: center; min-height: 100vh; }
+h1, h2 { font-family: 'Alex Brush', cursive; color: #b08d57; }
+h2 { font-size: 3.5rem; margin-bottom: 30px; }
 
-section { min-height: 100vh; padding: 60px 20px; text-align: center; }
-.section-title { font-family: 'Alex Brush', cursive; font-size: 3rem; margin-bottom: 40px; color: #b08d57; }
+.mempelai-img {
+    width: 220px; height: 320px; object-fit: cover;
+    border-radius: 110px 110px 0 0; border: 4px solid #d4af37;
+    margin-bottom: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
 
-.mempelai-grid { display: flex; flex-direction: column; gap: 40px; }
-.mempelai-box img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 5px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 15px; }
+.card {
+    background: white; padding: 40px 20px; border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(176,141,87,0.1); margin: 30px auto; max-width: 500px;
+}
 
-.info-card { background: white; padding: 40px 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+/* NAV BOTTOM */
+.navbar {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: white; padding: 12px 30px; border-radius: 50px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1); z-index: 90; display: flex; gap: 30px;
+}
+.navbar a { text-decoration: none; color: #b08d57; font-size: 0.7rem; font-weight: bold; }
