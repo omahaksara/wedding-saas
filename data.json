@@ -3,22 +3,24 @@
     "pria": {
       "panggilan": "Budi",
       "lengkap": "Budi Santoso, S.Kom",
-      "ayah": "Bpk. Joko Santoso",
-      "ibu": "Ibu Siti Aminah",
+      "urutan_anak": "Putra Pertama",
+      "ayah": "Joko Santoso", "ibu": "Siti Aminah",
       "foto": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500"
     },
     "wanita": {
       "panggilan": "Ani",
       "lengkap": "Ani Wijaya, S.E",
-      "ayah": "Bpk. Hasan Wijaya",
-      "ibu": "Ibu Lina Marlina",
+      "urutan_anak": "Putri Kedua",
+      "ayah": "Hasan Wijaya", "ibu": "Lina Marlina",
       "foto": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500"
     },
     "acara": {
       "akad": {
         "tanggal": "Sabtu, 20 Juli 2026",
-        "jam": "08:00 - 10:00 WIB",
-        "tempat": "Masjid Raya Baiturrahman"
+        "tanggal_iso": "2026-07-20 08:00:00",
+        "jam": "08:00 WIB",
+        "tempat": "Masjid Agung Jawa Tengah",
+        "map": "https://goo.gl/maps/xyz"
       }
     },
     "bg_cover": "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200",
