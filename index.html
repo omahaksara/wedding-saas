@@ -3,90 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wedding of Zeya & Putra</title>
+    <title>The Wedding Invitation</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400;600&family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
-        :root { --dark: #1a1a1a; --accent: #b39359; --bg: #fdfbf7; --white: #ffffff; }
+        :root { --dark: #1a1a1a; --accent: #b39359; --bg: #fdfbf7; }
         * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
-        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--dark); overflow-x: hidden; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--dark); overflow-x: hidden; }
+        
+        /* Background Dinamis */
+        .bg-custom { background-attachment: fixed; background-position: center; background-size: cover; background-repeat: no-repeat; }
+        
+        /* Hero/Cover */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; position: relative; background-size: cover; background-position: center; }
+        .hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); }
+        .hero-content { position: relative; z-index: 2; padding: 20px; width: 100%; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 8vw, 5rem); font-style: italic; margin: 15px 0; }
+        
+        .guest-box { margin: 30px auto; max-width: 300px; background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); }
+        .btn-open { background: var(--accent); border: none; color: white; padding: 12px 35px; cursor: pointer; letter-spacing: 2px; font-size: 0.7rem; text-transform: uppercase; transition: 0.3s; }
+        .btn-open:hover { background: #967a47; transform: scale(1.05); }
 
-        /* COVER SECTION */
-        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1920') center/cover no-repeat fixed; display: flex; align-items: center; justify-content: center; text-align: center; color: white; }
-        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 10vw, 5rem); font-style: italic; font-weight: 300; margin: 15px 0; }
-        .btn-open { background: transparent; border: 1px solid white; color: white; padding: 12px 35px; cursor: pointer; letter-spacing: 2px; font-size: 0.7rem; transition: 0.4s; text-transform: uppercase; }
-        .btn-open:hover { background: white; color: var(--dark); }
+        section { padding: 80px 20px; text-align: center; max-width: 1000px; margin: 0 auto; }
+        .title { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--accent); margin-bottom: 40px; }
 
-        /* SECTION GLOBAL */
-        section { padding: 100px 20px; text-align: center; max-width: 1100px; margin: 0 auto; }
-        .title { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--accent); margin-bottom: 50px; }
+        /* Countdown Style */
+        .countdown-sect { background: var(--dark); color: white; padding: 60px 20px; border-radius: 20px; margin: 20px; }
+        .cd-wrapper { display: flex; justify-content: center; gap: 10px; }
+        .cd-item { border: 1px solid rgba(179, 147, 89, 0.3); padding: 15px; border-radius: 8px; min-width: 75px; background: rgba(255,255,255,0.02); }
+        .cd-item span { display: block; font-size: 1.8rem; color: var(--accent); font-family: 'Cormorant Garamond'; font-weight: 600; }
+        .cd-item label { font-size: 0.6rem; text-transform: uppercase; opacity: 0.7; letter-spacing: 1px; }
 
-        /* MEMPELAI */
-        .profile-img { width: 280px; height: 400px; object-fit: cover; border: 10px solid white; box-shadow: 0 15px 35px rgba(0,0,0,0.05); margin-bottom: 25px; border-radius: 150px 150px 0 0; }
-        .profile-name { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 10px; color: var(--dark); }
-
-        /* COUNTDOWN */
-        .countdown-sect { background: var(--dark); color: white; padding: 80px 20px; }
-        .cd-wrapper { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
-        .cd-item { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; min-width: 70px; border: 1px solid rgba(255,255,255,0.1); }
-        .cd-item span { display: block; font-size: 1.8rem; color: var(--accent); font-family: 'Cormorant Garamond'; }
-        .cd-item label { font-size: 0.6rem; text-transform: uppercase; opacity: 0.7; }
-
-        /* STORY SECTION (Zig-Zag) */
-        .story-item { display: flex; align-items: center; gap: 40px; margin-bottom: 80px; text-align: left; }
+        /* Story Zig-Zag */
+        .story-item { display: flex; align-items: center; gap: 30px; margin-bottom: 60px; text-align: left; }
         .story-item:nth-child(even) { flex-direction: row-reverse; text-align: right; }
-        .story-img { width: 45%; height: 350px; object-fit: cover; border-radius: 10px; box-shadow: 15px 15px 0 var(--accent); }
+        .story-img { width: 45%; height: 300px; object-fit: cover; border-radius: 15px; border: 5px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .story-text { width: 55%; }
-        .story-text h3 { font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 15px; color: var(--accent); }
+        .story-text h3 { font-family: 'Playfair Display'; color: var(--accent); margin-bottom: 10px; }
 
-        /* EVENT CARD */
-        .event-card { background: white; padding: 50px 30px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); margin-bottom: 30px; border: 1px solid #f0e6d2; }
-        .btn-maps { display: inline-block; padding: 12px 30px; background: var(--dark); color: white; text-decoration: none; border-radius: 30px; font-size: 0.7rem; letter-spacing: 1px; margin-top: 20px; }
+        /* Bank & QR */
+        .gift-sect { background: white; border-radius: 20px; padding: 40px; border: 1px solid #eee; box-shadow: 0 5px 20px rgba(0,0,0,0.02); }
+        .qr-box img { width: 200px; margin-top: 20px; border: 1px solid #ddd; padding: 10px; border-radius: 10px; }
 
-        /* FOOTER & FLOATING */
-        .music-btn { position: fixed; bottom: 30px; left: 30px; width: 45px; height: 45px; background: white; border-radius: 50%; display: none; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.1); cursor: pointer; color: var(--accent); border: 1px solid var(--accent); }
+        .music-btn { position: fixed; bottom: 25px; left: 25px; width: 45px; height: 45px; background: white; border-radius: 50%; display: none; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); color: var(--accent); cursor: pointer; border: 1px solid var(--accent); }
 
-        @media (max-width: 768px) {
-            .story-item, .story-item:nth-child(even) { flex-direction: column; text-align: center; }
-            .story-img, .story-text { width: 100%; }
-            .hero h1 { font-size: 3rem; }
-        }
+        @media (max-width: 768px) { .story-item, .story-item:nth-child(even) { flex-direction: column; text-align: center; } .story-img, .story-text { width: 100%; } }
     </style>
 </head>
-<body>
+<body class="bg-custom" id="bodyBg">
 
     <div class="music-btn" onclick="toggleMusic()" id="mBtn">♪</div>
     <audio id="bgm" loop><source id="mSource" src=""></audio>
 
-    <section class="hero" id="hero">
-        <div data-aos="fade-up">
-            <p style="letter-spacing:5px; font-size:0.7rem;">THE WEDDING OF</p>
-            <h1 id="h-names">Zeya & Putra</h1>
-            <p id="h-date">20.04.2025</p>
+    <section class="hero" id="heroSec">
+        <div class="hero-content" data-aos="fade-up">
+            <p style="letter-spacing:5px; font-size: 0.8rem;">THE WEDDING OF</p>
+            <h1 id="h-names">Pria & Wanita</h1>
+            <div class="guest-box">
+                <p style="font-size: 0.75rem; opacity: 0.9; margin-bottom: 5px;">Kepada Yth. Bapak/Ibu/Saudara/i:</p>
+                <h2 id="guest-name" style="font-family: 'Playfair Display'; font-weight: 500;">Tamu Undangan</h2>
+            </div>
             <button class="btn-open" onclick="startInv()">Buka Undangan</button>
         </div>
     </section>
 
     <div id="main-content" style="display:none;">
-        <section id="mempelai">
-            <div class="title" data-aos="fade-up">Bride & Groom</div>
-            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:50px;">
+        <section>
+            <div class="title" data-aos="fade-up">Mempelai</div>
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:40px;">
                 <div data-aos="fade-right">
-                    <img id="p-foto" src="" class="profile-img">
-                    <h2 id="p-nama" class="profile-name"></h2>
-                    <p>Putra dari <br><b id="p-ortu"></b></p>
+                    <img id="p-foto" src="" style="width:260px; height:380px; object-fit:cover; border-radius:130px 130px 0 0; border: 10px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                    <h2 id="p-nama" style="font-family:'Playfair Display'; font-size:2rem; margin:20px 0 5px; color: var(--accent);"></h2>
+                    <p style="font-size: 0.9rem;">Putra dari <br><b id="p-ortu"></b></p>
                 </div>
-                <div style="align-self:center; font-family:'Cormorant Garamond'; font-size:3rem; color:#ddd;">&</div>
+                <div style="align-self: center; font-family: 'Cormorant Garamond'; font-size: 4rem; color: #eee;">&</div>
                 <div data-aos="fade-left">
-                    <img id="w-foto" src="" class="profile-img">
-                    <h2 id="w-nama" class="profile-name"></h2>
-                    <p>Putri dari <br><b id="w-ortu"></b></p>
+                    <img id="w-foto" src="" style="width:260px; height:380px; object-fit:cover; border-radius:130px 130px 0 0; border: 10px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                    <h2 id="w-nama" style="font-family:'Playfair Display'; font-size:2rem; margin:20px 0 5px; color: var(--accent);"></h2>
+                    <p style="font-size: 0.9rem;">Putri dari <br><b id="w-ortu"></b></p>
                 </div>
             </div>
         </section>
 
-        <section class="countdown-sect">
-            <div class="title" style="color:white; margin-bottom:20px;">Save The Date</div>
+        <section class="countdown-sect" data-aos="zoom-in">
+            <p id="display-tgl" style="letter-spacing:3px; margin-bottom:20px; font-weight: 300;"></p>
             <div class="cd-wrapper">
                 <div class="cd-item"><span id="days">00</span><label>Hari</label></div>
                 <div class="cd-item"><span id="hours">00</span><label>Jam</label></div>
@@ -95,64 +95,71 @@
             </div>
         </section>
 
-        <section id="story">
+        <section id="sect-story" style="display:none;">
             <div class="title">Our Love Story</div>
-            <div class="story-item" data-aos="fade-up">
-                <img id="s-f1" src="" class="story-img">
-                <div class="story-text"><h3>Pertemuan</h3><p id="s-t1"></p></div>
-            </div>
-            <div class="story-item" data-aos="fade-up">
-                <img id="s-f2" src="" class="story-img">
-                <div class="story-text"><h3>Pendekatan</h3><p id="s-t2"></p></div>
-            </div>
-            <div class="story-item" data-aos="fade-up">
-                <img id="s-f3" src="" class="story-img">
-                <div class="story-text"><h3>Lamaran</h3><p id="s-t3"></p></div>
+            <div id="story-container"></div>
+        </section>
+
+        <section>
+            <div class="title">Waktu & Lokasi</div>
+            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:25px;">
+                <div class="gift-sect" style="flex:1; min-width:300px;" data-aos="fade-up">
+                    <h3 style="font-family:'Playfair Display'; color:var(--accent); margin-bottom:15px;">Akad Nikah</h3>
+                    <p id="ak-tgl" style="font-weight:600; margin-bottom:10px;"></p>
+                    <p id="ak-lok" style="font-size:0.85rem; margin-bottom:20px; line-height:1.6;"></p>
+                    <a id="ak-map" href="#" target="_blank" class="btn-open" style="text-decoration:none; display:inline-block; font-size:0.6rem;">Lihat Lokasi</a>
+                </div>
+                <div class="gift-sect" style="flex:1; min-width:300px;" data-aos="fade-up" data-aos-delay="200">
+                    <h3 style="font-family:'Playfair Display'; color:var(--accent); margin-bottom:15px;">Resepsi</h3>
+                    <p id="re-tgl" style="font-weight:600; margin-bottom:10px;"></p>
+                    <p id="re-lok" style="font-size:0.85rem; margin-bottom:20px; line-height:1.6;"></p>
+                    <a id="re-map" href="#" target="_blank" class="btn-open" style="text-decoration:none; display:inline-block; font-size:0.6rem;">Lihat Lokasi</a>
+                </div>
             </div>
         </section>
 
-        <section id="event">
-            <div class="title">Wedding Event</div>
-            <div class="event-card" data-aos="zoom-in">
-                <h3>Akad Nikah</h3>
-                <p id="ak-tgl" style="font-weight:600;"></p>
-                <p id="ak-lok" style="margin:10px 0; font-size:0.9rem; opacity:0.8;"></p>
-                <a id="ak-map" href="#" target="_blank" class="btn-maps">LIHAT LOKASI</a>
-            </div>
-            <div class="event-card" data-aos="zoom-in">
-                <h3>Resepsi</h3>
-                <p id="re-tgl" style="font-weight:600;"></p>
-                <p id="re-lok" style="margin:10px 0; font-size:0.9rem; opacity:0.8;"></p>
-                <a id="re-map" href="#" target="_blank" class="btn-maps">LIHAT LOKASI</a>
+        <section id="sect-gift" style="display:none;">
+            <div class="title" data-aos="fade-up">Wedding Gift</div>
+            <div class="gift-sect" data-aos="fade-up">
+                <p style="margin-bottom:20px; font-size:0.9rem;">Doa restu Anda merupakan karunia terindah bagi kami. Namun jika Anda ingin memberikan kado digital, dapat melalui:</p>
+                <h3 id="bank-txt" style="color:var(--accent); letter-spacing:1px;"></h3>
+                <div id="qr-box" style="display:none;"><img id="qr-img" src=""></div>
             </div>
         </section>
 
-        <footer style="padding:80px 20px; background:var(--dark); color:white; text-align:center;">
-            <p style="font-size:0.6rem; opacity:0.4; letter-spacing:3px;">MADE WITH LOVE BY OMAHAKSARA</p>
+        <footer style="padding:60px; background:#111; color:white; font-size:0.6rem; letter-spacing:4px; opacity: 0.6;">
+            MADE BY OMAHAKSARA
         </footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        // API URL YANG KAMU BERIKAN
         const API = "https://script.google.com/macros/s/AKfycbxl_wwAkQSD9S5uNDfXhzT253KAtRTqeDNxZsB8TiU66KWLKsYdKVOgOJYsBBkNrmqxtw/exec";
-        const u = new URLSearchParams(window.location.search).get('u');
+        const urlParams = new URLSearchParams(window.location.search);
+        const u = urlParams.get('u');
+        const to = urlParams.get('to');
+
+        if(to) document.getElementById('guest-name').innerText = decodeURIComponent(to.replace(/\+/g, ' '));
 
         fetch(API).then(r => r.json()).then(res => {
             const d = res[u];
-            if(!d) return;
+            if(!d) { document.getElementById('h-names').innerText = "Undangan Tidak Ditemukan"; return; }
 
-            // Pemetaan Data dari Tabel ke HTML
+            // Image Mapping
+            document.getElementById('heroSec').style.backgroundImage = `url('${d.foto_sampul}')`;
+            document.getElementById('bodyBg').style.backgroundImage = `url('${d.foto_bg_isi}')`;
+            document.getElementById('p-foto').src = d.pria_foto;
+            document.getElementById('w-foto').src = d.wanita_foto;
+
+            // Content Mapping
             document.getElementById('h-names').innerText = d.pria_nama.split(' ')[0] + ' & ' + d.wanita_nama.split(' ')[0];
             document.getElementById('p-nama').innerText = d.pria_nama;
-            document.getElementById('p-foto').src = d.pria_foto;
             document.getElementById('p-ortu').innerText = d.pria_ortu;
             document.getElementById('w-nama').innerText = d.wanita_nama;
-            document.getElementById('w-foto').src = d.wanita_foto;
             document.getElementById('w-ortu').innerText = d.wanita_ortu;
-            document.getElementById('h-date').innerText = d.waktu_display;
+            document.getElementById('display-tgl').innerText = d.waktu_display;
             
-            // Event
+            // Events
             document.getElementById('ak-tgl').innerText = d.akad_tgl;
             document.getElementById('ak-lok').innerText = d.akad_lokasi;
             document.getElementById('ak-map').href = d.map_akad;
@@ -160,30 +167,48 @@
             document.getElementById('re-lok').innerText = d.resepsi_lokasi;
             document.getElementById('re-map').href = d.map_resepsi;
 
-            // Story
-            document.getElementById('s-t1').innerText = d.cerita_1_teks;
-            document.getElementById('s-t2').innerText = d.cerita_2_teks;
-            document.getElementById('s-t3').innerText = d.cerita_3_teks;
-            document.getElementById('s-f1').src = d.foto_cerita_1;
-            document.getElementById('s-f2').src = d.foto_cerita_2;
-            document.getElementById('s-f3').src = d.foto_cerita_3;
+            // Story Logic
+            if(d.cerita_1_teks) {
+                document.getElementById('sect-story').style.display = 'block';
+                let html = '';
+                for(let i=1; i<=3; i++) {
+                    if(d['cerita_'+i+'_teks']) {
+                        html += `<div class="story-item" data-aos="fade-up">
+                            <img src="${d['foto_cerita_'+i]}" class="story-img">
+                            <div class="story-text"><h3>Cerita Kami #${i}</h3><p style="font-size:0.85rem; line-height:1.6;">${d['cerita_'+i+'_teks']}</p></div>
+                        </div>`;
+                    }
+                }
+                document.getElementById('story-container').innerHTML = html;
+            }
 
-            // Musik
+            // Gift Logic
+            if(d.bank_data) {
+                document.getElementById('sect-gift').style.display = 'block';
+                if(d.bank_data.includes('http')) {
+                    document.getElementById('qr-box').style.display = 'block';
+                    document.getElementById('qr-img').src = d.bank_data;
+                } else {
+                    document.getElementById('bank-txt').innerText = d.bank_data;
+                }
+            }
+
             document.getElementById('mSource').src = d.musik_url;
-            
-            startCD(d.waktu_countdown);
+            startCountdown(d.waktu_countdown);
             AOS.init({ duration: 1000, once: true });
         });
 
-        function startCD(date) {
-            const target = new Date(date).getTime();
+        function startCountdown(date) {
+            // WITA = GMT+8
+            const target = new Date(date.replace(' ', 'T') + "+08:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
                 const diff = target - now;
-                document.getElementById('days').innerText = Math.max(0, Math.floor(diff/(1000*60*60*24)));
-                document.getElementById('hours').innerText = Math.max(0, Math.floor((diff%(1000*60*60*24))/(1000*60*60)));
-                document.getElementById('mins').innerText = Math.max(0, Math.floor((diff%(1000*60*60))/(1000*60)));
-                document.getElementById('secs').innerText = Math.max(0, Math.floor((diff%(1000*60))/1000));
+                if(diff < 0) return;
+                document.getElementById('days').innerText = Math.floor(diff/(1000*60*60*24));
+                document.getElementById('hours').innerText = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+                document.getElementById('mins').innerText = Math.floor((diff%(1000*60*60))/(1000*60));
+                document.getElementById('secs').innerText = Math.floor((diff%(1000*60))/1000);
             }, 1000);
         }
 
