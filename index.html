@@ -3,128 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan Digital - Omahaksara</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>The Wedding of Zeya & Putra - Omahaksara</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400;600&family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
-        :root { --primary-gold: #c5a059; --soft-bg: #fdfbf7; --text-dark: #333; }
-        body, html { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; background-color: var(--soft-bg); color: var(--text-dark); scroll-behavior: smooth; overflow-x: hidden; }
-        
-        /* Loading Screen */
-        #loader { position: fixed; z-index: 9999; background: white; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
+        :root { --dark: #2c2c2c; --accent: #b39359; --bg: #f4f4f4; --white: #ffffff; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--dark); overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* Hero Section */
-        #section-cover { height: 100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://picsum.photos/1920/1080?wedding') center/cover no-repeat; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; }
-        .hero-title { font-family: 'Great Vibes', cursive; font-size: 5rem; margin: 10px 0; }
-        .btn-open { margin-top: 30px; padding: 12px 30px; background-color: var(--primary-gold); color: white; border: none; border-radius: 50px; font-weight: 600; cursor: pointer; }
+        /* Full Page Hero */
+        .hero { height: 100vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://picsum.photos/1920/1080?wedding') center/cover no-repeat fixed; display: flex; align-items: center; justify-content: center; text-align: center; color: white; position: relative; z-index: 1; }
+        .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 10vw, 5.5rem); font-style: italic; font-weight: 300; margin: 15px 0 30px; }
+        .hero p { letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem; }
+        .btn-open { background: transparent; border: 1px solid white; color: white; padding: 12px 35px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; }
 
-        section { padding: 80px 20px; text-align: center; }
-        .couple-photo { width: 200px; height: 200px; border-radius: 50%; border: 5px solid var(--primary-gold); object-fit: cover; margin-bottom: 20px; }
-        .event-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin: 20px auto; max-width: 500px; }
-        
-        .audio-control { position: fixed; bottom: 20px; right: 20px; z-index: 999; background: var(--primary-gold); color: white; width: 50px; height: 50px; border-radius: 50%; display: none; justify-content: center; align-items: center; cursor: pointer; }
+        /* Quote Section */
+        .quote-sect { padding: 100px 20px; text-align: center; background: white; }
+        .quote-icon { font-size: 5rem; color: #eee; font-family: 'Cormorant Garamond', serif; line-height: 0; margin-bottom: 30px; display: block; }
+        .quote-text { max-width: 650px; margin: 0 auto; font-style: italic; color: #555; line-height: 1.8; font-size: 0.95rem; }
+
+        /* Countdown Section */
+        .countdown { background: var(--dark); color: white; padding: 80px 20px; text-align: center; }
+        .cd-title { font-family: 'Playfair Display', serif; color: var(--accent); margin-bottom: 40px; font-weight: 400; }
+        .cd-wrapper { display: flex; justify-content: center; gap: 20px; }
+        .cd-item { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; min-width: 80px; border: 1px solid rgba(255,255,255,0.1); }
+        .cd-item span { display: block; font-size: 2.2rem; font-weight: 600; font-family: 'Cormorant Garamond'; color: var(--accent); }
+        .cd-item label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+
+        /* Profil Section */
+        .profile-sect { padding: 100px 20px; text-align: center; max-width: 1000px; margin: 0 auto; }
+        .profile-card { margin-bottom: 80px; display: flex; flex-direction: column; align-items: center; }
+        .profile-img-wrapper { width: 300px; height: 420px; border: 10px solid white; box-shadow: 0 15px 35px rgba(0,0,0,0.05); overflow: hidden; margin-bottom: 25px; }
+        .profile-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .profile-img-wrapper:hover .profile-img { transform: scale(1.05); }
+        .name { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--accent); font-weight: 400; margin: 15px 0 5px; }
+
+        /* Event Card */
+        .event-card { background: white; padding: 50px 30px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); margin: 0 auto 40px; max-width: 600px; border: 1px solid #f0e6d2; }
+        .event-card h3 { font-family: 'Playfair Display'; font-size: 1.8rem; margin-bottom: 20px; color: var(--dark); font-weight: 500; }
+        .btn-maps { display: inline-block; padding: 12px 30px; background: var(--dark); color: white; text-decoration: none; border-radius: 30px; font-size: 0.7rem; letter-spacing: 2px; margin-top: 25px; transition: 0.3s; }
+        .btn-maps:hover { background: var(--accent); transform: translateY(-3px); }
+
+        /* Floating Music */
+        .music-toggle { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: white; border-radius: 50%; display: none; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 5px 20px rgba(0,0,0,0.1); cursor: pointer; color: var(--accent); border: 1px solid var(--accent); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.2rem; }
+            .cd-wrapper { gap: 10px; }
+            .cd-item { min-width: 65px; padding: 15px 10px; }
+            .cd-item span { font-size: 1.8rem; }
+        }
     </style>
 </head>
 <body>
 
-    <div id="loader"><h2>Memuat Undangan...</h2></div>
+    <div class="music-toggle" onclick="toggleMusic()" id="mBtn">♪</div>
+    <audio id="bgm" loop><source id="mSource" src=""></audio>
 
-    <div class="audio-control" onclick="toggleMusic()" id="music-btn">♫</div>
-    <audio id="myAudio" loop><source id="audio-src" src="" type="audio/mpeg"></audio>
+    <section class="hero" id="hero">
+        <div data-aos="fade-up" data-aos-duration="1500">
+            <p>The Wedding celebration of</p>
+            <h1 id="h-names">Zeya & Putra</h1>
+            <p id="h-date">Minggu, 20 April 2025</p>
+            <button class="btn-open" onclick="startUndangan()">Buka Undangan</button>
+        </div>
+    </section>
 
     <div id="main-content" style="display:none;">
-        <section id="section-cover">
-            <div style="letter-spacing: 5px; text-transform: uppercase;">The Wedding Of</div>
-            <h1 class="hero-title" id="display-couple-names">... & ...</h1>
-            <div style="margin-top: 20px; background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.3);">
-                <p>Kepada Yth. Bapak/Ibu/Saudara/i</p>
-                <h2 id="guest-name">Tamu Undangan</h2>
-            </div>
-            <button class="btn-open" onclick="openInvitation()">Buka Undangan</button>
+        <section class="quote-sect">
+            <span class="quote-icon">“</span>
+            <p class="quote-text" data-aos="fade-up">
+                "Maha Suci Allah yang telah menciptakan manusia dengan berpasang-pasangan. Dengan memohon Rahmat dan Ridho Allah SWT, kami bermaksud mengundang Saudara/i dalam acara resepsi pernikahan kami."<br><br>
+                <strong>( QS. Ar-Rum : 21 )</strong>
+            </p>
         </section>
 
-        <section id="couple">
-            <h2 style="font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--primary-gold);">Mempelai</h2>
-            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; max-width: 1000px; margin: 0 auto;">
-                <div>
-                    <img id="img-pria" src="" class="couple-photo">
-                    <h2 id="name-pria" style="font-family: 'Great Vibes'; font-size: 2.5rem;"></h2>
-                    <p>Putra dari <br><span id="parents-pria"></span></p>
-                </div>
-                <div style="align-self: center; font-family: 'Great Vibes'; font-size: 3rem; color: var(--primary-gold);">&</div>
-                <div>
-                    <img id="img-wanita" src="" class="couple-photo">
-                    <h2 id="name-wanita" style="font-family: 'Great Vibes'; font-size: 2.5rem;"></h2>
-                    <p>Putri dari <br><span id="parents-wanita"></span></p>
-                </div>
+        <section class="countdown">
+            <h2 class="cd-title" data-aos="fade-up">Wedding Countdown</h2>
+            <div class="cd-wrapper" id="timer">
+                <div class="cd-item"><span id="days">00</span><label>Hari</label></div>
+                <div class="cd-item"><span id="hours">00</span><label>Jam</label></div>
+                <div class="cd-item"><span id="mins">00</span><label>Menit</label></div>
+                <div class="cd-item"><span id="secs">00</span><label>Detik</label></div>
             </div>
         </section>
 
-        <section id="event" style="background-color: #f9f6f0;">
-            <h2 style="font-family: 'Great Vibes'; font-size: 3.5rem; color: var(--primary-gold);">Acara</h2>
-            <div class="event-card">
-                <h3>Akad Nikah</h3>
-                <p><b id="date-akad"></b></p>
-                <hr>
-                <p id="address"></p>
-                <a id="link-maps" href="#" target="_blank" class="btn-open" style="display:inline-block; font-size: 0.8rem; text-decoration:none;">Buka Google Maps</a>
+        <section class="profile-sect">
+            <div class="profile-card" data-aos="fade-right">
+                <div class="profile-img-wrapper"><img id="p-img" src="" class="profile-img"></div>
+                <p style="letter-spacing:3px; font-size:0.75rem; opacity:0.6;">THE BRIDE</p>
+                <h2 class="name" id="p-name"></h2>
+                <p style="font-size:0.9rem;">Putri Pertama Dari <br><b id="p-ortu"></b></p>
+            </div>
+            <div style="font-family:'Cormorant Garamond'; font-size:3rem; margin: 40px 0; color:#ddd;">&</div>
+            <div class="profile-card" data-aos="fade-left">
+                <div class="profile-img-wrapper"><img id="w-img" src="" class="profile-img"></div>
+                <p style="letter-spacing:3px; font-size:0.75rem; opacity:0.6;">THE GROOM</p>
+                <h2 class="name" id="w-name"></h2>
+                <p style="font-size:0.9rem;">Putra Kedua Dari <br><b id="w-ortu"></b></p>
             </div>
         </section>
 
-        <footer style="background: var(--primary-gold); color: white; padding: 40px; text-align: center;">
-            <p>Terima Kasih</p>
-            <h2 id="footer-names" style="font-family: 'Great Vibes';"></h2>
-            <p style="font-size: 0.7rem; opacity: 0.8;">Created by Omahaksara</p>
+        <section id="event" style="padding: 100px 20px; background:white; text-align:center;">
+            <p style="letter-spacing:5px; text-transform:uppercase; font-size:0.8rem; margin-bottom:50px;">Waktu & Lokasi</p>
+            <div class="event-card" data-aos="zoom-in">
+                <h3 style="color:var(--accent);">Akad Nikah</h3>
+                <p id="ev-akad-tgl" style="font-weight:600;"></p>
+                <p id="ev-akad-lok" style="font-size:0.9rem; margin-top:10px;"></p>
+                <a id="ev-akad-link" href="#" target="_blank" class="btn-maps">BUKA PETUNJUK LOKASI</a>
+            </div>
+            <div class="event-card" data-aos="zoom-in">
+                <h3 style="color:var(--accent);">Resepsi</h3>
+                <p id="ev-resepsi-tgl" style="font-weight:600;"></p>
+                <p id="ev-resepsi-lok" style="font-size:0.9rem; margin-top:10px;"></p>
+                <a id="ev-resepsi-link" href="#" target="_blank" class="btn-maps">BUKA PETUNJUK LOKASI</a>
+            </div>
+        </section>
+
+        <footer style="padding: 100px 20px; text-align: center; background: #111; color: #ddd;">
+            <h1 style="font-family:'Cormorant Garamond'; font-style:italic; font-weight:300; font-size:3.5rem;">Zeya & Putra</h1>
+            <p style="font-size:0.6rem; opacity:0.3; margin-top:50px; letter-spacing:2px;">CREATED BY OMAHAKSARA</p>
         </footer>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        const webAppUrl = "https://script.google.com/macros/s/AKfycbxNJAM9Zg9Aw1iw5G1aw3ItYmjhqlcNkgbXofz2SCm0RxUi0cmfyNcGQQcok7eiVbCRLw/exec";
-        const urlParams = new URLSearchParams(window.location.search);
-        const slug = urlParams.get('u');
-        const guest = urlParams.get('to');
+        const API = "https://script.google.com/macros/s/AKfycbxNJAM9Zg9Aw1iw5G1aw3ItYmjhqlcNkgbXofz2SCm0RxUi0cmfyNcGQQcok7eiVbCRLw/exec";
+        const u = new URLSearchParams(window.location.search).get('u');
 
-        if (guest) document.getElementById('guest-name').innerText = guest.replace(/\+/g, ' ');
+        fetch(API).then(r => r.json()).then(res => {
+            const d = res[u];
+            if(!d) return;
 
-        fetch(webAppUrl)
-            .then(res => res.json())
-            .then(allData => {
-                const data = allData[slug];
-                if (data) {
-                    // Isi Data
-                    document.getElementById('display-couple-names').innerText = data.pria.nama.split(' ')[0] + ' & ' + data.wanita.nama.split(' ')[0];
-                    document.getElementById('name-pria').innerText = data.pria.nama;
-                    document.getElementById('img-pria').src = data.pria.foto;
-                    document.getElementById('parents-pria').innerText = data.pria.ayah + ' & ' + data.pria.ibu;
-                    
-                    document.getElementById('name-wanita').innerText = data.wanita.nama;
-                    document.getElementById('img-wanita').src = data.wanita.foto;
-                    document.getElementById('parents-wanita').innerText = data.wanita.ayah + ' & ' + data.wanita.ibu;
-                    
-                    document.getElementById('date-akad').innerText = data.waktu.akad;
-                    document.getElementById('address').innerText = data.lokasi.alamat;
-                    document.getElementById('link-maps').href = data.lokasi.maps;
-                    document.getElementById('audio-src').src = data.fitur.musik;
-                    document.getElementById('footer-names').innerText = data.pria.nama.split(' ')[0] + ' & ' + data.wanita.nama.split(' ')[0];
-                    
-                    // Tampilkan Konten
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('main-content').style.display = 'block';
-                    document.getElementById('myAudio').load();
-                } else {
-                    document.getElementById('loader').innerHTML = "<h2>Undangan tidak ditemukan.</h2>";
-                }
-            });
+            document.title = "The Wedding of " + d.pria.nama.split(' ')[0] + " & " + d.wanita.nama.split(' ')[0];
+            document.getElementById('h-names').innerText = d.pria.nama.split(' ')[0] + ' & ' + d.wanita.nama.split(' ')[0];
+            document.getElementById('p-name').innerText = d.pria.nama;
+            document.getElementById('p-img').src = d.pria.foto;
+            document.getElementById('p-ortu').innerText = d.pria.ortu;
+            document.getElementById('w-name').innerText = d.wanita.nama;
+            document.getElementById('w-img').src = d.wanita.foto;
+            document.getElementById('w-ortu').innerText = d.wanita.ortu;
+            document.getElementById('h-date').innerText = d.waktu.display;
+            document.getElementById('ev-akad-tgl').innerText = d.akad.tgl;
+            document.getElementById('ev-akad-lok').innerText = d.akad.lokasi;
+            document.getElementById('ev-akad-link').href = d.lokasi.map_akad;
+            document.getElementById('ev-resepsi-tgl').innerText = d.resepsi.tgl;
+            document.getElementById('ev-resepsi-lok').innerText = d.resepsi.lokasi;
+            document.getElementById('ev-resepsi-link').href = d.lokasi.map_resepsi;
+            document.getElementById('mSource').src = d.fitur.musik;
+            
+            setupCountdown(d.waktu.countdown);
+            AOS.init({ duration: 1200, once: true });
+        });
 
-        const audio = document.getElementById("myAudio");
-        function openInvitation() {
+        function setupCountdown(date) {
+            const target = new Date(date).getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const diff = target - now;
+                document.getElementById('days').innerText = Math.floor(diff/(1000*60*60*24));
+                document.getElementById('hours').innerText = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+                document.getElementById('mins').innerText = Math.floor((diff%(1000*60*60))/(1000*60));
+                document.getElementById('secs').innerText = Math.floor((diff%(1000*60))/1000);
+            }, 1000);
+        }
+
+        function startUndangan() {
+            document.getElementById('main-content').style.display = 'block';
+            document.getElementById('mBtn').style.display = 'flex';
+            document.getElementById('bgm').play();
             window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-            audio.play();
-            document.getElementById('music-btn').style.display = 'flex';
         }
 
         function toggleMusic() {
-            if (audio.paused) { audio.play(); document.getElementById('music-btn').innerText = "♫"; }
-            else { audio.pause(); document.getElementById('music-btn').innerText = "✖"; }
+            const a = document.getElementById('bgm');
+            if(a.paused) { a.play(); document.getElementById('mBtn').innerText = '♪'; }
+            else { a.pause(); document.getElementById('mBtn').innerText = '✖'; }
         }
     </script>
 </body>
