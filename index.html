@@ -1,144 +1,585 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Wedding Invitation | Omah Aksara</title>
-    
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Wedding Invitation | Omah Aksara</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <style>
-        :root { --bg: #050505; --gold: #d4af37; --gold2: #f5e6a8; --white: #ffffff; }
-        html, body { height: 100%; margin: 0; padding: 0; background: var(--bg); color: var(--white); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
-        #loader { position: fixed; inset: 0; background: #000; display: flex; align-items: center; justify-content: center; z-index: 9999; }
-        .hero { height: 100vh; height: 100dvh; width: 100%; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; background-size: cover; background-position: center; }
-        .hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)); z-index: 1; }
-        .hero-content { position: relative; z-index: 10; padding: 20px; width: 100%; max-width: 500px; }
-        .overlay-card { background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.3); padding: 40px 25px; border-radius: 30px; }
-        h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 10vw, 4rem); margin: 15px 0; }
-        .btn-open { background: linear-gradient(45deg, var(--gold), var(--gold2)); color: #111; border: none; padding: 15px 35px; border-radius: 50px; font-weight: 700; letter-spacing: 2px; cursor: pointer; margin-top: 25px; text-transform: uppercase; }
-        main { display: none; }
-        section { padding: 80px 20px; max-width: 600px; margin: auto; text-align: center; }
-        .card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 20px; padding: 30px; margin-bottom: 25px; }
-        .profile-img { width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--gold); object-fit: cover; margin-bottom: 15px; }
-        .music-toggle { position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px; background: var(--gold); color: #000; border-radius: 50%; display: none; align-items: center; justify-content: center; z-index: 1000; cursor: pointer; }
-        .spinner { width: 40px; height: 40px; border: 3px solid rgba(212,175,55,0.2); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-    </style>
+<style>
+:root{
+--bg:#070707;
+--card:#121212;
+--gold:#d4af37;
+--gold2:#f5e7aa;
+--white:#ffffff;
+--soft:rgba(255,255,255,.72);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+body{
+background:var(--bg);
+color:var(--white);
+font-family:Montserrat,sans-serif;
+overflow-x:hidden;
+}
+
+img{
+max-width:100%;
+display:block;
+}
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+#loader{
+position:fixed;
+inset:0;
+background:#000;
+z-index:99999;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:18px;
+}
+
+.spin{
+width:42px;
+height:42px;
+border:3px solid rgba(255,255,255,.15);
+border-top:3px solid var(--gold);
+border-radius:50%;
+animation:putar 1s linear infinite;
+}
+
+@keyframes putar{
+to{transform:rotate(360deg)}
+}
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+background-size:cover;
+background-position:center;
+position:relative;
+text-align:center;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to bottom,rgba(0,0,0,.35),rgba(0,0,0,.85));
+}
+
+.hero-box{
+position:relative;
+z-index:2;
+width:100%;
+max-width:520px;
+padding:35px 24px;
+border-radius:28px;
+background:rgba(0,0,0,.30);
+backdrop-filter:blur(10px);
+border:1px solid rgba(212,175,55,.28);
+}
+
+.small{
+font-size:.72rem;
+letter-spacing:5px;
+color:var(--gold2);
+}
+
+h1{
+font-family:"Cormorant Garamond",serif;
+font-size:clamp(2.7rem,10vw,4.8rem);
+margin:14px 0 22px;
+line-height:1.05;
+}
+
+.to{
+font-size:.9rem;
+opacity:.8;
+margin-bottom:8px;
+}
+
+.guest{
+font-size:1.25rem;
+font-weight:600;
+margin-bottom:24px;
+}
+
+.btn{
+display:inline-block;
+border:none;
+cursor:pointer;
+padding:15px 28px;
+border-radius:999px;
+font-weight:700;
+letter-spacing:1px;
+background:linear-gradient(45deg,var(--gold),var(--gold2));
+color:#111;
+font-size:.88rem;
+}
+
+main{
+display:none;
+}
+
+section{
+padding:70px 20px;
+max-width:760px;
+margin:auto;
+}
+
+.title{
+font-family:"Cormorant Garamond",serif;
+font-size:2.6rem;
+color:var(--gold2);
+text-align:center;
+margin-bottom:30px;
+}
+
+.card{
+background:var(--card);
+border:1px solid rgba(212,175,55,.14);
+border-radius:22px;
+padding:26px;
+margin-bottom:22px;
+}
+
+.couple{
+display:grid;
+grid-template-columns:1fr;
+gap:30px;
+}
+
+.person{
+text-align:center;
+}
+
+.avatar{
+width:170px;
+height:170px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid var(--gold);
+margin:0 auto 14px;
+}
+
+.name{
+font-size:1.35rem;
+font-weight:600;
+margin-bottom:8px;
+}
+
+.parent{
+font-size:.9rem;
+color:var(--soft);
+line-height:1.7;
+}
+
+.and{
+text-align:center;
+font-family:"Cormorant Garamond",serif;
+font-size:3rem;
+color:var(--gold);
+}
+
+.event-grid{
+display:grid;
+gap:18px;
+}
+
+.label{
+font-size:.78rem;
+letter-spacing:2px;
+color:var(--gold2);
+margin-bottom:8px;
+}
+
+.text{
+line-height:1.8;
+color:var(--soft);
+}
+
+.story-img{
+width:100%;
+height:240px;
+object-fit:cover;
+border-radius:16px;
+margin-bottom:14px;
+}
+
+.actions{
+display:grid;
+gap:12px;
+margin-top:18px;
+}
+
+.btn-dark{
+background:#1f1f1f;
+color:#fff;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.countdown{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+text-align:center;
+}
+
+.cd-box{
+padding:14px 8px;
+border-radius:16px;
+background:#101010;
+border:1px solid rgba(212,175,55,.14);
+}
+
+.cd-num{
+font-size:1.4rem;
+font-weight:700;
+color:var(--gold2);
+}
+
+.cd-txt{
+font-size:.72rem;
+opacity:.7;
+margin-top:4px;
+}
+
+.music{
+position:fixed;
+right:18px;
+bottom:18px;
+width:52px;
+height:52px;
+border-radius:50%;
+display:none;
+align-items:center;
+justify-content:center;
+background:linear-gradient(45deg,var(--gold),var(--gold2));
+color:#111;
+font-size:1.2rem;
+font-weight:700;
+z-index:999;
+cursor:pointer;
+box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+footer{
+padding:45px 20px;
+text-align:center;
+font-size:.72rem;
+letter-spacing:3px;
+opacity:.45;
+}
+
+@media(min-width:720px){
+.couple{
+grid-template-columns:1fr auto 1fr;
+align-items:center;
+}
+.event-grid{
+grid-template-columns:1fr 1fr;
+}
+}
+</style>
 </head>
 <body>
 
-    <div id="loader"><div class="spinner"></div></div>
-    <audio id="bgm" loop><source id="musicSrc" src=""></audio>
-    <div class="music-toggle" id="mBtn" onclick="toggleMusic()">♫</div>
+<div id="loader">
+<div class="spin"></div>
+<div style="font-size:.85rem;opacity:.7">Memuat Undangan...</div>
+</div>
 
-    <div class="hero" id="cover">
-        <div class="hero-content" data-aos="zoom-in">
-            <div style="letter-spacing: 5px; font-size: 0.7rem; color: var(--gold2);">THE WEDDING OF</div>
-            <h1 id="heroName">Memuat...</h1>
-            <div class="overlay-card">
-                <div style="font-size: 0.9rem; opacity: 0.8;">Kepada Yth.</div>
-                <div id="guestName" style="font-size: 1.2rem; font-weight: 600; margin: 10px 0 25px 0;">Tamu Undangan</div>
-                <button class="btn-open" onclick="openInvitation()">Buka Undangan</button>
-            </div>
-        </div>
-    </div>
+<audio id="bgm" loop>
+<source id="musicSrc" src="">
+</audio>
 
-    <main id="main">
-        <section data-aos="fade-up">
-            <h2 style="font-family: 'Cormorant Garamond'; font-size: 2.5rem; color: var(--gold2);">Mempelai</h2>
-            <div style="margin-top: 40px;">
-                <img id="malePhoto" class="profile-img">
-                <h3 id="maleName"></h3>
-                <p id="maleParent" style="font-size: 0.85rem; opacity: 0.6;"></p>
-            </div>
-            <div style="font-family: 'Cormorant Garamond'; font-size: 3rem; color: var(--gold); margin: 20px 0;">&</div>
-            <div>
-                <img id="femalePhoto" class="profile-img">
-                <h3 id="femaleName"></h3>
-                <p id="femaleParent" style="font-size: 0.85rem; opacity: 0.6;"></p>
-            </div>
-        </section>
+<div class="music" id="musicBtn" onclick="toggleMusic()">♫</div>
 
-        <section><div id="storyWrap"></div></section>
+<header class="hero" id="hero">
+<div class="hero-box">
+<div class="small">THE WEDDING OF</div>
+<h1 id="heroTitle">Loading...</h1>
+<div class="to">Kepada Yth.</div>
+<div class="guest" id="guestName">Tamu Undangan</div>
+<button class="btn" onclick="openInvitation()">BUKA UNDANGAN</button>
+</div>
+</header>
 
-        <section>
-            <div class="card">
-                <h3 style="color: var(--gold2); margin-bottom: 15px;">Kado Digital</h3>
-                <div id="giftData" style="font-weight: 600; padding: 15px; border: 1px dashed var(--gold); border-radius: 10px;"></div>
-            </div>
-        </section>
+<main id="main">
 
-        <footer style="padding: 40px; text-align: center; font-size: 0.7rem; opacity: 0.4; letter-spacing: 3px;">
-            DESIGNED BY OMAH AKSARA
-        </footer>
-    </main>
+<section>
+<div class="title">Mempelai</div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <script>
-        // LINK API VERSI 9 FIX
-        const API = "https://script.google.com/macros/s/AKfycbz3S69wLBYLgy9KydJfwPM6ZThMiAHpmRgnhN_Vv7_YM2k5VC9x5xJbmhy3UDPevIViig/exec";
-        
-        const params = new URLSearchParams(location.search);
-        const slug = params.get("u") || "zeya-putra";
-        const guest = params.get("to") || "Tamu Undangan";
-        document.getElementById("guestName").innerText = guest;
+<div class="couple">
 
-        async function init() {
-            try {
-                const res = await fetch(API + "?u=" + encodeURIComponent(slug));
-                const json = await res.json();
-                if(!json.status) return;
-                
-                const d = json.config || json.data[0];
-                const cover = document.getElementById("cover");
-                cover.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('${d.foto_sampul}')`;
-                
-                document.getElementById("heroName").innerText = d.pria_nama.split(' ')[0] + " & " + d.wanita_nama.split(' ')[0];
-                document.getElementById("malePhoto").src = d.pria_foto;
-                document.getElementById("maleName").innerText = d.pria_nama;
-                document.getElementById("maleParent").innerText = d.pria_ortu;
-                document.getElementById("femalePhoto").src = d.wanita_foto;
-                document.getElementById("femaleName").innerText = d.wanita_nama;
-                document.getElementById("femaleParent").innerText = d.wanita_ortu;
-                document.getElementById("giftData").innerText = d.bank_data;
-                document.getElementById("musicSrc").src = d.musik_url;
-                document.getElementById("bgm").load();
+<div class="person">
+<img id="malePhoto" class="avatar" src="">
+<div class="name" id="maleName"></div>
+<div class="parent" id="maleParent"></div>
+</div>
 
-                let sHtml = "";
-                for(let i=1; i<=3; i++) {
-                    if(d["cerita_"+i+"_teks"]) {
-                        sHtml += `<div class="card" data-aos="fade-up">
-                            ${d["foto_cerita_"+i] ? `<img src="${d["foto_cerita_"+i]}" style="width:100%; border-radius:15px; margin-bottom:15px;">` : ""}
-                            <p style="font-size:0.9rem; line-height:1.7;">${d["cerita_"+i+"_teks"]}</p>
-                        </div>`;
-                    }
-                }
-                document.getElementById("storyWrap").innerHTML = sHtml;
-                document.getElementById("loader").style.display = "none";
-                AOS.init({ duration: 1000, once: true });
-            } catch (e) { console.error(e); }
-        }
+<div class="and">&</div>
 
-        function openInvitation() {
-            document.getElementById("cover").style.display = "none";
-            document.getElementById("main").style.display = "block";
-            document.getElementById("mBtn").style.display = "flex";
-            document.getElementById("bgm").play().catch(() => {});
-            window.scrollTo(0,0);
-        }
+<div class="person">
+<img id="femalePhoto" class="avatar" src="">
+<div class="name" id="femaleName"></div>
+<div class="parent" id="femaleParent"></div>
+</div>
 
-        function toggleMusic() {
-            const a = document.getElementById("bgm");
-            const b = document.getElementById("mBtn");
-            if(a.paused) { a.play(); b.innerText = "♫"; }
-            else { a.pause(); b.innerText = "✖"; }
-        }
-        init();
-    </script>
+</div>
+</section>
+
+<section>
+<div class="title">Hari Bahagia</div>
+
+<div class="card">
+<div class="label">TANGGAL</div>
+<div class="text" id="dateText">-</div>
+
+<div style="height:20px"></div>
+
+<div class="countdown">
+<div class="cd-box"><div class="cd-num" id="d">00</div><div class="cd-txt">Hari</div></div>
+<div class="cd-box"><div class="cd-num" id="h">00</div><div class="cd-txt">Jam</div></div>
+<div class="cd-box"><div class="cd-num" id="m">00</div><div class="cd-txt">Menit</div></div>
+<div class="cd-box"><div class="cd-num" id="s">00</div><div class="cd-txt">Detik</div></div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="title">Acara</div>
+
+<div class="event-grid">
+
+<div class="card">
+<div class="label">AKAD</div>
+<div class="text" id="akadDate"></div>
+<div class="text" id="akadLoc"></div>
+<div class="actions">
+<a id="akadMap" target="_blank" class="btn btn-dark">Buka Maps</a>
+</div>
+</div>
+
+<div class="card">
+<div class="label">RESEPSI</div>
+<div class="text" id="resepsiDate"></div>
+<div class="text" id="resepsiLoc"></div>
+<div class="actions">
+<a id="resepsiMap" target="_blank" class="btn btn-dark">Buka Maps</a>
+</div>
+</div>
+
+</div>
+</section>
+
+<section>
+<div class="title">Cerita Kami</div>
+<div id="storyWrap"></div>
+</section>
+
+<section>
+<div class="title">Kado Digital</div>
+
+<div class="card">
+<div class="text" id="giftData" style="margin-bottom:16px"></div>
+<button class="btn" onclick="copyGift()">SALIN REKENING</button>
+</div>
+</section>
+
+<footer>
+DESIGNED BY OMAH AKSARA
+</footer>
+
+</main>
+
+<script>
+const API="https://script.google.com/macros/s/AKfycbz3S69wLBYLgy9KydJfwPM6ZThMiAHpmRgnhN_Vv7_YM2k5VC9x5xJbmhy3UDPevIViig/exec";
+
+const params=new URLSearchParams(location.search);
+const slug=params.get("u") || "zeya-putra";
+const guest=params.get("to") || "Tamu Undangan";
+
+let targetTime=null;
+
+document.getElementById("guestName").innerText=
+decodeURIComponent(guest.replace(/\+/g," "));
+
+function firstWord(txt){
+if(!txt) return "";
+return txt.split(" ")[0];
+}
+
+function formatDate(val){
+if(!val) return "-";
+const x=new Date(val);
+return x.toLocaleDateString("id-ID",{
+weekday:"long",
+day:"numeric",
+month:"long",
+year:"numeric"
+});
+}
+
+function formatDateTime(val){
+if(!val) return "-";
+const x=new Date(val);
+return x.toLocaleDateString("id-ID",{
+weekday:"long",
+day:"numeric",
+month:"long",
+year:"numeric"
+}) + " • " +
+x.toLocaleTimeString("id-ID",{hour:"2-digit",minute:"2-digit"});
+}
+
+async function init(){
+try{
+
+const res=await fetch(API+"?u="+encodeURIComponent(slug));
+const json=await res.json();
+
+if(!json.status || !json.data || json.data.length===0){
+loader.innerHTML="Data tidak ditemukan";
+return;
+}
+
+const d=json.data[0];
+
+hero.style.backgroundImage=
+"linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.82)),url('"+d.foto_sampul+"')";
+
+heroTitle.innerText=
+firstWord(d.pria_nama)+" & "+firstWord(d.wanita_nama);
+
+malePhoto.src=d.pria_foto || "";
+maleName.innerText=d.pria_nama || "";
+maleParent.innerText=d.pria_ortu || "";
+
+femalePhoto.src=d.wanita_foto || "";
+femaleName.innerText=d.wanita_nama || "";
+femaleParent.innerText=d.wanita_ortu || "";
+
+dateText.innerText=formatDate(d.waktu_display);
+
+akadDate.innerText=formatDateTime(d.akad_tgl);
+akadLoc.innerText=d.akad_lokasi || "-";
+akadMap.href=d.map_akad || "#";
+
+resepsiDate.innerText=formatDateTime(d.resepsi_tgl);
+resepsiLoc.innerText=d.resepsi_lokasi || "-";
+resepsiMap.href=d.map_resepsi || "#";
+
+giftData.innerText=d.bank_data || "-";
+
+musicSrc.src=d.musik_url || "";
+bgm.load();
+
+renderStories(d);
+
+targetTime=new Date(d.waktu_countdown).getTime();
+startCountdown();
+
+loader.style.display="none";
+
+}catch(err){
+console.log(err);
+loader.innerHTML="Gagal memuat data";
+}
+}
+
+function renderStories(d){
+let html="";
+
+for(let i=1;i<=3;i++){
+
+const text=d["cerita_"+i+"_teks"];
+const img=d["foto_cerita_"+i];
+
+if(text){
+
+html+=`
+<div class="card">
+${img ? `<img class="story-img" src="${img}">` : ``}
+<div class="text">${text}</div>
+</div>
+`;
+
+}
+
+}
+
+storyWrap.innerHTML=html;
+}
+
+function startCountdown(){
+
+setInterval(function(){
+
+if(!targetTime) return;
+
+const now=new Date().getTime();
+const diff=targetTime-now;
+
+if(diff<=0) return;
+
+const day=Math.floor(diff/86400000);
+const hour=Math.floor((diff%86400000)/3600000);
+const min=Math.floor((diff%3600000)/60000);
+const sec=Math.floor((diff%60000)/1000);
+
+d.innerText=String(day).padStart(2,"0");
+h.innerText=String(hour).padStart(2,"0");
+m.innerText=String(min).padStart(2,"0");
+s.innerText=String(sec).padStart(2,"0");
+
+},1000);
+
+}
+
+function openInvitation(){
+hero.style.display="none";
+main.style.display="block";
+musicBtn.style.display="flex";
+bgm.play().catch(()=>{});
+window.scrollTo(0,0);
+}
+
+function toggleMusic(){
+if(bgm.paused){
+bgm.play();
+musicBtn.innerText="♫";
+}else{
+bgm.pause();
+musicBtn.innerText="✕";
+}
+}
+
+function copyGift(){
+navigator.clipboard.writeText(giftData.innerText);
+alert("Nomor rekening berhasil disalin");
+}
+
+init();
+</script>
+
 </body>
 </html>
