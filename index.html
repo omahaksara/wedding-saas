@@ -54,55 +54,58 @@ async function init(){
 
 function renderData(){
   const g=(k)=>DATA[k]||'';
-  document.title=`${g('pria_nama')} & ${g('wanita_nama')} Wedding`;
-  document.getElementById('heroName').innerHTML=`${g('pria_nama')}<br>&<br>${g('wanita_nama')}`;
-  document.getElementById('heroDate').textContent=formatDate(g('akad_tgl'));
-  document.getElementById('heroBg').style.backgroundImage=`url(${g('cover_img')||g('hero_img')})`;
-  document.getElementById('ogImage').content=g('cover_img')||g('hero_img');
 
-  document.getElementById('maleName').textContent=g('pria_nama');
-  document.getElementById('maleParent').innerHTML=g('pria_ortu').replace(/\\n/g,'<br>');
+  // Mapping kolom Sheet kamu ke HTML
+  const pria_nama = g('pria_nama');
+  const wanita_nama = g('wanita_nama');
+  const akad_tgl = g('akad_tgl') || g('waktu_countdown');
+  const resepsi_tgl = g('resepsi_tgl') || g('akad_tgl');
+
+  document.title=`${pria_nama} & ${wanita_nama} Wedding`;
+  document.getElementById('heroName').innerHTML=`${pria_nama}<br>&<br>${wanita_nama}`;
+  document.getElementById('heroDate').textContent=g('waktu_display') || formatDate(akad_tgl);
+  document.getElementById('heroBg').style.backgroundImage=`url(${g('foto_sampul')||g('foto_bg_isi')})`;
+  document.getElementById('ogImage').content=g('foto_sampul')||g('foto_bg_isi');
+
+  document.getElementById('maleName').textContent=pria_nama;
+  document.getElementById('maleParent').innerHTML=g('pria_ortu').replace(/\n/g,'<br>');
   document.getElementById('malePhoto').src=g('pria_foto');
-  document.getElementById('femaleName').textContent=g('wanita_nama');
-  document.getElementById('femaleParent').innerHTML=g('wanita_ortu').replace(/\\n/g,'<br>');
+  document.getElementById('femaleName').textContent=wanita_nama;
+  document.getElementById('femaleParent').innerHTML=g('wanita_ortu').replace(/\n/g,'<br>');
   document.getElementById('femalePhoto').src=g('wanita_foto');
 
-  startCountdown(g('akad_tgl'));
+  startCountdown(akad_tgl);
 
-  document.getElementById('akadDate').textContent=`${formatDate(g('akad_tgl'))} | ${formatTime(g('akad_tgl'))} WIB`;
+  document.getElementById('akadDate').textContent=`${formatDate(akad_tgl)} | ${formatTime(akad_tgl)} WIB`;
   document.getElementById('akadLoc').textContent=g('akad_lokasi');
-  document.getElementById('mapAkad').href=g('akad_map')||'#';
-  document.getElementById('calAkad').href=makeCal(g('akad_tgl'),g('pria_nama'),g('wanita_nama'),'Akad Nikah',g('akad_lokasi'));
-  if(g('akad_dresscode')){
-    document.getElementById('dresscodeAkad').style.display='block';
-    document.getElementById('dresscodeAkadText').textContent=g('akad_dresscode');
-  }
+  document.getElementById('mapAkad').href=g('map_akad')||'#';
+  document.getElementById('calAkad').href=makeCal(akad_tgl,pria_nama,wanita_nama,'Akad Nikah',g('akad_lokasi'));
 
-  document.getElementById('resepsiDate').textContent=`${formatDate(g('resepsi_tgl'))} | ${formatTime(g('resepsi_tgl'))} WIB`;
+  document.getElementById('resepsiDate').textContent=`${formatDate(resepsi_tgl)} | ${formatTime(resepsi_tgl)} WIB`;
   document.getElementById('resepsiLoc').textContent=g('resepsi_lokasi');
-  document.getElementById('mapResepsi').href=g('resepsi_map')||'#';
-  document.getElementById('calResepsi').href=makeCal(g('resepsi_tgl'),g('pria_nama'),g('wanita_nama'),'Resepsi',g('resepsi_lokasi'));
-  if(g('resepsi_dresscode')){
-    document.getElementById('dresscodeResepsi').style.display='block';
-    document.getElementById('dresscodeResepsiText').textContent=g('resepsi_dresscode');
-  }
+  document.getElementById('mapResepsi').href=g('map_resepsi')||'#';
+  document.getElementById('calResepsi').href=makeCal(resepsi_tgl,pria_nama,wanita_nama,'Resepsi',g('resepsi_lokasi'));
 
-  document.getElementById('fabMap').href=g('akad_map')||g('resepsi_map');
-  document.getElementById('fabCal').href=makeCal(g('akad_tgl'),g('pria_nama'),g('wanita_nama'),'Wedding',g('akad_lokasi'));
+  document.getElementById('fabMap').href=g('map_akad')||g('map_resepsi');
+  document.getElementById('fabCal').href=makeCal(akad_tgl,pria_nama,wanita_nama,'Wedding',g('akad_lokasi'));
 
   if(g('live_url')){
     document.getElementById('liveSection').style.display='block';
     document.getElementById('liveLink').href=g('live_url');
   }
 
+  // Gallery - kalau ada kolom gallery_urls, kalau gak ada skip
   const gal=(g('gallery_urls')||'').split(',').map(s=>s.trim()).filter(Boolean);
   document.getElementById('galleryWrap').innerHTML=gal.map(u=>`<a href="${u}" data-fancybox="gallery" class="gallery-item"><img src="${u}" loading="lazy"></a>`).join('');
   Fancybox.bind("[data-fancybox]",{});
 
+  // Story - mapping cerita_1_teks jadi story1_teks
   const story=[];
   for(let i=1;i<=3;i++){
-    if(g(`story${i}_tahun`)&&g(`story${i}_teks`)){
-      story.push({year:g(`story${i}_tahun`),text:g(`story${i}_teks`),img:g(`story${i}_foto`)});
+    const teks = g(`cerita_${i}_teks`);
+    const foto = g(`foto_cerita_${i}`);
+    if(teks){
+      story.push({year:`Part ${i}`,text:teks,img:foto});
     }
   }
   document.getElementById('storyWrap').innerHTML=story.map(s=>`
@@ -116,7 +119,7 @@ function renderData(){
     </div>
   `).join('');
 
-  document.getElementById('giftData').textContent=g('rekening_info')||'Tidak tersedia';
+  document.getElementById('giftData').textContent=g('bank_data')||'Tidak tersedia';
   if(g('rekening_qr'))document.getElementById('giftQR').innerHTML=`<img src="${g('rekening_qr')}" style="max-width:200px;margin:20px auto;display:block">`;
 
   if(g('musik_url')){
@@ -126,7 +129,6 @@ function renderData(){
 
   loadGuestbook();
 }
-
 function formatDate(d){
   if(!d)return'';
   const dt=new Date(d);
