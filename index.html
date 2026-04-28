@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Wedding of Zeya & Putra</title>
+    <title>The Wedding Invitation - Omah Aksara</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400;600&family=Playfair+Display:ital,wght@0,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
@@ -12,19 +12,17 @@
         body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--dark); overflow-x: hidden; }
         .bg-pattern { background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png"); }
 
-        /* Hero */
+        /* Hero / Cover */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; color: white; position: relative; background-size: cover; background-position: center; }
         .hero::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); }
-        .hero-content { position: relative; z-index: 2; padding: 20px; }
+        .hero-content { position: relative; z-index: 2; padding: 20px; width: 100%; }
         .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 8vw, 5rem); font-style: italic; margin: 15px 0; }
-        
         .guest-box { margin: 30px auto; max-width: 320px; background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); }
-        .btn-open { background: var(--gold); border: none; color: #1a1a1a; padding: 14px 40px; cursor: pointer; letter-spacing: 2px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; border-radius: 50px; transition: 0.4s; box-shadow: 0 4px 15px rgba(179, 147, 89, 0.4); }
+        .btn-open { background: var(--gold); border: none; color: #1a1a1a; padding: 14px 40px; cursor: pointer; letter-spacing: 2px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; border-radius: 50px; transition: 0.4s; }
 
-        /* Section */
+        /* General Section */
         section { padding: 80px 20px; text-align: center; max-width: 1000px; margin: 0 auto; }
         .title { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--accent); margin-bottom: 40px; }
-        
         .profile-card img { width: 260px; height: 380px; object-fit: cover; border-radius: 130px 130px 5px 5px; border: 8px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         
         /* Countdown WITA */
@@ -33,17 +31,11 @@
         .cd-item { border: 1px solid var(--accent); padding: 15px; border-radius: 10px; min-width: 70px; }
         .cd-item span { display: block; font-size: 1.8rem; color: var(--accent); font-family: 'Cormorant Garamond'; }
 
-        /* Story */
-        .story-item { display: flex; align-items: center; gap: 30px; margin-bottom: 50px; text-align: left; }
-        .story-item:nth-child(even) { flex-direction: row-reverse; text-align: right; }
-        .story-img { width: 45%; height: 300px; object-fit: cover; border-radius: 15px; border: 5px solid white; }
-        .story-text { width: 55%; }
-
-        /* Gift */
-        .event-card { background: white; border-radius: 20px; padding: 40px; border: 1px solid #eee; margin-bottom: 20px; }
+        /* RSVP Form */
+        .card-rsvp { background: white; border-radius: 20px; padding: 40px; border: 1px solid #eee; text-align: left; max-width: 600px; margin: 0 auto; box-shadow: 0 10px 40px rgba(0,0,0,0.02); }
+        input, select, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ddd; font-family: inherit; }
+        
         .music-btn { position: fixed; bottom: 25px; left: 25px; width: 45px; height: 45px; background: white; border-radius: 50%; display: none; align-items: center; justify-content: center; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.2); color: var(--accent); cursor: pointer; }
-
-        @media (max-width: 768px) { .story-item, .story-item:nth-child(even) { flex-direction: column; text-align: center; } .story-img, .story-text { width: 100%; } }
     </style>
 </head>
 <body class="bg-pattern" id="bodyBg">
@@ -88,44 +80,37 @@
             </div>
         </section>
 
-        <section id="sect-story" style="display:none;"><div class="title">Our Story</div><div id="story-container"></div></section>
-
         <section>
-            <div class="title">Waktu & Lokasi</div>
-            <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px;">
-                <div class="event-card" style="flex:1; min-width:300px;">
-                    <h3>Akad Nikah</h3><p id="ak-tgl" style="font-weight:600; margin:10px 0;"></p>
-                    <p id="ak-lok" style="font-size:0.85rem; margin-bottom:15px;"></p>
-                    <a id="ak-map" href="#" target="_blank" class="btn-open" style="text-decoration:none; font-size:0.6rem;">Maps</a>
-                </div>
-                <div class="event-card" style="flex:1; min-width:300px;">
-                    <h3>Resepsi</h3><p id="re-tgl" style="font-weight:600; margin:10px 0;"></p>
-                    <p id="re-lok" style="font-size:0.85rem; margin-bottom:15px;"></p>
-                    <a id="re-map" href="#" target="_blank" class="btn-open" style="text-decoration:none; font-size:0.6rem;">Maps</a>
-                </div>
+            <div class="title">Konfirmasi Kehadiran</div>
+            <div class="card-rsvp" data-aos="zoom-in">
+                <form id="rsvpForm">
+                    <input type="text" id="r-nama" placeholder="Nama Lengkap" required>
+                    <select id="r-hadir" required>
+                        <option value="" disabled selected>Apakah Anda akan hadir?</option>
+                        <option value="Hadir">Hadir</option>
+                        <option value="Tidak Hadir">Tidak Hadir</option>
+                    </select>
+                    <input type="number" id="r-jumlah" placeholder="Jumlah Orang" min="1">
+                    <textarea id="r-pesan" placeholder="Ucapan & Doa Restu..." rows="4"></textarea>
+                    <button type="submit" class="btn-open" id="btnRsvp" style="width:100%;">Kirim Konfirmasi</button>
+                </form>
+                <div id="rsvpSuccess" style="display:none; text-align:center; color:var(--accent); font-weight:600;">Pesan Anda telah terkirim. Terima kasih!</div>
             </div>
         </section>
 
-        <section id="sect-gift" style="display:none;">
-            <div class="title">Wedding Gift</div>
-            <div class="event-card">
-                <h3 id="bank-txt" style="color:var(--accent);"></h3>
-                <div id="qr-box" style="display:none; margin-top:15px;"><img id="qr-img" src="" style="width:200px; border-radius:10px;"></div>
-            </div>
-        </section>
-
-        <footer style="padding:50px; background:#111; color:white; font-size:0.6rem; letter-spacing:3px;">MADE BY OMAHAKSARA</footer>
+        <footer style="padding:50px; background:#111; color:white; font-size:0.6rem; letter-spacing:3px;">MADE BY OMAHAKSARA &copy; 2026</footer>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
-        const API = "https://script.google.com/macros/s/AKfycbxl_wwAkQSD9S5uNDfXhzT253KAtRTqeDNxZsB8TiU66KWLKsYdKVOgOJYsBBkNrmqxtw/exec";
+        const API = "GANTI_DENGAN_URL_DEPLOY_APPS_SCRIPT_KAMU";
         const urlParams = new URLSearchParams(window.location.search);
         const u = urlParams.get('u');
         const to = urlParams.get('to');
 
         if(to) document.getElementById('guest-name').innerText = decodeURIComponent(to.replace(/\+/g, ' '));
 
+        // Repair Fungsi Tanggal
         const cleanDate = (val) => {
             if (!val) return "";
             let s = val.toString().trim();
@@ -133,8 +118,6 @@
             if (s.includes('T')) date = new Date(s);
             else if (s.match(/^\d{4}-\d{2}-\d{2}/)) date = new Date(s.replace(' ', 'T') + "+08:00");
             else return s;
-
-            if (isNaN(date.getTime())) return s;
             return date.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
         };
 
@@ -154,44 +137,56 @@
             document.getElementById('display-tgl').innerText = d.waktu_display;
             
             document.getElementById('ak-tgl').innerText = cleanDate(d.akad_tgl);
-            document.getElementById('ak-lok').innerText = d.akad_lokasi;
-            document.getElementById('ak-map').href = d.map_akad;
             document.getElementById('re-tgl').innerText = cleanDate(d.resepsi_tgl);
-            document.getElementById('re-lok').innerText = d.resepsi_lokasi;
-            document.getElementById('re-map').href = d.map_resepsi;
-
-            if(d.cerita_1_teks) {
-                document.getElementById('sect-story').style.display = 'block';
-                let h = '';
-                for(let i=1; i<=3; i++) {
-                    if(d['cerita_'+i+'_teks']) h += `<div class="story-item" data-aos="fade-up"><img src="${d['foto_cerita_'+i]}" class="story-img"><div class="story-text"><h3>Our Story #${i}</h3><p>${d['cerita_'+i+'_teks']}</p></div></div>`;
-                }
-                document.getElementById('story-container').innerHTML = h;
-            }
-
-            if(d.bank_data) {
-                document.getElementById('sect-gift').style.display = 'block';
-                if(d.bank_data.includes('http')) { document.getElementById('qr-box').style.display = 'block'; document.getElementById('qr-img').src = d.bank_data; }
-                else document.getElementById('bank-txt').innerText = d.bank_data;
-            }
-
             document.getElementById('mSource').src = d.musik_url;
+            
             startCountdown(d.waktu_countdown);
             AOS.init({ duration: 1000, once: true });
         });
 
-        function startCountdown(date) {
-            const target = new Date(date.replace(' ', 'T') + "+08:00").getTime();
-            setInterval(() => {
-                const now = new Date().getTime();
+        // Global Internet Time Sync (WITA)
+        async function startCountdown(targetDate) {
+            let now;
+            try {
+                const r = await fetch("https://worldtimeapi.org/api/timezone/Asia/Makassar");
+                const data = await r.json();
+                now = new Date(data.datetime).getTime();
+            } catch (e) { now = new Date().getTime(); }
+
+            const target = new Date(targetDate.replace(' ', 'T') + "+08:00").getTime();
+            const timer = setInterval(() => {
+                now += 1000;
                 const diff = target - now;
-                if(diff < 0) return;
+                if(diff < 0) { clearInterval(timer); return; }
                 document.getElementById('days').innerText = String(Math.floor(diff/(1000*60*60*24))).padStart(2, '0');
                 document.getElementById('hours').innerText = String(Math.floor((diff%(1000*60*60*24))/(1000*60*60))).padStart(2, '0');
                 document.getElementById('mins').innerText = String(Math.floor((diff%(1000*60*60))/(1000*60))).padStart(2, '0');
                 document.getElementById('secs').innerText = String(Math.floor((diff%(1000*60))/1000)).padStart(2, '0');
             }, 1000);
         }
+
+        // POST RSVP
+        document.getElementById('rsvpForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btnRsvp');
+            btn.innerText = "Mengirim...";
+            btn.disabled = true;
+
+            await fetch(API, {
+                method: "POST",
+                mode: "no-cors",
+                body: JSON.stringify({
+                    type: "rsvp",
+                    slug: u,
+                    nama: document.getElementById('r-nama').value,
+                    hadir: document.getElementById('r-hadir').value,
+                    jumlah: document.getElementById('r-jumlah').value,
+                    pesan: document.getElementById('r-pesan').value
+                })
+            });
+            document.getElementById('rsvpForm').style.display = "none";
+            document.getElementById('rsvpSuccess').style.display = "block";
+        });
 
         function startInv() {
             document.getElementById('main-content').style.display = 'block';
