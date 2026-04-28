@@ -5,17 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Wedding Invitation | Omah Aksara</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
 --gold:#d4af37;
---gold2:#f6e7a8;
---dark:#0b0b0b;
---soft:#171717;
---white:#ffffff;
+--gold2:#f8e7a1;
+--dark:#050505;
+--soft:#111;
+--white:#fff;
 }
-
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
@@ -29,330 +28,284 @@ overflow-x:hidden;
 position:fixed;
 inset:0;
 background:#000;
-z-index:99999;
 display:flex;
 align-items:center;
 justify-content:center;
-flex-direction:column;
-gap:15px;
-}
-
-.spin{
-width:42px;
-height:42px;
-border:3px solid rgba(255,255,255,.15);
-border-top:3px solid var(--gold);
-border-radius:50%;
-animation:putar 1s linear infinite;
-}
-
-@keyframes putar{
-to{transform:rotate(360deg)}
+z-index:99999;
+font-size:18px;
+letter-spacing:2px;
 }
 
 .hero{
 min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px;
-text-align:center;
 background-size:cover;
 background-position:center;
 position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:30px;
 }
-
-.hero::before{
+.hero:before{
 content:"";
 position:absolute;
 inset:0;
-background:linear-gradient(to bottom,rgba(0,0,0,.45),rgba(0,0,0,.88));
+background:linear-gradient(to bottom,rgba(0,0,0,.45),rgba(0,0,0,.85));
 }
-
 .hero-box{
 position:relative;
 z-index:2;
-max-width:550px;
+max-width:700px;
 width:100%;
-padding:35px 25px;
-border:1px solid rgba(255,255,255,.1);
+padding:40px 30px;
+border:1px solid rgba(255,255,255,.08);
 background:rgba(0,0,0,.35);
-backdrop-filter:blur(8px);
-border-radius:26px;
+backdrop-filter:blur(10px);
+border-radius:28px;
 }
 
-.small{
-letter-spacing:4px;
-font-size:.75rem;
-opacity:.9;
-margin-bottom:10px;
+.label{
+font-size:12px;
+letter-spacing:5px;
 color:var(--gold2);
+margin-bottom:15px;
+text-transform:uppercase;
 }
 
 h1{
 font-family:"Cormorant Garamond",serif;
-font-size:clamp(3rem,10vw,5rem);
+font-size:70px;
 line-height:1;
-margin-bottom:20px;
+margin-bottom:18px;
 }
 
-.guest{
-padding:18px;
-border-radius:18px;
-background:rgba(255,255,255,.05);
-margin:20px 0;
+#guestName{
+margin:18px 0;
+font-size:20px;
+font-weight:600;
 }
 
 .btn{
 border:none;
-padding:15px 30px;
-border-radius:50px;
-cursor:pointer;
-font-weight:700;
-letter-spacing:2px;
+padding:16px 34px;
+border-radius:999px;
 background:linear-gradient(45deg,var(--gold),var(--gold2));
 color:#111;
-width:100%;
+font-weight:700;
+cursor:pointer;
+font-size:15px;
 }
 
-main{display:none;background:#070707}
+main{display:none}
 
 section{
 padding:70px 20px;
-max-width:760px;
+max-width:900px;
 margin:auto;
 }
 
 .title{
-font-family:"Cormorant Garamond",serif;
-font-size:3rem;
 text-align:center;
-margin-bottom:35px;
+font-family:"Cormorant Garamond",serif;
+font-size:52px;
+margin-bottom:45px;
 color:var(--gold2);
 }
 
-.card{
-background:linear-gradient(180deg,#121212,#0d0d0d);
-border:1px solid rgba(212,175,55,.15);
-border-radius:28px;
-padding:28px;
-margin-bottom:25px;
-box-shadow:0 10px 30px rgba(0,0,0,.25);
-}
-
-.couple{
+.grid2{
 display:grid;
-grid-template-columns:1fr;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:30px;
 }
 
-.person{
-text-align:center;
+.card{
+background:linear-gradient(180deg,#101010,#080808);
+border:1px solid rgba(212,175,55,.15);
+padding:28px;
+border-radius:24px;
+box-shadow:0 20px 40px rgba(0,0,0,.35);
 }
 
-.frame{
-width:240px;
-height:300px;
+.photo-wrap{
+width:220px;
+height:220px;
 margin:auto;
 padding:8px;
-border-radius:140px 140px 30px 30px;
-background:linear-gradient(145deg,var(--gold),#fff0b3,var(--gold));
-box-shadow:0 15px 40px rgba(212,175,55,.18);
+border-radius:50%;
+background:
+linear-gradient(135deg,var(--gold),#fff7d0,var(--gold));
+box-shadow:
+0 0 0 8px rgba(212,175,55,.08),
+0 10px 30px rgba(0,0,0,.4);
 }
 
-.frame img{
+.photo{
 width:100%;
 height:100%;
+border-radius:50%;
 object-fit:cover;
-border-radius:132px 132px 22px 22px;
-display:block;
+border:5px solid #111;
 }
 
 .name{
 font-family:"Cormorant Garamond",serif;
-font-size:2.1rem;
-margin-top:18px;
-}
-
-.parent{
-opacity:.75;
-font-size:.95rem;
-margin-top:8px;
-line-height:1.7;
-}
-
-.count{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:10px;
+font-size:42px;
+margin-top:20px;
 text-align:center;
 }
 
-.box{
-padding:18px 10px;
-border-radius:18px;
-background:#111;
-border:1px solid rgba(212,175,55,.2);
+.parent{
+text-align:center;
+opacity:.75;
+font-size:14px;
+line-height:1.7;
+margin-top:8px;
 }
 
-.num{
-font-size:1.7rem;
-font-weight:700;
+.and{
+text-align:center;
+font-size:55px;
+font-family:"Cormorant Garamond",serif;
+color:var(--gold);
+padding:15px 0;
+}
+
+.info{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+}
+
+.info h3{
+font-family:"Cormorant Garamond",serif;
+font-size:34px;
+margin-bottom:10px;
 color:var(--gold2);
 }
 
-.story-img{
+.story{
+display:grid;
+gap:22px;
+}
+
+.story img{
 width:100%;
-height:250px;
-object-fit:cover;
 border-radius:18px;
-margin-bottom:15px;
+margin-bottom:14px;
 }
 
-.line{
-height:1px;
-background:rgba(255,255,255,.08);
-margin:18px 0;
+.story p{
+line-height:1.8;
+opacity:.9;
+font-size:15px;
 }
 
-a.map{
-display:inline-block;
-margin-top:15px;
-color:#111;
-text-decoration:none;
-padding:12px 22px;
-border-radius:50px;
-font-weight:700;
-background:linear-gradient(45deg,var(--gold),var(--gold2));
+footer{
+padding:50px 20px;
+text-align:center;
+opacity:.5;
+font-size:12px;
+letter-spacing:3px;
 }
 
 .music{
 position:fixed;
-bottom:20px;
 right:20px;
-width:55px;
-height:55px;
+bottom:20px;
+width:56px;
+height:56px;
 border-radius:50%;
-background:linear-gradient(45deg,var(--gold),var(--gold2));
-color:#111;
+background:var(--gold);
 display:none;
-align-items:center;
 justify-content:center;
-font-size:22px;
-font-weight:700;
+align-items:center;
 cursor:pointer;
+font-size:22px;
+color:#111;
 z-index:999;
-box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
-footer{
-padding:40px 20px 70px;
-text-align:center;
-opacity:.5;
-font-size:.8rem;
-letter-spacing:3px;
-}
-
-@media(min-width:700px){
-.couple{grid-template-columns:1fr 80px 1fr}
+@media(max-width:768px){
+h1{font-size:48px}
+.title{font-size:40px}
+.photo-wrap{width:180px;height:180px}
+.name{font-size:34px}
 }
 </style>
 </head>
 <body>
 
-<div id="loader">
-<div class="spin"></div>
-<div>Memuat Undangan...</div>
-</div>
+<div id="loader">LOADING...</div>
 
 <audio id="bgm" loop>
-<source id="musicSrc" src="">
+<source id="musicSrc">
 </audio>
 
 <div class="music" id="musicBtn" onclick="toggleMusic()">♫</div>
 
-<header class="hero" id="hero">
+<section class="hero" id="hero">
 <div class="hero-box">
-<div class="small">THE WEDDING OF</div>
-<h1 id="heroName">Loading...</h1>
-
-<div class="guest">
-<div style="opacity:.8;font-size:.9rem">Kepada Yth.</div>
-<div id="guestName" style="font-size:1.25rem;font-weight:700;margin-top:8px">Tamu Undangan</div>
+<div class="label">THE WEDDING OF</div>
+<h1 id="heroName">Memuat...</h1>
+<div>Kepada Yth.</div>
+<div id="guestName">Tamu Undangan</div>
+<button class="btn" onclick="openInvite()">Buka Undangan</button>
 </div>
-
-<button class="btn" onclick="openInvite()">BUKA UNDANGAN</button>
-</div>
-</header>
+</section>
 
 <main id="main">
 
 <section>
 <div class="title">Mempelai</div>
 
-<div class="couple">
-
-<div class="person">
-<div class="frame"><img id="malePhoto"></div>
+<div class="grid2">
+<div class="card">
+<div class="photo-wrap">
+<img id="malePhoto" class="photo">
+</div>
 <div class="name" id="maleName"></div>
 <div class="parent" id="maleParent"></div>
 </div>
 
-<div style="display:flex;align-items:center;justify-content:center;font-family:Cormorant Garamond,serif;font-size:4rem;color:var(--gold)">
-&
+<div class="card">
+<div class="photo-wrap">
+<img id="femalePhoto" class="photo">
 </div>
-
-<div class="person">
-<div class="frame"><img id="femalePhoto"></div>
 <div class="name" id="femaleName"></div>
 <div class="parent" id="femaleParent"></div>
 </div>
+</div>
 
-</div>
-</section>
-
-<section>
-<div class="title">Menuju Hari Bahagia</div>
-<div class="card">
-<div style="margin-bottom:20px" id="dateText"></div>
-<div class="count">
-<div class="box"><div class="num" id="d">00</div><small>Hari</small></div>
-<div class="box"><div class="num" id="h">00</div><small>Jam</small></div>
-<div class="box"><div class="num" id="m">00</div><small>Menit</small></div>
-<div class="box"><div class="num" id="s">00</div><small>Detik</small></div>
-</div>
-</div>
+<div class="and">&</div>
 </section>
 
 <section>
 <div class="title">Acara</div>
-
+<div class="info">
 <div class="card">
 <h3>Akad</h3>
-<div class="line"></div>
-<div id="akadDate"></div>
-<div style="margin-top:10px" id="akadLoc"></div>
-<a class="map" id="akadMap" target="_blank">Buka Maps</a>
+<p id="akadDate"></p>
+<p id="akadLoc"></p>
 </div>
 
 <div class="card">
 <h3>Resepsi</h3>
-<div class="line"></div>
-<div id="resDate"></div>
-<div style="margin-top:10px" id="resLoc"></div>
-<a class="map" id="resMap" target="_blank">Buka Maps</a>
+<p id="resepsiDate"></p>
+<p id="resepsiLoc"></p>
+</div>
 </div>
 </section>
 
 <section>
 <div class="title">Cerita Kami</div>
-<div id="stories"></div>
+<div id="storyWrap" class="story"></div>
 </section>
 
 <section>
 <div class="title">Hadiah</div>
-<div class="card">
-<div id="giftBox"></div>
+<div class="card" style="text-align:center">
+<div id="giftData"></div>
 </div>
 </section>
 
@@ -365,23 +318,14 @@ DESIGNED BY OMAH AKSARA
 <script>
 const API="https://script.google.com/macros/s/AKfycbzjvtqD1bgA-H4QEfKKzURo_J3NIc37TBkAdVT8VPSGQRDvc1adD9wmNkuRlZAQReVNqg/exec";
 
-const q=new URLSearchParams(location.search);
-const slug=q.get("u")||"zeya-putra";
-const guest=q.get("to")||"Tamu Undangan";
+const params=new URLSearchParams(location.search);
+const slug=params.get("u") || "zeya-putra";
+const guest=params.get("to") || "Tamu Undangan";
 
 document.getElementById("guestName").innerText=guest;
 
-let targetDate=null;
-
-function firstWord(x){
-return (x||"").trim().split(" ")[0];
-}
-
-function formatDate(str){
-if(!str) return "-";
-const d=new Date(str);
-if(isNaN(d)) return str;
-return d.toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+function firstWord(n){
+return (n||"").split(" ")[0];
 }
 
 async function init(){
@@ -390,95 +334,77 @@ const res=await fetch(API+"?u="+encodeURIComponent(slug));
 const json=await res.json();
 
 if(!json.status || !json.data || json.data.length===0){
-document.getElementById("loader").innerHTML="Data tidak ditemukan";
+document.getElementById("loader").innerText="Data Tidak Ditemukan";
 return;
 }
 
 const d=json.data[0];
 
 document.getElementById("hero").style.backgroundImage=
-`url('${d.foto_sampul}')`;
+`url('${d.foto_sampul || d.foto_bg_isi}')`;
 
 document.getElementById("heroName").innerText=
 firstWord(d.pria_nama)+" & "+firstWord(d.wanita_nama);
 
-malePhoto.src=d.pria_foto;
-maleName.innerText=d.pria_nama;
-maleParent.innerText=d.pria_ortu;
+document.getElementById("malePhoto").src=d.pria_foto;
+document.getElementById("maleName").innerText=d.pria_nama;
+document.getElementById("maleParent").innerText=d.pria_ortu;
 
-femalePhoto.src=d.wanita_foto;
-femaleName.innerText=d.wanita_nama;
-femaleParent.innerText=d.wanita_ortu;
+document.getElementById("femalePhoto").src=d.wanita_foto;
+document.getElementById("femaleName").innerText=d.wanita_nama;
+document.getElementById("femaleParent").innerText=d.wanita_ortu;
 
-dateText.innerText=d.waktu_display || formatDate(d.waktu_countdown);
+document.getElementById("akadDate").innerText=d.akad_tgl || "";
+document.getElementById("akadLoc").innerText=d.akad_lokasi || "";
 
-akadDate.innerText=d.akad_tgl || "-";
-akadLoc.innerText=d.akad_lokasi || "-";
-akadMap.href=d.map_akad || "#";
+document.getElementById("resepsiDate").innerText=d.resepsi_tgl || "";
+document.getElementById("resepsiLoc").innerText=d.resepsi_lokasi || "";
 
-resDate.innerText=d.resepsi_tgl || "-";
-resLoc.innerText=d.resepsi_lokasi || "-";
-resMap.href=d.map_resepsi || "#";
+document.getElementById("giftData").innerText=d.bank_data || "-";
 
-giftBox.innerText=d.bank_data || "-";
-
-musicSrc.src=d.musik_url || "";
-bgm.load();
+document.getElementById("musicSrc").src=d.musik_url || "";
+document.getElementById("bgm").load();
 
 let html="";
 for(let i=1;i<=3;i++){
-const txt=d["cerita_"+i+"_teks"];
-const img=d["foto_cerita_"+i];
-if(txt){
+if(d["cerita_"+i+"_teks"]){
 html+=`
 <div class="card">
-${img?`<img src="${img}" class="story-img">`:""}
-<div>${txt}</div>
-</div>
-`;
+${d["foto_cerita_"+i] ? `<img src="${d["foto_cerita_"+i]}">` : ""}
+<p>${d["cerita_"+i+"_teks"]}</p>
+</div>`;
 }
 }
-stories.innerHTML=html;
-
-targetDate=new Date(d.waktu_countdown);
+document.getElementById("storyWrap").innerHTML=html;
 
 document.getElementById("loader").style.display="none";
 
-setInterval(runCountdown,1000);
-
 }catch(err){
-document.getElementById("loader").innerHTML="Gagal memuat data";
+document.getElementById("loader").innerText="Gagal Memuat";
+console.log(err);
 }
-}
-
-function runCountdown(){
-if(!targetDate) return;
-const now=new Date().getTime();
-const diff=targetDate-now;
-
-if(diff<0) return;
-
-d.innerText=String(Math.floor(diff/86400000)).padStart(2,"0");
-h.innerText=String(Math.floor(diff%86400000/3600000)).padStart(2,"0");
-m.innerText=String(Math.floor(diff%3600000/60000)).padStart(2,"0");
-s.innerText=String(Math.floor(diff%60000/1000)).padStart(2,"0");
 }
 
 function openInvite(){
-hero.style.display="none";
-main.style.display="block";
-musicBtn.style.display="flex";
-bgm.play().catch(()=>{});
+document.querySelector(".hero").style.display="none";
+document.getElementById("main").style.display="block";
+document.getElementById("musicBtn").style.display="flex";
+
+const a=document.getElementById("bgm");
+a.play().catch(()=>{});
 window.scrollTo(0,0);
 }
 
 function toggleMusic(){
-if(bgm.paused){
-bgm.play();
-musicBtn.innerText="♫";
+const a=document.getElementById("bgm");
+const b=document.getElementById("musicBtn");
+
+if(a.paused){
+a.play();
+b.innerText="♫";
 }else{
-bgm.pause();
-musicBtn.innerText="✕";
+a.pause();
+b.innerText="✕";
 }
 }
 
