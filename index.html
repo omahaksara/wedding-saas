@@ -358,72 +358,111 @@ Wedding Invitation • Sultan 2026 Edition
 
 </main>
 
+</main>
+
 <script>
 const API="https://script.google.com/macros/s/AKfycbxFIRAkRUAG6_E4RUJtU4yq-dk1n079na6Kol3gctkU92VELtNFtSJrjryFPo5JBiAv8A/exec";
 
+/* =========================
+   LOAD DATA
+========================= */
 fetch(API)
-.then(r=>r.json())
-.then(res=>{
+.then(r => r.json())
+.then(res => {
 
-const d = Array.isArray(res)?res[0]:res;
+const data = Array.isArray(res) ? res[0] : res;
 
+/* HERO */
 document.getElementById("heroNama").textContent =
-(d.pria_nama || "Mempelai Pria") + " & " +
-(d.wanita_nama || "Mempelai Wanita");
+(data.pria_nama || "Mempelai Pria") + " & " +
+(data.wanita_nama || "Mempelai Wanita");
 
 document.getElementById("heroTanggal").textContent =
-d.waktu_display || "Save The Date";
+data.waktu_display || "Save The Date";
 
-document.getElementById("namaPria").textContent = d.pria_nama || "-";
-document.getElementById("namaWanita").textContent = d.wanita_nama || "-";
+/* MEMPELAI */
+document.getElementById("namaPria").textContent =
+data.pria_nama || "-";
 
-document.getElementById("ortuPria").textContent = d.pria_ortu || "";
-document.getElementById("ortuWanita").textContent = d.wanita_ortu || "";
+document.getElementById("namaWanita").textContent =
+data.wanita_nama || "-";
 
-document.getElementById("fotoPria").src = d.pria_foto;
-document.getElementById("fotoWanita").src = d.wanita_foto;
+document.getElementById("ortuPria").textContent =
+data.pria_ortu || "";
 
-startCountdown(d.waktu_countdown);
+document.getElementById("ortuWanita").textContent =
+data.wanita_ortu || "";
+
+document.getElementById("fotoPria").src =
+data.pria_foto || "https://placehold.co/500x700?text=Pria";
+
+document.getElementById("fotoWanita").src =
+data.wanita_foto || "https://placehold.co/500x700?text=Wanita";
+
+/* COUNTDOWN */
+startCountdown(data.waktu_countdown);
 
 })
-.catch(()=>{
-document.getElementById("heroNama").textContent="Data Tidak Terhubung";
+.catch(err => {
+console.log(err);
+document.getElementById("heroNama").textContent = "Data Tidak Terhubung";
 });
 
+
+/* =========================
+   COUNTDOWN
+========================= */
 function startCountdown(dateStr){
-if(!dateStr)return;
+
+if(!dateStr) return;
 
 const target = new Date(dateStr).getTime();
 
-setInterval(()=>{
+const elD = document.getElementById("d");
+const elH = document.getElementById("h");
+const elM = document.getElementById("m");
+const elS = document.getElementById("s");
+
+setInterval(() => {
+
 const now = new Date().getTime();
-const gap = target-now;
+const gap = target - now;
 
-if(gap<0)return;
+if(gap <= 0){
+elD.textContent = "00";
+elH.textContent = "00";
+elM.textContent = "00";
+elS.textContent = "00";
+return;
+}
 
-const day = Math.floor(gap/86400000);
-const hour = Math.floor((gap%86400000)/3600000);
-const min = Math.floor((gap%3600000)/60000);
-const sec = Math.floor((gap%60000)/1000);
+const day  = Math.floor(gap / 86400000);
+const hour = Math.floor((gap % 86400000) / 3600000);
+const min  = Math.floor((gap % 3600000) / 60000);
+const sec  = Math.floor((gap % 60000) / 1000);
 
-d.textContent=day;
-h.textContent=hour;
-m.textContent=min;
-s.textContent=sec;
+elD.textContent = String(day).padStart(2,"0");
+elH.textContent = String(hour).padStart(2,"0");
+elM.textContent = String(min).padStart(2,"0");
+elS.textContent = String(sec).padStart(2,"0");
 
 },1000);
 }
 
-/* reveal scroll */
-const io = new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting){
-e.target.classList.add("show");
+
+/* =========================
+   REVEAL SCROLL
+========================= */
+const io = new IntersectionObserver(entries => {
+entries.forEach(entry => {
+if(entry.isIntersecting){
+entry.target.classList.add("show");
 }
 });
 },{threshold:.2});
 
-document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
 </script>
 
 </body>
