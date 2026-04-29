@@ -1,8 +1,17 @@
+# Pustaka
 node_modules/
-build/
+
+# Hasil Build
 dist/
-coverage/
+build/
+
+# Rahasia (API Key)
+.env
+.env.local
+
+# Sampah Sistem
 .DS_Store
+Thumbs.db
+
+# Log
 *.log
-.env*
-!.env.example
