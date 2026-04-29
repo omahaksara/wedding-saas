@@ -4,15 +4,18 @@ function App() {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  // Fungsi helper untuk membangun path yang benar sesuai base URL GitHub Pages
-  const getAssetPath = (path: string) => `/invitation/${path}`;
+  // Fungsi helper paling aman: Otomatis mendeteksi apakah di lokal atau GitHub Pages
+  const getAssetPath = (path: string) => {
+    const baseUrl = import.meta.env.BASE_URL; // Mengambil 'base' dari vite.config.ts
+    return `${baseUrl}${path}`.replace(/\/+/g, '/'); // Menghindari double slash //
+  };
 
   useEffect(() => {
     // 1. Ambil ID klien dari URL (?id=budi-ani)
     const params = new URLSearchParams(window.location.search);
     const slug = params.get('id') || 'budi-ani';
 
-    // 2. Fetch data menggunakan path absolut repositori
+    // 2. Fetch data.json
     fetch(getAssetPath(`clients/${slug}/data.json`))
       .then((res) => {
         if (!res.ok) throw new Error('Data tidak ditemukan');
@@ -56,7 +59,7 @@ function App() {
             {data.couple.groom.nickname} <span className="block text-2xl italic my-2">&</span> {data.couple.bride.nickname}
           </h1>
           <div className="w-12 h-[1px] bg-white/50 my-6"></div>
-          <p className="tracking-[0.2em] text-sm font-light">
+          <p className="tracking-[0.2em] text-sm font-light uppercase">
             {new Date(data.events[0].date).toLocaleDateString('id-ID', { 
               day: '2-digit', month: 'long', year: 'numeric' 
             })}
@@ -68,7 +71,7 @@ function App() {
       <section className="py-20 px-8 text-center bg-white">
         <div className="flex flex-col gap-16">
           {/* Pria */}
-          <div className="animate-fade-in">
+          <div>
             <div className="w-40 h-56 mx-auto overflow-hidden rounded-t-full shadow-xl border border-stone-100">
               <img 
                 src={getAssetPath(`clients/${data.slug}/${data.couple.groom.image}`)} 
@@ -84,7 +87,7 @@ function App() {
           <div className="text-3xl font-serif italic text-stone-200">and</div>
 
           {/* Wanita */}
-          <div className="animate-fade-in">
+          <div>
             <div className="w-40 h-56 mx-auto overflow-hidden rounded-t-full shadow-xl border border-stone-100">
               <img 
                 src={getAssetPath(`clients/${data.slug}/${data.couple.bride.image}`)} 
@@ -101,10 +104,10 @@ function App() {
 
       {/* 3 FOTO KENANGAN (GRID) */}
       <section className="bg-stone-50 py-12">
-        <p className="text-center text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-8">Our Memories</p>
+        <p className="text-center text-[10px] tracking-[0.3em] uppercase text-stone-400 mb-8 font-bold">Our Memories</p>
         <div className="grid grid-cols-3 gap-1 px-1">
           {data.gallery.album.slice(0, 3).map((img: string, i: number) => (
-            <div key={i} className="aspect-square overflow-hidden bg-stone-200 shadow-inner">
+            <div key={i} className="aspect-square overflow-hidden bg-stone-200">
               <img 
                 src={getAssetPath(`clients/${data.slug}/${img}`)} 
                 className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" 
