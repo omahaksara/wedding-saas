@@ -3,392 +3,101 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Wedding Invitation | Omah Aksara</title>
+<title>Wedding Invitation</title>
 <meta name="theme-color" content="#0b0b0b">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root{
---gold:#d4af37;
---gold2:#f3deb0;
---dark:#0b0b0b;
---dark2:#141414;
---text:#f5f5f5;
---muted:#b8b8b8;
-}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
-body{
-font-family:Inter,sans-serif;
-background:#000;
-color:var(--text);
-overflow-x:hidden;
-}
-
-img{
-max-width:100%;
-display:block;
-}
-
-a{
-color:inherit;
-text-decoration:none;
-}
-
-section{
-padding:70px 20px;
-max-width:1200px;
-margin:auto;
-}
-
-.wrap{
-max-width:1100px;
-margin:auto;
-}
-
-.title-small{
-text-align:center;
-letter-spacing:4px;
-font-size:11px;
-text-transform:uppercase;
-color:var(--gold2);
-margin-bottom:14px;
-}
-
-.title{
-text-align:center;
-font-family:"Cormorant Garamond",serif;
-font-size:52px;
-font-weight:400;
-color:var(--gold);
-margin-bottom:40px;
-}
-
-.hero{
-min-height:100vh;
-position:relative;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:30px;
-}
-
-.hero-bg{
-position:absolute;
-inset:0;
-background-size:cover;
-background-position:center;
-filter:brightness(.35);
-transform:scale(1.08);
-}
-
-.hero::after{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(to bottom,rgba(0,0,0,.2),rgba(0,0,0,.8));
-}
-
-.hero-content{
-position:relative;
-z-index:2;
-max-width:800px;
-}
-
-.hero-label{
-font-size:12px;
-letter-spacing:6px;
-text-transform:uppercase;
-color:#fff;
-margin-bottom:20px;
-}
-
-.hero-name{
-font-family:"Cormorant Garamond",serif;
-font-size:78px;
-line-height:1;
-font-weight:500;
-color:var(--gold);
-margin-bottom:20px;
-}
-
-.hero-date{
-font-size:18px;
-color:#ddd;
-margin-bottom:28px;
-}
-
-.hero-to{
-padding:20px 25px;
-background:rgba(255,255,255,.05);
-backdrop-filter:blur(8px);
-border:1px solid rgba(255,255,255,.08);
-display:inline-block;
-margin-bottom:25px;
-border-radius:10px;
-}
-
-.hero-btn{
-display:inline-block;
-padding:15px 34px;
-border:1px solid var(--gold);
-color:var(--gold);
-border-radius:40px;
-transition:.3s;
-cursor:pointer;
-}
-
-.hero-btn:hover{
-background:var(--gold);
-color:#000;
-}
-
-.countdown{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-margin-top:30px;
-}
-
-.box{
-background:var(--dark2);
-padding:20px;
-text-align:center;
-border-radius:14px;
-border:1px solid rgba(255,255,255,.06);
-}
-
-.box h3{
-font-size:38px;
-color:var(--gold);
-font-family:"Cormorant Garamond",serif;
-}
-
-.box p{
-font-size:12px;
-color:var(--muted);
-margin-top:6px;
-}
-
-.couple{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:30px;
-}
-
-.card{
-background:var(--dark2);
-padding:25px;
-border-radius:18px;
-text-align:center;
-border:1px solid rgba(255,255,255,.05);
-}
-
-.card img{
-height:430px;
-width:100%;
-object-fit:cover;
-border-radius:14px;
-margin-bottom:20px;
-}
-
-.card h3{
-font-family:"Cormorant Garamond",serif;
-font-size:42px;
-color:var(--gold);
-margin-bottom:10px;
-}
-
-.card p{
-color:var(--muted);
-line-height:1.8;
-}
-
-.events{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:25px;
-}
-
-.event{
-background:var(--dark2);
-padding:28px;
-border-radius:18px;
-}
-
-.event h3{
-font-size:38px;
-font-family:"Cormorant Garamond",serif;
-color:var(--gold);
-margin-bottom:15px;
-}
-
-.event p{
-line-height:1.9;
-color:#ddd;
-margin-bottom:18px;
-}
-
-.btn{
-display:inline-block;
-padding:12px 24px;
-border-radius:40px;
-background:var(--gold);
-color:#000;
-font-weight:600;
-}
-
-.story{
-display:grid;
-gap:22px;
-}
-
-.story-item{
-display:grid;
-grid-template-columns:240px 1fr;
-gap:20px;
-background:var(--dark2);
-padding:20px;
-border-radius:16px;
-}
-
-.story-item img{
-height:170px;
-width:100%;
-object-fit:cover;
-border-radius:12px;
-}
-
-.story-item p{
-line-height:1.9;
-color:#ddd;
-}
-
-.gallery{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
-}
-
-.gallery img{
-height:260px;
-width:100%;
-object-fit:cover;
-border-radius:14px;
-}
-
-.gift{
-max-width:700px;
-margin:auto;
-background:var(--dark2);
-padding:35px;
-border-radius:18px;
-text-align:center;
-}
-
-.rek{
-font-size:24px;
-margin:20px 0;
-color:var(--gold2);
-word-break:break-word;
-}
-
-footer{
-padding:40px 20px 80px;
-text-align:center;
-color:#aaa;
-}
-
-.music{
-position:fixed;
-right:18px;
-bottom:18px;
-width:56px;
-height:56px;
-border-radius:50%;
-border:none;
-background:var(--gold);
-font-size:24px;
-cursor:pointer;
-z-index:999;
-}
-
-@media(max-width:900px){
-.couple,.events{
-grid-template-columns:1fr;
-}
-.gallery{
-grid-template-columns:1fr 1fr;
-}
-.hero-name{
-font-size:56px;
-}
-}
-
-@media(max-width:600px){
-.countdown{
-grid-template-columns:1fr 1fr;
-}
-.gallery{
-grid-template-columns:1fr;
-}
-.story-item{
-grid-template-columns:1fr;
-}
-.hero-name{
-font-size:46px;
-}
-.title{
-font-size:40px;
-}
-}
+:root{--gold:#d4af37;--gold2:#f3deb0;--gold-glow:rgba(212,175,55,.25);--dark:#070707;--dark2:#121212;--text:#f5f5f5;--muted:#b8b8b8;--radius:18px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:#000;color:var(--text);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+section{padding:90px 20px;max-width:1200px;margin:auto}
+#loading{position:fixed;inset:0;background:#000;z-index:9999;display:grid;place-items:center;transition:opacity.6s ease}
+#loading.hide{opacity:0;pointer-events:none}
+.loader{width:50px;height:50px;border:3px solid rgba(212,175,55,.2);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.reveal{opacity:0;transform:translateY(30px);transition:all.8s cubic-bezier(.2,.8,.2,1)}
+.reveal.active{opacity:1;transform:translateY(0)}
+.title-small{text-align:center;letter-spacing:4px;font-size:11px;text-transform:uppercase;color:var(--gold2);margin-bottom:14px}
+.title{text-align:center;font-family:"Cormorant Garamond",serif;font-size:56px;font-weight:400;color:var(--gold);margin-bottom:50px;line-height:1.1}
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;overflow:hidden}
+.hero-bg{position:absolute;inset:-10%;background-size:cover;background-position:center;filter:brightness(.3)}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,transparent 0%,rgba(0,0,0,.9) 100%)}
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-label{font-size:12px;letter-spacing:6px;text-transform:uppercase;color:#fff;margin-bottom:20px}
+.hero-name{font-family:"Cormorant Garamond",serif;font-size:82px;line-height:1;font-weight:500;color:var(--gold);margin-bottom:20px;text-shadow:0 0 30px var(--gold-glow)}
+.hero-date{font-size:18px;color:#ddd;margin-bottom:32px;font-weight:300}
+.hero-to{padding:22px 28px;background:rgba(255,255,255,.04);backdrop-filter:blur(12px);border:1px solid rgba(212,175,55,.15);display:inline-block;margin-bottom:30px;border-radius:var(--radius)}
+.hero-btn{display:inline-block;padding:16px 38px;border:1px solid var(--gold);color:var(--gold);border-radius:40px;transition:.4s;cursor:pointer}
+.hero-btn:hover{background:var(--gold);color:#000;box-shadow:0 0 25px var(--gold-glow)}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:30px}
+.box{background:linear-gradient(145deg,var(--dark2),#0a0a0a);padding:24px 20px;text-align:center;border-radius:var(--radius);border:1px solid rgba(212,175,55,.1)}
+.box h3{font-size:42px;color:var(--gold);font-family:"Cormorant Garamond",serif}
+.box p{font-size:12px;color:var(--muted);margin-top:8px;letter-spacing:1px}
+.couple{display:grid;grid-template-columns:repeat(2,1fr);gap:35px}
+.card{background:linear-gradient(145deg,var(--dark2),#0a0a0a);padding:30px;border-radius:var(--radius);text-align:center;border:1px solid rgba(255,255,255,.05);transition:.4s}
+.card:hover{transform:translateY(-8px)}
+.card img{height:450px;width:100%;object-fit:cover;border-radius:14px;margin-bottom:24px}
+.card h3{font-family:"Cormorant Garamond",serif;font-size:44px;color:var(--gold);margin-bottom:12px}
+.card p{color:var(--muted);line-height:1.8;font-weight:300}
+.events{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+.event{background:linear-gradient(145deg,var(--dark2),#0a0a0a);padding:35px;border-radius:var(--radius)}
+.event h3{font-size:40px;font-family:"Cormorant Garamond",serif;color:var(--gold);margin-bottom:18px}
+.event p{line-height:1.9;color:#ddd;margin-bottom:22px;font-weight:300}
+.btn{display:inline-block;padding:13px 28px;border-radius:40px;background:var(--gold);color:#000;font-weight:600;transition:.3s}
+.btn:hover{transform:translateY(-2px)}
+.story{display:grid;gap:25px}
+.story-item{display:grid;grid-template-columns:260px 1fr;gap:25px;background:linear-gradient(145deg,var(--dark2),#0a0a0a);padding:25px;border-radius:var(--radius);align-items:center}
+.story-item img{height:180px;width:100%;object-fit:cover;border-radius:12px}
+.story-item p{line-height:1.9;color:#ddd;font-weight:300}
+.gallery{columns:3;column-gap:15px}
+.gallery img{width:100%;object-fit:cover;border-radius:14px;margin-bottom:15px;break-inside:avoid;transition:.4s}
+.gallery img:hover{transform:scale(1.03)}
+.gift{max-width:700px;margin:auto;background:linear-gradient(145deg,var(--dark2),#0a0a0a);padding:45px 35px;border-radius:var(--radius);text-align:center;border:1px solid rgba(212,175,55,.1)}
+.rek{font-size:26px;margin:25px 0;color:var(--gold2);word-break:break-word;font-family:"Cormorant Garamond",serif}
+.copy-btn{margin-top:10px;padding:10px 20px;font-size:14px;background:transparent;border:1px solid var(--gold);color:var(--gold);cursor:pointer}
+.music{position:fixed;right:20px;bottom:20px;width:58px;height:58px;border-radius:50%;border:1px solid rgba(212,175,55,.3);background:rgba(0,0,0,.6);backdrop-filter:blur(10px);font-size:22px;cursor:pointer;z-index:999;color:var(--gold)}
+.music.playing{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--gold-glow)}50%{box-shadow:0 0 0 15px transparent}}
+.hide{display:none!important}
+.error{text-align:center;padding:100px 20px}
+footer{padding:50px 20px 90px;text-align:center;color:#777;font-size:13px}
+@media(max-width:900px){.couple,.events{grid-template-columns:1fr}.gallery{columns:2}.hero-name{font-size:58px}.title{font-size:44px}}
+@media(max-width:600px){.countdown{grid-template-columns:1fr 1fr}.gallery{columns:1}.story-item{grid-template-columns:1fr}.hero-name{font-size:48px}.title{font-size:38px}section{padding:70px 20px}}
 </style>
 </head>
 <body>
 
-<!-- AUDIO -->
-<audio id="music" loop></audio>
-<button class="music" onclick="toggleMusic()">♫</button>
+<div id="loading"><div class="loader"></div></div>
+<div id="errorBox" class="error hide">
+  <h2 style="color:var(--gold);font-family:'Cormorant Garamond'">Undangan Tidak Ditemukan</h2>
+  <p style="color:var(--muted);margin-top:10px">Periksa kembali link undangan Anda</p>
+</div>
 
-<!-- HERO -->
+<div id="content">
+<audio id="music" loop></audio>
+<button class="music" id="musicBtn" onclick="toggleMusic()">♫</button>
+
 <section class="hero">
 <div class="hero-bg" id="coverBg"></div>
-
 <div class="hero-content">
 <div class="hero-label">The Wedding Of</div>
 <div class="hero-name" id="heroName">Loading...</div>
 <div class="hero-date" id="heroDate"></div>
-
-<div class="hero-to">
-Kepada Yth.<br>
-<strong id="guestName">Tamu Undangan</strong>
-</div>
-<br>
-<a href="#main" class="hero-btn">Buka Undangan</a>
+<div class="hero-to">Kepada Yth.<br><strong id="guestName">Tamu Undangan</strong></div>
+<br><a href="#main" class="hero-btn">Buka Undangan</a>
 </div>
 </section>
 
 <main id="main">
-
-<!-- COUNTDOWN -->
-<section>
+<section class="reveal">
 <div class="title-small">Save The Date</div>
 <div class="title">Menuju Hari Bahagia</div>
-
 <div class="countdown">
 <div class="box"><h3 id="d">00</h3><p>Hari</p></div>
 <div class="box"><h3 id="h">00</h3><p>Jam</p></div>
@@ -397,202 +106,200 @@ Kepada Yth.<br>
 </div>
 </section>
 
-<!-- COUPLE -->
-<section>
+<section class="reveal">
 <div class="title-small">Bride & Groom</div>
 <div class="title">Mempelai</div>
-
 <div class="couple">
-
-<div class="card">
-<img id="imgPria">
-<h3 id="namaPria"></h3>
-<p id="ortuPria"></p>
-</div>
-
-<div class="card">
-<img id="imgWanita">
-<h3 id="namaWanita"></h3>
-<p id="ortuWanita"></p>
-</div>
-
+<div class="card"><img id="imgPria" loading="lazy" onerror="this.src='https://via.placeholder.com/400x600?text=Foto+Pria'"><h3 id="namaPria"></h3><p id="ortuPria"></p></div>
+<div class="card"><img id="imgWanita" loading="lazy" onerror="this.src='https://via.placeholder.com/400x600?text=Foto+Wanita'"><h3 id="namaWanita"></h3><p id="ortuWanita"></p></div>
 </div>
 </section>
 
-<!-- EVENTS -->
-<section>
+<section class="reveal">
 <div class="title-small">Wedding Event</div>
 <div class="title">Rangkaian Acara</div>
-
 <div class="events">
-
-<div class="event">
-<h3>Akad Nikah</h3>
-<p id="akad"></p>
-<a id="mapAkad" target="_blank" class="btn">Lihat Lokasi</a>
-</div>
-
-<div class="event">
-<h3>Resepsi</h3>
-<p id="resepsi"></p>
-<a id="mapResepsi" target="_blank" class="btn">Lihat Lokasi</a>
-</div>
-
+<div class="event"><h3>Akad Nikah</h3><p id="akad"></p><a id="mapAkad" target="_blank" class="btn">Lihat Lokasi</a></div>
+<div class="event"><h3>Resepsi</h3><p id="resepsi"></p><a id="mapResepsi" target="_blank" class="btn">Lihat Lokasi</a></div>
 </div>
 </section>
 
-<!-- STORY -->
-<section>
+<section class="reveal" id="storySection">
 <div class="title-small">Our Story</div>
 <div class="title">Cerita Kami</div>
-
 <div class="story" id="storyBox"></div>
 </section>
 
-<!-- GALLERY -->
-<section>
+<section class="reveal" id="gallerySection">
 <div class="title-small">Gallery</div>
 <div class="title">Momen Bahagia</div>
-
 <div class="gallery" id="gallery"></div>
 </section>
 
-<!-- GIFT -->
-<section>
+<section class="reveal" id="giftSection">
 <div class="title-small">Wedding Gift</div>
 <div class="title">Amplop Digital</div>
-
 <div class="gift">
 <p>Doa restu Anda adalah hadiah terindah. Jika ingin berbagi kasih:</p>
 <div class="rek" id="rekening">-</div>
-<div id="qrWrap"></div>
+<button class="btn copy-btn" onclick="copyRek()">Salin Rekening</button>
+<div id="qrWrap" style="margin-top:20px"></div>
 </div>
 </section>
 
-<footer>
-Crafted With Love By Omah Aksara
-</footer>
-
+<footer>Crafted With Love By Omah Aksara</footer>
 </main>
+</div>
 
 <script>
-const API = "https://script.google.com/macros/s/AKfycbxCOCTqzBzzE0Ogc56DQPJ42IhBQ2oRXbt_sE33nHydbx6RhcebCXmBpbBVuvtToBO-eQ/exec";
-
+const API = "https://script.google.com/macros/s/AKfycbwPW3gMeKNsNHLC0lVwZeXA9KWp-wqXlZRFohXcznw1p_a--gvWK5yAA62S6BXfiDukGg/exec";
 const slug = new URLSearchParams(location.search).get("to") || "zeya-putra";
 const guest = new URLSearchParams(location.search).get("nama") || "Tamu Undangan";
-
 document.getElementById("guestName").innerText = decodeURIComponent(guest);
+
+// Anti tumpang tindih: cek elemen ada baru diisi
+const safeSet = (id, val, fallback = '') => {
+  const el = document.getElementById(id);
+  if(el) el.innerText = val || fallback;
+};
+const safeSetHTML = (id, val) => {
+  const el = document.getElementById(id);
+  if(el) el.innerHTML = val || '';
+};
+const safeSetAttr = (id, attr, val) => {
+  const el = document.getElementById(id);
+  if(el && val) el.setAttribute(attr, val);
+};
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active') });
+}, {threshold: 0.1});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 fetch(API + "?slug=" + slug)
 .then(r=>r.json())
 .then(res=>{
+  // Validasi data ada
+  if(!res.status ||!res.data || res.data.length === 0 ||!res.data[0].pria_nama){
+    document.getElementById('loading').classList.add('hide');
+    document.getElementById('content').classList.add('hide');
+    document.getElementById('errorBox').classList.remove('hide');
+    return;
+  }
 
-const d = res.data[0];
+  const d = res.data[0];
 
-document.title = d.pria_nama + " & " + d.wanita_nama;
+  // Hero
+  document.title = `${d.pria_nama} & ${d.wanita_nama}`;
+  safeSet("heroName", `${d.pria_nama} & ${d.wanita_nama}`);
+  safeSet("heroDate", d.waktu_display? new Date(d.waktu_display).toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"}) : '');
+  if(d.foto_sampul) document.getElementById("coverBg").style.backgroundImage = `url(${d.foto_sampul})`;
 
-document.getElementById("heroName").innerText =
-d.pria_nama + " & " + d.wanita_nama;
+  // Mempelai - anti broken image
+  safeSetAttr("imgPria", "src", d.pria_foto);
+  safeSet("namaPria", d.pria_nama);
+  safeSet("ortuPria", d.pria_ortu);
+  safeSetAttr("imgWanita", "src", d.wanita_foto);
+  safeSet("namaWanita", d.wanita_nama);
+  safeSet("ortuWanita", d.wanita_ortu);
 
-document.getElementById("heroDate").innerText =
-new Date(d.waktu_display).toLocaleDateString("id-ID",{
-weekday:"long",
-day:"numeric",
-month:"long",
-year:"numeric"
-});
+  // Acara
+  if(d.akad_tgl || d.akad_lokasi) {
+    safeSetHTML("akad", `${d.akad_tgl? formatDate(d.akad_tgl) : ''}<br>${d.akad_lokasi || ''}`);
+    safeSetAttr("mapAkad", "href", d.map_akad);
+  }
+  if(d.resepsi_tgl || d.resepsi_lokasi) {
+    safeSetHTML("resepsi", `${d.resepsi_tgl? formatDate(d.resepsi_tgl) : ''}<br>${d.resepsi_lokasi || ''}`);
+    safeSetAttr("mapResepsi", "href", d.map_resepsi);
+  }
 
-document.getElementById("coverBg").style.backgroundImage =
-`url(${d.foto_sampul})`;
+  // Story - hide section kalau kosong semua
+  const stories = [
+    [d.foto_cerita_1, d.cerita_1_teks],
+    [d.foto_cerita_2, d.cerita_2_teks],
+    [d.foto_cerita_3, d.cerita_3_teks]
+  ].filter(x => x[1]); // cuma ambil yang ada teksnya
 
-document.getElementById("imgPria").src = d.pria_foto;
-document.getElementById("namaPria").innerText = d.pria_nama;
-document.getElementById("ortuPria").innerText = d.pria_ortu;
+  if(stories.length > 0){
+    stories.forEach(x => {
+      document.getElementById("storyBox").innerHTML += `
+        <div class="story-item">
+          <img src="${x[0]}" loading="lazy" onerror="this.style.display='none'">
+          <p>${x[1]}</p>
+        </div>`;
+    });
+  } else {
+    document.getElementById('storySection').style.display = 'none';
+  }
 
-document.getElementById("imgWanita").src = d.wanita_foto;
-document.getElementById("namaWanita").innerText = d.wanita_nama;
-document.getElementById("ortuWanita").innerText = d.wanita_ortu;
+  // Gallery - anti broken, hide kalau dummy/kosong
+  if(d.gallery_urls &&!d.gallery_urls.includes('foto1.jpg')){
+    const urls = d.gallery_urls.split(",").map(u => u.trim()).filter(u => u);
+    if(urls.length > 0){
+      urls.forEach(img => {
+        document.getElementById("gallery").innerHTML += `<img src="${img}" loading="lazy" onerror="this.style.display='none'">`;
+      });
+    } else {
+      document.getElementById('gallerySection').style.display = 'none';
+    }
+  } else {
+    document.getElementById('gallerySection').style.display = 'none';
+  }
 
-document.getElementById("akad").innerHTML =
-formatDate(d.akad_tgl) + "<br>" + d.akad_lokasi;
+  // Gift - hide kalau kosong
+  if(d.bank_data){
+    safeSet("rekening", d.bank_data);
+    if(d.rekening_qr) document.getElementById("qrWrap").innerHTML = `<img src="${d.rekening_qr}" loading="lazy" style="max-width:220px;margin:auto;border-radius:12px">`;
+  } else {
+    document.getElementById('giftSection').style.display = 'none';
+  }
 
-document.getElementById("resepsi").innerHTML =
-formatDate(d.resepsi_tgl) + "<br>" + d.resepsi_lokasi;
+  // Musik
+  if(d.musik_url) document.getElementById("music").src = d.musik_url;
 
-document.getElementById("mapAkad").href = d.map_akad;
-document.getElementById("mapResepsi").href = d.map_resepsi;
+  // Countdown
+  if(d.waktu_display) runCountdown(d.waktu_display);
 
-document.getElementById("rekening").innerText = d.bank_data;
-
-if(d.rekening_qr){
-document.getElementById("qrWrap").innerHTML =
-`<img src="${d.rekening_qr}" style="max-width:220px;margin:auto;border-radius:12px">`;
-}
-
-document.getElementById("music").src = d.musik_url;
-
-const stories = [
-[d.foto_cerita_1,d.cerita_1_teks],
-[d.foto_cerita_2,d.cerita_2_teks],
-[d.foto_cerita_3,d.cerita_3_teks]
-];
-
-stories.forEach(x=>{
-if(x[1]){
-document.getElementById("storyBox").innerHTML += `
-<div class="story-item">
-<img src="${x[0]}">
-<p>${x[1]}</p>
-</div>`;
-}
-});
-
-if(d.gallery_urls){
-d.gallery_urls.split(",").forEach(img=>{
-document.getElementById("gallery").innerHTML +=
-`<img src="${img.trim()}">`;
-});
-}
-
-runCountdown(d.waktu_display);
-
+  setTimeout(() => document.getElementById('loading').classList.add('hide'), 800);
+})
+.catch(err => {
+  console.error(err);
+  document.getElementById('loading').classList.add('hide');
+  document.getElementById('content').classList.add('hide');
+  document.getElementById('errorBox').classList.remove('hide');
 });
 
 function formatDate(t){
-return new Date(t).toLocaleDateString("id-ID",{
-weekday:"long",
-day:"numeric",
-month:"long",
-year:"numeric",
-hour:"2-digit",
-minute:"2-digit"
-});
+  if(!t) return '';
+  return new Date(t).toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"})
 }
 
 function runCountdown(target){
-setInterval(()=>{
-let now = new Date().getTime();
-let end = new Date(target).getTime();
-let gap = end - now;
-
-if(gap < 0) gap = 0;
-
-let d = Math.floor(gap/86400000);
-let h = Math.floor(gap%86400000/3600000);
-let m = Math.floor(gap%3600000/60000);
-let s = Math.floor(gap%60000/1000);
-
-document.getElementById("d").innerText=d;
-document.getElementById("h").innerText=h;
-document.getElementById("m").innerText=m;
-document.getElementById("s").innerText=s;
-},1000);
+  if(!target) return;
+  setInterval(()=>{
+    let now=new Date().getTime(),end=new Date(target).getTime(),gap=end-now;
+    if(gap<0)gap=0;
+    let d=Math.floor(gap/86400000),h=Math.floor(gap%86400000/3600000),m=Math.floor(gap%3600000/60000),s=Math.floor(gap%60000/1000);
+    safeSet("d", d.toString().padStart(2,'0'));
+    safeSet("h", h.toString().padStart(2,'0'));
+    safeSet("m", m.toString().padStart(2,'0'));
+    safeSet("s", s.toString().padStart(2,'0'));
+  },1000)
 }
 
 function toggleMusic(){
-const audio=document.getElementById("music");
-if(audio.paused){audio.play();}
-else{audio.pause();}
+  const audio=document.getElementById("music"),btn=document.getElementById("musicBtn");
+  if(!audio.src) return;
+  if(audio.paused){audio.play();btn.classList.add('playing')}else{audio.pause();btn.classList.remove('playing')}
+}
+
+function copyRek(){
+  const rek=document.getElementById('rekening').innerText;
+  if(rek && rek!== '-') {
+    navigator.clipboard.writeText(rek);
+    alert('Nomor rekening berhasil disalin!')
+  }
 }
 </script>
 
