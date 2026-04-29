@@ -31,7 +31,7 @@
       "endTime": "10:00",
       "timezone": "WIB",
       "address": "Masjid Agung Jakarta, Jl. Taman Wijaya Kusuma No.1",
-      "googleMaps": "https://maps.app.goo.gl/xxx"
+      "googleMaps": "https://maps.google.com/?q=Masjid+Agung+Jakarta"
     },
     {
       "title": "Resepsi",
@@ -40,7 +40,7 @@
       "endTime": "13:00",
       "timezone": "WIB",
       "address": "Gedung Serbaguna Jakarta, Lantai 2",
-      "googleMaps": "https://maps.app.goo.gl/yyy"
+      "googleMaps": "https://maps.google.com/?q=Gedung+Serbaguna+Jakarta"
     }
   ],
   "gallery": {
