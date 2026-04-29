@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+? formatDate(d.a<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -124,6 +124,12 @@ footer{padding:50px 20px 90px;text-align:center;color:#777;font-size:13px}
 </div>
 </section>
 
+<section class="reveal" id="liveSection" style="display:none">
+<div class="title-small">Live Streaming</div>
+<div class="title">Saksikan Langsung</div>
+<div style="text-align:center"><a id="liveBtn" target="_blank" class="btn">Join Live Streaming</a></div>
+</section>
+
 <section class="reveal" id="storySection">
 <div class="title-small">Our Story</div>
 <div class="title">Cerita Kami</div>
@@ -153,25 +159,15 @@ footer{padding:50px 20px 90px;text-align:center;color:#777;font-size:13px}
 
 <script>
 const API = "https://script.google.com/macros/s/AKfycbwPW3gMeKNsNHLC0lVwZeXA9KWp-wqXlZRFohXcznw1p_a--gvWK5yAA62S6BXfiDukGg/exec";
-const slug = new URLSearchParams(location.search).get("to") || "zeya-putra";
-const guest = new URLSearchParams(location.search).get("nama") || "Tamu Undangan";
+const params = new URLSearchParams(location.search);
+const slug = params.get("u") || params.get("to") || "zeya-putra";
+const guest = params.get("nama") || "Tamu Undangan";
 document.getElementById("guestName").innerText = decodeURIComponent(guest);
 
-// Anti tumpang tindih: cek elemen ada baru diisi
-const safeSet = (id, val, fallback = '') => {
-  const el = document.getElementById(id);
-  if(el) el.innerText = val || fallback;
-};
-const safeSetHTML = (id, val) => {
-  const el = document.getElementById(id);
-  if(el) el.innerHTML = val || '';
-};
-const safeSetAttr = (id, attr, val) => {
-  const el = document.getElementById(id);
-  if(el && val) el.setAttribute(attr, val);
-};
+const safeSet = (id, val) => { const el = document.getElementById(id); if(el) el.innerText = val || '' };
+const safeSetHTML = (id, val) => { const el = document.getElementById(id); if(el) el.innerHTML = val || '' };
+const safeSetAttr = (id, attr, val) => { const el = document.getElementById(id); if(el && val) el.setAttribute(attr, val) };
 
-// Reveal on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active') });
 }, {threshold: 0.1});
@@ -180,23 +176,20 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 fetch(API + "?slug=" + slug)
 .then(r=>r.json())
 .then(res=>{
-  // Validasi data ada
-  if(!res.status ||!res.data || res.data.length === 0 ||!res.data[0].pria_nama){
+  const d = res.data.find(item => item.slug === slug);
+  
+  if(!res.status ||!d ||!d.pria_nama){
     document.getElementById('loading').classList.add('hide');
     document.getElementById('content').classList.add('hide');
     document.getElementById('errorBox').classList.remove('hide');
     return;
   }
 
-  const d = res.data[0];
-
-  // Hero
   document.title = `${d.pria_nama} & ${d.wanita_nama}`;
   safeSet("heroName", `${d.pria_nama} & ${d.wanita_nama}`);
   safeSet("heroDate", d.waktu_display? new Date(d.waktu_display).toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"}) : '');
   if(d.foto_sampul) document.getElementById("coverBg").style.backgroundImage = `url(${d.foto_sampul})`;
 
-  // Mempelai - anti broken image
   safeSetAttr("imgPria", "src", d.pria_foto);
   safeSet("namaPria", d.pria_nama);
   safeSet("ortuPria", d.pria_ortu);
@@ -204,104 +197,5 @@ fetch(API + "?slug=" + slug)
   safeSet("namaWanita", d.wanita_nama);
   safeSet("ortuWanita", d.wanita_ortu);
 
-  // Acara
   if(d.akad_tgl || d.akad_lokasi) {
-    safeSetHTML("akad", `${d.akad_tgl? formatDate(d.akad_tgl) : ''}<br>${d.akad_lokasi || ''}`);
-    safeSetAttr("mapAkad", "href", d.map_akad);
-  }
-  if(d.resepsi_tgl || d.resepsi_lokasi) {
-    safeSetHTML("resepsi", `${d.resepsi_tgl? formatDate(d.resepsi_tgl) : ''}<br>${d.resepsi_lokasi || ''}`);
-    safeSetAttr("mapResepsi", "href", d.map_resepsi);
-  }
-
-  // Story - hide section kalau kosong semua
-  const stories = [
-    [d.foto_cerita_1, d.cerita_1_teks],
-    [d.foto_cerita_2, d.cerita_2_teks],
-    [d.foto_cerita_3, d.cerita_3_teks]
-  ].filter(x => x[1]); // cuma ambil yang ada teksnya
-
-  if(stories.length > 0){
-    stories.forEach(x => {
-      document.getElementById("storyBox").innerHTML += `
-        <div class="story-item">
-          <img src="${x[0]}" loading="lazy" onerror="this.style.display='none'">
-          <p>${x[1]}</p>
-        </div>`;
-    });
-  } else {
-    document.getElementById('storySection').style.display = 'none';
-  }
-
-  // Gallery - anti broken, hide kalau dummy/kosong
-  if(d.gallery_urls &&!d.gallery_urls.includes('foto1.jpg')){
-    const urls = d.gallery_urls.split(",").map(u => u.trim()).filter(u => u);
-    if(urls.length > 0){
-      urls.forEach(img => {
-        document.getElementById("gallery").innerHTML += `<img src="${img}" loading="lazy" onerror="this.style.display='none'">`;
-      });
-    } else {
-      document.getElementById('gallerySection').style.display = 'none';
-    }
-  } else {
-    document.getElementById('gallerySection').style.display = 'none';
-  }
-
-  // Gift - hide kalau kosong
-  if(d.bank_data){
-    safeSet("rekening", d.bank_data);
-    if(d.rekening_qr) document.getElementById("qrWrap").innerHTML = `<img src="${d.rekening_qr}" loading="lazy" style="max-width:220px;margin:auto;border-radius:12px">`;
-  } else {
-    document.getElementById('giftSection').style.display = 'none';
-  }
-
-  // Musik
-  if(d.musik_url) document.getElementById("music").src = d.musik_url;
-
-  // Countdown
-  if(d.waktu_display) runCountdown(d.waktu_display);
-
-  setTimeout(() => document.getElementById('loading').classList.add('hide'), 800);
-})
-.catch(err => {
-  console.error(err);
-  document.getElementById('loading').classList.add('hide');
-  document.getElementById('content').classList.add('hide');
-  document.getElementById('errorBox').classList.remove('hide');
-});
-
-function formatDate(t){
-  if(!t) return '';
-  return new Date(t).toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"})
-}
-
-function runCountdown(target){
-  if(!target) return;
-  setInterval(()=>{
-    let now=new Date().getTime(),end=new Date(target).getTime(),gap=end-now;
-    if(gap<0)gap=0;
-    let d=Math.floor(gap/86400000),h=Math.floor(gap%86400000/3600000),m=Math.floor(gap%3600000/60000),s=Math.floor(gap%60000/1000);
-    safeSet("d", d.toString().padStart(2,'0'));
-    safeSet("h", h.toString().padStart(2,'0'));
-    safeSet("m", m.toString().padStart(2,'0'));
-    safeSet("s", s.toString().padStart(2,'0'));
-  },1000)
-}
-
-function toggleMusic(){
-  const audio=document.getElementById("music"),btn=document.getElementById("musicBtn");
-  if(!audio.src) return;
-  if(audio.paused){audio.play();btn.classList.add('playing')}else{audio.pause();btn.classList.remove('playing')}
-}
-
-function copyRek(){
-  const rek=document.getElementById('rekening').innerText;
-  if(rek && rek!== '-') {
-    navigator.clipboard.writeText(rek);
-    alert('Nomor rekening berhasil disalin!')
-  }
-}
-</script>
-
-</body>
-</html>
+    safeSetHTML("akad", `${d.akad_tgl? formatDate(d.akad
