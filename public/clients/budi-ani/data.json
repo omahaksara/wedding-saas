@@ -1,0 +1,80 @@
+{
+  "slug": "budi-ani",
+  "config": {
+    "theme": "minimalist-light",
+    "audioUrl": "musik.mp3",
+    "isLocked": false
+  },
+  "couple": {
+    "groom": {
+      "name": "Budi Santoso",
+      "nickname": "Budi",
+      "father": "Bpk. Heru Santoso",
+      "mother": "Ibu Siti Aminah",
+      "instagram": "@budi_ig",
+      "image": "foto-pria.jpg"
+    },
+    "bride": {
+      "name": "Ani Wijaya",
+      "nickname": "Ani",
+      "father": "Bpk. Bambang Wijaya",
+      "mother": "Ibu Larasati",
+      "instagram": "@ani_ig",
+      "image": "foto-wanita.jpg"
+    }
+  },
+  "events": [
+    {
+      "title": "Akad Nikah",
+      "date": "2026-07-12",
+      "startTime": "08:00",
+      "endTime": "10:00",
+      "timezone": "WIB",
+      "address": "Masjid Agung Jakarta, Jl. Taman Wijaya Kusuma No.1",
+      "googleMaps": "https://maps.app.goo.gl/xxx"
+    },
+    {
+      "title": "Resepsi",
+      "date": "2026-07-12",
+      "startTime": "11:00",
+      "endTime": "13:00",
+      "timezone": "WIB",
+      "address": "Gedung Serbaguna Jakarta, Lantai 2",
+      "googleMaps": "https://maps.app.goo.gl/yyy"
+    }
+  ],
+  "gallery": {
+    "heroImage": "foto-sampul.jpg",
+    "videoYoutubeId": "ABC123xyz",
+    "album": [
+      "foto1.jpg",
+      "foto2.jpg",
+      "foto3.jpg"
+    ]
+  },
+  "loveStory": [
+    {
+      "year": "2022",
+      "title": "First Meet",
+      "desc": "Pertama kali bertemu di kantor saat proyek bersama."
+    },
+    {
+      "year": "2024",
+      "title": "Engagement",
+      "desc": "Memutuskan untuk melangkah ke jenjang yang lebih serius."
+    }
+  ],
+  "digitalGift": [
+    {
+      "provider": "BCA",
+      "accountNumber": "123456789",
+      "accountHolder": "Budi Santoso",
+      "qrCode": "qr-bca.jpg"
+    }
+  ],
+  "logistics": {
+    "dressCode": "Formal / Batik",
+    "rsvpWaNumber": "628123456789",
+    "guestNote": "Tanpa mengurangi rasa hormat, tamu undangan diharapkan hadir tepat waktu."
+  }
+}
