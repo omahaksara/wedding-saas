@@ -1,14 +1,7 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite' // Pastikan plugin ini terinstall
-import path from 'path'
-
+// Di dalam vite.config.ts
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
-  base: '/invitation/',
+  plugins: [react(), tailwindcss()],
+  base: './', // Ubah dari '/invitation/' menjadi './'
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
