@@ -12,6 +12,7 @@
             --accent-dark: #A8884C;
             --bg: #FBF9F6;
             --paper: #FFFFFF;
+            --line: #E8E4DE;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -38,14 +39,14 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
+            background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.65) 100%);
             z-index: 1;
         }
         .hero-content { z-index: 2; animation: fadeUp 1.2s ease-out; }
         .subtitle { font-size: 0.75rem; letter-spacing: 4px; font-weight: 300; margin-bottom: 8px; }
         h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.2rem, 7vw, 3rem);
+            font-size: clamp(2.4rem, 8vw, 3.2rem);
             font-weight: 600;
             margin: 10px 0 24px;
             line-height: 1.1;
@@ -102,29 +103,29 @@
         }
         #app.show { display: block; animation: fadeIn 1s ease forwards; }
         .section {
-            padding: clamp(40px, 8vw, 80px) clamp(24px, 5vw, 48px);
+            padding: clamp(48px, 8vw, 88px) clamp(24px, 5vw, 48px);
             text-align: center;
-            border-bottom: 1px solid #F0EDE8;
+            border-bottom: 1px solid var(--line);
         }
         .section:last-child { border-bottom: none; }
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 600;
-            margin-bottom: 32px;
+            margin-bottom: 40px;
             position: relative;
             display: inline-block;
         }
-        .section-title::after {
+        .section-title::before, .section-title::after {
             content: '';
             position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
+            top: 50%;
+            width: 30px;
             height: 1px;
             background: var(--accent);
         }
+        .section-title::before { left: -45px; }
+        .section-title::after { right: -45px; }
         .mempelai-wrap {
             display: flex;
             justify-content: center;
@@ -132,38 +133,124 @@
             flex-wrap: wrap;
         }
         .foto-mempelai {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             object-fit: cover;
             border: 1px solid var(--accent);
-            padding: 4px;
+            padding: 5px;
             background: var(--paper);
         }
         .nama-mempelai {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             margin-top: 16px;
             font-weight: 600;
         }
         .ortu { font-size: 0.8rem; opacity: 0.7; margin-top: 4px; }
+        .ig-link {
+            display: inline-block;
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: 6px;
+        }
         .dan {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--accent);
             align-self: center;
         }
-        .event-card {
-            background: var(--bg);
-            padding: 24px;
-            border-radius: 2px;
-            margin-bottom: 16px;
-            border-left: 2px solid var(--accent);
-            text-align: left;
+        
+        /* === ACARA MEWAH === */
+        .timeline {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
         }
-        .event-title { font-weight: 500; font-size: 1.1rem; }
-        .event-time { font-size: 0.85rem; margin: 8px 0; opacity: 0.8; }
-        .event-address { font-size: 0.8rem; opacity: 0.7; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: var(--line);
+            transform: translateX(-50%);
+        }
+        .event-item {
+            position: relative;
+            margin-bottom: 48px;
+            text-align: center;
+        }
+        .event-item:last-child { margin-bottom: 0; }
+        .event-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--paper);
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+        .event-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--accent);
+            stroke-width: 1.5;
+        }
+        .event-box {
+            background: var(--bg);
+            padding: 28px 24px;
+            border-radius: 2px;
+            border: 1px solid var(--line);
+        }
+        .event-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+        .event-date {
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .event-time {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--accent-dark);
+            margin-bottom: 16px;
+        }
+        .event-divider {
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            margin: 16px auto;
+        }
+        .event-address {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .btn-maps {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 8px 20px;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 2px;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .btn-maps:hover { background: var(--accent); color: white; }
+
         .grid-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -177,11 +264,51 @@
             transition: transform 0.4s ease;
         }
         .grid-gallery img:hover { transform: scale(1.03); }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin-bottom: 24px;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 2px;
+        }
+        .story-item {
+            text-align: left;
+            margin-bottom: 28px;
+            padding-left: 24px;
+            border-left: 1px solid var(--line);
+            position: relative;
+        }
+        .story-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 5px;
+            width: 9px;
+            height: 9px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+        .story-year {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        .story-title { font-weight: 500; margin: 6px 0; }
+        .story-desc { font-size: 0.85rem; opacity: 0.8; }
         .gift-box {
             background: var(--bg);
             padding: 32px 24px;
             border-radius: 2px;
-            border: 1px solid #F0EDE8;
+            border: 1px solid var(--line);
+            margin-bottom: 16px;
         }
         .gift-box img {
             max-width: 220px;
@@ -189,28 +316,38 @@
             border-radius: 8px;
             margin: 20px auto 12px;
             display: block;
-            border: 1px solid #E8E4DE;
+            border: 1px solid var(--line);
         }
         .rekening {
-            font-family: 'Inter', sans-serif;
             font-size: 1rem;
             font-weight: 500;
             letter-spacing: 1px;
             margin: 12px 0 4px;
         }
-        .btn-copy {
+        .btn-copy, .btn-wa {
             background: var(--accent);
             color: white;
             border: none;
-            padding: 8px 20px;
+            padding: 10px 24px;
             border-radius: 2px;
             font-size: 0.75rem;
             letter-spacing: 1px;
             cursor: pointer;
             margin-top: 8px;
             transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
         }
-        .btn-copy:hover { background: var(--accent-dark); }
+        .btn-copy:hover, .btn-wa:hover { background: var(--accent-dark); }
+        .info-box {
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 2px;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+        .info-label { font-weight: 500; color: var(--accent); }
         #music-btn {
             position: fixed;
             bottom: 20px;
@@ -229,20 +366,15 @@
             justify-content: center;
             transition: all 0.3s ease;
         }
-        #music-btn:hover {
-            background: var(--accent);
-            color: white;
-            transform: scale(1.05);
-        }
+        #music-btn:hover { background: var(--accent); color: white; transform: scale(1.05); }
         #app.show ~ #music-btn { display: flex; }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .error-msg { padding: 20px; text-align: center; color: #999; font-size: 0.9rem; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { to { opacity: 1; } }
         @media (max-width: 600px) {
             .dan { display: none; }
             .mempelai-wrap { gap: 24px; }
+            .section-title::before, .section-title::after { display: none; }
         }
     </style>
 </head>
@@ -251,7 +383,7 @@
     <div id="cover" class="hero">
         <div class="hero-content">
             <p class="subtitle">THE WEDDING OF</p>
-            <h1 id="cover-names">... & ...</h1>
+            <h1 id="cover-names">Undangan</h1>
             <div class="tamu-box">
                 <p class="tamu-label">KEPADA YTH.</p>
                 <div class="tamu-nama" id="nama-tamu">Tamu Undangan</div>
@@ -266,21 +398,38 @@
             <div class="mempelai-wrap">
                 <div>
                     <img id="foto-pria" class="foto-mempelai" src="" alt="">
-                    <p class="nama-mempelai" id="nama-pria">...</p>
-                    <p class="ortu" id="ortu-pria">Putra dari ...</p>
+                    <p class="nama-mempelai" id="nama-pria">-</p>
+                    <p class="ortu" id="ortu-pria">-</p>
+                    <a id="ig-pria" class="ig-link" target="_blank"></a>
                 </div>
                 <div class="dan">&</div>
                 <div>
                     <img id="foto-wanita" class="foto-mempelai" src="" alt="">
-                    <p class="nama-mempelai" id="nama-wanita">...</p>
-                    <p class="ortu" id="ortu-wanita">Putri dari ...</p>
+                    <p class="nama-mempelai" id="nama-wanita">-</p>
+                    <p class="ortu" id="ortu-wanita">-</p>
+                    <a id="ig-wanita" class="ig-link" target="_blank"></a>
                 </div>
             </div>
         </div>
 
+        <div class="section" id="story-section" style="display:none;">
+            <h3 class="section-title">Perjalanan Cinta</h3>
+            <div id="story-container"></div>
+        </div>
+
         <div class="section">
             <h3 class="section-title">Waktu & Tempat</h3>
-            <div id="events-container"></div>
+            <div class="timeline" id="events-container"></div>
+        </div>
+
+        <div class="section" id="logistics-section" style="display:none;">
+            <h3 class="section-title">Informasi Acara</h3>
+            <div id="logistics-container"></div>
+        </div>
+
+        <div class="section" id="video-section" style="display:none;">
+            <h3 class="section-title">Video Kami</h3>
+            <div class="video-wrapper" id="video-container"></div>
         </div>
 
         <div class="section">
@@ -290,13 +439,13 @@
 
         <div class="section" id="gift-section" style="display:none;">
             <h3 class="section-title">Wedding Gift</h3>
-            <div class="gift-box">
-                <p style="font-size: 0.9rem; opacity: 0.8; line-height: 1.8;">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless.</p>
-                <img id="qr-image" src="" alt="QR BCA">
-                <div class="rekening" id="rekening-text"></div>
-                <p style="font-size: 0.8rem; opacity: 0.7;" id="gift-name"></p>
-                <button class="btn-copy" onclick="copyRekening()">Salin No. Rekening</button>
-            </div>
+            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 24px; line-height: 1.8;">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless.</p>
+            <div id="gift-container"></div>
+        </div>
+
+        <div class="section" id="rsvp-section" style="display:none;">
+            <h3 class="section-title">Konfirmasi Kehadiran</h3>
+            <a id="wa-rsvp" class="btn-wa" target="_blank">Konfirmasi via WhatsApp</a>
         </div>
     </div>
 
@@ -312,50 +461,136 @@
         const tamu = urlParams.get('to') || 'Tamu Undangan';
         let music = document.getElementById('bg-music');
         let isPlaying = false;
-        let nomorRekening = '';
 
         document.getElementById('nama-tamu').innerText = tamu.replace(/\+/g, ' ');
 
+        function formatDate(dateStr) {
+            if(!dateStr) return '-';
+            const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+            const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            const d = new Date(dateStr);
+            return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+        }
+
         fetch(`public/clients/${clientFolder}/data.json`)
-            .then(res => res.json())
+            .then(res => {
+                if(!res.ok) throw new Error('JSON not found');
+                return res.json();
+            })
             .then(data => {
-                document.title = `${data.couple.groom.nickname} & ${data.couple.bride.nickname} Wedding`;
-                document.getElementById('cover-names').innerText = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
-                document.getElementById('cover').style.backgroundImage = `url('public/clients/${clientFolder}/foto-sampul.jpg')`;
-
-                music.src = `public/clients/${clientFolder}/musik.mp3`;
-                music.volume = 0.3;
-
-                document.getElementById('nama-pria').innerText = data.couple.groom.name;
-                document.getElementById('ortu-pria').innerText = `Putra dari ${data.couple.groom.father} & ${data.couple.groom.mother}`;
-                document.getElementById('foto-pria').src = `public/clients/${clientFolder}/foto-pria.jpg`;
-
-                document.getElementById('nama-wanita').innerText = data.couple.bride.name;
-                document.getElementById('ortu-wanita').innerText = `Putri dari ${data.couple.bride.father} & ${data.couple.bride.mother}`;
-                document.getElementById('foto-wanita').src = `public/clients/${clientFolder}/foto-wanita.jpg`;
-
-                const eventHtml = data.events.map(ev => `
-                    <div class="event-card">
-                        <div class="event-title">${ev.title}</div>
-                        <div class="event-time">${ev.date} | ${ev.startTime} - ${ev.endTime} ${ev.timezone}</div>
-                        <div class="event-address">${ev.address}</div>
-                    </div>
-                `).join('');
-                document.getElementById('events-container').innerHTML = eventHtml;
-
-                const galleryFiles = ['foto1.jpg', 'foto2.jpg', 'foto3.jpg'];
-                const galleryHtml = galleryFiles.map(img => `
-                    <img src="public/clients/${clientFolder}/${img}" alt="Gallery" loading="lazy">
-                `).join('');
-                document.getElementById('gallery-container').innerHTML = galleryHtml;
-
-                if(data.gift) {
-                    document.getElementById('gift-section').style.display = 'block';
-                    document.getElementById('qr-image').src = `public/clients/${clientFolder}/qr-bca.jpg`;
-                    document.getElementById('rekening-text').innerText = data.gift.accountNumber;
-                    document.getElementById('gift-name').innerText = `${data.gift.bank} a.n ${data.gift.accountName}`;
-                    nomorRekening = data.gift.accountNumber;
+                const groomNick = data.couple?.groom?.nickname || 'Mempelai Pria';
+                const brideNick = data.couple?.bride?.nickname || 'Mempelai Wanita';
+                document.title = `${groomNick} & ${brideNick} Wedding`;
+                document.getElementById('cover-names').innerText = `${groomNick} & ${brideNick}`;
+                document.getElementById('cover').style.backgroundImage = `url('public/clients/${clientFolder}/${data.gallery?.heroImage || 'foto-sampul.jpg'}')`;
+                
+                if(data.config?.audioUrl) {
+                    music.src = `public/clients/${clientFolder}/${data.config.audioUrl}`;
+                    music.volume = 0.3;
+                } else {
+                    document.getElementById('music-btn').style.display = 'none';
                 }
+
+                if(data.couple?.groom) {
+                    document.getElementById('nama-pria').innerText = data.couple.groom.name || '-';
+                    document.getElementById('ortu-pria').innerText = data.couple.groom.father ? 
+                        `Putra dari ${data.couple.groom.father} & ${data.couple.groom.mother || '-'}` : '-';
+                    document.getElementById('foto-pria').src = `public/clients/${clientFolder}/${data.couple.groom.image || 'foto-pria.jpg'}`;
+                    if(data.couple.groom.instagram) {
+                        document.getElementById('ig-pria').href = `https://instagram.com/${data.couple.groom.instagram.replace('@','')}`;
+                        document.getElementById('ig-pria').innerText = data.couple.groom.instagram;
+                    }
+                }
+                if(data.couple?.bride) {
+                    document.getElementById('nama-wanita').innerText = data.couple.bride.name || '-';
+                    document.getElementById('ortu-wanita').innerText = data.couple.bride.father ? 
+                        `Putri dari ${data.couple.bride.father} & ${data.couple.bride.mother || '-'}` : '-';
+                    document.getElementById('foto-wanita').src = `public/clients/${clientFolder}/${data.couple.bride.image || 'foto-wanita.jpg'}`;
+                    if(data.couple.bride.instagram) {
+                        document.getElementById('ig-wanita').href = `https://instagram.com/${data.couple.bride.instagram.replace('@','')}`;
+                        document.getElementById('ig-wanita').innerText = data.couple.bride.instagram;
+                    }
+                }
+
+                if(data.loveStory && data.loveStory.length > 0) {
+                    document.getElementById('story-section').style.display = 'block';
+                    document.getElementById('story-container').innerHTML = data.loveStory.map(s => `
+                        <div class="story-item">
+                            <div class="story-year">${s.year}</div>
+                            <div class="story-title">${s.title}</div>
+                            <div class="story-desc">${s.desc}</div>
+                        </div>
+                    `).join('');
+                }
+
+                if(data.events && data.events.length > 0) {
+                    document.getElementById('events-container').innerHTML = data.events.map((ev, i) => `
+                        <div class="event-item">
+                            <div class="event-icon">
+                                ${i === 0 ? 
+                                '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>' : 
+                                '<svg viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>'}
+                            </div>
+                            <div class="event-box">
+                                <div class="event-title">${ev.title || 'Acara'}</div>
+                                <div class="event-date">${formatDate(ev.date)}</div>
+                                <div class="event-time">${ev.startTime || ''} ${ev.endTime ? '- ' + ev.endTime : ''} ${ev.timezone || ''}</div>
+                                <div class="event-divider"></div>
+                                <div class="event-address">${ev.address || '-'}</div>
+                                ${ev.googleMaps ? `<a href="${ev.googleMaps}" target="_blank" class="btn-maps">Lihat Lokasi</a>` : ''}
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    document.getElementById('events-container').innerHTML = '<div class="error-msg">Informasi acara akan diupdate segera</div>';
+                }
+
+                if(data.logistics) {
+                    let logHtml = '';
+                    if(data.logistics.dressCode) logHtml += `<div class="info-box"><span class="info-label">Dress Code:</span> ${data.logistics.dressCode}</div>`;
+                    if(data.logistics.guestNote) logHtml += `<div class="info-box"><span class="info-label">Catatan:</span> ${data.logistics.guestNote}</div>`;
+                    if(logHtml) {
+                        document.getElementById('logistics-section').style.display = 'block';
+                        document.getElementById('logistics-container').innerHTML = logHtml;
+                    }
+                    if(data.logistics.rsvpWaNumber) {
+                        document.getElementById('rsvp-section').style.display = 'block';
+                        const msg = `Halo, saya ${tamu.replace(/\+/g, ' ')} ingin konfirmasi kehadiran di acara ${groomNick} & ${brideNick}`;
+                        document.getElementById('wa-rsvp').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=${encodeURIComponent(msg)}`;
+                    }
+                }
+
+                if(data.gallery?.videoYoutubeId) {
+                    document.getElementById('video-section').style.display = 'block';
+                    document.getElementById('video-container').innerHTML = `
+                        <iframe src="https://www.youtube.com/embed/${data.gallery.videoYoutubeId}" frameborder="0" allowfullscreen></iframe>
+                    `;
+                }
+
+                if(data.gallery?.album && data.gallery.album.length > 0) {
+                    document.getElementById('gallery-container').innerHTML = data.gallery.album.map(img => `
+                        <img src="public/clients/${clientFolder}/${img}" alt="Gallery" loading="lazy">
+                    `).join('');
+                } else {
+                    document.getElementById('gallery-container').innerHTML = '<div class="error-msg">Galeri segera hadir</div>';
+                }
+
+                if(data.digitalGift && data.digitalGift.length > 0) {
+                    document.getElementById('gift-section').style.display = 'block';
+                    document.getElementById('gift-container').innerHTML = data.digitalGift.map((g, i) => `
+                        <div class="gift-box">
+                            <div style="font-weight:500;margin-bottom:8px;">${g.provider}</div>
+                            ${g.qrCode ? `<img src="public/clients/${clientFolder}/${g.qrCode}" alt="QR ${g.provider}">` : ''}
+                            <div class="rekening">${g.accountNumber}</div>
+                            <div style="font-size:0.8rem;opacity:0.7;">a.n ${g.accountHolder}</div>
+                            <button class="btn-copy" onclick="copyRekening('${g.accountNumber}', this)">Salin No. Rekening</button>
+                        </div>
+                    `).join('');
+                }
+            })
+            .catch(err => {
+                console.error("Error load data:", err);
+                document.getElementById('cover-names').innerText = "Undangan Pernikahan";
             });
 
         function bukaUndangan() {
@@ -369,7 +604,7 @@
         }
 
         function playMusic() {
-            if(music.src) {
+            if(music.src && music.src !== window.location.href) {
                 music.play().then(() => {
                     isPlaying = true;
                     document.getElementById('icon-play').style.display = 'none';
@@ -389,11 +624,11 @@
             }
         }
 
-        function copyRekening() {
-            navigator.clipboard.writeText(nomorRekening).then(() => {
-                const btn = event.target;
+        function copyRekening(norek, btn) {
+            navigator.clipboard.writeText(norek).then(() => {
+                const original = btn.innerText;
                 btn.innerText = 'Berhasil Disalin!';
-                setTimeout(() => { btn.innerText = 'Salin No. Rekening'; }, 2000);
+                setTimeout(() => { btn.innerText = original; }, 2000);
             });
         }
     </script>
