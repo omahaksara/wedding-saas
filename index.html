@@ -1,17 +1,121 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <title>Omah Aksara - Digital Invitation</title>
-    
-    <meta name="description" content="Sistem Undangan Digital Otomatis" />
-  </head>
-  <body>
-    <div id="root"></div>
-    
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #2c3e50; --accent: #d4a373; --bg: #fdfcfb; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: var(--bg); color: var(--primary); transition: opacity 0.5s; }
+        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; background-size: cover; background-position: center; color: white; position: relative; }
+        .hero::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.4); z-index: 1; }
+        .hero-content { z-index: 2; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin: 10px 0; }
+        .tamu-box { background: rgba(255,255,255,0.9); color: var(--primary); padding: 20px; border-radius: 15px; margin-top: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .tamu-nama { font-weight: 600; font-size: 1.2rem; color: var(--accent); }
+        .btn-buka { background: var(--accent); color: white; border: none; padding: 12px 30px; border-radius: 30px; font-weight: 600; cursor: pointer; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        #app { display: none; padding: 40px 20px; max-width: 600px; margin: auto; }
+        .section { margin-bottom: 50px; }
+        .foto-mempelai { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .grid-gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .grid-gallery img { width: 100%; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+    <div id="cover" class="hero">
+        <div class="hero-content">
+            <p>THE WEDDING OF</p>
+            <h1 id="cover-names">... & ...</h1>
+            <div class="tamu-box">
+                <p>Spesial Untuk:</p>
+                <div class="tamu-nama" id="nama-tamu">Tamu Undangan</div>
+            </div>
+            <button class="btn-buka" onclick="bukaUndangan()">Buka Undangan</button>
+        </div>
+    </div>
+
+    <div id="app">
+        <div class="section">
+            <h2 style="font-family: 'Playfair Display';">Mempelai</h2>
+            <div style="display: flex; justify-content: space-around; margin-top: 30px;">
+                <div>
+                    <img id="foto-pria" class="foto-mempelai" src="" alt="">
+                    <p><strong id="nama-pria">...</strong></p>
+                    <p style="font-size: 0.8rem;" id="ortu-pria">Putra dari ...</p>
+                </div>
+                <div>
+                    <img id="foto-wanita" class="foto-mempelai" src="" alt="">
+                    <p><strong id="nama-wanita">...</strong></p>
+                    <p style="font-size: 0.8rem;" id="ortu-wanita">Putri dari ...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Waktu & Tempat</h3>
+            <div id="events-container"></div>
+        </div>
+
+        <div class="section">
+            <h3>Galeri</h3>
+            <div class="grid-gallery" id="gallery-container"></div>
+        </div>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const clientFolder = urlParams.get('c') || 'budi-ani'; // Default ke budi-ani jika ?c= kosong
+        const tamu = urlParams.get('to') || 'Tamu Undangan';
+
+        // Tampilkan Nama Tamu
+        document.getElementById('nama-tamu').innerText = tamu.replace(/\+/g, ' ');
+
+        // Jalankan Engine Pembaca JSON
+        fetch(`public/clients/${clientFolder}/data.json`)
+            .then(res => res.json())
+            .then(data => {
+                // Set Judul & Cover
+                document.title = `Undangan ${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+                document.getElementById('cover-names').innerText = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+                document.getElementById('cover').style.backgroundImage = `url('public/clients/${clientFolder}/${data.gallery.heroImage}')`;
+
+                // Set Data Mempelai
+                document.getElementById('nama-pria').innerText = data.couple.groom.name;
+                document.getElementById('ortu-pria').innerText = `Putra dari ${data.couple.groom.father} & ${data.couple.groom.mother}`;
+                document.getElementById('foto-pria').src = `public/clients/${clientFolder}/${data.couple.groom.image}`;
+
+                document.getElementById('nama-wanita').innerText = data.couple.bride.name;
+                document.getElementById('ortu-wanita').innerText = `Putri dari ${data.couple.bride.father} & ${data.couple.bride.mother}`;
+                document.getElementById('foto-wanita').src = `public/clients/${clientFolder}/${data.couple.bride.image}`;
+
+                // Render Acara
+                const eventHtml = data.events.map(ev => `
+                    <div style="background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-left: 5px solid var(--accent);">
+                        <strong>${ev.title}</strong><br>
+                        ${ev.date} | ${ev.startTime} - ${ev.endTime} ${ev.timezone}<br>
+                        <small>${ev.address}</small>
+                    </div>
+                `).join('');
+                document.getElementById('events-container').innerHTML = eventHtml;
+
+                // Render Galeri
+                const galleryHtml = data.gallery.album.map(img => `
+                    <img src="public/clients/${clientFolder}/${img}" alt="Gallery">
+                `).join('');
+                document.getElementById('gallery-container').innerHTML = galleryHtml;
+            })
+            .catch(err => {
+                console.error("Gagal load data klien:", err);
+                alert("Data undangan tidak ditemukan.");
+            });
+
+        function bukaUndangan() {
+            document.getElementById('cover').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+    </script>
+</body>
 </html>
