@@ -16,15 +16,15 @@
             --text-color: #6D5F4B;
         }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
-      .font-serif { font-family: 'Cormorant Garamond', serif; }
-      .font-arab { font-family: 'Scheherazade New', serif; }
-      .bg-theme { background-color: var(--theme-color); }
-      .text-theme { color: var(--theme-color); }
-      .border-theme { border-color: var(--theme-color); }
-      .cover-bg { background-color: var(--bg-color); }
-      .polaroid { background: white; padding: 10px 10px 35px 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
-      .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
-      .torn {
+     .font-serif { font-family: 'Cormorant Garamond', serif; }
+     .font-arab { font-family: 'Scheherazade New', serif; }
+     .bg-theme { background-color: var(--theme-color); }
+     .text-theme { color: var(--theme-color); }
+     .border-theme { border-color: var(--theme-color); }
+     .cover-bg { background-color: var(--bg-color); }
+     .polaroid { background: white; padding: 10px 10px 35px 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+     .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
+     .torn {
             -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 C150,100 350,0 500,100 C650,0 850,100 1000,0 L1000,100 L0,100 Z" fill="black"/></svg>');
             mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 C150,100 350,0 500,100 C650,0 850,100 1000,0 L1000,100 L0,100 Z" fill="black"/></svg>');
             -webkit-mask-size: 100% 20px; mask-size: 100% 20px;
@@ -36,13 +36,17 @@
 <body class="antialiased">
 
     <!-- COVER -->
-    <div id="cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center p-8 cover-bg transition-opacity duration-1000">
-        <p id="cover-bismillah" class="font-arab text-3xl text-theme mb-4 hidden">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
-        <p class="text-sm tracking-widest uppercase">WALIMATUL 'URSY</p>
-        <h1 id="cover-names" class="font-serif text-5xl my-4 text-theme"></h1>
-        <p class="text-sm">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-        <p id="cover-guest" class="text-lg font-semibold mt-1"></p>
-        <button id="open-invitation" class="bg-theme text-white rounded-full px-8 py-3 mt-8 text-sm uppercase tracking-wider shadow-lg">Buka Undangan</button>
+    <div id="cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center text-white transition-opacity duration-1000">
+        <img id="cover-image" class="absolute inset-0 w-full h-full object-cover" src="" crossorigin="anonymous">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+        <div class="relative z-10 p-8">
+            <p id="cover-bismillah" class="font-arab text-3xl mb-4 hidden">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+            <p id="cover-event-name" class="text-sm tracking-widest uppercase">WALIMATUL 'URSY</p>
+            <h1 id="cover-names" class="font-serif text-6xl my-4"></h1>
+            <p class="text-sm mt-8">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+            <p id="cover-guest" class="text-xl font-semibold mt-1"></p>
+            <button id="open-invitation" class="bg-white/20 backdrop-blur-sm border-white border text-white rounded-full px-8 py-3 mt-8 text-sm uppercase tracking-wider shadow-lg">Buka Undangan</button>
+        </div>
     </div>
 
     <div id="app" class="max-w-md mx-auto min-h-screen opacity-0 transition-opacity duration-1000">
@@ -149,24 +153,29 @@
                 document.getElementById('cover-bismillah').classList.remove('hidden');
                 document.getElementById('footer-closing').classList.remove('hidden');
                 document.getElementById('footer-closing-text').classList.remove('hidden');
+                document.getElementById('cover-event-name').textContent = "WALIMATUL 'URSY";
             }
             if(settings.bgColor) document.documentElement.style.setProperty('--bg-color', settings.bgColor);
             if(settings.textColor) document.documentElement.style.setProperty('--text-color', settings.textColor);
             if(settings.themeColor) document.documentElement.style.setProperty('--theme-color', settings.themeColor);
 
-            // 2. HERO
+            // 2. COVER & HERO IMAGE
+            const coverImg = document.getElementById('cover-image');
             const heroImg = document.getElementById('hero-image');
+            coverImg.crossOrigin = 'Anonymous';
             heroImg.crossOrigin = 'Anonymous';
+            coverImg.src = basePath + data.gallery.heroImage;
             heroImg.src = basePath + data.gallery.heroImage;
             
-            heroImg.addEventListener('load', function() {
+            coverImg.addEventListener('load', function() {
                 if(settings.autoColor!== false &&!settings.themeColor) {
                     const colorThief = new ColorThief();
-                    const dominantColor = colorThief.getColor(heroImg);
+                    const dominantColor = colorThief.getColor(coverImg);
                     document.documentElement.style.setProperty('--theme-color', `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`);
                 }
             });
 
+            // 3. HERO FRAME STYLE
             const heroSection = document.getElementById('hero-section');
             if(settings.heroStyle === 'polaroid') {
                 heroSection.className = 'relative p-8';
@@ -315,7 +324,9 @@
             // RSVP
             if(data.logistics.dressCode) document.getElementById('dresscode').textContent = `Dresscode: ${data.logistics.dressCode}`;
             if(data.logistics.guestNote) document.getElementById('guest-note').textContent = data.logistics.guestNote;
-            const rsvpMessage = `Assalamualaikum. Saya, ${guestName.replace(/\+/g, ' ')}, insyaAllah akan hadir di acara Walimatul 'Ursy ${g.nickname} & ${b.nickname}. Jazakumullah khairan.`;
+            const rsvpMessage = settings.islami? 
+                `Assalamualaikum. Saya, ${guestName.replace(/\+/g, ' ')}, insyaAllah akan hadir di acara Walimatul 'Ursy ${g.nickname} & ${b.nickname}. Jazakumullah khairan.` :
+                `Halo, saya ${guestName.replace(/\+/g, ' ')} akan hadir di acara pernikahan ${g.nickname} & ${b.nickname}. Terima kasih.`;
             document.getElementById('rsvp-link').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=${encodeURIComponent(rsvpMessage)}`;
             
             // FOOTER
@@ -339,4 +350,4 @@
         });
     </script>
 </body>
-      </html>
+</html>
