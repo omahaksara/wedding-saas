@@ -46,9 +46,7 @@
     "heroImage": "foto-sampul.jpg",
     "videoYoutubeId": "",
     "album": [
-      "foto1.jpg",
-      "foto2.jpg",
-      "foto3.jpg"
+      "foto1.jpg"
     ]
   },
   "digitalGift": [
@@ -56,7 +54,7 @@
       "provider": "BRI",
       "accountNumber": "519501024699536",
       "accountHolder": "Khosi Saimima",
-      "qrImage": ""
+      "qrImage": "foto-qr"
     },
     {
       "provider": "Mandiri",
