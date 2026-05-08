@@ -26,15 +26,14 @@
         if (!client) {
             document.body.innerHTML = 'Error: Parameter ?c= tidak ada';
         } else {
-            // Path yang bener: dari /invitation/ langsung ke public/clients/
             fetch(`public/clients/${client}/data.json`)
                 .then(res => {
                     if (!res.ok) throw new Error('Not found');
                     return res.json();
                 })
                 .then(data => {
-                    const template = data.meta?.template || 'minimalis-gold';
-                    // Kirim semua parameter URL ke template
+                    // AUTO TERRA-SOFT, tapi tetap bisa pakai template lain
+                    const template = data.meta?.template || 'terra-soft';
                     window.location.href = `templates/${template}/index.html${window.location.search}`;
                 })
                 .catch(err => {
