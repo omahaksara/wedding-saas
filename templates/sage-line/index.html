@@ -17,40 +17,41 @@
             --accent-color: #F4F6F2;
         }
         body { font-family: 'Montserrat', sans-serif; background: var(--bg-color); color: var(--text-color); }
-   .font-serif { font-family: 'Cormorant Garamond', serif; }
-   .font-arab { font-family: 'Scheherazade New', serif; }
-   .bg-theme { background-color: var(--theme-color); }
-   .text-theme { color: var(--theme-color); }
-   .border-theme { border-color: var(--theme-color); }
-   .bg-accent { background-color: var(--accent-color); }
-   .torn-top {
+  .font-serif { font-family: 'Cormorant Garamond', serif; }
+  .font-arab { font-family: 'Scheherazade New', serif; }
+  .bg-theme { background-color: var(--theme-color); }
+  .text-theme { color: var(--theme-color); }
+  .border-theme { border-color: var(--theme-color); }
+  .bg-accent { background-color: var(--accent-color); }
+  .torn-top {
             -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,50 C150,0 350,0 500,50 C650,100 850,100 1000,50 L1000,50 L0,50 Z" fill="black"/></svg>');
             mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,50 C150,0 350,0 500,50 C650,100 850,100 1000,50 L1000,50 L0,50 Z" fill="black"/></svg>');
             -webkit-mask-size: 100% 20px; mask-size: 100% 20px;
             -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
         }
-   .torn-bottom {
+  .torn-bottom {
             -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,0 C150,50 350,50 500,0 C650,-50 850,-50 1000,0 L1000,0 L0,0 Z" fill="black"/></svg>');
             mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,0 C150,50 350,50 500,0 C650,-50 850,-50 1000,0 L1000,0 L0,0 Z" fill="black"/></svg>');
             -webkit-mask-size: 100% 20px; mask-size: 100% 20px;
             -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
             -webkit-mask-position: bottom; mask-position: bottom;
         }
-   .hidden { display: none!important; }
+  .hidden { display: none!important; }
     </style>
 </head>
 <body class="antialiased">
-    <!-- COVER -->
+    <!-- COVER + BLUR -->
     <div id="cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center text-white transition-opacity duration-1000">
         <img id="cover-image" class="absolute inset-0 w-full h-full object-cover" src="" crossorigin="anonymous">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+        <!-- Blur + Gradient biar teks kebaca, kalau nggak ada foto jadi bg-color -->
+        <div class="absolute inset-0 backdrop-blur-sm bg-gradient-to-t from-black/70 via-black/30 to-white/10"></div>
         <div class="relative z-10 p-8">
             <p id="cover-bismillah" class="font-arab text-3xl mb-4 hidden">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
             <p id="cover-event-name" class="text-sm tracking-widest uppercase">WALIMATUL 'URSY</p>
             <h1 id="cover-names" class="font-serif text-6xl my-4"></h1>
             <p class="text-sm mt-8">Kepada Yth. Bapak/Ibu/Saudara/i</p>
             <p id="cover-guest" class="text-xl font-semibold mt-1"></p>
-            <button id="open-invitation" class="bg-white/20 backdrop-blur-sm border-white border text-white rounded-full px-8 py-3 mt-8 text-sm uppercase tracking-wider shadow-lg">Buka Undangan</button>
+            <button id="open-invitation" class="bg-white/20 backdrop-blur-sm border-white border text-white rounded-full px-8 py-3 mt-8 text-sm uppercase tracking-wider shadow-lg hover:bg-white/30 transition-all">Buka Undangan</button>
         </div>
     </div>
 
@@ -65,7 +66,7 @@
             <h1 id="initials" class="font-serif text-7xl text-theme mb-8"></h1>
 
             <div class="torn-top torn-bottom mb-8">
-                <img id="hero-image" class="w-full h-80 object-cover" src="" crossorigin="anonymous">
+                <img id="hero-image" class="w-full h-80 object-cover" src="" crossorigin="anonymous" onerror="this.parentElement.style.display='none'">
             </div>
 
             <div class="mt-8">
@@ -121,7 +122,7 @@
             </div>
 
             <div id="gift-section" class="mb-8 hidden">
-                <svg class="w-10 h-10 mx-auto mb-2 opacity-70 text-theme" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z" clip-rule="evenodd"></path><path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z"></path></svg>
+                <svg class="w-10 h-10 mx-auto mb-2 opacity-70 text-theme" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z" clip-rule="evenodd"></path><path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z"></path></svg>
                 <p class="text-xs uppercase font-semibold">AMPLLOP DIGITAL</p>
                 <p class="text-xs mt-2 leading-relaxed">DOA RESTU ANDA ADALAH KADO TERINDAH BAGI KAMI<br>NAMUN JIKA MEMBERI ADALAH UNGKAPAN TANDA KASIH, DAPAT MELALUI:</p>
                 <div id="gift-list" class="mt-4 space-y-2"></div>
@@ -143,7 +144,7 @@
         <!-- FOOTER -->
         <section class="bg-white">
             <div class="torn-top">
-                <img id="footer-image" class="w-full h-64 object-cover" src="">
+                <img id="footer-image" class="w-full h-64 object-cover" src="" onerror="this.parentElement.style.display='none'">
             </div>
             <div class="p-8 text-center text-xs">
                 <p id="footer-closing" class="font-arab text-xl text-theme mb-2 hidden">بَارَكَ اللهُ لَكُماَ وَبَارَكَ عَلَيْكُماَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
@@ -182,7 +183,7 @@
                 document.getElementById('footer-closing-text').classList.remove('hidden');
             }
 
-            // 3. COVER + HERO
+            // 3. COVER + HERO + AUTOCOLOR
             document.getElementById('cover-names').innerHTML = `${g.nickname} & ${b.nickname}`;
             document.getElementById('cover-guest').textContent = guestName.replace(/\+/g, ' ');
             document.getElementById('initials').textContent = `${g.nickname.charAt(0)}|${b.nickname.charAt(0)}`;
@@ -206,6 +207,9 @@
                         }
                     }
                 });
+            } else {
+                // Fallback kalau nggak ada foto = background solid
+                document.getElementById('cover').style.backgroundColor = 'var(--bg-color)';
             }
 
             document.getElementById('parents').innerHTML = `Putra dari Bapak ${g.father} & Ibu ${g.mother}<br>&<br>Putri dari Bapak ${b.father} & Ibu ${b.mother}`;
@@ -260,7 +264,7 @@
                     `;
                 });
 
-                // COUNTDOWN
+                // COUNTDOWN - Fix kurung
                 if(ev) {
                     document.getElementById('countdown-wrap').classList.remove('hidden');
                     const countdownDate = new Date(`${ev.date}T${ev.startTime}:00`).getTime();
@@ -351,7 +355,7 @@
                 document.getElementById('footer-image').src = basePath + lastPhoto;
             }
 
-            // 11. OPEN + MUSIC
+            // 11. OPEN + MUSIC + FALLBACK BUTTON
             document.getElementById('open-invitation').addEventListener('click', () => {
                 document.getElementById('cover').style.opacity = '0';
                 document.getElementById('app').style.opacity = '1';
