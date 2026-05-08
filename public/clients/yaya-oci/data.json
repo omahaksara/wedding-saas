@@ -7,9 +7,6 @@
   "settings": {
     "islami": true,
     "autoColor": false,
-    "themeColor": "#7A8B7A",
-    "bgColor": "#FBF8F3",
-    "textColor": "#3A4A3A",
     "heroStyle": "full",
     "coupleFrame": "polaroid"
   },
