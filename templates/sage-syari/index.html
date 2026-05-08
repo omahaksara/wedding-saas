@@ -5,222 +5,395 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Undangan Pernikahan</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Montserrat', sans-serif; background-color: #EAECE6; color: #3A4A3A; }
-    .font-serif { font-family: 'Cormorant Garamond', serif; }
-    .font-arab { font-family: 'Scheherazade New', serif; }
-    .bg-sage { background-color: #7A8B7A; }
-    .text-sage { color: #7A8B7A; }
-    .border-sage { border-color: #7A8B7A; }
-    .cover-bg { background-color: #FBF8F3; }
-    .polaroid { background: white; padding: 10px 10px 35px 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
-    .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
+        :root {
+            --theme-color: #7A8B7A; /* Sage default */
+            --bg-color: #EAECE6;
+            --text-color: #3A4A3A;
+            --accent-color: #F4F6F2;
+        }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg-color); color: var(--text-color); }
+ .font-serif { font-family: 'Cormorant Garamond', serif; }
+ .font-arab { font-family: 'Scheherazade New', serif; }
+ .bg-theme { background-color: var(--theme-color); }
+ .text-theme { color: var(--theme-color); }
+ .border-theme { border-color: var(--theme-color); }
+ .bg-accent { background-color: var(--accent-color); }
+ .cover-bg { background-color: var(--bg-color); }
+ .polaroid { background: white; padding: 10px 10px 35px 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+ .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
+ .torn-top {
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,50 C150,0 350,0 500,50 C650,100 850,100 1000,50 L1000,50 L0,50 Z" fill="black"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,50 C150,0 350,0 500,50 C650,100 850,100 1000,50 L1000,50 L0,50 Z" fill="black"/></svg>');
+            -webkit-mask-size: 100% 20px; mask-size: 100% 20px;
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+        }
+ .torn-bottom {
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,0 C150,50 350,50 500,0 C650,-50 850,-50 1000,0 L1000,0 L0,0 Z" fill="black"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,0 C150,50 350,50 500,0 C650,-50 850,-50 1000,0 L1000,0 L0,0 Z" fill="black"/></svg>');
+            -webkit-mask-size: 100% 20px; mask-size: 100% 20px;
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            -webkit-mask-position: bottom; mask-position: bottom;
+        }
+ .hidden { display: none!important; }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- COVER -->
-    <div id="cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center p-8 cover-bg transition-opacity duration-1000">
-        <p class="font-arab text-3xl text-sage mb-4">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
-        <p class="text-sm tracking-widest uppercase">WALIMATUL 'URSY</p>
-        <h1 id="cover-names" class="font-serif text-5xl my-4 text-sage"></h1>
-        <p class="text-sm">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-        <p id="cover-guest" class="text-lg font-semibold mt-1"></p>
-        <button id="open-invitation" class="bg-sage text-white rounded-full px-8 py-3 mt-8 text-sm uppercase tracking-wider shadow-lg">Buka Undangan</button>
+    <!-- COVER + BLUR -->
+    <div id="cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center text-white transition-opacity duration-1000">
+        <img id="cover-image" class="absolute inset-0 w-full h-full object-cover" src="" crossorigin="anonymous">
+        <!-- Blur + Gradient biar teks kebaca -->
+        <div class="absolute inset-0 backdrop-blur-sm bg-gradient-to-t from-black/70 via-black/30 to-white/10"></div>
+        <div class="relative z-10 p-8">
+            <p id="cover-bismillah" class="font-arab text-3xl mb-4 hidden">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+            <p id="cover-event-name" class="text-sm tracking-widest uppercase">WALIMATUL 'URSY</p>
+            <h1 id="cover-names" class="font-serif text-6xl my-4"></h1>
+            <p class="text-sm mt-8">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+            <p id="cover-guest" class="text-xl font-semibold mt-1"></p>
+            <button id="open-invitation" class="bg-white/20 backdrop-blur-sm border-white border text-white rounded-full px-8 py-3 mt-8 text-sm uppercase tracking-wider shadow-lg hover:bg-white/30 transition-all">Buka Undangan</button>
+        </div>
     </div>
 
-    <div id="app" class="max-w-md mx-auto bg-[#FBF8F3] min-h-screen opacity-0 transition-opacity duration-1000">
+    <div id="app" class="max-w-md mx-auto bg-white min-h-screen shadow-xl opacity-0 transition-opacity duration-1000">
         <!-- HERO -->
-        <section class="relative h-[80vh] flex flex-col items-center justify-end text-center text-white p-8">
-            <img id="hero-image" class="absolute inset-0 w-full h-full object-cover" src="">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div class="relative z-10">
-                <p class="text-sm tracking-widest uppercase">PERNIKAHAN</p>
-                <h1 id="hero-names" class="font-serif text-6xl my-2"></h1>
-                <p id="hero-date" class="text-lg"></p>
+        <section class="relative text-center bg-white p-8">
+            <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f33f.svg" class="absolute top-4 left-4 w-16 opacity-60">
+            <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f33f.svg" class="absolute bottom-20 right-2 w-14 opacity-60 rotate-45">
+
+            <p id="hero-bismillah" class="font-arab text-2xl text-theme mb-4 hidden">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+            <p class="text-xs tracking-[0.3em] uppercase mb-8">WALIMATUL 'URSY</p>
+            <h1 id="initials" class="font-serif text-7xl text-theme mb-8"></h1>
+
+            <div class="torn-top torn-bottom mb-8">
+                <img id="hero-image" class="w-full h-80 object-cover" src="" crossorigin="anonymous" onerror="this.parentElement.style.display='none'">
+            </div>
+
+            <div class="mt-8">
+                <p class="text-xs uppercase mb-4">DENGAN MEMOHON RAHMAT & RIDHO ALLAH SWT<br>KAMI BERMASUD MENYELENGGARAKAN AKAD NIKAH PUTRA-PUTRI KAMI</p>
+                <div id="parents" class="text-sm leading-relaxed mb-6"></div>
+                <h2 id="couple-names" class="font-serif text-5xl text-theme leading-none"></h2>
+
+                <div id="quote-section" class="text-xs mt-6 px-4 py-3 bg-accent rounded-lg italic leading-relaxed hidden">
+                    <p id="quote-arab" class="font-arab text-lg mb-1 hidden"></p>
+                    <p id="quote-text"></p>
+                    <p id="quote-source" class="mt-1 font-semibold"></p>
+                </div>
+
+                <div id="date-box" class="border-t border-b border-theme py-3 mt-6 inline-block px-8"></div>
             </div>
         </section>
 
-        <div class="p-8 text-center">
-            <!-- AYAT -->
-            <section class="my-8 bg-white/60 p-6 rounded-2xl shadow-sm">
-                <p class="font-arab text-2xl text-sage leading-relaxed">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
-                <p class="text-sm mt-4 italic text-gray-600">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tentram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang."</p>
-                <p class="text-xs font-semibold mt-2">QS. Ar-Rum: 21</p>
-            </section>
+        <!-- EVENT + TIMELINE -->
+        <section id="event-section" class="bg-white p-8 hidden">
+            <div id="event-cards" class="space-y-6 mb-10"></div>
 
-            <!-- PEMBUKA -->
-            <section class="my-12">
-                <p class="text-sm leading-relaxed">DENGAN MEMOHON RAHMAT & RIDHO ALLAH SUBHANAHU WA TA'ALA<br>KAMI BERMASUD MENYELENGGARAKAN AKAD NIKAH PUTRA-PUTRI KAMI</p>
-            </section>
+            <h3 class="text-center text-xs tracking-[0.2em] uppercase mb-6">RANGKAIAN ACARA</h3>
+            <div id="timeline" class="relative border-l-2 border-theme/30 ml-4 pl-8 space-y-6"></div>
 
-            <!-- COUPLE -->
-            <section id="couple" class="my-12">
-                <div class="mb-8">
-                    <div class="polaroid w-48 mx-auto -rotate-3">
-                        <img id="groom-img" class="w-full aspect-[3/4] object-cover" src="">
-                    </div>
-                    <h2 id="groom-name" class="font-serif text-4xl mt-4 text-sage"></h2>
-                    <p id="groom-parents" class="text-sm mt-1 text-gray-600"></p>
-                </div>
-                <div class="font-serif text-5xl my-4 text-sage">&</div>
-                <div>
-                    <div class="polaroid w-48 mx-auto rotate-3">
-                        <img id="bride-img" class="w-full aspect-[3/4] object-cover" src="">
-                    </div>
-                    <h2 id="bride-name" class="font-serif text-4xl mt-4 text-sage"></h2>
-                    <p id="bride-parents" class="text-sm mt-1 text-gray-600"></p>
-                </div>
-            </section>
+            <div id="countdown-wrap" class="mt-10 text-center hidden">
+                <p class="text-xs uppercase tracking-widest mb-3">Menuju Hari Bahagia</p>
+                <div id="countdown" class="flex justify-center space-x-4 text-center"></div>
+            </div>
 
-            <!-- EVENT -->
-            <section class="my-16 bg-white/60 p-6 rounded-2xl shadow-sm">
-                <h3 class="font-serif text-3xl mb-6 text-sage">Save The Date</h3>
-                <div id="event-details" class="space-y-4"></div>
-                
-                <!-- COUNTDOWN -->
-                <div class="mt-8">
-                    <p class="text-xs uppercase tracking-widest mb-3">Menuju Hari Bahagia</p>
-                    <div id="countdown" class="flex justify-center space-x-4 text-center"></div>
-                </div>
-                
-                <a id="google-calendar-link" target="_blank" class="inline-block bg-sage text-white rounded-full px-6 py-2 mt-6 text-xs uppercase tracking-wider">Simpan Tanggal</a>
-            </section>
+            <a id="google-calendar-link" target="_blank" class="block bg-theme text-white text-xs uppercase px-6 py-2 rounded-sm mt-6 mx-auto w-fit hidden">SIMPAN TANGGAL</a>
+        </section>
 
-            <!-- GALLERY -->
-            <section class="my-16">
-                <h3 class="font-serif text-3xl mb-6 text-sage">Momen Bahagia</h3>
-                <div id="gallery-grid" class="grid grid-cols-2 gap-4"></div>
-            </section>
+        <!-- GALLERY -->
+        <section id="gallery-section" class="bg-white p-8 hidden">
+            <h3 class="text-center text-xs tracking-[0.2em] uppercase mb-6">MOMEN BAHAGIA</h3>
+            <div id="gallery-grid" class="grid gap-3"></div>
+        </section>
 
-            <!-- GIFT -->
-            <section class="my-16 bg-white/60 p-6 rounded-2xl shadow-sm">
-                <h3 class="font-serif text-3xl mb-4 text-sage">Amplop Digital</h3>
-                <p class="text-xs mb-4 text-gray-600">DOA RESTU ANDA ADALAH KADO TERINDAH BAGI KAMI. NAMUN JIKA MEMBERI ADALAH UNGKAPAN TANDA KASIH, DAPAT MELALUI:</p>
-                <div id="gift-details" class="space-y-3"></div>
-            </section>
+        <!-- VIDEO -->
+        <section id="video-section" class="bg-white p-8 hidden">
+            <h3 class="text-center text-xs tracking-[0.2em] uppercase mb-6">VIDEO PREWEDDING</h3>
+            <div class="aspect-video rounded-lg overflow-hidden shadow-lg">
+                <iframe id="video-frame" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
 
-            <!-- RSVP -->
-            <section class="my-16">
-                 <h3 class="font-serif text-3xl mb-4 text-sage">Konfirmasi Kehadiran</h3>
-                 <p class="text-sm mb-4">Mohon konfirmasi kehadiran Anda melalui WhatsApp</p>
-                 <a id="rsvp-link" target="_blank" class="inline-block bg-sage text-white rounded-full px-8 py-3 text-sm uppercase tracking-wider shadow-lg">Kirim Pesan WA</a>
-            </section>
-            
-            <!-- ADAB -->
-            <section class="my-12 bg-sage/10 p-6 rounded-2xl">
-                <h4 class="font-semibold text-sm uppercase mb-2 text-sage">ADAB MENGHADIRI WALIMAH</h4>
-                <p class="text-xs leading-relaxed">DENGAN TIDAK MENGURANGI RASA HORMAT, KAMI MENGHARAPKAN TAMU UNDANGAN BERKENAN MEMAKAI BUSANA SOPAN & MENUTUP AURAT. SEMOGA ALLAH MEMBERKAHI ACARA KITA.</p>
-            </section>
+        <!-- GIFT + RSVP -->
+        <section id="gift-rsvp-section" class="bg-accent p-8 text-center">
+            <div class="mb-8">
+                <svg class="w-10 h-10 mx-auto mb-2 opacity-70 text-theme" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                <p class="text-xs uppercase font-semibold">MOHON DOA RESTU</p>
+                <p id="guest-note" class="text-xs mt-2 leading-relaxed">MERUPAKAN SUATU KEHORMATAN DAN KEBAHAGIAAN<br>BAGI KAMI APABILA BAPAK/IBU/SAUDARA/I BERKENAN HADIR<br>DAN MEMBERIKAN DOA RESTU KEPADA KEDUA MEMPELAI</p>
+            </div>
 
-            <!-- CLOSING -->
-            <footer class="text-center py-8 mt-8">
-                <p class="font-arab text-2xl text-sage mb-2">بَارَكَ اللهُ لَكُماَ وَبَارَكَ عَلَيْكُماَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
-                <p class="text-xs italic text-gray-600 mb-4">"Semoga Allah memberkahimu dan memberkahi atasmu, serta mengumpulkan kalian berdua dalam kebaikan"</p>
-                <p class="text-sm">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
-                <p class="font-serif text-2xl mt-6 text-sage">Terima Kasih</p>
-                <p id="footer-names" class="font-serif text-3xl mt-2 text-sage"></p>
-            </footer>
-        </div>
+            <div id="gift-section" class="mb-8 hidden">
+                <svg class="w-10 h-10 mx-auto mb-2 opacity-70 text-theme" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z" clip-rule="evenodd"></path><path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z"></path></svg>
+                <p class="text-xs uppercase font-semibold">AMPLLOP DIGITAL</p>
+                <p class="text-xs mt-2 leading-relaxed">DOA RESTU ANDA ADALAH KADO TERINDAH BAGI KAMI<br>NAMUN JIKA MEMBERI ADALAH UNGKAPAN TANDA KASIH, DAPAT MELALUI:</p>
+                <div id="gift-list" class="mt-4 space-y-2"></div>
+            </div>
+
+            <div id="rsvp-section" class="hidden">
+                <svg class="w-10 h-10 mx-auto mb-2 opacity-70 text-theme" fill="currentColor" viewBox="0 0 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+                <p class="text-xs uppercase font-semibold">KONFIRMASI KEHADIRAN</p>
+                <p class="text-xs mt-2">MOHON KONFIRMASI KEHADIRAN ANDA</p>
+                <a id="rsvp-btn" href="#" class="inline-block bg-theme text-white text-xs uppercase px-6 py-2 rounded-sm mt-3">KIRIM PESAN WHATSAPP</a>
+            </div>
+
+            <div id="dresscode-section" class="text-xs mt-8 bg-white p-4 rounded-lg hidden">
+                <p class="font-semibold mb-1">ATURAN BERPAKAIAN</p>
+                <p id="dresscode" class="leading-relaxed"></p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <section class="bg-white">
+            <div class="torn-top">
+                <img id="footer-image" class="w-full h-64 object-cover" src="" onerror="this.parentElement.style.display='none'">
+            </div>
+            <div class="p-8 text-center text-xs">
+                <p id="footer-closing" class="font-arab text-xl text-theme mb-2 hidden">بَارَكَ اللهُ لَكُماَ وَبَارَكَ عَلَيْكُماَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+                <p id="footer-closing-text" class="italic mb-4 hidden">"Semoga Allah memberkahimu dan memberkahi atasmu, serta mengumpulkan kalian berdua dalam kebaikan"</p>
+                <p>KAMI YANG BERBAHAGIA</p>
+                <p id="footer-names" class="font-serif text-2xl text-theme mt-2"></p>
+                <p class="mt-6">Digital Invitation by Omah Aksara</p>
+            </div>
+        </section>
     </div>
 
     <script>
         const params = new URLSearchParams(window.location.search);
         const clientSlug = params.get('c');
-        const guestName = params.get('to') || 'Tamu Undangan';
+        const guestName = params.get('to') || 'Bapak/Ibu/Saudara/i';
         const basePath = `../../public/clients/${clientSlug}/`;
+        const defaultAvatar = '../../public/default-avatar.jpg';
+        let globalAudio = null;
 
         fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
             const g = data.couple.groom;
             const b = data.couple.bride;
-            const ev = data.events[0];
+            const ev = data.events && data.events.length > 0? data.events[0] : null;
+            const settings = data.settings || {};
 
-            // COVER
+            // 1. WARNA: Base template, override kalau ada di json
+            if(settings.themeColor) document.documentElement.style.setProperty('--theme-color', settings.themeColor);
+            if(settings.bgColor) document.documentElement.style.setProperty('--bg-color', settings.bgColor);
+            if(settings.textColor) document.documentElement.style.setProperty('--text-color', settings.textColor);
+
+            // 2. ISLAMI
+            if(settings.islami) {
+                document.getElementById('cover-bismillah').classList.remove('hidden');
+                document.getElementById('hero-bismillah').classList.remove('hidden');
+                document.getElementById('footer-closing').classList.remove('hidden');
+                document.getElementById('footer-closing-text').classList.remove('hidden');
+            }
+
+            // 3. COVER + HERO + AUTOCOLOR
             document.getElementById('cover-names').innerHTML = `${g.nickname} & ${b.nickname}`;
             document.getElementById('cover-guest').textContent = guestName.replace(/\+/g, ' ');
+            document.getElementById('initials').textContent = `${g.nickname.charAt(0)}|${b.nickname.charAt(0)}`;
+            document.getElementById('footer-names').textContent = `${g.nickname} & ${b.nickname}`;
 
-            // HERO - FIX: kasih tinggi 80vh biar foto muncul
-            document.getElementById('hero-image').src = basePath + data.gallery.heroImage;
-            document.getElementById('hero-names').innerHTML = `${g.nickname} & ${b.nickname}`;
-            document.getElementById('hero-date').textContent = new Date(ev.date).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            if(data.gallery.heroImage) {
+                const heroImg = document.getElementById('hero-image');
+                const coverImg = document.getElementById('cover-image');
+                heroImg.crossOrigin = 'Anonymous';
+                coverImg.crossOrigin = 'Anonymous';
+                heroImg.src = basePath + data.gallery.heroImage;
+                coverImg.src = basePath + data.gallery.heroImage;
 
-            // COUPLE
-            document.getElementById('groom-img').src = basePath + g.image;
-            document.getElementById('groom-name').textContent = g.name;
-            document.getElementById('groom-parents').innerHTML = `Putra dari Bapak ${g.father} <br> & Ibu ${g.mother}`;
-            document.getElementById('bride-img').src = basePath + b.image;
-            document.getElementById('bride-name').textContent = b.name;
-            document.getElementById('bride-parents').innerHTML = `Putri dari Bapak ${b.father} <br> & Ibu ${b.mother}`;
+                heroImg.addEventListener('load', function() {
+                    if(!settings.themeColor && settings.autoColor === true) {
+                        const colorThief = new ColorThief();
+                        const [r, g, b] = colorThief.getColor(heroImg);
+                        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                        if (brightness > 60 && brightness < 200) {
+                           document.documentElement.style.setProperty('--theme-color', `rgb(${r}, ${g}, ${b})`);
+                        }
+                    }
+                });
+            } else {
+                // Fallback kalau nggak ada foto = background solid
+                document.getElementById('cover').classList.add('cover-bg');
+            }
 
-            // EVENT
-            const eventDetails = document.getElementById('event-details');
-            data.events.forEach(event => {
-                eventDetails.innerHTML += `
-                    <div class="border-t border-sage/20 pt-4 first:border-t-0 first:pt-0">
-                        <h4 class="font-semibold uppercase tracking-widest text-sm">${event.title}</h4>
-                        <p class="text-sm mt-1">${new Date(event.date).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
-                        <p class="text-sm">Pukul ${event.startTime} - ${event.endTime} ${event.timezone}</p>
-                        <p class="text-xs mt-2 text-gray-600">${event.address}</p>
-                        ${event.googleMaps? `<a href="${event.googleMaps}" target="_blank" class="text-xs text-sage underline mt-1 inline-block">Lihat Lokasi</a>` : ''}
-                    </div>
+            document.getElementById('parents').innerHTML = `Putra dari Bapak ${g.father} & Ibu ${g.mother}<br>&<br>Putri dari Bapak ${b.father} & Ibu ${b.mother}`;
+            document.getElementById('couple-names').innerHTML = `${g.name}<br><span class="font-sans text-3xl">&</span><br>${b.name}`;
+
+            if(ev) {
+                const date = new Date(ev.date);
+                document.getElementById('date-box').innerHTML = `
+                    <p class="text-xs uppercase">${date.toLocaleDateString('id-ID', { weekday: 'long' })}</p>
+                    <p class="font-serif text-5xl leading-none my-1">${date.getDate()}</p>
+                    <p class="text-xs uppercase">${date.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })}</p>
                 `;
+            }
+
+            // 4. QUOTE - GUARD
+            if(data.quote && data.quote.text) {
+                document.getElementById('quote-section').classList.remove('hidden');
+                if(data.quote.arab) {
+                    document.getElementById('quote-arab').classList.remove('hidden');
+                    document.getElementById('quote-arab').textContent = data.quote.arab;
+                }
+                document.getElementById('quote-text').textContent = `"${data.quote.text}"`;
+                document.getElementById('quote-source').textContent = data.quote.source || '';
+            }
+
+            // 5. EVENT - GUARD
+            if(data.events && data.events.length > 0) {
+                document.getElementById('event-section').classList.remove('hidden');
+                const eventCards = document.getElementById('event-cards');
+                data.events.forEach(ev => {
+                    eventCards.innerHTML += `
+                        <div class="text-center bg-accent p-5 rounded-lg">
+                            <p class="text-xs uppercase font-semibold tracking-wider">${ev.title}</p>
+                            <p class="text-sm font-semibold mt-2">${new Date(ev.date).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                            <p class="text-sm">${ev.startTime} - ${ev.endTime} ${ev.timezone}</p>
+                            <p class="text-xs mt-1">${ev.address}</p>
+                            ${ev.googleMaps? `<a href="${ev.googleMaps}" target="_blank" class="inline-block bg-theme text-white text-xs uppercase px-4 py-1.5 rounded-sm mt-3">PETUNJUK LOKASI</a>` : ''}
+                        </div>
+                    `;
+                });
+
+                // TIMELINE
+                const timeline = document.getElementById('timeline');
+                const icons = ['🕌','💍','🤲','🍽️','📸','💐'];
+                data.events.forEach((ev, i) => {
+                    timeline.innerHTML += `
+                        <div class="relative">
+                            <div class="absolute -left-10 top-0 w-6 h-6 bg-white border-2 border-theme rounded-full flex items-center justify-center text-xs">${icons[i] || '•'}</div>
+                            <p class="text-sm font-semibold">${ev.startTime} ${ev.timezone}</p>
+                            <p class="text-xs">${ev.title}</p>
+                        </div>
+                    `;
+                });
+
+                // COUNTDOWN - Fix kurung
+                if(ev) {
+                    document.getElementById('countdown-wrap').classList.remove('hidden');
+                    const countdownDate = new Date(`${ev.date}T${ev.startTime}:00`).getTime();
+                    const countdownEl = document.getElementById('countdown');
+                    setInterval(() => {
+                        const distance = countdownDate - new Date().getTime();
+                        const d = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
+                        const h = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+                        const m = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+                        const s = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
+                        countdownEl.innerHTML = `
+                            <div><div class="text-2xl font-serif text-theme">${d}</div><div class="text-xs">Hari</div></div>
+                            <div><div class="text-2xl font-serif text-theme">${h}</div><div class="text-xs">Jam</div></div>
+                            <div><div class="text-2xl font-serif text-theme">${m}</div><div class="text-xs">Menit</div></div>
+                            <div><div class="text-2xl font-serif text-theme">${s}</div><div class="text-xs">Detik</div></div>
+                        `;
+                    }, 1000);
+
+                    // GOOGLE CALENDAR
+                    const startTime = new Date(`${ev.date}T${ev.startTime}:00`).toISOString().replace(/-|:|\.\d+/g, '');
+                    const endTimeRaw = ev.endTime === 'Selesai'? '23:59' : ev.endTime;
+                    const endTime = new Date(`${ev.date}T${endTimeRaw}:00`).toISOString().replace(/-|:|\.\d+/g, '');
+                    const calendarLink = document.getElementById('google-calendar-link');
+                    calendarLink.classList.remove('hidden');
+                    calendarLink.href = `https://www.google.com/calendar/render?action=TEMPLATE&text=Walimah ${g.nickname} & ${b.nickname}&dates=${startTime}/${endTime}&details=Acara Pernikahan ${g.name} dan ${b.name}&location=${ev.address}`;
+                }
+            }
+
+            // 6. GALLERY - GUARD + AUTO CENTER
+            if(data.gallery.album && data.gallery.album.length > 0) {
+                const gallerySection = document.getElementById('gallery-section');
+                const galleryGrid = document.getElementById('gallery-grid');
+                gallerySection.classList.remove('hidden');
+
+                let gridCols = 'grid-cols-2';
+                if(data.gallery.album.length === 1) gridCols = 'grid-cols-1 max-w-xs mx-auto';
+                if(data.gallery.album.length === 3) gridCols = 'grid-cols-3';
+                galleryGrid.className = `grid ${gridCols} gap-3`;
+
+                data.gallery.album.forEach((img, i) => {
+                    galleryGrid.innerHTML += `
+                        <div class="overflow-hidden rounded-lg">
+                            <img src="${basePath}${img}" class="w-full aspect-square object-cover" alt="Gallery ${i+1}" onerror="this.parentElement.style.display='none'">
+                        </div>
+                    `;
+                });
+            }
+
+            // 7. VIDEO - GUARD
+            if(data.gallery.videoYoutubeId && data.gallery.videoYoutubeId.trim()!== '') {
+                document.getElementById('video-section').classList.remove('hidden');
+                document.getElementById('video-frame').src = `https://www.youtube.com/embed/${data.gallery.videoYoutubeId}`;
+            }
+
+            // 8. GIFT - GUARD
+            if(data.digitalGift && data.digitalGift.length > 0) {
+                document.getElementById('gift-section').classList.remove('hidden');
+                const giftList = document.getElementById('gift-list');
+                data.digitalGift.forEach(g => {
+                    giftList.innerHTML += `
+                        <div class="text-xs bg-white p-3 rounded">
+                            <p class="font-semibold">${g.provider}</p>
+                            <p class="font-mono text-sm my-1">${g.accountNumber}</p>
+                            <p>a.n ${g.accountHolder}</p>
+                            <button onclick="navigator.clipboard.writeText('${g.accountNumber}').then(() => alert('Nomor rekening disalin!'))" class="text-xs bg-theme/20 text-theme px-3 py-1 rounded mt-2">Salin</button>
+                        </div>
+                    `;
+                });
+            }
+
+            // 9. RSVP - GUARD
+            if(data.logistics && data.logistics.rsvpWaNumber) {
+                document.getElementById('rsvp-section').classList.remove('hidden');
+                if(data.logistics.guestNote) document.getElementById('guest-note').textContent = data.logistics.guestNote;
+                if(data.logistics.dressCode) {
+                    document.getElementById('dresscode-section').classList.remove('hidden');
+                    document.getElementById('dresscode').textContent = data.logistics.dressCode;
+                }
+                const rsvpMessage = settings.islami?
+                    `Assalamualaikum, saya ${guestName.replace(/\+/g, ' ')} insyaAllah akan hadir di walimah ${g.nickname} & ${b.nickname}. Jazakumullah khairan.` :
+                    `Halo, saya ${guestName.replace(/\+/g, ' ')} akan hadir di acara pernikahan ${g.nickname} & ${b.nickname}. Terima kasih.`;
+                document.getElementById('rsvp-btn').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=${encodeURIComponent(rsvpMessage)}`;
+            }
+
+            // 10. FOOTER IMAGE
+            if(data.gallery.album && data.gallery.album.length > 0) {
+                const lastPhoto = data.gallery.album[data.gallery.album.length - 1];
+                document.getElementById('footer-image').src = basePath + lastPhoto;
+            }
+
+            // 11. OPEN + MUSIC + FALLBACK BUTTON
+            document.getElementById('open-invitation').addEventListener('click', () => {
+                document.getElementById('cover').style.opacity = '0';
+                document.getElementById('app').style.opacity = '1';
+                setTimeout(() => document.getElementById('cover').style.display = 'none', 1000);
+
+                if(data.logistics.music) {
+                    globalAudio = new Audio(basePath + data.logistics.music);
+                    globalAudio.loop = true;
+                    globalAudio.volume = 0.7;
+                    setTimeout(() => {
+                        globalAudio.play().catch(e => {
+                            const musicBtn = document.createElement('button');
+                            musicBtn.id = 'music-toggle';
+                            musicBtn.innerHTML = '🔊';
+                            musicBtn.className = 'fixed bottom-4 right-4 bg-theme text-white rounded-full w-10 h-10 z-50 shadow-lg';
+                            musicBtn.onclick = () => {
+                                if(globalAudio.paused) {
+                                    globalAudio.play();
+                                    musicBtn.innerHTML = '⏸️';
+                                } else {
+                                    globalAudio.pause();
+                                    musicBtn.innerHTML = '🔊';
+                                }
+                            };
+                            document.body.appendChild(musicBtn);
+                        });
+                    }, 300);
+                }
             });
 
-            // COUNTDOWN - FIX: sekarang muncul
-            const countdownDate = new Date(`${ev.date}T${ev.startTime}:00`).getTime();
-            const countdownEl = document.getElementById('countdown');
-            setInterval(() => {
-                const distance = countdownDate - new Date().getTime();
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                countdownEl.innerHTML = `
-                    <div><div class="text-2xl font-serif">${days}</div><div class="text-xs">Hari</div></div>
-                    <div><div class="text-2xl font-serif">${hours}</div><div class="text-xs">Jam</div></div>
-                    <div><div class="text-2xl font-serif">${minutes}</div><div class="text-xs">Menit</div></div>
-                    <div><div class="text-2xl font-serif">${seconds}</div><div class="text-xs">Detik</div></div>
-                `;
-            }, 1000);
-            
-            // GOOGLE CALENDAR
-            const startTime = new Date(`${ev.date}T${ev.startTime}:00`).toISOString().replace(/-|:|\.\d+/g, '');
-            const endTime = new Date(`${ev.date}T${ev.endTime}:00`).toISOString().replace(/-|:|\.\d+/g, '');
-            document.getElementById('google-calendar-link').href = `https://www.google.com/calendar/render?action=TEMPLATE&text=Walimah ${g.nickname} & ${b.nickname}&dates=${startTime}/${endTime}&details=Acara Pernikahan ${g.name} dan ${b.name}&location=${ev.address}`;
-
-            // GALLERY
-            const galleryGrid = document.getElementById('gallery-grid');
-            data.gallery.album.forEach((img, i) => {
-                const rotation = i % 2 === 0? '-rotate-2' : 'rotate-2';
-                galleryGrid.innerHTML += `
-                    <div class="polaroid ${rotation}">
-                        <img src="${basePath}${img}" class="w-full aspect-square object-cover" alt="Gallery Image ${i+1}">
-                    </div>
-                `;
-            });
-
-            // GIFT
-            const giftDetails = document.getElementById('gift-details');
-            data.digitalGift.forEach(gift => {
-                giftDetails.innerHTML += `
-                    <div class="bg-white p-3 rounded-lg text-sm">
-                        <p class="font-bold">${gift.provider}</p>
-                        <p id="rekening-${gift.provider}" class="my-1">${gift.accountNumber}</p>
-                        <p class="text-xs">a.n ${gift.accountHolder}</p>
-                        <button onclick="navigator.clipboard.writeText('${gift.accountNumber}').then(() => alert('Nomor rekening disalin!'))" class="text-xs bg-sage/20 text-sage px-3 py-1 rounded-full mt-2">Salin No. Rekening</button>
-                    </div>
-                `;
-            });
-
-            // RSVP
-            const rsvpMessage = `Assalamualaikum. Saya, ${guestName.replace(/\+/g, ' ')}, insyaAllah akan hadir di acara Walimatul 'Ursy ${g.nickname} & ${b.nickname}. Jazakumullah khairan.`;
-            document.getElementById('rsvp-link').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=${encodeURIComponent(rsvpMessage)}`;
-            
-            // FOOTER
-            document.getElementById('footer-names').innerHTML = `${g.nickname} & ${b.nickname}`;
-
-            // OPEN BUTTON
-            document.getElementById('
+        }).catch(error => {
+            console.error('Error:', error);
+            document.getElementById('app').innerHTML = '<div class="p-8 text-center">Mohon maaf, terjadi kesalahan saat memuat data undangan.</div>';
+        });
+    </script>
+</body>
+</html>
