@@ -26,8 +26,8 @@
             line-height: 1.8;
             overflow-x: hidden;
         }
-     .container { max-width: 500px; margin: 0 auto; background: var(--bg); }
-     .cover {
+        .container { max-width: 500px; margin: 0 auto; background: var(--bg); }
+        .cover {
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -38,24 +38,24 @@
             background-size: cover;
             background-position: center;
         }
-     .cover::after {
+        .cover::after {
             content: '';
             position: absolute;
             inset: 0;
             background: linear-gradient(180deg, rgba(15,15,15,0.2) 0%, var(--bg) 95%);
         }
-     .cover-content { position: relative; z-index: 2; padding: 20px; }
-     .cover.to { font-size: 0.9rem; letter-spacing: 2px; color: var(--text-muted); }
-     .cover.guest-name { font-size: 1.5rem; margin: 10px 0 30px; font-weight: 500; }
-     .cover h1 {
+        .cover-content { position: relative; z-index: 2; padding: 20px; }
+        .cover .to { font-size: 0.9rem; letter-spacing: 2px; color: var(--text-muted); }
+        .cover .guest-name { font-size: 1.5rem; margin: 10px 0 30px; font-weight: 500; }
+        .cover h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3.8rem;
+            font-size: 3.5rem;
             color: var(--gold);
             line-height: 1.1;
             font-weight: 600;
         }
-     .cover.date { margin: 30px 0; letter-spacing: 3px; }
-     .btn {
+        .cover .date { margin: 30px 0; letter-spacing: 3px; }
+        .btn {
             display: inline-block;
             background: var(--gold);
             color: var(--bg);
@@ -67,25 +67,23 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
-     .btn:hover { background: transparent; color: var(--gold); }
+        .btn:hover { background: transparent; color: var(--gold); }
         section { padding: 80px 24px; text-align: center; }
-     .section-title {
+        .section-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.5rem;
             color: var(--gold);
             margin-bottom: 40px;
             font-weight: 600;
         }
-        
-        /* COUPLE UPGRADE - GAK FLAT LAGI */
-     .couple-grid { display: grid; gap: 60px; }
-     .couple-item {
+        .couple-grid { display: grid; gap: 60px; }
+        .couple-item {
             background: var(--bg-soft);
             border: 1px solid var(--border);
             padding: 24px 24px 32px;
             position: relative;
         }
-     .couple-item::before {
+        .couple-item::before {
             content: '';
             position: absolute;
             top: -8px; left: -8px; right: -8px; bottom: -8px;
@@ -93,59 +91,52 @@
             opacity: 0.3;
             pointer-events: none;
         }
-     .couple-item img {
+        .couple-item img {
             width: 100%;
             height: 400px;
             object-fit: cover;
             filter: grayscale(10%);
             margin-bottom: 20px;
         }
-     .couple-item h3 {
+        .couple-item h3 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem;
             color: var(--gold);
             margin-bottom: 8px;
         }
-     .couple-item p { color: var(--text-muted); font-size: 0.95rem; }
-     .couple-item a { color: var(--gold); text-decoration: none; font-weight: 500; }
-        
-     .event-card,.story-card,.gift-box,.logistics-box {
+        .couple-item p { color: var(--text-muted); font-size: 0.95rem; }
+        .couple-item a { color: var(--gold); text-decoration: none; font-weight: 500; }
+        .event-card, .story-card, .gift-box, .logistics-box {
             background: var(--bg-soft);
             border: 1px solid var(--border);
             padding: 32px;
             margin-bottom: 24px;
             text-align: left;
         }
-     .event-card h3,.story-card h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 16px; }
-     .event-card p,.story-card p,.logistics-box p { color: var(--text-muted); margin-bottom: 8px; }
-     .event-card.btn { margin-top: 16px; padding: 10px 24px; font-size: 0.9rem; }
-     .story-card span { color: var(--gold); font-weight: 600; }
-
-        /* GALLERY SLIDER - AUTO GESER */
-     .gallery-slider { width: 100%; padding-bottom: 40px; }
-     .swiper-slide { width: 85%; height: 450px; }
-     .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
-     .swiper-pagination-bullet { background: var(--text-muted); opacity: 1; }
-     .swiper-pagination-bullet-active { background: var(--gold); }
-        
-     .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; margin-top: 24px; }
-     .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-     .gift-box img { max-width: 200px; margin: 20px auto; display: block; }
-     .footer { padding: 60px 24px; font-size: 0.9rem; color: var(--text-muted); }
-     .music-btn {
+        .event-card h3, .story-card h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 16px; }
+        .event-card p, .story-card p, .logistics-box p { color: var(--text-muted); margin-bottom: 8px; }
+        .story-card span { color: var(--gold); font-weight: 600; }
+        .gallery-slider { width: 100%; padding-bottom: 40px; }
+        .swiper-slide { width: 85%; height: 450px; }
+        .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; margin-top: 24px; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .gift-box img { max-width: 200px; margin: 20px auto; display: block; }
+        .footer { padding: 60px 24px; font-size: 0.9rem; color: var(--text-muted); }
+        .music-btn {
             position: fixed; bottom: 20px; right: 20px; z-index: 999;
             width: 50px; height: 50px; border-radius: 50%;
             background: var(--gold); color: var(--bg); border: none;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; box-shadow: 0 4px 20px rgba(197,165,114,0.3);
+            font-size: 1.2rem;
         }
-     .hidden { display: none!important; }
-        #loader { position: fixed; inset: 0; background: var(--bg); z-index: 1000; }
+        .hidden { display: none !important; }
+        #loader { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: flex; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
-    <div id="loader" class="cover">
-        <div class="cover-content"><p>Loading...</p></div>
+    <div id="loader">
+        <p>Memuat Kebahagiaan...</p>
     </div>
 
     <main id="main" class="container hidden">
@@ -153,7 +144,7 @@
             <div class="cover-content">
                 <p class="to">Kepada Yth.</p>
                 <p class="guest-name" id="guestName">Tamu Undangan</p>
-                <h1 id="coupleName"></h1>
+                <h1 id="coupleName">Loading...</h1>
                 <p class="date" id="weddingDate"></p>
                 <a href="#couple" class="btn" id="openBtn">Buka Undangan</a>
             </div>
@@ -222,26 +213,29 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const clientSlug = urlParams.get('c');
+        const clientSlug = urlParams.get('c'); // Slug dari URL ?c=budi-ani
         const guestName = urlParams.get('to') || 'Tamu Undangan';
+        
+        // Path menyesuaikan struktur folder kamu
         const basePath = `../../public/clients/${clientSlug}/`;
 
         fetch(`${basePath}data.json`)
-      .then(res => {
-            if (!res.ok) throw new Error('Data not found');
+        .then(res => {
+            if (!res.ok) throw new Error('Data tidak ditemukan');
             return res.json();
         })
-      .then(data => {
+        .then(data => {
             // 1. Meta & Theme
-            if (data.meta?.theme_color) {
-                document.documentElement.style.setProperty('--gold', data.meta.theme_color);
+            if (data.settings?.themeColor) {
+                document.documentElement.style.setProperty('--gold', data.settings.themeColor);
             }
-            document.title = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+            document.title = `Undangan Pernikahan: ${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
 
             // 2. Cover
             document.getElementById('guestName').textContent = guestName;
             document.getElementById('coupleName').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
             document.getElementById('cover').style.backgroundImage = `url('${basePath}${data.gallery.heroImage}')`;
+            
             const eventDate = new Date(data.events[0].date);
             document.getElementById('weddingDate').textContent = eventDate.toLocaleDateString('id-ID', {
                 weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
@@ -250,95 +244,73 @@
             // 3. Couple
             document.getElementById('groomImg').src = basePath + data.couple.groom.image;
             document.getElementById('groomName').textContent = data.couple.groom.name;
-            document.getElementById('groomParents').textContent = `Putra dari ${data.couple.groom.father} & ${data.couple.groom.mother}`;
+            document.getElementById('groomParents').textContent = `Putra dari Bapak ${data.couple.groom.father} & Ibu ${data.couple.groom.mother}`;
             if (data.couple.groom.instagram) {
-                const groomIg = document.getElementById('groomIg');
-                groomIg.textContent = data.couple.groom.instagram;
-                groomIg.href = `https://instagram.com/${data.couple.groom.instagram.replace('@', '')}`;
+                const ig = document.getElementById('groomIg');
+                ig.textContent = data.couple.groom.instagram;
+                ig.href = `https://instagram.com/${data.couple.groom.instagram.replace('@', '')}`;
             }
 
             document.getElementById('brideImg').src = basePath + data.couple.bride.image;
             document.getElementById('brideName').textContent = data.couple.bride.name;
-            document.getElementById('brideParents').textContent = `Putri dari ${data.couple.bride.father} & ${data.couple.bride.mother}`;
+            document.getElementById('brideParents').textContent = `Putri dari Bapak ${data.couple.bride.father} & Ibu ${data.couple.bride.mother}`;
             if (data.couple.bride.instagram) {
-                const brideIg = document.getElementById('brideIg');
-                brideIg.textContent = data.couple.bride.instagram;
-                brideIg.href = `https://instagram.com/${data.couple.bride.instagram.replace('@', '')}`;
+                const ig = document.getElementById('brideIg');
+                ig.textContent = data.couple.bride.instagram;
+                ig.href = `https://instagram.com/${data.couple.bride.instagram.replace('@', '')}`;
             }
 
             // 4. Events
             const eventList = document.getElementById('eventList');
             data.events.forEach(ev => {
-                const date = new Date(ev.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+                const d = new Date(ev.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
                 eventList.innerHTML += `
                     <div class="event-card">
                         <h3>${ev.title}</h3>
-                        <p><strong>${date}</strong></p>
+                        <p><strong>${d}</strong></p>
                         <p>Pukul ${ev.startTime} - ${ev.endTime} ${ev.timezone}</p>
                         <p>${ev.address}</p>
-                        ${ev.googleMaps? `<a href="${ev.googleMaps}" target="_blank" class="btn">Lihat Lokasi</a>` : ''}
+                        ${ev.googleMaps ? `<a href="${ev.googleMaps}" target="_blank" class="btn" style="margin-top:15px; padding: 10px 20px; font-size:0.8rem;">Lihat Lokasi</a>` : ''}
                     </div>
                 `;
             });
 
-            // 5. Love Story
+            // 5. Love Story (Sesuai key: date & description)
             if (data.loveStory && data.loveStory.length > 0) {
                 document.getElementById('loveStory').classList.remove('hidden');
                 const storyList = document.getElementById('storyList');
                 data.loveStory.forEach(story => {
                     storyList.innerHTML += `
                         <div class="story-card">
-                            <h3><span>${story.year}</span> - ${story.title}</h3>
-                            <p>${story.desc}</p>
+                            <h3><span>${story.date}</span> - ${story.title}</h3>
+                            <p>${story.description}</p>
                         </div>
                     `;
                 });
             }
 
-            // 6. Gallery Slider - AUTO GESER
+            // 6. Gallery
             const galleryWrapper = document.getElementById('galleryWrapper');
             if (data.gallery.album && data.gallery.album.length > 0) {
                 data.gallery.album.forEach(img => {
                     galleryWrapper.innerHTML += `<div class="swiper-slide"><img src="${basePath}${img}" alt="Gallery"></div>`;
                 });
                 new Swiper('.gallery-slider', {
-                    effect: 'coverflow',
-                    grabCursor: true,
-                    centeredSlides: true,
-                    slidesPerView: 'auto',
-                    loop: true,
-                    autoplay: {
-                        delay: 3000,
-                        disableOnInteraction: false,
-                    },
-                    coverflowEffect: {
-                        rotate: 0,
-                        stretch: 0,
-                        depth: 100,
-                        modifier: 2,
-                        slideShadows: false,
-                    },
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true,
-                    },
+                    effect: 'coverflow', grabCursor: true, centeredSlides: true,
+                    slidesPerView: 'auto', loop: true, autoplay: { delay: 3000 },
+                    pagination: { el: '.swiper-pagination', clickable: true }
                 });
-            } else {
-                document.getElementById('gallery').classList.add('hidden');
             }
 
-            // 7. Video YouTube
+            // 7. Video
             if (data.gallery.videoYoutubeId) {
                 document.getElementById('video').classList.remove('hidden');
                 document.getElementById('videoWrapper').innerHTML = `
-                    <iframe src="https://www.youtube.com/embed/${data.gallery.videoYoutubeId}" 
-                            title="YouTube video" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/${data.gallery.videoYoutubeId}" allowfullscreen></iframe>
                 `;
             }
 
-            // 8. Gift
+            // 8. Gift (Sesuai key: qrImage)
             if (data.digitalGift && data.digitalGift.length > 0) {
                 document.getElementById('gift').classList.remove('hidden');
                 const giftList = document.getElementById('giftList');
@@ -346,52 +318,57 @@
                     giftList.innerHTML += `
                         <div class="gift-box">
                             <h3>${gift.provider}</h3>
-                            <p style="font-size: 1.2rem; letter-spacing: 2px; margin: 10px 0;">${gift.accountNumber}</p>
+                            <p style="font-size: 1.2rem; letter-spacing: 2px;">${gift.accountNumber}</p>
                             <p>a.n ${gift.accountHolder}</p>
-                            ${gift.qrCode? `<img src="${basePath}${gift.qrCode}" alt="QR Code">` : ''}
+                            ${gift.qrImage ? `<img src="${basePath}${gift.qrImage}" alt="QR Code">` : ''}
                         </div>
                     `;
                 });
             }
 
             // 9. Logistics
-            if (data.logistics && (data.logistics.dressCode || data.logistics.rsvpWaNumber || data.logistics.guestNote)) {
+            if (data.logistics) {
                 document.getElementById('logistics').classList.remove('hidden');
-                const logisticsBox = document.getElementById('logisticsBox');
-                let logisticsHTML = '';
-                if (data.logistics.dressCode) logisticsHTML += `<p><strong>Dress Code:</strong> ${data.logistics.dressCode}</p>`;
-                if (data.logistics.guestNote) logisticsHTML += `<p><strong>Catatan:</strong> ${data.logistics.guestNote}</p>`;
+                const box = document.getElementById('logisticsBox');
+                let html = '';
+                if (data.logistics.dressCode) html += `<p><strong>Dress Code:</strong> ${data.logistics.dressCode}</p>`;
+                if (data.logistics.guestNote) html += `<p><strong>Catatan:</strong> ${data.logistics.guestNote}</p>`;
                 if (data.logistics.rsvpWaNumber) {
-                    const waLink = `https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo, saya ${guestName} ingin konfirmasi kehadiran untuk acara ${data.couple.groom.nickname} %26 ${data.couple.bride.nickname}`;
-                    logisticsHTML += `<a href="${waLink}" target="_blank" class="btn" style="margin-top: 16px;">Konfirmasi via WhatsApp</a>`;
+                    const link = `https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo, saya ${guestName} ingin konfirmasi kehadiran.`;
+                    html += `<a href="${link}" target="_blank" class="btn" style="margin-top:15px;">Konfirmasi Kehadiran</a>`;
                 }
-                logisticsBox.innerHTML = logisticsHTML;
+                box.innerHTML = html;
             }
 
-            // 10. Music
-            if (data.config?.audioUrl) {
+            // 10. Music (Sesuai key: music)
+            if (data.logistics?.music) {
                 const audio = document.getElementById('bgMusic');
-                const musicBtn = document.getElementById('musicBtn');
-                audio.src = basePath + data.config.audioUrl;
-                musicBtn.classList.remove('hidden');
+                const btn = document.getElementById('musicBtn');
+                audio.src = basePath + data.logistics.music;
+                btn.classList.remove('hidden');
+                
                 let isPlaying = false;
-                musicBtn.onclick = () => {
-                    if (isPlaying) { audio.pause(); musicBtn.textContent = '♫'; }
-                    else { audio.play(); musicBtn.textContent = '❚❚'; }
-                    isPlaying =!isPlaying;
+                btn.onclick = () => {
+                    if (isPlaying) { audio.pause(); btn.textContent = '♫'; }
+                    else { audio.play(); btn.textContent = '❚❚'; }
+                    isPlaying = !isPlaying;
                 };
-                document.getElementById('openBtn').addEventListener('click', () => {
-                    audio.play().then(() => { isPlaying = true; musicBtn.textContent = '❚❚'; }).catch(e => {});
-                });
+
+                document.getElementById('openBtn').onclick = (e) => {
+                    audio.play();
+                    isPlaying = true;
+                    btn.textContent = '❚❚';
+                };
             }
 
             document.getElementById('footerCouple').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
             document.getElementById('loader').classList.add('hidden');
             document.getElementById('main').classList.remove('hidden');
+
         })
-      .catch(err => {
-            document.getElementById('loader').innerHTML = '<div class="cover-content"><p>Gagal memuat data. Cek link atau data.json</p></div>';
+        .catch(err => {
             console.error(err);
+            document.getElementById('loader').innerHTML = '<p>Gagal memuat data. Periksa file data.json Anda.</p>';
         });
     </script>
 </body>
