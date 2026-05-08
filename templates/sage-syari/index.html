@@ -10,21 +10,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Montserrat', sans-serif; background-color: #EAECE6; color: #3A4A3A; }
-     .font-serif { font-family: 'Cormorant Garamond', serif; }
-     .font-arab { font-family: 'Scheherazade New', serif; }
-     .bg-sage { background-color: #7A8B7A; }
-     .text-sage { color: #7A8B7A; }
-     .border-sage { border-color: #7A8B7A; }
-     .cover-bg { background-color: #FBF8F3; }
-     .polaroid { background: white; padding: 10px 10px 35px 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
-     .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
-     .no-scrollbar::-webkit-scrollbar { display: none; }
-     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .font-serif { font-family: 'Cormorant Garamond', serif; }
+    .font-arab { font-family: 'Scheherazade New', serif; }
+    .bg-sage { background-color: #7A8B7A; }
+    .text-sage { color: #7A8B7A; }
+    .border-sage { border-color: #7A8B7A; }
+    .cover-bg { background-color: #FBF8F3; }
+    .polaroid { background: white; padding: 10px 10px 35px 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+    .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- COVER LOCK SCREEN -->
+    <!-- COVER -->
     <div id="cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center p-8 cover-bg transition-opacity duration-1000">
         <p class="font-arab text-3xl text-sage mb-4">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
         <p class="text-sm tracking-widest uppercase">WALIMATUL 'URSY</p>
@@ -36,7 +34,7 @@
 
     <div id="app" class="max-w-md mx-auto bg-[#FBF8F3] min-h-screen opacity-0 transition-opacity duration-1000">
         <!-- HERO -->
-        <section class="relative h-[85vh] flex flex-col items-center justify-end text-center text-white p-8">
+        <section class="relative h-[80vh] flex flex-col items-center justify-end text-center text-white p-8">
             <img id="hero-image" class="absolute inset-0 w-full h-full object-cover" src="">
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             <div class="relative z-10">
@@ -48,7 +46,7 @@
 
         <div class="p-8 text-center">
             <!-- AYAT -->
-            <section class="my-8">
+            <section class="my-8 bg-white/60 p-6 rounded-2xl shadow-sm">
                 <p class="font-arab text-2xl text-sage leading-relaxed">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
                 <p class="text-sm mt-4 italic text-gray-600">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tentram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang."</p>
                 <p class="text-xs font-semibold mt-2">QS. Ar-Rum: 21</p>
@@ -82,7 +80,13 @@
             <section class="my-16 bg-white/60 p-6 rounded-2xl shadow-sm">
                 <h3 class="font-serif text-3xl mb-6 text-sage">Save The Date</h3>
                 <div id="event-details" class="space-y-4"></div>
-                <div id="countdown" class="flex justify-center space-x-4 text-center mt-6"></div>
+                
+                <!-- COUNTDOWN -->
+                <div class="mt-8">
+                    <p class="text-xs uppercase tracking-widest mb-3">Menuju Hari Bahagia</p>
+                    <div id="countdown" class="flex justify-center space-x-4 text-center"></div>
+                </div>
+                
                 <a id="google-calendar-link" target="_blank" class="inline-block bg-sage text-white rounded-full px-6 py-2 mt-6 text-xs uppercase tracking-wider">Simpan Tanggal</a>
             </section>
 
@@ -138,5 +142,85 @@
             document.getElementById('cover-names').innerHTML = `${g.nickname} & ${b.nickname}`;
             document.getElementById('cover-guest').textContent = guestName.replace(/\+/g, ' ');
 
-            // HERO
-            document.getElementById('hero-image').src
+            // HERO - FIX: kasih tinggi 80vh biar foto muncul
+            document.getElementById('hero-image').src = basePath + data.gallery.heroImage;
+            document.getElementById('hero-names').innerHTML = `${g.nickname} & ${b.nickname}`;
+            document.getElementById('hero-date').textContent = new Date(ev.date).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+            // COUPLE
+            document.getElementById('groom-img').src = basePath + g.image;
+            document.getElementById('groom-name').textContent = g.name;
+            document.getElementById('groom-parents').innerHTML = `Putra dari Bapak ${g.father} <br> & Ibu ${g.mother}`;
+            document.getElementById('bride-img').src = basePath + b.image;
+            document.getElementById('bride-name').textContent = b.name;
+            document.getElementById('bride-parents').innerHTML = `Putri dari Bapak ${b.father} <br> & Ibu ${b.mother}`;
+
+            // EVENT
+            const eventDetails = document.getElementById('event-details');
+            data.events.forEach(event => {
+                eventDetails.innerHTML += `
+                    <div class="border-t border-sage/20 pt-4 first:border-t-0 first:pt-0">
+                        <h4 class="font-semibold uppercase tracking-widest text-sm">${event.title}</h4>
+                        <p class="text-sm mt-1">${new Date(event.date).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                        <p class="text-sm">Pukul ${event.startTime} - ${event.endTime} ${event.timezone}</p>
+                        <p class="text-xs mt-2 text-gray-600">${event.address}</p>
+                        ${event.googleMaps? `<a href="${event.googleMaps}" target="_blank" class="text-xs text-sage underline mt-1 inline-block">Lihat Lokasi</a>` : ''}
+                    </div>
+                `;
+            });
+
+            // COUNTDOWN - FIX: sekarang muncul
+            const countdownDate = new Date(`${ev.date}T${ev.startTime}:00`).getTime();
+            const countdownEl = document.getElementById('countdown');
+            setInterval(() => {
+                const distance = countdownDate - new Date().getTime();
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                countdownEl.innerHTML = `
+                    <div><div class="text-2xl font-serif">${days}</div><div class="text-xs">Hari</div></div>
+                    <div><div class="text-2xl font-serif">${hours}</div><div class="text-xs">Jam</div></div>
+                    <div><div class="text-2xl font-serif">${minutes}</div><div class="text-xs">Menit</div></div>
+                    <div><div class="text-2xl font-serif">${seconds}</div><div class="text-xs">Detik</div></div>
+                `;
+            }, 1000);
+            
+            // GOOGLE CALENDAR
+            const startTime = new Date(`${ev.date}T${ev.startTime}:00`).toISOString().replace(/-|:|\.\d+/g, '');
+            const endTime = new Date(`${ev.date}T${ev.endTime}:00`).toISOString().replace(/-|:|\.\d+/g, '');
+            document.getElementById('google-calendar-link').href = `https://www.google.com/calendar/render?action=TEMPLATE&text=Walimah ${g.nickname} & ${b.nickname}&dates=${startTime}/${endTime}&details=Acara Pernikahan ${g.name} dan ${b.name}&location=${ev.address}`;
+
+            // GALLERY
+            const galleryGrid = document.getElementById('gallery-grid');
+            data.gallery.album.forEach((img, i) => {
+                const rotation = i % 2 === 0? '-rotate-2' : 'rotate-2';
+                galleryGrid.innerHTML += `
+                    <div class="polaroid ${rotation}">
+                        <img src="${basePath}${img}" class="w-full aspect-square object-cover" alt="Gallery Image ${i+1}">
+                    </div>
+                `;
+            });
+
+            // GIFT
+            const giftDetails = document.getElementById('gift-details');
+            data.digitalGift.forEach(gift => {
+                giftDetails.innerHTML += `
+                    <div class="bg-white p-3 rounded-lg text-sm">
+                        <p class="font-bold">${gift.provider}</p>
+                        <p id="rekening-${gift.provider}" class="my-1">${gift.accountNumber}</p>
+                        <p class="text-xs">a.n ${gift.accountHolder}</p>
+                        <button onclick="navigator.clipboard.writeText('${gift.accountNumber}').then(() => alert('Nomor rekening disalin!'))" class="text-xs bg-sage/20 text-sage px-3 py-1 rounded-full mt-2">Salin No. Rekening</button>
+                    </div>
+                `;
+            });
+
+            // RSVP
+            const rsvpMessage = `Assalamualaikum. Saya, ${guestName.replace(/\+/g, ' ')}, insyaAllah akan hadir di acara Walimatul 'Ursy ${g.nickname} & ${b.nickname}. Jazakumullah khairan.`;
+            document.getElementById('rsvp-link').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=${encodeURIComponent(rsvpMessage)}`;
+            
+            // FOOTER
+            document.getElementById('footer-names').innerHTML = `${g.nickname} & ${b.nickname}`;
+
+            // OPEN BUTTON
+            document.getElementById('
