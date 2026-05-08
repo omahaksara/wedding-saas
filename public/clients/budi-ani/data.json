@@ -1,7 +1,10 @@
 {
   "slug": "budi-ani",
+  "meta": {
+    "template": "minimalis-gold",
+    "theme_color": "#C5A572"
+  },
   "config": {
-    "theme": "minimalist-light",
     "audioUrl": "musik.mp3",
     "isLocked": false
   },
