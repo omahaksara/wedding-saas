@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; background: #EAECE6; color: #3A4A3A; }
+       .font-serif { font-family: 'Cormorant Garamond', serif; }
+       .bg-sage { background-color: #7A8B7A; }
+       .text-sage { color: #7A8B7A; }
+       .border-sage { border-color: #7A8B7A; }
+       .torn-top {
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 10 Q 5 0, 10 10 T 20 10 T 30 10 T 40 10 T 50 10 T 60 10 T 70 10 T 80 10 T 90 10 T 100 10 L 100 10 L 0 10 Z" fill="black"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 10 Q 5 0, 10 10 T 20 10 T 30 10 T 40 10 T 50 10 T 60 10 T 70 10 T 80 10 T 90 10 T 100 10 L 100 10 L 0 10 Z" fill="black"/></svg>');
+            -webkit-mask-size: 100% 10px; mask-size: 100% 10px;
+        }
+       .torn-bottom {
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 0 Q 5 10, 10 0 T 20 0 T 30 0 T 40 0 T 50 0 T 60 0 T 70 0 T 80 0 T 90 0 T 100 0 L 100 0 L 0 0 Z" fill="black"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 0 Q 5 10, 10 0 T 20 0 T 30 0 T 40 0 T 50 0 T 60 0 T 70 0 T 80 0 T 90 0 T 100 0 L 100 0 L 0 0 Z" fill="black"/></svg>');
+            -webkit-mask-size: 100% 10px; mask-size: 100% 10px;
+            -webkit-mask-position: bottom; mask-position: bottom;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div id="app" class="max-w-md mx-auto bg-white min-h-screen shadow-xl">
+        <!-- HERO -->
+        <section class="relative text-center bg-white p-8">
+            <img src="https://raw.githubusercontent.com/sa-github/png/main/eucalyptus-1.png" class="absolute top-4 left-4 w-24 opacity-70">
+            <img src="https://raw.githubusercontent.com/sa-github/png/main/eucalyptus-2.png" class="absolute bottom-20 right-2 w-20 opacity-70 rotate-45">
+            
+            <p class="text-xs tracking-[0.3em] uppercase mb-8">NUESTRA BODA</p>
+            <h1 id="initials" class="font-serif text-7xl text-sage mb-8"></h1>
+            
+            <div class="torn-top torn-bottom">
+                <img id="hero-image" class="w-full h-80 object-cover" src="">
+            </div>
+
+            <div class="mt-8">
+                <p class="text-xs uppercase mb-4">CON NUESTRO AMOR, LA BENDICIÓN DE DIOS Y LA DE NUESTROS PADRES</p>
+                <div id="parents" class="text-sm leading-relaxed mb-6"></div>
+                <h2 id="couple-names" class="font-serif text-5xl text-sage leading-none"></h2>
+                <p class="text-xs mt-6 uppercase">TENEMOS EL HONOR DE INVITARTE A<br>NUESTRA BODA</p>
+                
+                <div id="date-box" class="border-t border-b border-sage py-3 mt-6 inline-block px-8">
+                    <p class="text-sm"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVENT + TIMELINE -->
+        <section class="bg-white p-8">
+            <div id="event-cards" class="space-y-4 mb-10"></div>
+            
+            <h3 class="text-center text-xs tracking-[0.2em] uppercase mb-6">ITINERARIO DE ACTIVIDADES</h3>
+            <div id="timeline" class="relative border-l-2 border-sage/30 ml-4 pl-8 space-y-6">
+                <!-- Timeline diisi JS -->
+            </div>
+        </section>
+
+        <!-- PASES + GIFT -->
+        <section class="bg-[#F4F6F2] p-8 text-center">
+            <div class="mb-8">
+                <img src="https://raw.githubusercontent.com/sa-github/png/main/icon-ticket.png" class="w-10 mx-auto mb-2 opacity-70">
+                <p class="text-xs uppercase">PASES</p>
+                <p class="text-xs">TENEMOS RESERVADOS</p>
+                <div class="border border-sage w-12 h-12 mx-auto my-2 flex items-center justify-center">
+                    <p id="guest-count" class="font-serif text-2xl">2</p>
+                </div>
+                <p class="text-xs uppercase">LUGARES</p>
+            </div>
+
+            <div class="mb-8">
+                <img src="https://raw.githubusercontent.com/sa-github/png/main/icon-gift.png" class="w-10 mx-auto mb-2 opacity-70">
+                <p class="text-xs uppercase font-semibold">SUGERENCIA DE REGALO</p>
+                <p class="text-xs mt-2 leading-relaxed">SI DESEAN HACERNOS UN PRESENTE, PUEDEN AYUDARNOS EN NUESTRO SUEÑO DE COMPRAR UNA CASA. ¡TODO SUMA!<br>LLUVIA DE SOBRES</p>
+                <div id="gift-list" class="mt-4 space-y-2"></div>
+            </div>
+
+            <div>
+                <img src="https://raw.githubusercontent.com/sa-github/png/main/icon-wa.png" class="w-10 mx-auto mb-2 opacity-70">
+                <p class="text-xs uppercase font-semibold">CONFIRMACIÓN</p>
+                <p class="text-xs mt-2">AGRADECEMOS QUE CONFIRMES TU ASISTENCIA</p>
+                <a id="rsvp-btn" href="#" class="inline-block bg-sage text-white text-xs uppercase px-6 py-2 rounded-sm mt-3">ENVIAR MENSAJE</a>
+            </div>
+            
+            <p class="text-[10px] mt-8 leading-relaxed italic">ADORAMOS A SUS HIJOS, PERO CREEMOS QUE NECESITAN UNA NOCHE LIBRE.<br><b>SÓLO ADULTOS, POR FAVOR</b></p>
+        </section>
+
+        <!-- FOOTER IMAGE -->
+        <section class="bg-white">
+            <div class="torn-top">
+                <img id="footer-image" class="w-full h-64 object-cover" src="">
+            </div>
+            <div class="p-8 text-center text-[10px]">
+                <p>ESPERAMOS CONTAR CON SU PRESENCIA</p>
+                <p class="mt-4">Digital Invitation by Omah Aksara</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const clientSlug = params.get('c');
+        const guestName = params.get('to') || 'Bapak/Ibu/Saudara/i';
+        const basePath = `../../public/clients/${clientSlug}/`;
+
+        fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
+            const g = data.couple.groom;
+            const b = data.couple.bride;
+
+            // HERO
+            document.getElementById('initials').textContent = `${g.nickname.charAt(0)}|${b.nickname.charAt(0)}`;
+            document.getElementById('hero-image').src = basePath + data.gallery.heroImage;
+            document.getElementById('parents').innerHTML = `${g.father} & ${g.mother}<br>Y<br>${b.father} & ${b.mother}`;
+            document.getElementById('couple-names').innerHTML = `${g.nickname} <span class="font-sans text-3xl">&</span><br>${b.nickname}`;
+            
+            const date = new Date(data.events[0].date);
+            document.getElementById('date-box').innerHTML = `
+                <p class="text-xs uppercase">${date.toLocaleDateString('es-ES', { weekday: 'long' })}</p>
+                <p class="font-serif text-5xl leading-none my-1">${date.getDate()}</p>
+                <p class="text-xs uppercase">${date.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}</p>
+            `;
+
+            // EVENT CARDS
+            const eventCards = document.getElementById('event-cards');
+            data.events.forEach(ev => {
+                eventCards.innerHTML += `
+                    <div class="text-center">
+                        <p class="text-sm font-semibold">${ev.startTime} PM</p>
+                        <p class="text-xs uppercase font-semibold">${ev.title}</p>
+                        <p class="text-xs">${ev.address}</p>
+                        ${ev.googleMaps? `<a href="${ev.googleMaps}" target="_blank" class="inline-block bg-sage text-white text-[10px] uppercase px-4 py-1.5 rounded-sm mt-2">VER UBICACIÓN</a>` : ''}
+                    </div>
+                `;
+            });
+
+            // TIMELINE - pakai data events
+            const timeline = document.getElementById('timeline');
+            const icons = ['⛪','🥂','💐','🍽️','🎉','🌙'];
+            data.events.forEach((ev, i) => {
+                timeline.innerHTML += `
+                    <div class="relative">
+                        <div class="absolute -left-[42px] top-0 w-6 h-6 bg-white border-2 border-sage rounded-full flex items-center justify-center text-xs">${icons[i] || '•'}</div>
+                        <p class="text-sm font-semibold">${ev.startTime} PM</p>
+                        <p class="text-xs">${ev.title}</p>
+                    </div>
+                `;
+            });
+
+            // GIFT
+            const giftList = document.getElementById('gift-list');
+            data.digitalGift.forEach(g => {
+                giftList.innerHTML += `
+                    <div class="text-xs">
+                        <p class="font-semibold">${g.provider}</p>
+                        <p class="font-mono">${g.accountNumber}</p>
+                        <p>a.n ${g.accountHolder}</p>
+                    </div>
+                `;
+            });
+
+            // RSVP
+            document.getElementById('rsvp-btn').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo, saya ${guestName.replace(/\+/g, ' ')} akan hadir di acara ${g.nickname} & ${b.nickname}. Terima kasih.`;
+            
+            // FOOTER IMG - pake foto terakhir dari album
+            const lastPhoto = data.gallery.album[data.gallery.album.length - 1];
+            document.getElementById('footer-image').src = basePath + lastPhoto;
+
+        }).catch(err => {
+            document.getElementById('app').innerHTML = `<div class="p-8 text-center">Error: Data undangan tidak ditemukan.</div>`;
+        });
+    </script>
+</body>
+</html>
