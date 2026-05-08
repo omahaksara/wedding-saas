@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <style>
+        :root {
+            --pink: #E8B4B8;
+            --pink-dark: #D49FA4;
+            --bg: #FFF9FB;
+            --bg-card: rgba(255, 255, 255, 0.7);
+            --text: #5C4B51;
+            --text-muted: #9B8D91;
+            --border: #F5E1E3;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+            background-image: url('https://www.transparenttextures.com/patterns/flowers.png');
+        }
+    .container { max-width: 500px; margin: 0 auto; }
+    .cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            padding-bottom: 80px;
+        }
+    .cover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255,249,251,0) 50%, var(--bg) 100%);
+        }
+    .cover-content { 
+            position: relative; z-index: 2; padding: 20px;
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 32px rgba(212, 159, 164, 0.1);
+        }
+    .cover.to { font-size: 0.9rem; letter-spacing: 2px; color: var(--text-muted); }
+    .cover.guest-name { font-size: 1.3rem; margin: 8px 0 20px; font-weight: 500; color: var(--pink-dark); }
+    .cover h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            color: var(--pink-dark);
+            line-height: 1;
+            font-weight: 400;
+        }
+    .cover.date { margin: 20px 0; letter-spacing: 2px; font-size: 0.9rem; }
+    .btn {
+            display: inline-block;
+            background: var(--pink);
+            color: white;
+            padding: 14px 36px;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(232, 180, 184, 0.4);
+        }
+    .btn:hover { background: var(--pink-dark); transform: translateY(-2px); }
+        section { padding: 70px 24px; text-align: center; }
+    .section-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5rem;
+            color: var(--pink-dark);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+        
+        /* COUPLE CARD FLORAL */
+    .couple-grid { display: grid; gap: 50px; }
+    .couple-item {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 32px rgba(212, 159, 164, 0.1);
+        }
+    .couple-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+    .couple-item h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: var(--pink-dark);
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+    .couple-item p { color: var(--text-muted); font-size: 0.9rem; }
+    .couple-item a { color: var(--pink-dark); text-decoration: none; font-weight: 500; }
+        
+    .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 24px;
+            text-align: left;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 32px rgba(212, 159, 164, 0.1);
+        }
+    .card h3 { color: var(--pink-dark); font-size: 1.4rem; margin-bottom: 16px; font-weight: 600; }
+    .card p { color: var(--text-muted); margin-bottom: 8px; }
+    .story-card span { color: var(--pink-dark); font-weight: 600; }
+
+        /* GALLERY SLIDER */
+    .gallery-slider { width: 100%; padding-bottom: 40px; }
+    .swiper-slide { width: 80%; height: 400px; }
+    .swiper-slide img { width: 100%; height: 100%; object-fit: cover; border-radius: 15px; }
+    .swiper-pagination-bullet { background: var(--text-muted); opacity: 1; }
+    .swiper-pagination-bullet-active { background: var(--pink-dark); }
+        
+    .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; margin-top: 24px; border-radius: 15px; overflow: hidden; }
+    .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .gift-box img { max-width: 180px; margin: 20px auto; display: block; border-radius: 10px; }
+    .footer { padding: 60px 24px; font-size: 0.9rem; color: var(--text-muted); }
+    .music-btn {
+            position: fixed; bottom: 20px; right: 20px; z-index: 999;
+            width: 55px; height: 55px; border-radius: 50%;
+            background: var(--pink); color: white; border: none;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; box-shadow: 0 4px 20px rgba(232, 180, 184, 0.5);
+        }
+    .hidden { display: none!important; }
+        #loader { position: fixed; inset: 0; background: var(--bg); z-index: 1000; }
+    </style>
+</head>
+<body>
+    <div id="loader" class="cover">
+        <div class="cover-content"><p>Loading...</p></div>
+    </div>
+
+    <main id="main" class="container hidden">
+        <section id="cover" class="cover">
+            <div class="cover-content">
+                <p class="to">Kepada Yth.</p>
+                <p class="guest-name" id="guestName">Tamu Undangan</p>
+                <h1 id="coupleName"></h1>
+                <p class="date" id="weddingDate"></p>
+                <a href="#couple" class="btn" id="openBtn">Buka Undangan</a>
+            </div>
+        </section>
+
+        <section id="couple">
+            <h2 class="section-title">Mempelai</h2>
+            <div class="couple-grid">
+                <div class="couple-item">
+                    <img id="groomImg" src="" alt="Mempelai Pria">
+                    <h3 id="groomName"></h3>
+                    <p id="groomParents"></p>
+                    <p><a id="groomIg" href="" target="_blank"></a></p>
+                </div>
+                <div class="couple-item">
+                    <img id="brideImg" src="" alt="Mempelai Wanita">
+                    <h3 id="brideName"></h3>
+                    <p id="brideParents"></p>
+                    <p><a id="brideIg" href="" target="_blank"></a></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="events">
+            <h2 class="section-title">Save The Date</h2>
+            <div id="eventList"></div>
+        </section>
+
+        <section id="loveStory" class="hidden">
+            <h2 class="section-title">Perjalanan Cinta</h2>
+            <div id="storyList"></div>
+        </section>
+
+        <section id="gallery">
+            <h2 class="section-title">Momen Bahagia</h2>
+            <div class="swiper gallery-slider">
+                <div class="swiper-wrapper" id="galleryWrapper"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+
+        <section id="video" class="hidden">
+            <h2 class="section-title">Video Kami</h2>
+            <div class="video-wrapper" id="videoWrapper"></div>
+        </section>
+
+        <section id="gift" class="hidden">
+            <h2 class="section-title">Wedding Gift</h2>
+            <div id="giftList"></div>
+        </section>
+
+        <section id="logistics" class="hidden">
+            <h2 class="section-title">Informasi Acara</h2>
+            <div class="card" id="logisticsBox"></div>
+        </section>
+
+        <section class="footer">
+            <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+            <p style="margin-top: 20px; color: var(--pink-dark);" id="footerCouple"></p>
+        </section>
+    </main>
+
+    <button id="musicBtn" class="music-btn hidden">♫</button>
+    <audio id="bgMusic" loop></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const clientSlug = urlParams.get('c');
+        const guestName = urlParams.get('to') || 'Tamu Undangan';
+        const basePath = `../../public/clients/${clientSlug}/`;
+
+        fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
+            if (data.meta?.theme_color) document.documentElement.style.setProperty('--pink-dark', data.meta.theme_color);
+            document.title = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+            document.getElementById('guestName').textContent = guestName;
+            document.getElementById('coupleName').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+            document.getElementById('cover').style.backgroundImage = `url('${basePath}${data.gallery.heroImage}')`;
+            const eventDate = new Date(data.events[0].date);
+            document.getElementById('weddingDate').textContent = eventDate.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+            document.getElementById('groomImg').src = basePath + data.couple.groom.image;
+            document.getElementById('groomName').textContent = data.couple.groom.name;
+            document.getElementById('groomParents').textContent = `Putra dari ${data.couple.groom.father} & ${data.couple.groom.mother}`;
+            if (data.couple.groom.instagram) { document.getElementById('groomIg').textContent = data.couple.groom.instagram; document.getElementById('groomIg').href = `https://instagram.com/${data.couple.groom.instagram.replace('@', '')}`; }
+            document.getElementById('brideImg').src = basePath + data.couple.bride.image;
+            document.getElementById('brideName').textContent = data.couple.bride.name;
+            document.getElementById('brideParents').textContent = `Putri dari ${data.couple.bride.father} & ${data.couple.bride.mother}`;
+            if (data.couple.bride.instagram) { document.getElementById('brideIg').textContent = data.couple.bride.instagram; document.getElementById('brideIg').href = `https://instagram.com/${data.couple.bride.instagram.replace('@', '')}`; }
+
+            const eventList = document.getElementById('eventList');
+            data.events.forEach(ev => {
+                const date = new Date(ev.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+                eventList.innerHTML += `<div class="card"><h3>${ev.title}</h3><p><strong>${date}</strong></p><p>Pukul ${ev.startTime} - ${ev.endTime} ${ev.timezone}</p><p>${ev.address}</p>${ev.googleMaps? `<a href="${ev.googleMaps}" target="_blank" class="btn" style="margin-top:16px;">Lihat Lokasi</a>` : ''}</div>`;
+            });
+
+            if (data.loveStory && data.loveStory.length > 0) {
+                document.getElementById('loveStory').classList.remove('hidden');
+                const storyList = document.getElementById('storyList');
+                data.loveStory.forEach(story => { storyList.innerHTML += `<div class="card story-card"><h3><span>${story.year}</span> - ${story.title}</h3><p>${story.desc}</p></div>`; });
+            }
+
+            const galleryWrapper = document.getElementById('galleryWrapper');
+            if (data.gallery.album && data.gallery.album.length > 0) {
+                data.gallery.album.forEach(img => { galleryWrapper.innerHTML += `<div class="swiper-slide"><img src="${basePath}${img}" alt="Gallery"></div>`; });
+                new Swiper('.gallery-slider', { effect: 'cards', grabCursor: true, loop: true, autoplay: { delay: 3000, disableOnInteraction: false }, pagination: { el: '.swiper-pagination', clickable: true } });
+            } else { document.getElementById('gallery').classList.add('hidden'); }
+
+            if (data.gallery.videoYoutubeId) { document.getElementById('video').classList.remove('hidden'); document.getElementById('videoWrapper').innerHTML = `<iframe src="https://www.youtube.com/embed/${data.gallery.videoYoutubeId}" allowfullscreen></iframe>`; }
+            if (data.digitalGift && data.digitalGift.length > 0) {
+                document.getElementById('gift').classList.remove('hidden');
+                const giftList = document.getElementById('giftList');
+                data.digitalGift.forEach(gift => { giftList.innerHTML += `<div class="card gift-box"><h3>${gift.provider}</h3><p style="font-size: 1.2rem; letter-spacing: 2px; margin: 10px 0;">${gift.accountNumber}</p><p>a.n ${gift.accountHolder}</p>${gift.qrCode? `<img src="${basePath}${gift.qrCode}" alt="QR Code">` : ''}</div>`; });
+            }
+            if (data.logistics && (data.logistics.dressCode || data.logistics.rsvpWaNumber || data.logistics.guestNote)) {
+                document.getElementById('logistics').classList.remove('hidden');
+                let html = '';
+                if (data.logistics.dressCode) html += `<p><strong>Dress Code:</strong> ${data.logistics.dressCode}</p>`;
+                if (data.logistics.guestNote) html += `<p><strong>Catatan:</strong> ${data.logistics.guestNote}</p>`;
+                if (data.logistics.rsvpWaNumber) { const waLink = `https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo, saya ${guestName} ingin konfirmasi kehadiran`; html += `<a href="${waLink}" target="_blank" class="btn" style="margin-top: 16px;">Konfirmasi via WhatsApp</a>`; }
+                document.getElementById('logisticsBox').innerHTML = html;
+            }
+            if (data.config?.audioUrl) {
+                const audio = document.getElementById('bgMusic'); const musicBtn = document.getElementById('musicBtn');
+                audio.src = basePath + data.config.audioUrl; musicBtn.classList.remove('hidden'); let isPlaying = false;
+                musicBtn.onclick = () => { if (isPlaying) { audio.pause(); musicBtn.textContent = '♫'; } else { audio.play(); musicBtn.textContent = '❚❚'; } isPlaying =!isPlaying; };
+                document.getElementById('openBtn').addEventListener('click', () => { audio.play().then(() => { isPlaying = true; musicBtn.textContent = '❚❚'; }).catch(e => {}); });
+            }
+            document.getElementById('footerCouple').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+            document.getElementById('loader').classList.add('hidden'); document.getElementById('main').classList.remove('hidden');
+        }).catch(err => { document.getElementById('loader').innerHTML = '<div class="cover-content"><p>Gagal memuat data</p></div>'; console.error(err); });
+    </script>
+</body>
+</html>
