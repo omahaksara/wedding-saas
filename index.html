@@ -1,48 +1,47 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading Invitation...</title>
+    <title>Loading...</title>
     <style>
         body { 
-            background: #111; 
-            color: #C5A572; 
+            font-family: sans-serif; 
+            background: #FDFBF8; 
+            color: #8B6B4F; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             height: 100vh; 
-            font-family: sans-serif;
             margin: 0;
         }
     </style>
 </head>
 <body>
-    <p>Mempersiapkan undangan...</p>
+    <p>Loading...</p>
     <script>
         const params = new URLSearchParams(window.location.search);
-        const clientSlug = params.get('c');
-        const tamu = params.get('to') || 'Tamu Undangan';
-
-        if (!clientSlug) {
-            document.body.innerHTML = '<p>Error: Link undangan tidak valid.</p>';
-            throw new Error('Client slug missing');
+        const client = params.get('c');
+        
+        if (!client) {
+            document.body.innerHTML = 'Error: Parameter ?c= tidak ada';
+        } else {
+            // Path yang bener: dari /invitation/ langsung ke public/clients/
+            fetch(`public/clients/${client}/data.json`)
+                .then(res => {
+                    if (!res.ok) throw new Error('Not found');
+                    return res.json();
+                })
+                .then(data => {
+                    const template = data.meta?.template || 'minimalis-gold';
+                    // Kirim semua parameter URL ke template
+                    window.location.href = `templates/${template}/index.html${window.location.search}`;
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.body.innerHTML = 'Error: Data undangan tidak ditemukan. Periksa kembali link Anda.';
+                });
         }
-
-        fetch(`./public/clients/${clientSlug}/data.json`)
-            .then(res => {
-                if (!res.ok) throw new Error('Data not found');
-                return res.json();
-            })
-            .then(data => {
-                const template = data.meta?.template || 'minimalis-gold';
-                const redirectUrl = `./templates/${template}/?c=${clientSlug}&to=${encodeURIComponent(tamu)}`;
-                window.location.replace(redirectUrl);
-            })
-            .catch(err => {
-                document.body.innerHTML = '<p>Error: Data undangan tidak ditemukan. Periksa kembali link Anda.</p>';
-                console.error(err);
-            });
     </script>
 </body>
 </html>
