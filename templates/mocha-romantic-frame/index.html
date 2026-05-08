@@ -16,15 +16,15 @@
             --text-color: #6D5F4B;
         }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
-     .font-serif { font-family: 'Cormorant Garamond', serif; }
-     .font-arab { font-family: 'Scheherazade New', serif; }
-     .bg-theme { background-color: var(--theme-color); }
-     .text-theme { color: var(--theme-color); }
-     .border-theme { border-color: var(--theme-color); }
-     .cover-bg { background-color: var(--bg-color); }
-     .polaroid { background: white; padding: 10px 10px 35px 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
-     .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
-     .torn {
+      .font-serif { font-family: 'Cormorant Garamond', serif; }
+      .font-arab { font-family: 'Scheherazade New', serif; }
+      .bg-theme { background-color: var(--theme-color); }
+      .text-theme { color: var(--theme-color); }
+      .border-theme { border-color: var(--theme-color); }
+      .cover-bg { background-color: var(--bg-color); }
+      .polaroid { background: white; padding: 10px 10px 35px 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+      .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
+      .torn {
             -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 C150,100 350,0 500,100 C650,0 850,100 1000,0 L1000,100 L0,100 Z" fill="black"/></svg>');
             mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 C150,100 350,0 500,100 C650,0 850,100 1000,0 L1000,100 L0,100 Z" fill="black"/></svg>');
             -webkit-mask-size: 100% 20px; mask-size: 100% 20px;
@@ -141,6 +141,7 @@
         const clientSlug = params.get('c');
         const guestName = params.get('to') || 'Tamu Undangan';
         const basePath = `../../public/clients/${clientSlug}/`;
+        let globalAudio = null;
 
         fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
             const g = data.couple.groom;
@@ -332,15 +333,38 @@
             // FOOTER
             document.getElementById('footer-names').innerHTML = `${g.nickname} & ${b.nickname}`;
 
-            // OPEN BUTTON
+            // MUSIK - TARUH DI SINI, JANGAN PINDAH-PINDAH
             document.getElementById('open-invitation').addEventListener('click', () => {
                 document.getElementById('cover').style.opacity = '0';
                 document.getElementById('app').style.opacity = '1';
                 setTimeout(() => document.getElementById('cover').style.display = 'none', 1000);
+                
                 if(data.logistics.music) {
-                    const audio = new Audio(basePath + data.logistics.music);
-                    audio.loop = true;
-                    audio.play().catch(e => {});
+                    globalAudio = new Audio(basePath + data.logistics.music);
+                    globalAudio.loop = true;
+                    globalAudio.volume = 0.7;
+                    
+                    setTimeout(() => {
+                        globalAudio.play().then(() => {
+                            console.log('Musik play otomatis');
+                        }).catch(e => {
+                            console.log('Autoplay diblokir:', e);
+                            const musicBtn = document.createElement('button');
+                            musicBtn.id = 'music-toggle';
+                            musicBtn.innerHTML = '🔊 Putar Musik';
+                            musicBtn.className = 'fixed bottom-4 right-4 bg-theme text-white rounded-full px-4 py-2 text-xs z-50 shadow-lg';
+                            musicBtn.onclick = () => {
+                                if(globalAudio.paused) {
+                                    globalAudio.play();
+                                    musicBtn.innerHTML = '⏸️ Pause';
+                                } else {
+                                    globalAudio.pause();
+                                    musicBtn.innerHTML = '🔊 Play';
+                                }
+                            };
+                            document.body.appendChild(musicBtn);
+                        });
+                    }, 300);
                 }
             });
 
