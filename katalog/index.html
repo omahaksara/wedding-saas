@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omah Aksara - Katalog Template Undangan Digital</title>
+    <meta name="description" content="Katalog template undangan digital pernikahan dari Omah Aksara. Custom warna, musik, dan nama tamu.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #FBF8F3;
+            --primary: #C87941;
+            --primary-dark: #b06836;
+            --text: #5A3E2B;
+            --muted: #8B6F5C;
+            --card: #FFFFFF;
+            --border: rgba(90, 62, 43, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 64px 20px 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(200,121,65,0.08) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .logo::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+            margin: 8px auto 0;
+            opacity: 0.5;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 6vw, 48px);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .hero p {
+            font-size: clamp(14px, 2.8vw, 17px);
+            color: var(--muted);
+            margin-bottom: 28px;
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 8px 24px rgba(200, 121, 65, 0.25), 0 2px 6px rgba(200, 121, 65, 0.2);
+            transition: all 0.25s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .cta:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(200, 121, 65, 0.3), 0 4px 8px rgba(200, 121, 65, 0.22);
+        }
+
+        .cta:active {
+            transform: translateY(0);
+        }
+
+        .cta svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px 80px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        @media (min-width: 640px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+            .container {
+                padding: 0 24px 100px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 24px;
+            }
+            .hero {
+                padding: 80px 20px 60px;
+            }
+        }
+
+        /* Card */
+        .card {
+            background: var(--card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(90, 62, 43, 0.06), 0 1px 3px rgba(90, 62, 43, 0.04);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.6s ease forwards;
+            border: 1px solid var(--border);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(90, 62, 43, 0.12), 0 4px 8px rgba(90, 62, 43, 0.06);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .thumb {
+            position: relative;
+            aspect-ratio: 4/3;
+            background: #F0E9E0;
+            overflow: hidden;
+        }
+
+        .thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .thumb img {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 14px 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .title {
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 1.3;
+            color: var(--text);
+            text-transform: capitalize;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .price {
+            font-size: 13px;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 9px 10px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: 1.5px solid transparent;
+            text-align: center;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-outline {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: rgba(200, 121, 65, 0.08);
+        }
+
+        .btn-filled {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .btn-filled:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        /* Skeleton */
+        .skeleton {
+            background: var(--card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 16px rgba(90, 62, 43, 0.04);
+        }
+
+        .skeleton-thumb {
+            aspect-ratio: 4/3;
+            background: linear-gradient(90deg, #F0E9E0 25%, #F7F2EB 50%, #F0E9E0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        .skeleton-body {
+            padding: 14px;
+        }
+
+        .skeleton-line {
+            height: 14px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #F0E9E0 25%, #F7F2EB 50%, #F0E9E0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            margin-bottom: 8px;
+        }
+
+        .skeleton-line.short {
+            width: 60%;
+            height: 12px;
+            margin-bottom: 14px;
+        }
+
+        .skeleton-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .skeleton-btn {
+            height: 32px;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #F0E9E0 25%, #F7F2EB 50%, #F0E9E0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 32px 20px 40px;
+            color: var(--muted);
+            font-size: 13px;
+            border-top: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(6px);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Empty state */
+        .empty {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content">
+            <div class="logo">Omah Aksara</div>
+            <h1>Katalog Template Undangan Digital</h1>
+            <p>Klik 'Lihat Demo' untuk preview langsung dengan nama tamu. Semua template bisa custom warna & musik.</p>
+            <a href="https://wa.me/6282261567928?text=Halo%20kak,%20mau%20pesan%20undangan%20digital" target="_blank" rel="noopener" class="cta">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M17.6 6.32A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.88 11.89L4 20l4.2-1.1A7.93 7.93 0 0 0 12 20a7.94 7.94 0 0 0 7.88-8.93c-.3-1.97-1.43-2.95-2.28-3.75ZM12 18.5a6.5 6.5 0 0 1-3.3-.9l-.24-.14-2.5.65.67-2.44-.16-.25A6.5 0 1 1 18.5 12 6.51 6.51 0 0 1 12 18.5Zm3.6-4.86c-.2-.1-1.17-.58-1.35-.64s-.32-.1-.45.1-.52.64-.64.77-.23.15-.43.05a5.4 5.4 0 0 1-1.6-1 3 3 0 0 1-.95-1.18c-.1-.2 0-.3.08-.4.08-.08.2-.2.3-.3a.97.97 0 0 0 .2-.33 1.2 1.2 0 0 0-.05-.34c-.03-.1-.45-1.1-.62-1.5s-.33-.34-.45-.35h-.38a.72.72 0 0 0-.53.25 2.24 2.24 0 0 0-.7 1.66A3.87 3.87 0 0 0 9.9 13a8.93 8.93 0 0 0 3.4 2.28c.47.2.84.32 1.13.41a2.7 2.7 0 0 0 1.24.08 2.05 2.05 0 0 0 1.35-.95 1.66 1.66 0 0 0 .12-.95c-.06-.1-.21-.16-.41-.26Z"/>
+                </svg>
+                Pesan via WhatsApp
+            </a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 class="section-title">Pilih Template Favoritmu</h2>
+        <div id="grid" class="grid" aria-live="polite"></div>
+    </main>
+
+    <footer>
+        © 2026 Omah Aksara • <a href="https://instagram.com/omahaksara" target="_blank" rel="noopener">@omahaksara</a>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('grid');
+            const demoClient = 'budi-ani';
+            const waLink = 'https://wa.me/6282261567928?text=Halo%20kak,%20mau%20pesan%20undangan%20digital';
+            const fallbackImg = 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80';
+
+            function toTitleCase(str) {
+                return str.replace(/-/g, ' ').replace(/\s+/g, ' ').trim()
+                    .split(' ')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                    .join(' ');
+            }
+
+            function showSkeletons(count = 8) {
+                grid.innerHTML = '';
+                for (let i = 0; i < count; i++) {
+                    const skel = document.createElement('div');
+                    skel.className = 'skeleton';
+                    skel.innerHTML = `
+                        <div class="skeleton-thumb"></div>
+                        <div class="skeleton-body">
+                            <div class="skeleton-line"></div>
+                            <div class="skeleton-line short"></div>
+                            <div class="skeleton-btns">
+                                <div class="skeleton-btn"></div>
+                                <div class="skeleton-btn"></div>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(skel);
+                }
+            }
+
+            function createCard(folderName, index) {
+                const name = toTitleCase(folderName);
+                const demoUrl = `https://omahaksara.github.io/invitation/templates/${folderName}/?c=${demoClient}&to=Nama-Tamu`;
+                const imageUrl = `https://raw.githubusercontent.com/omahaksara/invitation/main/templates/${folderName}/preview.jpg`;
+
+                const card = document.createElement('article');
+                card.className = 'card';
+                card.style.animationDelay = `${index * 0.04}s`;
+                
+                card.innerHTML = `
+                    <div class="thumb">
+                        <img src="${imageUrl}" alt="Template ${name}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='${fallbackImg}';">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="title">${name}</h3>
+                        <p class="price">Mulai 85rb</p>
+                        <div class="actions">
+                            <a href="${demoUrl}" target="_blank" rel="noopener" class="btn btn-outline" aria-label="Lihat demo ${name}">Lihat Demo</a>
+                            <a href="${waLink}" target="_blank" rel="noopener" class="btn btn-filled" aria-label="Pesan template ${name}">Pesan</a>
+                        </div>
+                    </div>
+                `;
+                return card;
+            }
+
+            function render(names) {
+                grid.innerHTML = '';
+                if (!names || names.length === 0) {
+                    grid.innerHTML = '<div class="empty">Belum ada template tersedia.</div>';
+                    return;
+                }
+                names.forEach((name, i) => {
+                    const card = createCard(name, i);
+                    grid.appendChild(card);
+                });
+            }
+
+            async function loadTemplates() {
+                showSkeletons(8);
+                try {
+                    const res = await fetch('https://api.github.com/repos/omahaksara/invitation/contents/templates', {
+                        headers: { 'Accept': 'application/vnd.github.v3+json' }
+                    });
+                    
+                    if (!res.ok) throw new Error('GitHub API error');
+                    
+                    const data = await res.json();
+                    const folders = data
+                        .filter(item => item.type === 'dir')
+                        .map(item => item.name)
+                        .sort((a, b) => a.localeCompare(b, 'id', { sensitivity: 'base' }));
+                    
+                    render(folders);
+                } catch (error) {
+                    console.warn('API gagal, menggunakan fallback:', error);
+                    const fallback = [
+                        'terra-soft',
+                        'mocha-romantic-frame',
+                        'mocha-romantic',
+                        'sage-line',
+                        'sage-syari',
+                        'floral-pink',
+                        'minimalis-gold',
+                        'elegance-motion'
+                    ];
+                    render(fallback);
+                }
+            }
+
+            loadTemplates();
+        });
+    </script>
+</body>
+</html>
