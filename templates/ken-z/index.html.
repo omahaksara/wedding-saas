@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ken-Z Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;600&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root { --kenz-dark: #121212; --kenz-accent: #D1D5DB; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--kenz-dark); color: var(--kenz-accent); overflow-x: hidden; }
+        .font-serif { font-family: 'Instrument Serif', serif; }
+        
+        /* Efek Film Grain - Khas Gen Z 2026 */
+        .grain { pointer-events: none; position: fixed; inset: -100%; height: 300%; width: 300%; background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain_Noise.png'); opacity: 0.04; animation: noise 8s steps(10) infinite; z-index: 100; }
+        @keyframes noise { 0%, 100% { transform:translate(0,0) } 10% { transform:translate(-5%,-10%) } 30% { transform:translate(-10%,5%) } 50% { transform:translate(-15%,-10%) } 70% { transform:translate(5%,10%) } 90% { transform:translate(10%,5%) } }
+
+        .reveal-text { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        .hero-img { filter: grayscale(100%) contrast(110%); transition: filter 1s ease; }
+        .hero-img:hover { filter: grayscale(0%) contrast(100%); }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+
+    <!-- COVER SCREEN (BRUTALIST) -->
+    <div id="cover" class="fixed inset-0 z-[60] bg-[#121212] flex flex-col items-center justify-center p-6">
+        <div class="w-full max-w-xs border border-gray-800 p-8 text-center">
+            <p class="text-[10px] tracking-[0.3em] uppercase opacity-60 mb-12">— The Union of —</p>
+            <h1 id="cover-names" class="font-serif text-6xl italic leading-tight mb-20 text-white"></h1>
+            <p class="text-xs mb-2 opacity-50 italic">Specially invited:</p>
+            <p id="cover-guest" class="text-lg font-light tracking-wide mb-12 border-b border-gray-800 pb-2"></p>
+            <button id="open-invitation" class="group relative overflow-hidden border border-gray-500 px-10 py-3 transition-all hover:bg-white hover:text-black">
+                <span class="relative z-10 text-xs tracking-widest uppercase">Enter Experience</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="app" class="max-w-md mx-auto opacity-0">
+        <!-- HERO (FULL SCREEN CINEMATIC) -->
+        <section class="h-[90vh] relative overflow-hidden flex items-center justify-center">
+            <img id="hero-image" class="hero-img absolute inset-0 w-full h-full object-cover opacity-60" src="">
+            <div class="relative z-10 text-center px-6">
+                <h2 id="hero-names" class="font-serif text-7xl text-white"></h2>
+                <div class="h-[1px] w-20 bg-white/30 mx-auto my-6"></div>
+                <p id="hero-date" class="text-[10px] tracking-[0.4em] uppercase"></p>
+            </div>
+        </section>
+
+        <!-- NARRATIVE (STYLE BOLD BERNALAR) -->
+        <section class="p-12 text-center bg-[#121212]">
+            <p class="text-sm leading-relaxed opacity-70 italic font-light">
+                "Dalam keriuhan dunia yang enggan diam, kita memilih satu sudut sunyi untuk menua bersama."
+            </p>
+        </section>
+
+        <!-- COUPLE SECTION (MINIMALIST) -->
+        <section id="couple" class="p-8 space-y-24 bg-[#121212]">
+            <div class="reveal-text">
+                <img id="groom-img" class="w-full grayscale hover:grayscale-0 transition duration-700 aspect-[4/5] object-cover mb-6 border border-gray-800" src="">
+                <h3 id="groom-name" class="font-serif text-4xl text-white"></h3>
+                <p id="groom-parents" class="text-[10px] mt-2 tracking-widest uppercase opacity-40"></p>
+            </div>
+            <div class="text-center font-serif text-4xl opacity-20 italic">at the same time</div>
+            <div class="reveal-text text-right">
+                <img id="bride-img" class="w-full grayscale hover:grayscale-0 transition duration-700 aspect-[4/5] object-cover mb-6 border border-gray-800" src="">
+                <h3 id="bride-name" class="font-serif text-4xl text-white"></h3>
+                <p id="bride-parents" class="text-[10px] mt-2 tracking-widest uppercase opacity-40"></p>
+            </div>
+        </section>
+
+        <!-- DARK FOOTER -->
+        <footer class="p-12 text-center border-t border-gray-900 mt-20">
+            <p class="text-[10px] tracking-[0.5em] uppercase opacity-30 mb-4">Fin — 2026</p>
+            <p class="font-serif text-xl italic">Omah Aksara Digital Archive</p>
+        </footer>
+    </div>
+
+    <script>
+        // Gunakan logika fetch yang sama dengan omahaksara engine sebelumnya
+        // Tambahkan GSAP untuk smooth reveal
+        document.getElementById('open-invitation').addEventListener('click', () => {
+            gsap.to("#cover", { opacity: 0, duration: 1.5, ease: "power4.out", onComplete: () => {
+                document.getElementById('cover').style.display = 'none';
+                gsap.to("#app", { opacity: 1, duration: 2 });
+            }});
+        });
+    </script>
+</body>
+</html>
