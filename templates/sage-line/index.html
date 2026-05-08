@@ -3,26 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation</title>
+    <title>Undangan Pernikahan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Montserrat', sans-serif; background: #EAECE6; color: #3A4A3A; }
-       .font-serif { font-family: 'Cormorant Garamond', serif; }
-       .bg-sage { background-color: #7A8B7A; }
-       .text-sage { color: #7A8B7A; }
-       .border-sage { border-color: #7A8B7A; }
-       .torn-top {
-            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 10 Q 5 0, 10 10 T 20 10 T 30 10 T 40 10 T 50 10 T 60 10 T 70 10 T 80 10 T 90 10 T 100 10 L 100 10 L 0 10 Z" fill="black"/></svg>');
-            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 10 Q 5 0, 10 10 T 20 10 T 30 10 T 40 10 T 50 10 T 60 10 T 70 10 T 80 10 T 90 10 T 100 10 L 100 10 L 0 10 Z" fill="black"/></svg>');
-            -webkit-mask-size: 100% 10px; mask-size: 100% 10px;
+     .font-serif { font-family: 'Cormorant Garamond', serif; }
+     .font-arab { font-family: 'Scheherazade New', serif; }
+     .bg-sage { background-color: #7A8B7A; }
+     .text-sage { color: #7A8B7A; }
+     .border-sage { border-color: #7A8B7A; }
+     .torn-top {
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,50 C150,0 350,0 500,50 C650,100 850,100 1000,50 L1000,50 L0,50 Z" fill="black"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,50 C150,0 350,0 500,50 C650,100 850,100 1000,50 L1000,50 L0,50 Z" fill="black"/></svg>');
+            -webkit-mask-size: 100% 20px; mask-size: 100% 20px;
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
         }
-       .torn-bottom {
-            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 0 Q 5 10, 10 0 T 20 0 T 30 0 T 40 0 T 50 0 T 60 0 T 70 0 T 80 0 T 90 0 T 100 0 L 100 0 L 0 0 Z" fill="black"/></svg>');
-            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 0 Q 5 10, 10 0 T 20 0 T 30 0 T 40 0 T 50 0 T 60 0 T 70 0 T 80 0 T 90 0 T 100 0 L 100 0 L 0 0 Z" fill="black"/></svg>');
-            -webkit-mask-size: 100% 10px; mask-size: 100% 10px;
+     .torn-bottom {
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,0 C150,50 350,50 500,0 C650,-50 850,-50 1000,0 L1000,0 L0,0 Z" fill="black"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,0 C150,50 350,50 500,0 C650,-50 850,-50 1000,0 L1000,0 L0,0 Z" fill="black"/></svg>');
+            -webkit-mask-size: 100% 20px; mask-size: 100% 20px;
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
             -webkit-mask-position: bottom; mask-position: bottom;
         }
     </style>
@@ -31,75 +34,81 @@
     <div id="app" class="max-w-md mx-auto bg-white min-h-screen shadow-xl">
         <!-- HERO -->
         <section class="relative text-center bg-white p-8">
-            <img src="https://raw.githubusercontent.com/sa-github/png/main/eucalyptus-1.png" class="absolute top-4 left-4 w-24 opacity-70">
-            <img src="https://raw.githubusercontent.com/sa-github/png/main/eucalyptus-2.png" class="absolute bottom-20 right-2 w-20 opacity-70 rotate-45">
+            <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f33f.svg" class="absolute top-4 left-4 w-16 opacity-60">
+            <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f33f.svg" class="absolute bottom-20 right-2 w-14 opacity-60 rotate-45">
             
-            <p class="text-xs tracking-[0.3em] uppercase mb-8">NUESTRA BODA</p>
+            <p class="font-arab text-2xl text-sage mb-4">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+            <p class="text-xs tracking-[0.3em] uppercase mb-8">WALIMATUL 'URSY</p>
             <h1 id="initials" class="font-serif text-7xl text-sage mb-8"></h1>
             
-            <div class="torn-top torn-bottom">
+            <div class="torn-top torn-bottom mb-8">
                 <img id="hero-image" class="w-full h-80 object-cover" src="">
             </div>
 
             <div class="mt-8">
-                <p class="text-xs uppercase mb-4">CON NUESTRO AMOR, LA BENDICIÓN DE DIOS Y LA DE NUESTROS PADRES</p>
+                <p class="text-xs uppercase mb-4">DENGAN MEMOHON RAHMAT & RIDHO ALLAH SWT<br>KAMI BERMASUD MENYELENGGARAKAN AKAD NIKAH PUTRA-PUTRI KAMI</p>
                 <div id="parents" class="text-sm leading-relaxed mb-6"></div>
                 <h2 id="couple-names" class="font-serif text-5xl text-sage leading-none"></h2>
-                <p class="text-xs mt-6 uppercase">TENEMOS EL HONOR DE INVITARTE A<br>NUESTRA BODA</p>
                 
+                <div class="text-xs mt-6 px-4 py-3 bg-[#F4F6F2] rounded-lg italic leading-relaxed">
+                    <p class="font-arab text-lg mb-1">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا</p>
+                    <p>"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tentram kepadanya."</p>
+                    <p class="mt-1 font-semibold">QS. Ar-Rum: 21</p>
+                </div>
+
                 <div id="date-box" class="border-t border-b border-sage py-3 mt-6 inline-block px-8">
-                    <p class="text-sm"></p>
                 </div>
             </div>
         </section>
 
         <!-- EVENT + TIMELINE -->
         <section class="bg-white p-8">
-            <div id="event-cards" class="space-y-4 mb-10"></div>
+            <div id="event-cards" class="space-y-6 mb-10"></div>
             
-            <h3 class="text-center text-xs tracking-[0.2em] uppercase mb-6">ITINERARIO DE ACTIVIDADES</h3>
+            <h3 class="text-center text-xs tracking-[0.2em] uppercase mb-6">RANGKAIAN ACARA</h3>
             <div id="timeline" class="relative border-l-2 border-sage/30 ml-4 pl-8 space-y-6">
-                <!-- Timeline diisi JS -->
             </div>
         </section>
 
-        <!-- PASES + GIFT -->
+        <!-- GIFT + RSVP -->
         <section class="bg-[#F4F6F2] p-8 text-center">
             <div class="mb-8">
-                <img src="https://raw.githubusercontent.com/sa-github/png/main/icon-ticket.png" class="w-10 mx-auto mb-2 opacity-70">
-                <p class="text-xs uppercase">PASES</p>
-                <p class="text-xs">TENEMOS RESERVADOS</p>
-                <div class="border border-sage w-12 h-12 mx-auto my-2 flex items-center justify-center">
-                    <p id="guest-count" class="font-serif text-2xl">2</p>
-                </div>
-                <p class="text-xs uppercase">LUGARES</p>
+                <svg class="w-10 h-10 mx-auto mb-2 opacity-70 text-sage" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                <p class="text-xs uppercase font-semibold">MOHON DOA RESTU</p>
+                <p class="text-xs mt-2 leading-relaxed">MERUPAKAN SUATU KEHORMATAN DAN KEBAHAGIAAN<br>BAGI KAMI APABILA BAPAK/IBU/SAUDARA/I BERKENAN HADIR<br>DAN MEMBERIKAN DOA RESTU KEPADA KEDUA MEMPELAI</p>
             </div>
 
             <div class="mb-8">
-                <img src="https://raw.githubusercontent.com/sa-github/png/main/icon-gift.png" class="w-10 mx-auto mb-2 opacity-70">
-                <p class="text-xs uppercase font-semibold">SUGERENCIA DE REGALO</p>
-                <p class="text-xs mt-2 leading-relaxed">SI DESEAN HACERNOS UN PRESENTE, PUEDEN AYUDARNOS EN NUESTRO SUEÑO DE COMPRAR UNA CASA. ¡TODO SUMA!<br>LLUVIA DE SOBRES</p>
+                <svg class="w-10 h-10 mx-auto mb-2 opacity-70 text-sage" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z" clip-rule="evenodd"></path><path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z"></path></svg>
+                <p class="text-xs uppercase font-semibold">AMPLLOP DIGITAL</p>
+                <p class="text-xs mt-2 leading-relaxed">DOA RESTU ANDA ADALAH KADO TERINDAH BAGI KAMI<br>NAMUN JIKA MEMBERI ADALAH UNGKAPAN TANDA KASIH, DAPAT MELALUI:</p>
                 <div id="gift-list" class="mt-4 space-y-2"></div>
             </div>
 
             <div>
-                <img src="https://raw.githubusercontent.com/sa-github/png/main/icon-wa.png" class="w-10 mx-auto mb-2 opacity-70">
-                <p class="text-xs uppercase font-semibold">CONFIRMACIÓN</p>
-                <p class="text-xs mt-2">AGRADECEMOS QUE CONFIRMES TU ASISTENCIA</p>
-                <a id="rsvp-btn" href="#" class="inline-block bg-sage text-white text-xs uppercase px-6 py-2 rounded-sm mt-3">ENVIAR MENSAJE</a>
+                <svg class="w-10 h-10 mx-auto mb-2 opacity-70 text-sage" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+                <p class="text-xs uppercase font-semibold">KONFIRMASI KEHADIRAN</p>
+                <p class="text-xs mt-2">MOHON KONFIRMASI KEHADIRAN ANDA</p>
+                <a id="rsvp-btn" href="#" class="inline-block bg-sage text-white text-xs uppercase px-6 py-2 rounded-sm mt-3">KIRIM PESAN WHATSAPP</a>
             </div>
             
-            <p class="text-[10px] mt-8 leading-relaxed italic">ADORAMOS A SUS HIJOS, PERO CREEMOS QUE NECESITAN UNA NOCHE LIBRE.<br><b>SÓLO ADULTOS, POR FAVOR</b></p>
+            <div class="text-xs mt-8 bg-white p-4 rounded-lg">
+                <p class="font-semibold mb-1">ATURAN BERPAKAIAN</p>
+                <p class="leading-relaxed">DENGAN TIDAK MENGURANGI RASA HORMAT, KAMI MENGHARAPKAN TAMU UNDANGAN BERKENAN MEMAKAI BUSANA SOPAN & MENUTUP AURAT. WARNA SAGE/HIJAU SAGE DIPERSILAKAN.</p>
+            </div>
         </section>
 
-        <!-- FOOTER IMAGE -->
+        <!-- FOOTER -->
         <section class="bg-white">
             <div class="torn-top">
                 <img id="footer-image" class="w-full h-64 object-cover" src="">
             </div>
-            <div class="p-8 text-center text-[10px]">
-                <p>ESPERAMOS CONTAR CON SU PRESENCIA</p>
-                <p class="mt-4">Digital Invitation by Omah Aksara</p>
+            <div class="p-8 text-center text-xs">
+                <p class="font-arab text-xl text-sage mb-2">بَارَكَ اللهُ لَكُماَ وَبَارَكَ عَلَيْكُماَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+                <p class="italic mb-4">"Semoga Allah memberkahimu dan memberkahi atasmu, serta mengumpulkan kalian berdua dalam kebaikan"</p>
+                <p>KAMI YANG BERBAHAGIA</p>
+                <p id="footer-names" class="font-serif text-2xl text-sage mt-2"></p>
+                <p class="mt-6">Digital Invitation by Omah Aksara</p>
             </div>
         </section>
     </div>
@@ -117,37 +126,37 @@
             // HERO
             document.getElementById('initials').textContent = `${g.nickname.charAt(0)}|${b.nickname.charAt(0)}`;
             document.getElementById('hero-image').src = basePath + data.gallery.heroImage;
-            document.getElementById('parents').innerHTML = `${g.father} & ${g.mother}<br>Y<br>${b.father} & ${b.mother}`;
-            document.getElementById('couple-names').innerHTML = `${g.nickname} <span class="font-sans text-3xl">&</span><br>${b.nickname}`;
+            document.getElementById('parents').innerHTML = `Putra dari Bapak ${g.father} & Ibu ${g.mother}<br>&<br>Putri dari Bapak ${b.father} & Ibu ${b.mother}`;
+            document.getElementById('couple-names').innerHTML = `${g.name}<br><span class="font-sans text-3xl">&</span><br>${b.name}`;
             
             const date = new Date(data.events[0].date);
             document.getElementById('date-box').innerHTML = `
-                <p class="text-xs uppercase">${date.toLocaleDateString('es-ES', { weekday: 'long' })}</p>
+                <p class="text-xs uppercase">${date.toLocaleDateString('id-ID', { weekday: 'long' })}</p>
                 <p class="font-serif text-5xl leading-none my-1">${date.getDate()}</p>
-                <p class="text-xs uppercase">${date.toLocaleDateString('es-ES', { month: 'long', year: 'numeric' })}</p>
+                <p class="text-xs uppercase">${date.toLocaleDateString('id-ID', { month: 'long', year: 'numeric' })}</p>
             `;
 
             // EVENT CARDS
             const eventCards = document.getElementById('event-cards');
             data.events.forEach(ev => {
                 eventCards.innerHTML += `
-                    <div class="text-center">
-                        <p class="text-sm font-semibold">${ev.startTime} PM</p>
-                        <p class="text-xs uppercase font-semibold">${ev.title}</p>
-                        <p class="text-xs">${ev.address}</p>
-                        ${ev.googleMaps? `<a href="${ev.googleMaps}" target="_blank" class="inline-block bg-sage text-white text-[10px] uppercase px-4 py-1.5 rounded-sm mt-2">VER UBICACIÓN</a>` : ''}
+                    <div class="text-center bg-[#F4F6F2] p-5 rounded-lg">
+                        <p class="text-xs uppercase font-semibold tracking-wider">${ev.title}</p>
+                        <p class="text-sm font-semibold mt-2">${ev.startTime} - ${ev.endTime} ${ev.timezone}</p>
+                        <p class="text-xs mt-1">${ev.address}</p>
+                        ${ev.googleMaps? `<a href="${ev.googleMaps}" target="_blank" class="inline-block bg-sage text-white text-xs uppercase px-4 py-1.5 rounded-sm mt-3">PETUNJUK LOKASI</a>` : ''}
                     </div>
                 `;
             });
 
-            // TIMELINE - pakai data events
+            // TIMELINE
             const timeline = document.getElementById('timeline');
-            const icons = ['⛪','🥂','💐','🍽️','🎉','🌙'];
+            const icons = ['🕌','💍','🤲','🍽️','📸','💐'];
             data.events.forEach((ev, i) => {
                 timeline.innerHTML += `
                     <div class="relative">
-                        <div class="absolute -left-[42px] top-0 w-6 h-6 bg-white border-2 border-sage rounded-full flex items-center justify-center text-xs">${icons[i] || '•'}</div>
-                        <p class="text-sm font-semibold">${ev.startTime} PM</p>
+                        <div class="absolute -left-10 top-0 w-6 h-6 bg-white border-2 border-sage rounded-full flex items-center justify-center text-xs">${icons[i] || '•'}</div>
+                        <p class="text-sm font-semibold">${ev.startTime} ${ev.timezone}</p>
                         <p class="text-xs">${ev.title}</p>
                     </div>
                 `;
@@ -157,23 +166,24 @@
             const giftList = document.getElementById('gift-list');
             data.digitalGift.forEach(g => {
                 giftList.innerHTML += `
-                    <div class="text-xs">
+                    <div class="text-xs bg-white p-3 rounded">
                         <p class="font-semibold">${g.provider}</p>
-                        <p class="font-mono">${g.accountNumber}</p>
+                        <p class="font-mono text-sm my-1">${g.accountNumber}</p>
                         <p>a.n ${g.accountHolder}</p>
                     </div>
                 `;
             });
 
             // RSVP
-            document.getElementById('rsvp-btn').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo, saya ${guestName.replace(/\+/g, ' ')} akan hadir di acara ${g.nickname} & ${b.nickname}. Terima kasih.`;
+            document.getElementById('rsvp-btn').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=Assalamualaikum, saya ${guestName.replace(/\+/g, ' ')} insyaAllah akan hadir di walimah ${g.nickname} & ${b.nickname}. Jazakumullah khairan.`;
             
-            // FOOTER IMG - pake foto terakhir dari album
+            // FOOTER
             const lastPhoto = data.gallery.album[data.gallery.album.length - 1];
             document.getElementById('footer-image').src = basePath + lastPhoto;
+            document.getElementById('footer-names').textContent = `${g.nickname} & ${b.nickname}`;
 
         }).catch(err => {
-            document.getElementById('app').innerHTML = `<div class="p-8 text-center">Error: Data undangan tidak ditemukan.</div>`;
+            document.getElementById('app').innerHTML = `<div class="p-8 text-center">Mohon maaf, data undangan tidak ditemukan.</div>`;
         });
     </script>
 </body>
