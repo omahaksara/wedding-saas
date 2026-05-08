@@ -88,19 +88,22 @@
             margin-top: 20px;
         }
        .couple-item p { color: var(--text-muted); }
-       .event-card {
+       .couple-item a { color: var(--gold); text-decoration: none; }
+       .event-card,.story-card,.gift-box,.logistics-box {
             background: var(--bg-soft);
             border: 1px solid #222;
             padding: 32px;
             margin-bottom: 24px;
             text-align: left;
         }
-       .event-card h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 16px; }
-       .event-card p { color: var(--text-muted); margin-bottom: 8px; }
+       .event-card h3,.story-card h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 16px; }
+       .event-card p,.story-card p,.logistics-box p { color: var(--text-muted); margin-bottom: 8px; }
        .event-card.btn { margin-top: 16px; padding: 10px 24px; font-size: 0.9rem; }
+       .story-card span { color: var(--gold); font-weight: 600; }
        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
        .gallery-grid img { width: 100%; height: 250px; object-fit: cover; }
-       .gift-box { background: var(--bg-soft); padding: 32px; border: 1px solid #222; }
+       .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; margin-top: 24px; }
+       .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
        .gift-box img { max-width: 200px; margin: 20px auto; display: block; }
        .footer { padding: 60px 24px; font-size: 0.9rem; color: var(--text-muted); }
        .music-btn {
@@ -137,13 +140,13 @@
                     <img id="groomImg" src="" alt="Mempelai Pria">
                     <h3 id="groomName"></h3>
                     <p id="groomParents"></p>
-                    <p id="groomIg"></p>
+                    <p><a id="groomIg" href="" target="_blank"></a></p>
                 </div>
                 <div class="couple-item">
                     <img id="brideImg" src="" alt="Mempelai Wanita">
                     <h3 id="brideName"></h3>
                     <p id="brideParents"></p>
-                    <p id="brideIg"></p>
+                    <p><a id="brideIg" href="" target="_blank"></a></p>
                 </div>
             </div>
         </section>
@@ -153,18 +156,33 @@
             <div id="eventList"></div>
         </section>
 
+        <section id="loveStory" class="hidden">
+            <h2 class="section-title">Perjalanan Cinta</h2>
+            <div id="storyList"></div>
+        </section>
+
         <section id="gallery">
             <h2 class="section-title">Momen Bahagia</h2>
             <div class="gallery-grid" id="galleryGrid"></div>
         </section>
 
-        <section id="gift" class="hidden" style="background: var(--bg-soft);">
+        <section id="video" class="hidden" style="background: var(--bg-soft);">
+            <h2 class="section-title">Video Kami</h2>
+            <div class="video-wrapper" id="videoWrapper"></div>
+        </section>
+
+        <section id="gift" class="hidden">
             <h2 class="section-title">Wedding Gift</h2>
-            <div class="gift-box" id="giftBox"></div>
+            <div id="giftList"></div>
+        </section>
+
+        <section id="logistics" class="hidden" style="background: var(--bg-soft);">
+            <h2 class="section-title">Informasi Acara</h2>
+            <div class="logistics-box" id="logisticsBox"></div>
         </section>
 
         <section class="footer">
-            <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
+            <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
             <p style="margin-top: 20px; color: var(--gold);" id="footerCouple"></p>
         </section>
     </main>
@@ -179,86 +197,150 @@
         const basePath = `../../public/clients/${clientSlug}/`;
 
         fetch(`${basePath}data.json`)
-          .then(res => res.json())
-          .then(data => {
-                if (data.meta?.theme_color) {
-                    document.documentElement.style.setProperty('--gold', data.meta.theme_color);
-                }
+       .then(res => {
+            if (!res.ok) throw new Error('Data not found');
+            return res.json();
+        })
+       .then(data => {
+            // 1. Meta & Theme
+            if (data.meta?.theme_color) {
+                document.documentElement.style.setProperty('--gold', data.meta.theme_color);
+            }
+            document.title = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
 
-                document.title = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
-                document.getElementById('guestName').textContent = guestName;
-                document.getElementById('coupleName').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
-                document.getElementById('cover').style.backgroundImage = `url('${basePath}${data.gallery.heroImage}')`;
+            // 2. Cover
+            document.getElementById('guestName').textContent = guestName;
+            document.getElementById('coupleName').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+            document.getElementById('cover').style.backgroundImage = `url('${basePath}${data.gallery.heroImage}')`;
+            const eventDate = new Date(data.events[0].date);
+            document.getElementById('weddingDate').textContent = eventDate.toLocaleDateString('id-ID', {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+            });
 
-                const eventDate = new Date(data.events[0].date);
-                document.getElementById('weddingDate').textContent = eventDate.toLocaleDateString('id-ID', {
-                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-                });
+            // 3. Couple
+            document.getElementById('groomImg').src = basePath + data.couple.groom.image;
+            document.getElementById('groomName').textContent = data.couple.groom.name;
+            document.getElementById('groomParents').textContent = `Putra dari ${data.couple.groom.father} & ${data.couple.groom.mother}`;
+            if (data.couple.groom.instagram) {
+                const groomIg = document.getElementById('groomIg');
+                groomIg.textContent = data.couple.groom.instagram;
+                groomIg.href = `https://instagram.com/${data.couple.groom.instagram.replace('@', '')}`;
+            }
 
-                document.getElementById('groomImg').src = basePath + data.couple.groom.image;
-                document.getElementById('groomName').textContent = data.couple.groom.name;
-                document.getElementById('groomParents').textContent = `Putra dari ${data.couple.groom.father} & ${data.couple.groom.mother}`;
-                if (data.couple.groom.instagram) document.getElementById('groomIg').textContent = data.couple.groom.instagram;
+            document.getElementById('brideImg').src = basePath + data.couple.bride.image;
+            document.getElementById('brideName').textContent = data.couple.bride.name;
+            document.getElementById('brideParents').textContent = `Putri dari ${data.couple.bride.father} & ${data.couple.bride.mother}`;
+            if (data.couple.bride.instagram) {
+                const brideIg = document.getElementById('brideIg');
+                brideIg.textContent = data.couple.bride.instagram;
+                brideIg.href = `https://instagram.com/${data.couple.bride.instagram.replace('@', '')}`;
+            }
 
-                document.getElementById('brideImg').src = basePath + data.couple.bride.image;
-                document.getElementById('brideName').textContent = data.couple.bride.name;
-                document.getElementById('brideParents').textContent = `Putri dari ${data.couple.bride.father} & ${data.couple.bride.mother}`;
-                if (data.couple.bride.instagram) document.getElementById('brideIg').textContent = data.couple.bride.instagram;
+            // 4. Events
+            const eventList = document.getElementById('eventList');
+            data.events.forEach(ev => {
+                const date = new Date(ev.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+                eventList.innerHTML += `
+                    <div class="event-card">
+                        <h3>${ev.title}</h3>
+                        <p><strong>${date}</strong></p>
+                        <p>Pukul ${ev.startTime} - ${ev.endTime} ${ev.timezone}</p>
+                        <p>${ev.address}</p>
+                        ${ev.googleMaps? `<a href="${ev.googleMaps}" target="_blank" class="btn">Lihat Lokasi</a>` : ''}
+                    </div>
+                `;
+            });
 
-                const eventList = document.getElementById('eventList');
-                data.events.forEach(ev => {
-                    const date = new Date(ev.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-                    eventList.innerHTML += `
-                        <div class="event-card">
-                            <h3>${ev.title}</h3>
-                            <p><strong>${date}</strong></p>
-                            <p>Pukul ${ev.startTime} - ${ev.endTime} ${ev.timezone}</p>
-                            <p>${ev.address}</p>
-                            ${ev.googleMaps? `<a href="${ev.googleMaps}" target="_blank" class="btn">Lihat Lokasi</a>` : ''}
+            // 5. Love Story - Hide jika kosong
+            if (data.loveStory && data.loveStory.length > 0) {
+                document.getElementById('loveStory').classList.remove('hidden');
+                const storyList = document.getElementById('storyList');
+                data.loveStory.forEach(story => {
+                    storyList.innerHTML += `
+                        <div class="story-card">
+                            <h3><span>${story.year}</span> - ${story.title}</h3>
+                            <p>${story.desc}</p>
                         </div>
                     `;
                 });
+            }
 
-                const galleryGrid = document.getElementById('galleryGrid');
-                if (data.gallery.album && data.gallery.album.length > 0) {
-                    data.gallery.album.forEach(img => {
-                        galleryGrid.innerHTML += `<img src="${basePath}${img}" alt="Gallery">`;
-                    });
-                } else {
-                    document.getElementById('gallery').classList.add('hidden');
-                }
+            // 6. Gallery - Hide jika kosong
+            const galleryGrid = document.getElementById('galleryGrid');
+            if (data.gallery.album && data.gallery.album.length > 0) {
+                data.gallery.album.forEach(img => {
+                    galleryGrid.innerHTML += `<img src="${basePath}${img}" alt="Gallery">`;
+                });
+            } else {
+                document.getElementById('gallery').classList.add('hidden');
+            }
 
-                if (data.digitalGift && data.digitalGift.length > 0) {
-                    const gift = data.digitalGift[0];
-                    document.getElementById('gift').classList.remove('hidden');
-                    document.getElementById('giftBox').innerHTML = `
-                        <h3>${gift.provider}</h3>
-                        <p style="font-size: 1.2rem; letter-spacing: 2px; margin: 10px 0;">${gift.accountNumber}</p>
-                        <p>a.n ${gift.accountHolder}</p>
-                        ${gift.qrCode? `<img src="${basePath}${gift.qrCode}" alt="QR Code">` : ''}
+            // 7. Video YouTube - Hide jika kosong
+            if (data.gallery.videoYoutubeId) {
+                document.getElementById('video').classList.remove('hidden');
+                document.getElementById('videoWrapper').innerHTML = `
+                    <iframe src="https://www.youtube.com/embed/${data.gallery.videoYoutubeId}" 
+                            title="YouTube video" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                `;
+            }
+
+            // 8. Gift - Hide jika kosong
+            if (data.digitalGift && data.digitalGift.length > 0) {
+                document.getElementById('gift').classList.remove('hidden');
+                const giftList = document.getElementById('giftList');
+                data.digitalGift.forEach(gift => {
+                    giftList.innerHTML += `
+                        <div class="gift-box">
+                            <h3>${gift.provider}</h3>
+                            <p style="font-size: 1.2rem; letter-spacing: 2px; margin: 10px 0;">${gift.accountNumber}</p>
+                            <p>a.n ${gift.accountHolder}</p>
+                            ${gift.qrCode? `<img src="${basePath}${gift.qrCode}" alt="QR Code">` : ''}
+                        </div>
                     `;
-                }
+                });
+            }
 
-                if (data.config?.audioUrl) {
-                    const audio = document.getElementById('bgMusic');
-                    const musicBtn = document.getElementById('musicBtn');
-                    audio.src = basePath + data.config.audioUrl;
-                    musicBtn.classList.remove('hidden');
-                    musicBtn.onclick = () => {
-                        if (audio.paused) { audio.play(); musicBtn.textContent = '❚❚'; }
-                        else { audio.pause(); musicBtn.textContent = '♫'; }
-                    };
-                    document.getElementById('openBtn').onclick = () => audio.play().catch(e => {});
+            // 9. Logistics - Hide jika semua kosong
+            if (data.logistics && (data.logistics.dressCode || data.logistics.rsvpWaNumber || data.logistics.guestNote)) {
+                document.getElementById('logistics').classList.remove('hidden');
+                const logisticsBox = document.getElementById('logisticsBox');
+                let logisticsHTML = '';
+                if (data.logistics.dressCode) logisticsHTML += `<p><strong>Dress Code:</strong> ${data.logistics.dressCode}</p>`;
+                if (data.logistics.guestNote) logisticsHTML += `<p><strong>Catatan:</strong> ${data.logistics.guestNote}</p>`;
+                if (data.logistics.rsvpWaNumber) {
+                    const waLink = `https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo, saya ${guestName} ingin konfirmasi kehadiran untuk acara ${data.couple.groom.nickname} %26 ${data.couple.bride.nickname}`;
+                    logisticsHTML += `<a href="${waLink}" target="_blank" class="btn" style="margin-top: 16px;">Konfirmasi via WhatsApp</a>`;
                 }
+                logisticsBox.innerHTML = logisticsHTML;
+            }
 
-                document.getElementById('footerCouple').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
-                document.getElementById('loader').classList.add('hidden');
-                document.getElementById('main').classList.remove('hidden');
-            })
-          .catch(err => {
-                document.getElementById('loader').innerHTML = '<div class="cover-content"><p>Gagal memuat data.</p></div>';
-                console.error(err);
-            });
+            // 10. Music - Hide jika kosong
+            if (data.config?.audioUrl) {
+                const audio = document.getElementById('bgMusic');
+                const musicBtn = document.getElementById('musicBtn');
+                audio.src = basePath + data.config.audioUrl;
+                musicBtn.classList.remove('hidden');
+                let isPlaying = false;
+                musicBtn.onclick = () => {
+                    if (isPlaying) { audio.pause(); musicBtn.textContent = '♫'; }
+                    else { audio.play(); musicBtn.textContent = '❚❚'; }
+                    isPlaying =!isPlaying;
+                };
+                document.getElementById('openBtn').addEventListener('click', () => {
+                    audio.play().then(() => { isPlaying = true; musicBtn.textContent = '❚❚'; }).catch(e => {});
+                });
+            }
+
+            document.getElementById('footerCouple').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+            document.getElementById('loader').classList.add('hidden');
+            document.getElementById('main').classList.remove('hidden');
+        })
+       .catch(err => {
+            document.getElementById('loader').innerHTML = '<div class="cover-content"><p>Gagal memuat data. Cek link atau data.json</p></div>';
+            console.error(err);
+        });
     </script>
 </body>
 </html>
