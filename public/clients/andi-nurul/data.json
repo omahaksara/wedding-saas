@@ -49,4 +49,36 @@
   "gallery": {
     "heroImage": "foto-sampul.jpg",
     "videoYoutubeId": "",
-    "
+    "album": [
+      "foto1.jpg",
+      "foto2.jpg",
+      "foto3.jpg",
+      "foto4.jpg"
+    ]
+  },
+  "loveStory": [
+    {
+      "year": "2021",
+      "title": "Pertemuan Pertama",
+      "desc": "Takdir mempertemukan kami di acara kampus. Dari teman, menjadi nyaman."
+    },
+    {
+      "year": "2025",
+      "title": "Lamaran",
+      "desc": "Dengan restu keluarga, kami mengikat janji untuk selamanya."
+    }
+  ],
+  "digitalGift": [
+    {
+      "provider": "BCA",
+      "accountNumber": "987654321",
+      "accountHolder": "Andi Pratama",
+      "qrCode": "qr-bca.jpg"
+    }
+  ],
+  "logistics": {
+    "dressCode": "Nude / Earth Tone",
+    "rsvpWaNumber": "6285796461157",
+    "guestNote": "Mohon maaf jika ada kesalahan penulisan nama/gelar. Kehadiran Anda sangat berarti bagi kami."
+  }
+}
