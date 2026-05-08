@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <style>
         :root {
             --gold: #C5A572;
@@ -14,6 +15,7 @@
             --bg-soft: #1A1A1A;
             --text: #EAEAEA;
             --text-muted: #888;
+            --border: #222;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -24,8 +26,8 @@
             line-height: 1.8;
             overflow-x: hidden;
         }
-       .container { max-width: 500px; margin: 0 auto; background: var(--bg); }
-       .cover {
+     .container { max-width: 500px; margin: 0 auto; background: var(--bg); }
+     .cover {
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -36,24 +38,24 @@
             background-size: cover;
             background-position: center;
         }
-       .cover::after {
+     .cover::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(15,15,15,0.3) 0%, var(--bg) 95%);
+            background: linear-gradient(180deg, rgba(15,15,15,0.2) 0%, var(--bg) 95%);
         }
-       .cover-content { position: relative; z-index: 2; padding: 20px; }
-       .cover.to { font-size: 0.9rem; letter-spacing: 2px; color: var(--text-muted); }
-       .cover.guest-name { font-size: 1.5rem; margin: 10px 0 30px; font-weight: 500; }
-       .cover h1 {
+     .cover-content { position: relative; z-index: 2; padding: 20px; }
+     .cover.to { font-size: 0.9rem; letter-spacing: 2px; color: var(--text-muted); }
+     .cover.guest-name { font-size: 1.5rem; margin: 10px 0 30px; font-weight: 500; }
+     .cover h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             color: var(--gold);
             line-height: 1.1;
             font-weight: 600;
         }
-       .cover.date { margin: 30px 0; letter-spacing: 3px; }
-       .btn {
+     .cover.date { margin: 30px 0; letter-spacing: 3px; }
+     .btn {
             display: inline-block;
             background: var(--gold);
             color: var(--bg);
@@ -65,55 +67,79 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
-       .btn:hover { background: transparent; color: var(--gold); }
+     .btn:hover { background: transparent; color: var(--gold); }
         section { padding: 80px 24px; text-align: center; }
-       .section-title {
+     .section-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.5rem;
             color: var(--gold);
             margin-bottom: 40px;
             font-weight: 600;
         }
-       .couple-grid { display: grid; gap: 40px; }
-       .couple-item img {
+        
+        /* COUPLE UPGRADE - GAK FLAT LAGI */
+     .couple-grid { display: grid; gap: 60px; }
+     .couple-item {
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            padding: 24px 24px 32px;
+            position: relative;
+        }
+     .couple-item::before {
+            content: '';
+            position: absolute;
+            top: -8px; left: -8px; right: -8px; bottom: -8px;
+            border: 1px solid var(--gold);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+     .couple-item img {
             width: 100%;
             height: 400px;
             object-fit: cover;
-            filter: grayscale(20%);
+            filter: grayscale(10%);
+            margin-bottom: 20px;
         }
-       .couple-item h3 {
+     .couple-item h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--gold);
-            margin-top: 20px;
+            margin-bottom: 8px;
         }
-       .couple-item p { color: var(--text-muted); }
-       .couple-item a { color: var(--gold); text-decoration: none; }
-       .event-card,.story-card,.gift-box,.logistics-box {
+     .couple-item p { color: var(--text-muted); font-size: 0.95rem; }
+     .couple-item a { color: var(--gold); text-decoration: none; font-weight: 500; }
+        
+     .event-card,.story-card,.gift-box,.logistics-box {
             background: var(--bg-soft);
-            border: 1px solid #222;
+            border: 1px solid var(--border);
             padding: 32px;
             margin-bottom: 24px;
             text-align: left;
         }
-       .event-card h3,.story-card h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 16px; }
-       .event-card p,.story-card p,.logistics-box p { color: var(--text-muted); margin-bottom: 8px; }
-       .event-card.btn { margin-top: 16px; padding: 10px 24px; font-size: 0.9rem; }
-       .story-card span { color: var(--gold); font-weight: 600; }
-       .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-       .gallery-grid img { width: 100%; height: 250px; object-fit: cover; }
-       .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; margin-top: 24px; }
-       .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-       .gift-box img { max-width: 200px; margin: 20px auto; display: block; }
-       .footer { padding: 60px 24px; font-size: 0.9rem; color: var(--text-muted); }
-       .music-btn {
+     .event-card h3,.story-card h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 16px; }
+     .event-card p,.story-card p,.logistics-box p { color: var(--text-muted); margin-bottom: 8px; }
+     .event-card.btn { margin-top: 16px; padding: 10px 24px; font-size: 0.9rem; }
+     .story-card span { color: var(--gold); font-weight: 600; }
+
+        /* GALLERY SLIDER - AUTO GESER */
+     .gallery-slider { width: 100%; padding-bottom: 40px; }
+     .swiper-slide { width: 85%; height: 450px; }
+     .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
+     .swiper-pagination-bullet { background: var(--text-muted); opacity: 1; }
+     .swiper-pagination-bullet-active { background: var(--gold); }
+        
+     .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; margin-top: 24px; }
+     .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+     .gift-box img { max-width: 200px; margin: 20px auto; display: block; }
+     .footer { padding: 60px 24px; font-size: 0.9rem; color: var(--text-muted); }
+     .music-btn {
             position: fixed; bottom: 20px; right: 20px; z-index: 999;
             width: 50px; height: 50px; border-radius: 50%;
             background: var(--gold); color: var(--bg); border: none;
             cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.2rem; box-shadow: 0 4px 20px rgba(197,165,114,0.3);
         }
-       .hidden { display: none!important; }
+     .hidden { display: none!important; }
         #loader { position: fixed; inset: 0; background: var(--bg); z-index: 1000; }
     </style>
 </head>
@@ -163,7 +189,10 @@
 
         <section id="gallery">
             <h2 class="section-title">Momen Bahagia</h2>
-            <div class="gallery-grid" id="galleryGrid"></div>
+            <div class="swiper gallery-slider">
+                <div class="swiper-wrapper" id="galleryWrapper"></div>
+                <div class="swiper-pagination"></div>
+            </div>
         </section>
 
         <section id="video" class="hidden" style="background: var(--bg-soft);">
@@ -190,6 +219,7 @@
     <button id="musicBtn" class="music-btn hidden">♫</button>
     <audio id="bgMusic" loop></audio>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const clientSlug = urlParams.get('c');
@@ -197,11 +227,11 @@
         const basePath = `../../public/clients/${clientSlug}/`;
 
         fetch(`${basePath}data.json`)
-       .then(res => {
+      .then(res => {
             if (!res.ok) throw new Error('Data not found');
             return res.json();
         })
-       .then(data => {
+      .then(data => {
             // 1. Meta & Theme
             if (data.meta?.theme_color) {
                 document.documentElement.style.setProperty('--gold', data.meta.theme_color);
@@ -251,7 +281,7 @@
                 `;
             });
 
-            // 5. Love Story - Hide jika kosong
+            // 5. Love Story
             if (data.loveStory && data.loveStory.length > 0) {
                 document.getElementById('loveStory').classList.remove('hidden');
                 const storyList = document.getElementById('storyList');
@@ -265,17 +295,39 @@
                 });
             }
 
-            // 6. Gallery - Hide jika kosong
-            const galleryGrid = document.getElementById('galleryGrid');
+            // 6. Gallery Slider - AUTO GESER
+            const galleryWrapper = document.getElementById('galleryWrapper');
             if (data.gallery.album && data.gallery.album.length > 0) {
                 data.gallery.album.forEach(img => {
-                    galleryGrid.innerHTML += `<img src="${basePath}${img}" alt="Gallery">`;
+                    galleryWrapper.innerHTML += `<div class="swiper-slide"><img src="${basePath}${img}" alt="Gallery"></div>`;
+                });
+                new Swiper('.gallery-slider', {
+                    effect: 'coverflow',
+                    grabCursor: true,
+                    centeredSlides: true,
+                    slidesPerView: 'auto',
+                    loop: true,
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false,
+                    },
+                    coverflowEffect: {
+                        rotate: 0,
+                        stretch: 0,
+                        depth: 100,
+                        modifier: 2,
+                        slideShadows: false,
+                    },
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
                 });
             } else {
                 document.getElementById('gallery').classList.add('hidden');
             }
 
-            // 7. Video YouTube - Hide jika kosong
+            // 7. Video YouTube
             if (data.gallery.videoYoutubeId) {
                 document.getElementById('video').classList.remove('hidden');
                 document.getElementById('videoWrapper').innerHTML = `
@@ -286,7 +338,7 @@
                 `;
             }
 
-            // 8. Gift - Hide jika kosong
+            // 8. Gift
             if (data.digitalGift && data.digitalGift.length > 0) {
                 document.getElementById('gift').classList.remove('hidden');
                 const giftList = document.getElementById('giftList');
@@ -302,7 +354,7 @@
                 });
             }
 
-            // 9. Logistics - Hide jika semua kosong
+            // 9. Logistics
             if (data.logistics && (data.logistics.dressCode || data.logistics.rsvpWaNumber || data.logistics.guestNote)) {
                 document.getElementById('logistics').classList.remove('hidden');
                 const logisticsBox = document.getElementById('logisticsBox');
@@ -316,7 +368,7 @@
                 logisticsBox.innerHTML = logisticsHTML;
             }
 
-            // 10. Music - Hide jika kosong
+            // 10. Music
             if (data.config?.audioUrl) {
                 const audio = document.getElementById('bgMusic');
                 const musicBtn = document.getElementById('musicBtn');
@@ -337,7 +389,7 @@
             document.getElementById('loader').classList.add('hidden');
             document.getElementById('main').classList.remove('hidden');
         })
-       .catch(err => {
+      .catch(err => {
             document.getElementById('loader').innerHTML = '<div class="cover-content"><p>Gagal memuat data. Cek link atau data.json</p></div>';
             console.error(err);
         });
