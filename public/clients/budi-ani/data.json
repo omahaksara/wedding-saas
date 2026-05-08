@@ -1,83 +1,101 @@
 {
-  "slug": "budi-ani",
   "meta": {
-    "template": "minimalis-gold",
-    "theme_color": "#C5A572"
+    "slug": "budi-ani",
+    "template": "pink-floral-bliss",
+    "status": "published"
   },
-  "config": {
-    "audioUrl": "musik.mp3",
-    "isLocked": false
+  "settings": {
+    "islami": true,
+    "autoColor": false,
+    "themeColor": "#FF8DA1",
+    "bgColor": "#FFEAF1",
+    "textColor": "#6D5A5E",
+    "heroStyle": "full",
+    "coupleFrame": "polaroid"
+  },
+  "quote": {
+    "arab": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
+    "text": "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tentram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang.",
+    "source": "QS. Ar-Rum: 21"
   },
   "couple": {
     "groom": {
       "name": "Budi Santoso",
       "nickname": "Budi",
-      "father": "Bpk. Heru Santoso",
-      "mother": "Ibu Siti Aminah",
-      "instagram": "@budi_ig",
-      "image": "foto-pria.jpg"
+      "father": "Sukirman",
+      "mother": "Sumiati",
+      "image": "foto-pria.jpg",
+      "instagram": "@budi.testing"
     },
     "bride": {
-      "name": "Ani Wijaya",
+      "name": "Ani Lestari",
       "nickname": "Ani",
-      "father": "Bpk. Bambang Wijaya",
-      "mother": "Ibu Larasati",
-      "instagram": "@ani_ig",
-      "image": "foto-wanita.jpg"
+      "father": "Joko",
+      "mother": "Sri",
+      "image": "foto-wanita.jpg",
+      "instagram": "@ani.testing"
     }
   },
   "events": [
     {
       "title": "Akad Nikah",
-      "date": "2026-07-12",
-      "startTime": "08:00",
+      "date": "2026-09-06",
+      "startTime": "09:00",
       "endTime": "10:00",
       "timezone": "WIB",
-      "address": "Masjid Agung Jakarta, Jl. Taman Wijaya Kusuma No.1",
-      "googleMaps": "https://maps.google.com/?q=Masjid+Agung+Jakarta"
+      "address": "Desa Petunasugi (SPD), Dusun 4",
+      "googleMaps": ""
     },
     {
-      "title": "Resepsi",
-      "date": "2026-07-12",
+      "title": "Walimatul 'Ursy",
+      "date": "2026-09-06",
       "startTime": "11:00",
-      "endTime": "13:00",
+      "endTime": "Selesai",
       "timezone": "WIB",
-      "address": "Gedung Serbaguna Jakarta, Lantai 2",
-      "googleMaps": "https://maps.google.com/?q=Gedung+Serbaguna+Jakarta"
+      "address": "Desa Petunasugi (SPD), Dusun 4",
+      "googleMaps": ""
     }
   ],
   "gallery": {
     "heroImage": "foto-sampul.jpg",
-    "videoYoutubeId": "ABC123xyz",
+    "videoYoutubeId": "",
     "album": [
       "foto1.jpg",
       "foto2.jpg",
-      "foto3.jpg"
+      "foto3.jpg",
+      "foto4.jpg"
     ]
   },
-  "loveStory": [
-    {
-      "year": "2022",
-      "title": "First Meet",
-      "desc": "Pertama kali bertemu di kantor saat proyek bersama."
-    },
-    {
-      "year": "2024",
-      "title": "Engagement",
-      "desc": "Memutuskan untuk melangkah ke jenjang yang lebih serius."
-    }
-  ],
   "digitalGift": [
     {
-      "provider": "BCA",
-      "accountNumber": "123456789",
+      "provider": "BRI",
+      "accountNumber": "1234567890",
+      "accountHolder": "Ani Lestari",
+      "qrImage": ""
+    },
+    {
+      "provider": "Mandiri",
+      "accountNumber": "0987654321",
       "accountHolder": "Budi Santoso",
-      "qrCode": "qr-bca.jpg"
+      "qrImage": ""
     }
   ],
   "logistics": {
-    "dressCode": "Formal / Batik",
-    "rsvpWaNumber": "628123456789",
-    "guestNote": "Tanpa mengurangi rasa hormat, tamu undangan diharapkan hadir tepat waktu."
-  }
+    "dressCode": "Batik Bebas, Sopan & Menutup Aurat",
+    "rsvpWaNumber": "6281234567890",
+    "guestNote": "Dengan tidak mengurangi rasa hormat, kami mengharapkan tamu undangan berkenan memakai busana batik bebas, sopan & menutup aurat. Semoga Allah memberkahi acara kita.",
+    "music": "musik.mp3"
+  },
+  "loveStory": [
+    {
+      "date": "Juni 2021",
+      "title": "First Meet",
+      "description": "Berawal dari sebuah tanggapan kecil di story, siapa sangka percakapan itu membawa kami pada babak baru yang lebih serius."
+    },
+    {
+      "date": "14 April 2024",
+      "title": "Khitbah",
+      "description": "Hingga akhirnya, kami memutuskan untuk bersama, saling menjaga, dan kini siap melangkah ke pelaminan untuk hidup bersama dalam ridho-Nya."
+    }
+  ]
 }
