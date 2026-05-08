@@ -16,18 +16,18 @@
             --accent-color: #E8DCCA;
         }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
-     .font-serif { font-family: 'Playfair Display', serif; }
-     .font-arab { font-family: 'Scheherazade New', serif; }
-     .bg-theme { background-color: var(--theme-color); }
-     .text-theme { color: var(--theme-color); }
-     .border-theme { border-color: var(--theme-color); }
-     .bg-accent { background-color: var(--accent-color); }
-     .cover-bg { background-color: var(--bg-color); }
-     .polaroid { background: white; padding: 12px 12px 40px 12px; box-shadow: 0 4px 12px rgba(0,0,0,.08); transition: transform 0.3s ease; }
-     .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
-     .fade-in { animation: fadeIn 0.8s ease-in; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-arab { font-family: 'Scheherazade New', serif; }
+    .bg-theme { background-color: var(--theme-color); }
+    .text-theme { color: var(--theme-color); }
+    .border-theme { border-color: var(--theme-color); }
+    .bg-accent { background-color: var(--accent-color); }
+    .cover-bg { background-color: var(--bg-color); }
+    .polaroid { background: white; padding: 12px 12px 40px 12px; box-shadow: 0 4px 12px rgba(0,0,0,.08); transition: transform 0.3s ease; }
+    .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
+    .fade-in { animation: fadeIn 0.8s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-     .hidden { display: none!important; }
+    .hidden { display: none!important; }
     </style>
 </head>
 <body class="antialiased">
@@ -71,7 +71,7 @@
             <div class="grid grid-cols-2 gap-4">
                 <div class="text-center">
                     <div class="polaroid mb-3 -rotate-2">
-                        <img id="groom-img" class="w-full aspect-[3/4] object-cover" src="" onerror="this.src='public/default-avatar.jpg'">
+                        <img id="groom-img" class="w-full aspect-[3/4] object-cover" src="" onerror="this.src='../../public/default-avatar.jpg'">
                     </div>
                     <h3 id="groom-name" class="font-serif text-2xl"></h3>
                     <p id="groom-parents" class="text-xs mt-1 text-gray-600"></p>
@@ -79,7 +79,7 @@
                 </div>
                 <div class="text-center">
                     <div class="polaroid mb-3 rotate-2">
-                        <img id="bride-img" class="w-full aspect-[3/4] object-cover" src="" onerror="this.src='public/default-avatar.jpg'">
+                        <img id="bride-img" class="w-full aspect-[3/4] object-cover" src="" onerror="this.src='../../public/default-avatar.jpg'">
                     </div>
                     <h3 id="bride-name" class="font-serif text-2xl"></h3>
                     <p id="bride-parents" class="text-xs mt-1 text-gray-600"></p>
@@ -102,7 +102,6 @@
                 <p class="text-xs uppercase tracking-widest mb-3 text-center">Menuju Hari Bahagia</p>
                 <div id="countdown" class="grid grid-cols-4 gap-2 text-center"></div>
             </div>
-            <a id="google-calendar-link" target="_blank" class="block bg-theme text-white text-xs uppercase px-6 py-2 rounded-full mt-6 mx-auto w-fit hidden">Simpan Tanggal</a>
         </section>
 
         <!-- GALLERY -->
@@ -149,9 +148,8 @@
         const params = new URLSearchParams(window.location.search);
         const clientSlug = params.get('c');
         const guestName = params.get('to') || 'Tamu Undangan';
-        const basePath = location.hostname.includes('github.io')
-          ? `public/clients/${clientSlug}/`
-           : `../../public/clients/${clientSlug}/`;
+        // SAMA PERSIS KAYAK TEMPLATE LAIN YANG JALAN
+        const basePath = `../../public/clients/${clientSlug}/`;
 
         if(!clientSlug) {
             document.getElementById('app').innerHTML = '<div class="p-8 text-center">Error: tambahkan?c=nama-client</div>';
