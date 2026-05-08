@@ -1,8 +1,13 @@
 {
   "meta": {
     "slug": "yaya-oci",
-    "template": "sage-syari",
+    "template": "mocha-romantic",
     "status": "published"
+  },
+  "quote": {
+    "arab": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
+    "text": "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tentram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang.",
+    "source": "QS. Ar-Rum: 21"
   },
   "couple": {
     "groom": {
@@ -46,7 +51,9 @@
     "heroImage": "foto-sampul.jpg",
     "videoYoutubeId": "",
     "album": [
-      "foto1.jpg"
+      "foto1.jpg",
+      "foto2.jpg",
+      "foto3.jpg"
     ]
   },
   "digitalGift": [
@@ -54,7 +61,7 @@
       "provider": "BRI",
       "accountNumber": "519501024699536",
       "accountHolder": "Khosi Saimima",
-      "qrImage": "foto-qr"
+      "qrImage": ""
     },
     {
       "provider": "Mandiri",
@@ -71,14 +78,14 @@
   },
   "loveStory": [
     {
-      "year": "Juni 2021",
+      "date": "Juni 2021",
       "title": "First Meet",
-      "story": "Berawal dari sebuah tanggapan kecil di story, siapa sangka percakapan itu membawa kami pada babak baru yang lebih serius."
+      "description": "Berawal dari sebuah tanggapan kecil di story, siapa sangka percakapan itu membawa kami pada babak baru yang lebih serius."
     },
     {
-      "year": "14 April 2024",
+      "date": "14 April 2024",
       "title": "Engagement",
-      "story": "Hingga akhirnya, kami memutuskan untuk bersama, saling menjaga, dan kini siap melangkah ke pelaminan untuk hidup bersama."
+      "description": "Hingga akhirnya, kami memutuskan untuk bersama, saling menjaga, dan kini siap melangkah ke pelaminan untuk hidup bersama."
     }
   ]
 }
