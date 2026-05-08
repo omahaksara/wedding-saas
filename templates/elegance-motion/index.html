@@ -13,88 +13,89 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --dusty-blue: #7A9BBE;
-            --sage: #A3B899;
-            --cream: #F9F7F3;
+            --mocha: #8B7355;
+            --mocha-dark: #5D4E37;
+            --rose-gold: #B76E79;
+            --cream: #FAF7F2;
+            --ivory: #FFFFF0;
+            --text: #3E3E3E;
             --gold: #C9A86A;
-            --text-dark: #4A5568;
         }
-        body { font-family: 'Montserrat', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
-     .font-script { font-family: 'Parisienne', cursive; }
-     .font-serif { font-family: 'Cormorant Garamond', serif; }
-     .text-dusty { color: var(--dusty-blue); }
-     .text-gold { color: var(--gold); }
-     .bg-dusty { background-color: var(--dusty-blue); }
-     .bg-gold { background-color: var(--gold); }
+        body { font-family: 'Montserrat', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+   .font-script { font-family: 'Parisienne', cursive; }
+   .font-serif { font-family: 'Cormorant Garamond', serif; }
+   .text-mocha { color: var(--mocha); }
+   .text-rose { color: var(--rose-gold); }
+   .text-gold { color: var(--gold); }
+   .bg-mocha { background-color: var(--mocha); }
+   .bg-rose { background-color: var(--rose-gold); }
+   .bg-gold { background-color: var(--gold); }
         
-        /* Floral Falling */
-     .petal {
-            position: fixed; top: -10%; z-index: 1; pointer-events: none;
-            animation: fall linear infinite;
-        }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        /* HAPUS BUNGA - BIKIN RIBET */
+        #petal-container { display: none; }
         
         /* Reveal Animation */
-     .reveal { opacity: 0; transform: translateY(40px); }
+   .reveal { opacity: 0; transform: translateY(40px); }
         
-        /* Monogram Glow */
-     .monogram {
-            animation: spin 25s linear infinite, glow 3s ease-in-out infinite alternate;
-            box-shadow: 0 0 15px var(--gold);
+        /* Monogram Glow Rose Gold */
+   .monogram {
+            animation: glow 3s ease-in-out infinite alternate;
+            box-shadow: 0 0 20px var(--rose-gold);
+            border-color: var(--rose-gold);
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes glow { from { box-shadow: 0 0 10px var(--gold); } to { box-shadow: 0 0 25px var(--gold); } }
+        @keyframes glow { from { box-shadow: 0 0 10px var(--rose-gold); } to { box-shadow: 0 0 30px var(--rose-gold); } }
         
-        /* Floral Divider */
-     .floral-line {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 10"><path d="M0,5 Q25,0 50,5 T100,5" fill="none" stroke="%23C9A86A" stroke-width="0.4"/><circle cx="50" cy="5" r="1.5" fill="%23C9A86A"/></svg>');
-            background-repeat: no-repeat; background-position: center; height: 10px;
+        /* Elegant Divider */
+   .gold-line {
+            background: linear-gradient(90deg, transparent, var(--rose-gold), transparent);
+            height: 1px;
         }
         
         /* Countdown Box */
-     .countdown-box {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
+   .countdown-box {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
-    <div id="petal-container"></div>
-
-    <!-- COVER -->
-    <div id="cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center bg-cream transition-opacity duration-1000 px-6">
-        <img src="https://i.imgur.com/8QfZ9xL.png" class="w-64 mx-auto mb-6 opacity-60">
-        <div class="monogram text-3xl font-serif text-gold border-2 border-gold rounded-full w-20 h-20 flex items-center justify-center mx-auto">
-            <span id="monogram-text">K&R</span>
+    <!-- COVER - OVERLAY GELAP 70% BIAR TEKS KEBACA -->
+    <div id="cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center transition-opacity duration-1000 px-6">
+        <img id="cover-bg" class="absolute inset-0 w-full h-full object-cover" src="">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
+        <div class="relative z-10">
+            <div class="monogram text-3xl font-serif text-white border-2 rounded-full w-20 h-20 flex items-center justify-center mx-auto">
+                <span id="monogram-text">K&R</span>
+            </div>
+            <h1 id="cover-names" class="font-script text-7xl md:text-8xl my-8 text-white leading-none drop-shadow-2xl"></h1>
+            <div class="gold-line w-32 mx-auto my-6"></div>
+            <p class="text-xs mt-12 tracking-[0.4em] text-white/90">KEPADA YTH.</p>
+            <p id="cover-guest" class="text-2xl font-semibold mt-2 font-serif text-white"></p>
+            <button id="open-invitation" class="bg-rose text-white rounded-full px-12 py-4 mt-10 text-xs uppercase tracking-[0.3em] shadow-2xl hover:bg-mocha transition">
+                Buka Undangan
+            </button>
         </div>
-        <h1 id="cover-names" class="font-script text-7xl md:text-8xl my-8 text-dusty leading-none"></h1>
-        <img src="https://i.imgur.com/8QfZ9xL.png" class="w-64 mx-auto mt-6 opacity-60 rotate-180">
-        <p class="text-xs mt-12 tracking-[0.4em]">KEPADA YTH.</p>
-        <p id="cover-guest" class="text-xl font-semibold mt-2 font-serif"></p>
-        <button id="open-invitation" class="bg-dusty text-white rounded-full px-12 py-4 mt-10 text-xs uppercase tracking-[0.3em] shadow-xl hover:bg-sage transition">
-            Buka Undangan
-        </button>
     </div>
 
     <div id="app" class="opacity-0">
-        <!-- HERO PARALLAX -->
+        <!-- HERO - OVERLAY GELAP -->
         <section id="hero" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
             <img id="hero-image" class="absolute inset-0 w-full h-full object-cover" src="">
-            <div class="absolute inset-0 bg-gradient-to-t from-cream via-cream/30 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/60"></div>
             <div class="relative z-10 px-6">
-                <p class="reveal tracking-[0.5em] text-xs text-text-dark mb-6">THE WEDDING OF</p>
-                <h1 id="hero-names" class="reveal font-script text-8xl md:text-9xl text-dusty drop-shadow-sm"></h1>
-                <div class="reveal floral-line w-48 mx-auto my-8"></div>
-                <p id="hero-date" class="reveal font-serif text-xl text-text-dark tracking-wider"></p>
+                <p class="reveal tracking-[0.5em] text-xs text-white/90 mb-6">THE WEDDING OF</p>
+                <h1 id="hero-names" class="reveal font-script text-8xl md:text-9xl text-white drop-shadow-2xl"></h1>
+                <div class="reveal gold-line w-48 mx-auto my-8"></div>
+                <p id="hero-date" class="reveal font-serif text-xl text-white tracking-wider"></p>
             </div>
         </section>
 
         <!-- QUOTE -->
-        <section class="reveal py-20 px-6 text-center bg-white">
-            <img src="https://i.imgur.com/8QfZ9xL.png" class="w-48 mx-auto opacity-50 mb-8">
-            <p id="quote-text" class="font-serif text-xl italic text-dusty max-w-2xl mx-auto leading-relaxed"></p>
-            <p id="quote-source" class="text-sm mt-4 text-gold font-semibold tracking-widest"></p>
+        <section class="reveal py-20 px-6 text-center bg-ivory">
+            <p id="quote-text" class="font-serif text-xl italic text-mocha max-w-2xl mx-auto leading-relaxed"></p>
+            <p id="quote-source" class="text-sm mt-4 text-rose font-semibold tracking-widest"></p>
         </section>
 
         <!-- COUPLE -->
@@ -102,28 +103,27 @@
             <div class="max-w-4xl mx-auto space-y-20">
                 <div class="reveal text-center">
                     <img id="groom-img" class="w-64 h-80 object-cover rounded-t-full shadow-2xl mx-auto">
-                    <h3 id="groom-name" class="font-script text-6xl text-dusty mt-8"></h3>
+                    <h3 id="groom-name" class="font-script text-6xl text-mocha mt-8"></h3>
                     <p id="groom-parents" class="text-sm mt-2 font-serif"></p>
-                    <a id="groom-ig" target="_blank" class="inline-block mt-4 text-gold"><i class="fab fa-instagram"></i></a>
+                    <a id="groom-ig" target="_blank" class="inline-block mt-4 text-rose"><i class="fab fa-instagram"></i></a>
                 </div>
-                <div class="reveal text-center font-script text-8xl text-gold">&</div>
+                <div class="reveal text-center font-script text-8xl text-rose">&</div>
                 <div class="reveal text-center">
                     <img id="bride-img" class="w-64 h-80 object-cover rounded-t-full shadow-2xl mx-auto">
-                    <h3 id="bride-name" class="font-script text-6xl text-dusty mt-8"></h3>
+                    <h3 id="bride-name" class="font-script text-6xl text-mocha mt-8"></h3>
                     <p id="bride-parents" class="text-sm mt-2 font-serif"></p>
-                    <a id="bride-ig" target="_blank" class="inline-block mt-4 text-gold"><i class="fab fa-instagram"></i></a>
+                    <a id="bride-ig" target="_blank" class="inline-block mt-4 text-rose"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </section>
 
-        <!-- EVENT + COUNTDOWN + MAPS -->
-        <section class="py-20 px-6 bg-dusty text-white">
+        <!-- EVENT + COUNTDOWN -->
+        <section class="py-20 px-6 bg-mocha text-white">
             <div class="max-w-3xl mx-auto text-center">
                 <h2 class="reveal font-script text-7xl mb-4">Save The Date</h2>
                 
-                <!-- COUNTDOWN MAKSIMAL -->
                 <div class="reveal mb-16">
-                    <p class="text-xs uppercase tracking-[0.3em] mb-6 opacity-80">Menuju Hari Bahagia</p>
+                    <p class="text-xs uppercase tracking-[0.3em] mb-6 opacity-90">Menuju Hari Bahagia</p>
                     <div id="countdown" class="flex justify-center space-x-4 md:space-x-8 font-serif"></div>
                 </div>
 
@@ -131,35 +131,34 @@
             </div>
         </section>
 
-        <!-- GALLERY -->
+        <!-- GALLERY - 4 FOTO SUPPORT -->
         <section class="reveal py-20 px-6 bg-cream">
-            <h2 class="font-script text-7xl text-center text-dusty mb-12">Momen Bahagia</h2>
-            <div id="gallery-grid" class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4"></div>
+            <h2 class="font-script text-7xl text-center text-mocha mb-12">Momen Bahagia</h2>
+            <div id="gallery-grid" class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4"></div>
         </section>
 
         <!-- LOVE STORY -->
-        <section id="lovestory-section" class="py-20 px-6 bg-white hidden">
+        <section id="lovestory-section" class="py-20 px-6 bg-ivory hidden">
             <div class="max-w-3xl mx-auto">
-                <h2 class="reveal font-script text-7xl text-center text-dusty mb-16">Perjalanan Cinta</h2>
+                <h2 class="reveal font-script text-7xl text-center text-mocha mb-16">Perjalanan Cinta</h2>
                 <div id="lovestory-list" class="space-y-12"></div>
             </div>
         </section>
 
         <!-- GIFT -->
-        <section class="reveal py-20 px-6 bg-sage text-white text-center">
+        <section class="reveal py-20 px-6 bg-rose text-white text-center">
             <h2 class="font-script text-7xl mb-6">Amplop Digital</h2>
-            <p class="max-w-xl mx-auto mb-10 text-sm opacity-90">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless.</p>
+            <p class="max-w-xl mx-auto mb-10 text-sm opacity-95">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless.</p>
             <div id="gift-list" class="max-w-md mx-auto space-y-4"></div>
         </section>
 
         <!-- PENUTUP -->
         <section class="py-20 px-6 bg-cream text-center">
-            <img src="https://i.imgur.com/8QfZ9xL.png" class="w-48 mx-auto opacity-50 mb-8">
             <p id="guest-note" class="reveal font-serif text-base max-w-xl mx-auto mb-10"></p>
-            <a id="rsvp-link" target="_blank" class="reveal inline-block bg-dusty text-white rounded-full px-12 py-4 text-xs uppercase tracking-[0.3em] shadow-xl">
+            <a id="rsvp-link" target="_blank" class="reveal inline-block bg-rose text-white rounded-full px-12 py-4 text-xs uppercase tracking-[0.3em] shadow-xl">
                 Konfirmasi Kehadiran
             </a>
-            <p class="font-script text-6xl mt-20 text-dusty" id="footer-names"></p>
+            <p class="font-script text-6xl mt-20 text-mocha" id="footer-names"></p>
             <p class="text-xs mt-4 opacity-60">Terima kasih atas doa restunya</p>
         </section>
     </div>
@@ -171,26 +170,13 @@
         const guestName = params.get('to') || 'Tamu Undangan';
         const basePath = `../../public/clients/${clientSlug}/`;
 
-        function createPetals() {
-            const container = document.getElementById('petal-container');
-            for(let i=0; i<15; i++) {
-                const petal = document.createElement('div');
-                petal.className = 'petal';
-                petal.innerHTML = '🌸';
-                petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.animationDuration = Math.random() * 8 + 12 + 's';
-                petal.style.animationDelay = Math.random() * 5 + 's';
-                petal.style.fontSize = Math.random() * 8 + 12 + 'px';
-                petal.style.opacity = Math.random() * 0.4 + 0.2;
-                container.appendChild(petal);
-            }
-        }
-
         fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
             const g = data.couple.groom;
             const b = data.couple.bride;
             const ev = data.events[0];
             
+            // COVER BACKGROUND
+            document.getElementById('cover-bg').src = basePath + data.gallery.heroImage;
             document.getElementById('monogram-text').textContent = `${g.nickname[0]}&${b.nickname[0]}`;
             document.getElementById('cover-names').textContent = `${g.nickname} & ${b.nickname}`;
             document.getElementById('cover-guest').textContent = guestName.replace(/\+/g, ' ');
@@ -201,7 +187,7 @@
                 weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
             }).toUpperCase();
             
-            if(data.quote.text) {
+            if(data.quote?.text) {
                 document.getElementById('quote-text').textContent = `"${data.quote.text}"`;
                 document.getElementById('quote-source').textContent = data.quote.source;
             }
@@ -227,10 +213,10 @@
                 const m = Math.max(0, Math.floor((distance % 3600000) / 60000));
                 const s = Math.max(0, Math.floor((distance % 60000) / 1000));
                 document.getElementById('countdown').innerHTML = `
-                    <div class="countdown-box rounded-lg p-4 w-20"><div class="text-4xl">${d}</div><div class="text-xs uppercase">Hari</div></div>
-                    <div class="countdown-box rounded-lg p-4 w-20"><div class="text-4xl">${h}</div><div class="text-xs uppercase">Jam</div></div>
-                    <div class="countdown-box rounded-lg p-4 w-20"><div class="text-4xl">${m}</div><div class="text-xs uppercase">Menit</div></div>
-                    <div class="countdown-box rounded-lg p-4 w-20"><div class="text-4xl">${s}</div><div class="text-xs uppercase">Detik</div></div>
+                    <div class="countdown-box rounded-lg p-4 w-20"><div class="text-4xl text-white">${d}</div><div class="text-xs uppercase text-white/80">Hari</div></div>
+                    <div class="countdown-box rounded-lg p-4 w-20"><div class="text-4xl text-white">${h}</div><div class="text-xs uppercase text-white/80">Jam</div></div>
+                    <div class="countdown-box rounded-lg p-4 w-20"><div class="text-4xl text-white">${m}</div><div class="text-xs uppercase text-white/80">Menit</div></div>
+                    <div class="countdown-box rounded-lg p-4 w-20"><div class="text-4xl text-white">${s}</div><div class="text-xs uppercase text-white/80">Detik</div></div>
                 `;
             }, 1000);
             
@@ -239,24 +225,24 @@
             data.events.forEach(e => {
                 eventList.innerHTML += `
                     <div class="reveal">
-                        <h3 class="font-serif text-3xl text-gold mb-2">${e.title}</h3>
-                        <div class="floral-line w-24 mx-auto my-4"></div>
+                        <h3 class="font-serif text-3xl text-rose mb-2">${e.title}</h3>
+                        <div class="gold-line w-24 mx-auto my-4"></div>
                         <p class="font-semibold text-lg">${new Date(e.date).toLocaleDateString('id-ID', { 
                             weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' 
                         })}</p>
                         <p class="text-sm mt-1">Pukul ${e.startTime} - ${e.endTime} WIB</p>
-                        <p class="text-sm mt-3 opacity-80">${e.address}</p>
-                        ${e.googleMaps? `<a href="${e.googleMaps}" target="_blank" class="inline-block mt-4 bg-white text-dusty rounded-full px-6 py-2 text-xs uppercase tracking-wider">
+                        <p class="text-sm mt-3 opacity-90">${e.address}</p>
+                        ${e.googleMaps? `<a href="${e.googleMaps}" target="_blank" class="inline-block mt-4 bg-white text-mocha rounded-full px-6 py-2 text-xs uppercase tracking-wider shadow-lg">
                             <i class="fas fa-map-marker-alt mr-2"></i>Lihat Lokasi
                         </a>` : ''}
                     </div>
                 `;
             });
             
-            // GALLERY
+            // GALLERY - 4 FOTO
             const galleryGrid = document.getElementById('gallery-grid');
             data.gallery.album.forEach(img => {
-                galleryGrid.innerHTML += `<img src="${basePath}${img}" class="reveal w-full aspect-[3/4] object-cover rounded-lg shadow-lg">`;
+                galleryGrid.innerHTML += `<img src="${basePath}${img}" class="reveal w-full aspect-[3/4] object-cover rounded-lg shadow-xl">`;
             });
             
             // LOVE STORY
@@ -266,10 +252,10 @@
                 data.loveStory.forEach((s, i) => {
                     lsList.innerHTML += `
                         <div class="reveal flex items-start gap-6">
-                            <div class="font-script text-5xl text-gold w-12">${i+1}</div>
+                            <div class="font-script text-5xl text-rose w-12">${i+1}</div>
                             <div>
-                                <p class="text-xs text-gold tracking-widest">${s.date}</p>
-                                <h4 class="font-serif text-2xl text-dusty mt-1">${s.title}</h4>
+                                <p class="text-xs text-rose tracking-widest">${s.date}</p>
+                                <h4 class="font-serif text-2xl text-mocha mt-1">${s.title}</h4>
                                 <p class="text-sm mt-2 opacity-80">${s.description}</p>
                             </div>
                         </div>
@@ -286,7 +272,7 @@
                             <p class="font-semibold">${acc.provider} - ${acc.accountHolder}</p>
                             <div class="flex justify-between items-center mt-1">
                                 <p class="font-serif text-lg">${acc.accountNumber}</p>
-                                <button onclick="navigator.clipboard.writeText('${acc.accountNumber}');this.textContent='COPIED'" class="text-xs bg-white text-sage rounded-full px-3 py-1">SALIN</button>
+                                <button onclick="navigator.clipboard.writeText('${acc.accountNumber}');this.textContent='COPIED'" class="text-xs bg-white text-rose rounded-full px-3 py-1">SALIN</button>
                             </div>
                         </div>
                     `;
@@ -301,7 +287,6 @@
                 gsap.to('#cover', { opacity: 0, duration: 1, onComplete: () => {
                     document.getElementById('cover').style.display = 'none';
                     document.getElementById('app').style.opacity = 1;
-                    createPetals();
                     initScroll();
                     if(data.logistics.music) {
                         const audio = new Audio(basePath + data.logistics.music);
