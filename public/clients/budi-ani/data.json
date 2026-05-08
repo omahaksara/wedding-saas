@@ -2,18 +2,18 @@
   "meta": {
     "slug": "budi-ani",
     "template": "elegance-motion",
-    "status": "published"
+    "status": "published",
+    "created": "2026-05-08"
   },
   "settings": {
     "islami": true,
-    "autoColor": false,
+    "religion": "islam",
+    "themeColor": "#8B6F5C",
+    "bgColor": "#F9F6F1",
+    "textColor": "#3E3A35",
     "heroStyle": "full",
-    "coupleFrame": "circle"
-  },
-  "quote": {
-    "arab": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
-    "text": "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tentram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang.",
-    "source": "QS. Ar-Rum: 21"
+    "coupleFrame": "circle",
+    "autoColor": false
   },
   "couple": {
     "groom": {
@@ -33,6 +33,11 @@
       "instagram": "@ani.testing"
     }
   },
+  "quote": {
+    "arab": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
+    "text": "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tentram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang.",
+    "source": "QS. Ar-Rum: 21"
+  },
   "events": [
     {
       "title": "Akad Nikah",
@@ -41,7 +46,7 @@
       "endTime": "10:00",
       "timezone": "WIB",
       "address": "Desa Petunasugi (SPD), Dusun 4",
-      "googleMaps": ""
+      "googleMaps": "https://maps.app.goo.gl/"
     },
     {
       "title": "Walimatul 'Ursy",
@@ -50,12 +55,12 @@
       "endTime": "Selesai",
       "timezone": "WIB",
       "address": "Desa Petunasugi (SPD), Dusun 4",
-      "googleMaps": ""
+      "googleMaps": "https://maps.app.goo.gl/"
     }
   ],
   "gallery": {
     "heroImage": "foto-sampul.jpg",
-    "videoYoutubeId": "",
+    "videoYoutubeId": "dQw4w9WgXcQ",
     "album": [
       "foto1.jpg",
       "foto2.jpg",
@@ -68,11 +73,17 @@
       "provider": "BRI",
       "accountNumber": "1234567890",
       "accountHolder": "Ani Lestari",
-      "qrImage": ""
+      "qrImage": "qr-bri.png"
     },
     {
       "provider": "Mandiri",
       "accountNumber": "0987654321",
+      "accountHolder": "Budi Santoso",
+      "qrImage": "qr-mandiri.png"
+    },
+    {
+      "provider": "DANA",
+      "accountNumber": "081234567890",
       "accountHolder": "Budi Santoso",
       "qrImage": ""
     }
@@ -93,6 +104,11 @@
       "date": "14 April 2024",
       "title": "Khitbah",
       "description": "Hingga akhirnya, kami memutuskan untuk bersama, saling menjaga, dan kini siap melangkah ke pelaminan untuk hidup bersama dalam ridho-Nya."
+    },
+    {
+      "date": "06 September 2026",
+      "title": "Menuju Halal",
+      "description": "InsyaAllah kami akan mengikat janji suci pernikahan."
     }
   ]
 }
