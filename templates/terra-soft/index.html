@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FBF8F3; color: #4A3F35; }
+       .font-serif { font-family: 'Playfair Display', serif; }
+       .polaroid { background: white; padding: 12px 12px 40px 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+       .fade-in { animation: fadeIn 0.8s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="antialiased">
+    <div id="app" class="max-w-md mx-auto bg-[#FBF8F3] min-h-screen">
+        <!-- HERO -->
+        <section id="hero" class="relative h-[90vh] flex items-end justify-center text-center p-8">
+            <img id="hero-image" class="absolute inset-0 w-full h-full object-cover" src="" alt="Hero">
+            <div class="absolute inset-0 bg-gradient-to-t from-[#FBF8F3] via-[#FBF8F3]/70 to-transparent"></div>
+            <div class="relative z-10 fade-in">
+                <p class="text-sm tracking-widest uppercase mb-3">The Wedding Of</p>
+                <h1 id="couple-names" class="font-serif text-5xl leading-tight mb-4"></h1>
+                <p id="wedding-date" class="text-lg"></p>
+            </div>
+        </section>
+
+        <!-- QUOTE -->
+        <section class="py-16 px-8 text-center fade-in">
+            <p id="guest-greeting" class="text-sm mb-2"></p>
+            <p id="opening-quote" class="font-serif text-xl italic leading-relaxed text-[#8B6B4F]"></p>
+        </section>
+
+        <!-- COUPLE -->
+        <section id="couple" class="py-8 px-8 fade-in">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="text-center">
+                    <div class="polaroid mb-3">
+                        <img id="groom-img" class="w-full aspect-[3/4] object-cover" src="">
+                    </div>
+                    <h3 id="groom-name" class="font-serif text-2xl"></h3>
+                    <p id="groom-parents" class="text-xs mt-1 text-gray-600"></p>
+                </div>
+                <div class="text-center">
+                    <div class="polaroid mb-3">
+                        <img id="bride-img" class="w-full aspect-[3/4] object-cover" src="">
+                    </div>
+                    <h3 id="bride-name" class="font-serif text-2xl"></h3>
+                    <p id="bride-parents" class="text-xs mt-1 text-gray-600"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVENT -->
+        <section class="py-16 px-8 bg-white/50 fade-in">
+            <h2 class="font-serif text-3xl text-center mb-10">Save The Date</h2>
+            <div id="event-list" class="space-y-6"></div>
+            <div id="countdown" class="grid grid-cols-4 gap-2 text-center mt-10"></div>
+        </section>
+
+        <!-- GALLERY -->
+        <section class="py-16 px-4 fade-in">
+            <h2 class="font-serif text-3xl text-center mb-8">Our Moments</h2>
+            <div id="gallery-grid" class="grid grid-cols-2 gap-3"></div>
+        </section>
+
+        <!-- GIFT -->
+        <section class="py-16 px-8 text-center bg-[#E8DCCA] fade-in">
+            <h2 class="font-serif text-3xl mb-4">Wedding Gift</h2>
+            <p class="text-sm mb-6">Doa restu Anda merupakan karunia terindah. Namun jika memberi adalah ungkapan tanda kasih, dapat melalui:</p>
+            <div id="gift-list" class="space-y-4"></div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="py-12 px-8 text-center text-xs text-gray-500">
+            <p id="guest-note" class="mb-4"></p>
+            <p>Digital Invitation by Omah Aksara</p>
+        </footer>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const clientSlug = params.get('c');
+        const guestName = params.get('to') || 'Bapak/Ibu/Saudara/i';
+        const basePath = `../../public/clients/${clientSlug}/`;
+
+        fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
+            // HERO
+            document.getElementById('hero-image').src = basePath + data.gallery.heroImage;
+            document.getElementById('couple-names').innerHTML = `${data.couple.groom.nickname}<br>&<br>${data.couple.bride.nickname}`;
+            document.getElementById('wedding-date').textContent = new Date(data.events[0].date).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            
+            // QUOTE
+            document.getElementById('guest-greeting').innerHTML = `Kepada Yth. <strong>${guestName.replace(/\+/g, ' ')}</strong>`;
+            document.getElementById('opening-quote').textContent = `"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tentram kepadanya." - QS. Ar-Rum: 21`;
+
+            // COUPLE
+            document.getElementById('groom-img').src = basePath + data.couple.groom.image;
+            document.getElementById('groom-name').textContent = data.couple.groom.name;
+            document.getElementById('groom-parents').textContent = `Putra dari ${data.couple.groom.father} & ${data.couple.groom.mother}`;
+            document.getElementById('bride-img').src = basePath + data.couple.bride.image;
+            document.getElementById('bride-name').textContent = data.couple.bride.name;
+            document.getElementById('bride-parents').textContent = `Putri dari ${data.couple.bride.father} & ${data.couple.bride.mother}`;
+
+            // EVENT + COUNTDOWN
+            const eventList = document.getElementById('event-list');
+            data.events.forEach(ev => {
+                eventList.innerHTML += `
+                    <div class="bg-white p-6 rounded-lg shadow-sm text-center">
+                        <h3 class="font-serif text-2xl mb-2">${ev.title}</h3>
+                        <p class="font-medium">${new Date(ev.date).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                        <p class="text-sm mt-1">${ev.startTime} - ${ev.endTime} ${ev.timezone}</p>
+                        <p class="text-sm mt-3 text-gray-600">${ev.address}</p>
+                        ${ev.googleMaps? `<a href="${ev.googleMaps}" target="_blank" class="inline-block mt-4 text-xs bg-[#8B6B4F] text-white px-4 py-2 rounded-full">Lihat Lokasi</a>` : ''}
+                    </div>
+                `;
+            });
+            
+            // Countdown
+            const countdownDate = new Date(`${data.events[0].date}T${data.events[0].startTime}:00`).getTime();
+            setInterval(() => {
+                const dist = countdownDate - new Date().getTime();
+                const d = Math.floor(dist / (1000*60*60*24));
+                const h = Math.floor((dist % (1000*60*60*24)) / (1000*60*60));
+                const m = Math.floor((dist % (1000*60*60)) / (1000*60));
+                const s = Math.floor((dist % (1000*60)) / 1000);
+                document.getElementById('countdown').innerHTML = `
+                    <div><p class="text-2xl font-serif">${d}</p><p class="text-xs">Hari</p></div>
+                    <div><p class="text-2xl font-serif">${h}</p><p class="text-xs">Jam</p></div>
+                    <div><p class="text-2xl font-serif">${m}</p><p class="text-xs">Menit</p></div>
+                    <div><p class="text-2xl font-serif">${s}</p><p class="text-xs">Detik</p></div>
+                `;
+            }, 1000);
+
+            // GALLERY
+            const galleryGrid = document.getElementById('gallery-grid');
+            data.gallery.album.forEach(img => {
+                galleryGrid.innerHTML += `
+                    <div class="polaroid">
+                        <img src="${basePath}${img}" class="w-full aspect-square object-cover">
+                    </div>
+                `;
+            });
+
+            // GIFT
+            const giftList = document.getElementById('gift-list');
+            data.digitalGift.forEach(g => {
+                giftList.innerHTML += `
+                    <div class="bg-white/70 p-4 rounded-lg">
+                        <p class="font-semibold">${g.provider}</p>
+                        <p class="text-lg font-mono my-1">${g.accountNumber}</p>
+                        <p class="text-xs">a.n ${g.accountHolder}</p>
+                    </div>
+                `;
+            });
+
+            // FOOTER
+            document.getElementById('guest-note').textContent = data.logistics.guestNote;
+        }).catch(err => {
+            document.getElementById('app').innerHTML = `<div class="p-8 text-center">Error: Data undangan tidak ditemukan.</div>`;
+        });
+    </script>
+</body>
+</html>
