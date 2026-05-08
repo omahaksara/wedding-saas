@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mocha: #8B6B4F;
+            --mocha-dark: #6B4F3A;
+            --cream: #F9F5F1;
+            --bg: #FDFBF8;
+            --text: #4A403A;
+            --text-muted: #8C7B6F;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+        .container { max-width: 480px; margin: 0 auto; background: var(--cream); }
+        .wave-top {
+            background: var(--mocha);
+            height: 40px;
+            position: relative;
+        }
+        .wave-top::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0; right: 0;
+            height: 20px;
+            background: var(--cream);
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+        }
+        .cover {
+            text-align: center;
+            padding: 40px 24px 0;
+            position: relative;
+        }
+        .cover .polaroid {
+            width: 85%;
+            margin: 0 auto 30px;
+            background: white;
+            padding: 15px 15px 60px;
+            box-shadow: 0 4px 20px rgba(139, 107, 79, 0.15);
+            transform: rotate(-2deg);
+        }
+        .cover .polaroid img { width: 100%; height: 300px; object-fit: cover; }
+        .cover h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2rem;
+            color: var(--mocha-dark);
+            font-weight: 600;
+            line-height: 1.1;
+            margin: 20px 0;
+        }
+        .cover h1 em { font-weight: 400; font-style: italic; }
+        .cover .guest { margin: 30px 0; }
+        .cover .guest p { color: var(--text-muted); font-size: 0.9rem; letter-spacing: 1px; }
+        .cover .guest h3 { color: var(--mocha-dark); font-size: 1.3rem; margin-top: 5px; }
+        .btn {
+            display: inline-block;
+            background: var(--mocha);
+            color: white;
+            padding: 14px 40px;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 30px;
+            margin-top: 20px;
+        }
+        section { padding: 60px 24px; }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--mocha-dark);
+            text-align: center;
+            margin-bottom: 40px;
+            font-style: italic;
+            font-weight: 600;
+        }
+        
+        /* COUPLE POLAROID STYLE */
+        .couple-section { background: var(--bg); }
+        .couple-polaroid {
+            background: white;
+            padding: 15px;
+            box-shadow: 0 4px 20px rgba(139, 107, 79, 0.15);
+            margin-bottom: 30px;
+        }
+        .couple-polaroid:nth-child(1) { transform: rotate(2deg); }
+        .couple-polaroid:nth-child(2) { transform: rotate(-1deg); }
+        .couple-polaroid img { width: 100%; height: 320px; object-fit: cover; }
+        .couple-polaroid .caption { text-align: center; padding: 15px 10px 5px; }
+        .couple-polaroid .caption h3 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 1.8rem; 
+            color: var(--mocha-dark); 
+        }
+        .couple-polaroid .caption p { color: var(--text-muted); font-size: 0.85rem; }
+        .couple-polaroid .caption a { color: var(--mocha); text-decoration: none; }
+
+        /* COUNTDOWN */
+        .countdown-wrap { background: var(--mocha); padding: 40px 24px; text-align: center; }
+        .countdown-title { color: white; font-size: 1.2rem; margin-bottom: 20px; letter-spacing: 2px; }
+        .countdown { display: flex; justify-content: center; gap: 15px; }
+        .countdown-box { background: rgba(255,255,255,0.15); padding: 15px; border-radius: 10px; min-width: 65px; }
+        .countdown-box h4 { font-size: 2rem; color: white; font-weight: 600; }
+        .countdown-box p { font-size: 0.7rem; color: var(--cream); letter-spacing: 1px; }
+
+        /* TIMELINE */
+        .timeline { position: relative; padding-left: 30px; }
+        .timeline::before {
+            content: ''; position: absolute; left: 8px; top: 10px; bottom: 10px;
+            width: 2px; background: var(--mocha); opacity: 0.3;
+        }
+        .timeline-item { position: relative; margin-bottom: 40px; padding-left: 30px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -28px; top: 5px;
+            width: 18px; height: 18px; background: var(--mocha);
+            border: 3px solid var(--cream); border-radius: 50%;
+        }
+        .timeline-item h3 { color: var(--mocha-dark); font-size: 1.3rem; margin-bottom: 5px; }
+        .timeline-item p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* GALLERY GRID POLAROID */
+        .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .gallery-item {
+            background: white; padding: 10px; box-shadow: 0 4px 15px rgba(139, 107, 79, 0.1);
+        }
+        .gallery-item:nth-child(odd) { transform: rotate(-2deg); }
+        .gallery-item:nth-child(even) { transform: rotate(1deg); }
+        .gallery-item img { width: 100%; height: 180px; object-fit: cover; }
+
+        /* GIFT & RSVP */
+        .brown-section { background: var(--mocha); color: white; text-align: center; }
+        .brown-section .section-title { color: white; }
+        .qr-box { background: white; padding: 20px; border-radius: 15px; display: inline-block; margin: 20px 0; }
+        .qr-box img { width: 180px; height: 180px; }
+        
+        .note-box {
+            background: white; border-radius: 15px; padding: 30px; text-align: left;
+            color: var(--text); margin-bottom: 20px;
+        }
+        .note-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--mocha-dark); margin-bottom: 15px; font-style: italic; }
+
+        .footer { padding: 40px 24px; text-align: center; font-size: 0.85rem; color: var(--text-muted); }
+        .music-btn {
+            position: fixed; bottom: 20px; right: 20px; z-index: 999;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--mocha); color: white; border: none;
+            cursor: pointer; font-size: 1.2rem; box-shadow: 0 4px 15px rgba(139, 107, 79, 0.3);
+        }
+        .hidden { display: none!important; }
+        #loader { position: fixed; inset: 0; background: var(--bg); z-index: 1000; }
+    </style>
+</head>
+<body>
+    <div id="loader"><div class="cover"><p>Loading...</p></div></div>
+
+    <main id="main" class="container hidden">
+        <div class="wave-top"></div>
+        
+        <section class="cover">
+            <div class="polaroid">
+                <img id="heroImg" src="" alt="Hero">
+            </div>
+            <h1 id="coupleName">Happily <em>Ever After</em> Begins Here</h1>
+            <div class="guest">
+                <p>Kepada Yth.</p>
+                <h3 id="guestName">Tamu Undangan</h3>
+            </div>
+            <a href="#couple" class="btn" id="openBtn">Buka Undangan</a>
+        </section>
+
+        <section class="couple-section" id="couple">
+            <h2 class="section-title">Welcome to our Wedding</h2>
+            <div class="couple-polaroid">
+                <img id="groomImg" src="" alt="Groom">
+                <div class="caption">
+                    <h3 id="groomName"></h3>
+                    <p id="groomParents"></p>
+                    <p><a id="groomIg" href="" target="_blank"></a></p>
+                </div>
+            </div>
+            <div class="couple-polaroid">
+                <img id="brideImg" src="" alt="Bride">
+                <div class="caption">
+                    <h3 id="brideName"></h3>
+                    <p id="brideParents"></p>
+                    <p><a id="brideIg" href="" target="_blank"></a></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="loveStory" class="hidden">
+            <h2 class="section-title">Our Love Story</h2>
+            <div id="storyList"></div>
+        </section>
+
+        <div class="countdown-wrap">
+            <p class="countdown-title" id="weddingDateText"></p>
+            <div class="countdown" id="countdown">
+                <div class="countdown-box"><h4 id="days">00</h4><p>DAYS</p></div>
+                <div class="countdown-box"><h4 id="hours">00</h4><p>HOURS</p></div>
+                <div class="countdown-box"><h4 id="minutes">00</h4><p>MINUTES</p></div>
+                <div class="countdown-box"><h4 id="seconds">00</h4><p>SECONDS</p></div>
+            </div>
+        </div>
+
+        <section id="events">
+            <h2 class="section-title">Order of Events</h2>
+            <div class="timeline" id="eventTimeline"></div>
+        </section>
+
+        <section id="gallery">
+            <h2 class="section-title">Momen Bahagia</h2>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+
+        <section class="brown-section" id="gift">
+            <h2 class="section-title">A Note on Gifts!</h2>
+            <div class="note-box">
+                <p>Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, kami dengan senang hati menerima.</p>
+            </div>
+            <div id="giftList"></div>
+        </section>
+
+        <section id="logistics">
+            <h2 class="section-title">RSVP</h2>
+            <div id="logisticsBox" class="card"></div>
+        </section>
+
+        <section class="footer">
+            <p id="footerCouple"></p>
+            <p>Thank you for making a change to visit our website</p>
+        </section>
+    </main>
+
+    <button id="musicBtn" class="music-btn hidden">♫</button>
+    <audio id="bgMusic" loop></audio>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const clientSlug = urlParams.get('c');
+        const guestName = urlParams.get('to') || 'Tamu Undangan';
+        const basePath = `../../public/clients/${clientSlug}/`;
+
+        fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
+            if (data.meta?.theme_color) document.documentElement.style.setProperty('--mocha', data.meta.theme_color);
+            document.title = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+            document.getElementById('guestName').textContent = guestName;
+            document.getElementById('coupleName').innerHTML = `${data.couple.groom.nickname} <em>&</em> ${data.couple.bride.nickname}`;
+            document.getElementById('heroImg').src = basePath + data.gallery.heroImage;
+
+            // Couple
+            document.getElementById('groomImg').src = basePath + data.couple.groom.image;
+            document.getElementById('groomName').textContent = data.couple.groom.name;
+            document.getElementById('groomParents').textContent = `Putra dari ${data.couple.groom.father} & ${data.couple.groom.mother}`;
+            if(data.couple.groom.instagram) { document.getElementById('groomIg').textContent = data.couple.groom.instagram; document.getElementById('groomIg').href = `https://instagram.com/${data.couple.groom.instagram.replace('@', '')}`; }
+            document.getElementById('brideImg').src = basePath + data.couple.bride.image;
+            document.getElementById('brideName').textContent = data.couple.bride.name;
+            document.getElementById('brideParents').textContent = `Putri dari ${data.couple.bride.father} & ${data.couple.bride.mother}`;
+            if(data.couple.bride.instagram) { document.getElementById('brideIg').textContent = data.couple.bride.instagram; document.getElementById('brideIg').href = `https://instagram.com/${data.couple.bride.instagram.replace('@', '')}`; }
+
+            // Love Story
+            if (data.loveStory && data.loveStory.length > 0) {
+                document.getElementById('loveStory').classList.remove('hidden');
+                const storyList = document.getElementById('storyList');
+                data.loveStory.forEach(s => { storyList.innerHTML += `<div class="card"><h3><span>${s.year}</span> - ${s.title}</h3><p>${s.desc}</p></div>`; });
+            }
+
+            // Countdown
+            const weddingDate = new Date(data.events[0].date + 'T' + data.events[0].startTime);
+            document.getElementById('weddingDateText').textContent = weddingDate.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = weddingDate - now;
+                document.getElementById('days').textContent = Math.floor(distance / (1000*60*60*24));
+                document.getElementById('hours').textContent = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+                document.getElementById('minutes').textContent = Math.floor((distance % (1000*60*60)) / (1000*60));
+                document.getElementById('seconds').textContent = Math.floor((distance % (1000*60)) / 1000);
+            }, 1000);
+
+            // Timeline Events
+            const timeline = document.getElementById('eventTimeline');
+            data.events.forEach(ev => {
+                timeline.innerHTML += `<div class="timeline-item"><h3>${ev.title}</h3><p>${ev.startTime} ${ev.timezone}</p><p>${ev.address}</p></div>`;
+            });
+
+            // Gallery
+            const galleryGrid = document.getElementById('galleryGrid');
+            if (data.gallery.album && data.gallery.album.length > 0) {
+                data.gallery.album.forEach(img => { galleryGrid.innerHTML += `<div class="gallery-item"><img src="${basePath}${img}" alt=""></div>`; });
+            } else { document.getElementById('gallery').classList.add('hidden'); }
+
+            // Gift
+            if (data.digitalGift && data.digitalGift.length > 0) {
+                const giftList = document.getElementById('giftList');
+                data.digitalGift.forEach(g => {
+                    giftList.innerHTML += `<div class="qr-box"><h3 style="color:var(--mocha-dark);margin-bottom:10px;">${g.provider}</h3><p style="color:var(--text);">${g.accountNumber}</p><p style="color:var(--text);margin-bottom:15px;">a.n ${g.accountHolder}</p>${g.qrCode? `<img src="${basePath}${g.qrCode}" alt="QR">` : ''}</div>`;
+                });
+            } else { document.getElementById('gift').classList.add('hidden'); }
+
+            // Logistics RSVP
+            if (data.logistics && data.logistics.rsvpWaNumber) {
+                const waLink = `https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo, saya ${guestName} ingin konfirmasi kehadiran`;
+                document.getElementById('logisticsBox').innerHTML = `<h3>Konfirmasi Kehadiran</h3><p>${data.logistics.guestNote || ''}</p><p style="margin:20px 0;"><strong>Dresscode:</strong> ${data.logistics.dressCode || '-'}</p><a href="${waLink}" target="_blank" class="btn">WhatsApp RSVP</a>`;
+            } else { document.getElementById('logistics').classList.add('hidden'); }
+
+            // Music
+            if (data.config?.audioUrl) {
+                const audio = document.getElementById('bgMusic'); const musicBtn = document.getElementById('musicBtn');
+                audio.src = basePath + data.config.audioUrl; musicBtn.classList.remove('hidden'); let isPlaying = false;
+                musicBtn.onclick = () => { if (isPlaying) { audio.pause(); musicBtn.textContent = '♫'; } else { audio.play(); musicBtn.textContent = '❚❚'; } isPlaying =!isPlaying; };
+                document.getElementById('openBtn').addEventListener('click', () => { audio.play().then(() => { isPlaying = true; musicBtn.textContent = '❚❚'; }).catch(e => {}); });
+            }
+
+            document.getElementById('footerCouple').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+            document.getElementById('loader').classList.add('hidden');
+            document.getElementById('main').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
