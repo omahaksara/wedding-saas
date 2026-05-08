@@ -20,12 +20,12 @@
             --text-dark: #4A5568;
         }
         body { font-family: 'Montserrat', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
-   .font-script { font-family: 'Parisienne', cursive; }
-   .font-serif { font-family: 'Cormorant Garamond', serif; }
-   .text-dusty { color: var(--dusty-blue); }
-   .text-gold { color: var(--gold); }
-   .bg-dusty { background-color: var(--dusty-blue); }
-   .bg-gold { background-color: var(--gold); }
+     .font-script { font-family: 'Parisienne', cursive; }
+     .font-serif { font-family: 'Cormorant Garamond', serif; }
+     .text-dusty { color: var(--dusty-blue); }
+     .text-gold { color: var(--gold); }
+     .bg-dusty { background-color: var(--dusty-blue); }
+     .bg-gold { background-color: var(--gold); }
         
         /* Floral Falling */
      .petal {
@@ -68,7 +68,6 @@
         <div class="monogram text-3xl font-serif text-gold border-2 border-gold rounded-full w-20 h-20 flex items-center justify-center mx-auto">
             <span id="monogram-text">K&R</span>
         </div>
-        <!-- FONT LEBIH MELIUK -->
         <h1 id="cover-names" class="font-script text-7xl md:text-8xl my-8 text-dusty leading-none"></h1>
         <img src="https://i.imgur.com/8QfZ9xL.png" class="w-64 mx-auto mt-6 opacity-60 rotate-180">
         <p class="text-xs mt-12 tracking-[0.4em]">KEPADA YTH.</p>
@@ -210,11 +209,14 @@
             document.getElementById('groom-img').src = basePath + g.image;
             document.getElementById('groom-name').textContent = g.name;
             document.getElementById('groom-parents').innerHTML = `Putra dari Bpk. ${g.father} & Ibu ${g.mother}`;
-            document.getElementById('groom-ig').href = `https://instagram.com/${g.instagram.replace('@','')}`;
+            if(g.instagram) document.getElementById('groom-ig').href = `https://instagram.com/${g.instagram.replace('@','')}`;
+            else document.getElementById('groom-ig').style.display = 'none';
+            
             document.getElementById('bride-img').src = basePath + b.image;
             document.getElementById('bride-name').textContent = b.name;
             document.getElementById('bride-parents').innerHTML = `Putri dari Bpk. ${b.father} & Ibu ${b.mother}`;
-            document.getElementById('bride-ig').href = `https://instagram.com/${b.instagram.replace('@','')}`;
+            if(b.instagram) document.getElementById('bride-ig').href = `https://instagram.com/${b.instagram.replace('@','')}`;
+            else document.getElementById('bride-ig').style.display = 'none';
             
             // COUNTDOWN
             const countdownDate = new Date(`${ev.date}T${ev.startTime}:00`).getTime();
@@ -277,17 +279,19 @@
             
             // GIFT
             const giftList = document.getElementById('gift-list');
-            data.digitalGift.forEach(acc => {
-                giftList.innerHTML += `
-                    <div class="bg-white/20 rounded-xl p-4 text-left">
-                        <p class="font-semibold">${acc.provider} - ${acc.accountHolder}</p>
-                        <div class="flex justify-between items-center mt-1">
-                            <p class="font-serif text-lg">${acc.accountNumber}</p>
-                            <button onclick="navigator.clipboard.writeText('${acc.accountNumber}')" class="text-xs bg-white text-sage rounded-full px-3 py-1">SALIN</button>
+            if(data.digitalGift && data.digitalGift.length > 0) {
+                data.digitalGift.forEach(acc => {
+                    giftList.innerHTML += `
+                        <div class="bg-white/20 rounded-xl p-4 text-left">
+                            <p class="font-semibold">${acc.provider} - ${acc.accountHolder}</p>
+                            <div class="flex justify-between items-center mt-1">
+                                <p class="font-serif text-lg">${acc.accountNumber}</p>
+                                <button onclick="navigator.clipboard.writeText('${acc.accountNumber}');this.textContent='COPIED'" class="text-xs bg-white text-sage rounded-full px-3 py-1">SALIN</button>
+                            </div>
                         </div>
-                    </div>
-                `;
-            });
+                    `;
+                });
+            }
             
             document.getElementById('guest-note').textContent = data.logistics.guestNote;
             document.getElementById('rsvp-link').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo, saya ${guestName.replace(/\+/g, ' ')} akan hadir di acara ${g.nickname} & ${b.nickname}`;
@@ -299,7 +303,11 @@
                     document.getElementById('app').style.opacity = 1;
                     createPetals();
                     initScroll();
-                    if(data.logistics.music) new Audio(basePath + data.logistics.music).play().catch(e=>{});
+                    if(data.logistics.music) {
+                        const audio = new Audio(basePath + data.logistics.music);
+                        audio.loop = true;
+                        audio.play().catch(e => console.log('Autoplay blocked'));
+                    }
                 }});
             });
             
@@ -315,6 +323,9 @@
                     });
                 });
             }
+        }).catch(err => {
+            console.error('Error load data.json:', err);
+            document.body.innerHTML = '<div class="text-center p-10">Gagal memuat data undangan. Cek data.json</div>';
         });
     </script>
 </body>
