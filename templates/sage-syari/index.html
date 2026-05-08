@@ -1,411 +1,776 @@
+```html
+<!-- ========================= -->
+<!-- OMAH AKSARA — KENZ SAGE 2026 -->
+<!-- SYARI • CINEMATIC • GEN Z -->
+<!-- ========================= -->
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --theme-color: #7A8B7A; /* Sage default */
-            --bg-color: #EAECE6;
-            --text-color: #3A4A3A;
-            --accent-color: #F4F6F2;
-        }
-        body { font-family: 'Montserrat', sans-serif; background: var(--bg-color); color: var(--text-color); }
-.font-serif { font-family: 'Cormorant Garamond', serif; }
-.font-arab { font-family: 'Scheherazade New', serif; }
-.bg-theme { background-color: var(--theme-color); }
-.text-theme { color: var(--theme-color); }
-.border-theme { border-color: var(--theme-color); }
-.bg-accent { background-color: var(--accent-color); }
-.cover-bg { background-color: var(--bg-color); }
-.polaroid { background: white; padding: 10px 10px 35px 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
-.polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
-.torn-top {
-            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,50 C150,0 350,0 500,50 C650,100 850,100 1000,50 L1000,50 L0,50 Z" fill="black"/></svg>');
-            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,50 C150,0 350,0 500,50 C650,100 850,100 1000,50 L1000,50 L0,50 Z" fill="black"/></svg>');
-            -webkit-mask-size: 100% 20px; mask-size: 100% 20px;
-            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
-        }
-.torn-bottom {
-            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,0 C150,50 350,50 500,0 C650,-50 850,-50 1000,0 L1000,0 L0,0 Z" fill="black"/></svg>');
-            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 50" preserveAspectRatio="none"><path d="M0,0 C150,50 350,50 500,0 C650,-50 850,-50 1000,0 L1000,0 L0,0 Z" fill="black"/></svg>');
-            -webkit-mask-size: 100% 20px; mask-size: 100% 20px;
-            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
-            -webkit-mask-position: bottom; mask-position: bottom;
-        }
-.hidden { display: none!important; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Undangan Pernikahan</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --theme-color:#8B9A8B;
+    --bg-color:#F4F1EA;
+    --text-color:#4E5A4E;
+    --accent-color:#E7E2D8;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    background:var(--bg-color);
+    color:var(--text-color);
+    overflow-x:hidden;
+}
+
+/* PAPER TEXTURE */
+body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background-image:url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+    opacity:.07;
+    pointer-events:none;
+    z-index:999;
+}
+
+.font-serif{
+    font-family:'Cormorant Garamond',serif;
+}
+
+.font-arab{
+    font-family:'Scheherazade New',serif;
+}
+
+.text-theme{
+    color:var(--theme-color);
+}
+
+.bg-theme{
+    background:var(--theme-color);
+}
+
+.border-theme{
+    border-color:var(--theme-color);
+}
+
+/* GLASS CARD */
+.glass{
+    background:rgba(255,255,255,.35);
+    backdrop-filter:blur(16px);
+    border:1px solid rgba(255,255,255,.25);
+    box-shadow:0 10px 40px rgba(0,0,0,.05);
+}
+
+/* HERO */
+.hero-overlay{
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,.72),
+        rgba(0,0,0,.18),
+        rgba(0,0,0,.32)
+    );
+}
+
+/* SOFT ANIMATION */
+.fade-up{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1.2s ease;
+}
+
+.fade-up.show{
+    opacity:1;
+    transform:none;
+}
+
+/* GALLERY */
+.gallery-card{
+    overflow:hidden;
+    border-radius:28px;
+    position:relative;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.gallery-card img{
+    transition:1.2s ease;
+}
+
+.gallery-card:hover img{
+    transform:scale(1.08);
+}
+
+/* POLAROID */
+.polaroid{
+    background:white;
+    padding:10px 10px 30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+}
+
+/* MUSIC */
+#music-toggle{
+    backdrop-filter:blur(15px);
+    background:rgba(255,255,255,.25);
+    border:1px solid rgba(255,255,255,.35);
+}
+
+/* DIVIDER */
+.divider{
+    width:60px;
+    height:1px;
+    background:rgba(139,154,139,.35);
+    margin:80px auto;
+}
+
+</style>
 </head>
-<body class="antialiased">
 
-    <!-- COVER - UDAH ADA FOTO + BLUR + FALLBACK -->
-    <div id="cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center text-white transition-opacity duration-1000">
-        <img id="cover-image" class="absolute inset-0 w-full h-full object-cover" src="" crossorigin="anonymous">
-        <!-- Blur + Gradient biar teks kebaca, kalau foto nggak ada = background sage -->
-        <div class="absolute inset-0 backdrop-blur-sm bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-        <div class="relative z-10 p-8">
-            <p id="cover-bismillah" class="font-arab text-3xl mb-4 hidden">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
-            <p id="cover-event-name" class="text-sm tracking-widest uppercase">WALIMATUL 'URSY</p>
-            <h1 id="cover-names" class="font-serif text-6xl my-4"></h1>
-            <p class="text-sm mt-8">Kepada Yth. Bapak/Ibu/Saudara/i</p>
-            <p id="cover-guest" class="text-xl font-semibold mt-1"></p>
-            <button id="open-invitation" class="bg-white/20 backdrop-blur-sm border-white border text-white rounded-full px-8 py-3 mt-8 text-sm uppercase tracking-wider shadow-lg hover:bg-white/30 transition-all">Buka Undangan</button>
+<body>
+
+<!-- ================= -->
+<!-- COVER -->
+<!-- ================= -->
+
+<div id="cover" class="fixed inset-0 z-50 flex items-center justify-center text-center text-white overflow-hidden">
+
+    <img id="cover-image"
+    class="absolute inset-0 w-full h-full object-cover"
+    src="">
+
+    <div class="absolute inset-0 backdrop-blur-sm hero-overlay"></div>
+
+    <div class="relative z-10 px-8">
+
+        <p class="font-arab text-3xl mb-5">
+            بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم
+        </p>
+
+        <p class="uppercase tracking-[.4em] text-xs opacity-70">
+            Walimatul 'Ursy
+        </p>
+
+        <h1 id="cover-names"
+        class="font-serif text-6xl md:text-7xl mt-5 italic">
+        </h1>
+
+        <div class="mt-10">
+            <p class="text-xs uppercase tracking-[.3em] opacity-60">
+                Kepada Yth.
+            </p>
+
+            <p id="guest-name"
+            class="mt-3 text-xl font-light">
+            </p>
         </div>
+
+        <button id="openInvitation"
+        class="mt-12 px-10 py-4 rounded-full border border-white/30 bg-white/10 backdrop-blur-md uppercase tracking-[.25em] text-xs hover:bg-white hover:text-black transition-all duration-700">
+
+            Buka Undangan
+
+        </button>
+
     </div>
 
-    <div id="app" class="max-w-md mx-auto bg-white min-h-screen shadow-xl opacity-0 transition-opacity duration-1000">
-        <!-- HERO - FIX TINGGI 80VH -->
-        <section id="hero-section" class="relative h-[80vh] flex flex-col items-center justify-end text-center text-white">
-            <img id="hero-image" class="absolute inset-0 w-full h-full object-cover" src="" crossorigin="anonymous" onerror="this.parentElement.style.backgroundColor='var(--bg-color)'">
-            <div id="hero-overlay" class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-            <div id="hero-content" class="relative z-10 p-8">
-                <p class="text-sm tracking-widest uppercase">PERNIKAHAN</p>
-                <h1 id="hero-names" class="font-serif text-6xl my-2"></h1>
-                <p id="hero-date" class="text-lg"></p>
-            </div>
-        </section>
+</div>
 
-        <div class="p-8 text-center">
-            <!-- QUOTE/AYAT -->
-            <section id="quote-section" class="my-12 bg-white/60 p-6 rounded-2xl shadow-sm hidden">
-                <p id="quote-arab" class="font-arab text-2xl text-theme leading-relaxed hidden"></p>
-                <p id="quote-text" class="text-sm mt-4 italic"></p>
-                <p id="quote-source" class="text-xs font-semibold mt-2"></p>
-            </section>
+<!-- ================= -->
+<!-- MAIN -->
+<!-- ================= -->
 
-            <!-- COUPLE -->
-            <section id="couple" class="my-12">
-                <div id="groom-section" class="mb-8"></div>
-                <div class="font-serif text-5xl my-4 text-theme">&</div>
-                <div id="bride-section"></div>
-            </section>
+<main id="app"
+class="max-w-md mx-auto opacity-0 transition duration-1000">
 
-            <!-- LOVE STORY -->
-            <section id="love-story-section" class="my-16 hidden">
-                <h3 class="font-serif text-3xl mb-6 text-theme">Kisah Kami</h3>
-                <div id="love-story" class="space-y-6 text-left"></div>
-            </section>
+<!-- HERO -->
 
-            <!-- EVENT -->
-            <section id="event-section" class="my-16 bg-white/60 p-6 rounded-2xl shadow-sm hidden">
-                <h3 class="font-serif text-3xl mb-6 text-theme">Save The Date</h3>
-                <div id="event-details" class="space-y-4"></div>
+<section class="relative h-screen flex items-end justify-center text-center overflow-hidden">
 
-                <div id="countdown-wrap" class="mt-8 hidden">
-                    <p class="text-xs uppercase tracking-widest mb-3">Menuju Hari Bahagia</p>
-                    <div id="countdown" class="flex justify-center space-x-4 text-center"></div>
-                </div>
+    <img id="hero-image"
+    class="absolute inset-0 w-full h-full object-cover"
+    src="">
 
-                <a id="google-calendar-link" target="_blank" class="inline-block bg-theme text-white rounded-full px-6 py-2 mt-6 text-xs uppercase tracking-wider hidden">Simpan Tanggal</a>
-            </section>
+    <div class="absolute inset-0 hero-overlay"></div>
 
-            <!-- GALLERY -->
-            <section id="gallery-section" class="my-16 hidden">
-                <h3 class="font-serif text-3xl mb-6 text-theme">Momen Bahagia</h3>
-                <div id="gallery-grid" class="grid gap-4"></div>
-            </section>
+    <div class="relative z-10 px-8 pb-24 text-white">
 
-            <!-- VIDEO -->
-            <section id="video-section" class="my-16 hidden">
-                <h3 class="font-serif text-3xl mb-6 text-theme">Video Prewedding</h3>
-                <div class="aspect-video rounded-lg overflow-hidden shadow-lg">
-                    <iframe id="video-frame" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-            </section>
+        <p class="uppercase tracking-[.4em] text-xs opacity-70">
+            The Wedding Of
+        </p>
 
-            <!-- GIFT -->
-            <section id="gift-section" class="my-16 bg-white/60 p-6 rounded-2xl shadow-sm hidden">
-                <h3 class="font-serif text-3xl mb-4 text-theme">Amplop Digital</h3>
-                <p class="text-xs mb-4">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, dapat melalui:</p>
-                <div id="gift-details" class="space-y-3"></div>
-            </section>
+        <h1 id="hero-names"
+        class="font-serif text-7xl italic leading-none mt-5">
+        </h1>
 
-            <!-- RSVP -->
-            <section id="rsvp-section" class="my-16 hidden">
-                 <h3 class="font-serif text-3xl mb-4 text-theme">Konfirmasi Kehadiran</h3>
-                 <p id="guest-note" class="text-sm mb-4">Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
-                 <p id="dresscode" class="text-xs mb-4"></p>
-                 <a id="rsvp-link" target="_blank" class="inline-block bg-theme text-white rounded-full px-8 py-3 text-sm uppercase tracking-wider shadow-lg">Konfirmasi via WhatsApp</a>
-            </section>
+        <div class="w-16 h-px bg-white/30 mx-auto my-8"></div>
 
-            <!-- FOOTER -->
-            <footer class="text-center py-8 mt-8">
-                <p id="footer-closing" class="font-arab text-2xl text-theme mb-2 hidden">بَارَكَ اللهُ لَكُماَ وَبَارَكَ عَلَيْكُماَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
-                <p id="footer-closing-text" class="text-xs italic mb-4 hidden">"Semoga Allah memberkahimu dan memberkahi atasmu, serta mengumpulkan kalian berdua dalam kebaikan"</p>
-                <p class="text-sm">Terima kasih atas doa dan restu yang telah diberikan.</p>
-                <p class="font-serif text-2xl mt-6 text-theme">Kami yang berbahagia,</p>
-                <p id="footer-names" class="font-serif text-3xl mt-2 text-theme"></p>
-                <p class="text-xs mt-8">Digital Invitation by Omah Aksara</p>
-            </footer>
-        </div>
+        <p id="hero-date"
+        class="tracking-[.2em] uppercase text-xs">
+        </p>
+
     </div>
 
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const clientSlug = params.get('c');
-        const guestName = params.get('to') || 'Tamu Undangan';
-        const basePath = `../../public/clients/${clientSlug}/`;
-        const defaultAvatar = '../../public/default-avatar.jpg';
-        let globalAudio = null;
+</section>
 
-        fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
-            const g = data.couple.groom;
-            const b = data.couple.bride;
-            const ev = data.events && data.events.length > 0? data.events[0] : null;
-            const settings = data.settings || {};
+<div class="px-6 pb-24">
 
-            // 1. WARNA: Base template, override kalau ada di json
-            if(settings.themeColor) document.documentElement.style.setProperty('--theme-color', settings.themeColor);
-            if(settings.bgColor) document.documentElement.style.setProperty('--bg-color', settings.bgColor);
-            if(settings.textColor) document.documentElement.style.setProperty('--text-color', settings.textColor);
+<!-- QUOTE -->
 
-            if(settings.islami) {
-                document.getElementById('cover-bismillah').classList.remove('hidden');
-                document.getElementById('footer-closing').classList.remove('hidden');
-                document.getElementById('footer-closing-text').classList.remove('hidden');
-                document.getElementById('cover-event-name').textContent = "WALIMATUL 'URSY";
-            }
+<div class="divider"></div>
 
-            // 2. COVER & HERO - FIX FOTO + FALLBACK
-            const coverImg = document.getElementById('cover-image');
-            const heroImg = document.getElementById('hero-image');
-            if(data.gallery.heroImage) {
-                coverImg.crossOrigin = 'Anonymous';
-                heroImg.crossOrigin = 'Anonymous';
-                coverImg.src = basePath + data.gallery.heroImage;
-                heroImg.src = basePath + data.gallery.heroImage;
+<section id="quote-section"
+class="glass rounded-[32px] p-8 text-center fade-up">
 
-                coverImg.addEventListener('load', function() {
-                    if(!settings.themeColor && settings.autoColor === true) {
-                        const colorThief = new ColorThief();
-                        const [r, g, b] = colorThief.getColor(coverImg);
-                        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-                        if (brightness > 60 && brightness < 200) {
-                           document.documentElement.style.setProperty('--theme-color', `rgb(${r}, ${g}, ${b})`);
-                        }
-                    }
-                });
-            } else {
-                // Fallback kalau nggak ada foto = background sage
-                document.getElementById('cover').classList.add('cover-bg');
-                document.getElementById('hero-section').style.backgroundColor = 'var(--bg-color)';
-            }
+    <p id="quote-arab"
+    class="font-arab text-3xl leading-loose text-theme">
+    </p>
 
-            // 3. HERO STYLE
-            const heroSection = document.getElementById('hero-section');
-            const heroDate = ev? new Date(ev.date).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '';
+    <p id="quote-text"
+    class="italic mt-6 leading-relaxed text-sm">
+    </p>
 
-            if(settings.heroStyle === 'polaroid') {
-                heroSection.className = 'relative p-8 bg-white';
-                heroSection.innerHTML = `
-                    <div class="polaroid -rotate-2">
-                        <img src="${basePath + data.gallery.heroImage}" class="w-full aspect-[3/4] object-cover" crossorigin="anonymous" onerror="this.src='${defaultAvatar}'">
-                    </div>
-                    <div class="text-center mt-6">
-                        <p class="text-sm tracking-widest uppercase">PERNIKAHAN</p>
-                        <h1 class="font-serif text-6xl my-2 text-theme">${g.nickname} & ${b.nickname}</h1>
-                        <p class="text-lg">${heroDate}</p>
-                    </div>
-                `;
-            } else {
-                document.getElementById('hero-names').innerHTML = `${g.nickname} & ${b.nickname}`;
-                document.getElementById('hero-date').textContent = heroDate;
-            }
+    <p id="quote-source"
+    class="mt-5 uppercase tracking-[.3em] text-[10px] opacity-60">
+    </p>
 
-            // COVER
-            document.getElementById('cover-names').innerHTML = `${g.nickname} & ${b.nickname}`;
-            document.getElementById('cover-guest').textContent = guestName.replace(/\+/g, ' ');
+</section>
 
-            // QUOTE - GUARD
-            if(data.quote && data.quote.text) {
-                document.getElementById('quote-section').classList.remove('hidden');
-                if(data.quote.arab) {
-                    document.getElementById('quote-arab').classList.remove('hidden');
-                    document.getElementById('quote-arab').textContent = data.quote.arab;
-                }
-                document.getElementById('quote-text').textContent = `"${data.quote.text}"`;
-                document.getElementById('quote-source').textContent = data.quote.source || '';
-            }
+<!-- COUPLE -->
 
-            // COUPLE FRAME
-            const renderCouple = (person, el) => {
-                let imgHtml = `<img src="${basePath + person.image}" class="w-full aspect-[3/4] object-cover" onerror="this.src='${defaultAvatar}'">`;
-                if(settings.coupleFrame === 'polaroid') {
-                    imgHtml = `<div class="polaroid w-48 mx-auto ${person.gender === 'groom'? '-rotate-3' : 'rotate-3'}">${imgHtml}</div>`;
-                } else if(settings.coupleFrame === 'circle') {
-                    imgHtml = `<img src="${basePath + person.image}" class="w-48 h-48 mx-auto rounded-full object-cover border-4 border-white shadow-lg" onerror="this.src='${defaultAvatar}'">`;
-                } else {
-                    imgHtml = `<img src="${basePath + person.image}" class="w-48 mx-auto rounded-lg object-cover shadow-lg" onerror="this.src='${defaultAvatar}'">`;
-                }
+<div class="divider"></div>
 
-                document.getElementById(el).innerHTML = `
-                    ${imgHtml}
-                    <h2 class="font-serif text-4xl mt-4 text-theme">${person.name}</h2>
-                    <p class="text-sm mt-1">${person.gender === 'groom'? 'Putra' : 'Putri'} dari Bapak ${person.father} <br> & Ibu ${person.mother}</p>
-                    ${person.instagram? `<a href="https://instagram.com/${person.instagram.replace('@','')}" target="_blank" class="text-xs text-theme mt-1 inline-block">${person.instagram}</a>` : ''}
-                `;
-            };
-            renderCouple({...g, gender: 'groom'}, 'groom-section');
-            renderCouple({...b, gender: 'bride'}, 'bride-section');
+<section class="fade-up">
 
-            // LOVE STORY - GUARD
-            if(data.loveStory && data.loveStory.length > 0) {
-                document.getElementById('love-story-section').classList.remove('hidden');
-                const loveStoryEl = document.getElementById('love-story');
-                data.loveStory.forEach(item => {
-                    loveStoryEl.innerHTML += `
-                        <div class="bg-white/40 p-4 rounded-lg">
-                            <p class="text-xs text-theme font-semibold">${item.date} - ${item.title}</p>
-                            <p class="text-sm mt-2">${item.description}</p>
-                        </div>
-                    `;
-                });
-            }
+    <div id="groom-section" class="text-center"></div>
 
-            // EVENT - GUARD
-            if(data.events && data.events.length > 0) {
-                document.getElementById('event-section').classList.remove('hidden');
-                const eventDetails = document.getElementById('event-details');
-                data.events.forEach(event => {
-                    eventDetails.innerHTML += `
-                        <div class="border-t border-theme/20 pt-4 first:border-t-0 first:pt-0">
-                            <h4 class="font-semibold uppercase tracking-widest text-sm">${event.title}</h4>
-                            <p class="text-sm mt-1">${new Date(event.date).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
-                            <p class="text-sm">Pukul ${event.startTime} - ${event.endTime} ${event.timezone}</p>
-                            <p class="text-xs mt-2">${event.address}</p>
-                            ${event.googleMaps? `<a href="${event.googleMaps}" target="_blank" class="text-xs text-theme underline mt-1 inline-block">Lihat Lokasi</a>` : ''}
-                        </div>
-                    `;
-                });
+    <div class="font-serif text-5xl text-center my-12 text-theme">
+        &
+    </div>
 
-                // COUNTDOWN - Fix kurung
-                if(ev) {
-                    document.getElementById('countdown-wrap').classList.remove('hidden');
-                    const countdownDate = new Date(`${ev.date}T${ev.startTime}:00`).getTime();
-                    const countdownEl = document.getElementById('countdown');
-                    setInterval(() => {
-                        const distance = countdownDate - new Date().getTime();
-                        const d = Math.max(0, Math.floor(distance / (1000 * 60 * 24)));
-                        const h = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-                        const m = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
-                        const s = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000));
-                        countdownEl.innerHTML = `
-                            <div><div class="text-2xl font-serif">${d}</div><div class="text-xs">Hari</div></div>
-                            <div><div class="text-2xl font-serif">${h}</div><div class="text-xs">Jam</div></div>
-                            <div><div class="text-2xl font-serif">${m}</div><div class="text-xs">Menit</div></div>
-                            <div><div class="text-2xl font-serif">${s}</div><div class="text-xs">Detik</div></div>
-                        `;
-                    }, 1000);
+    <div id="bride-section" class="text-center"></div>
 
-                    // GOOGLE CALENDAR
-                    const startTime = new Date(`${ev.date}T${ev.startTime}:00`).toISOString().replace(/-|:|\.\d+/g, '');
-                    const endTimeRaw = ev.endTime === 'Selesai'? '23:59' : ev.endTime;
-                    const endTime = new Date(`${ev.date}T${endTimeRaw}:00`).toISOString().replace(/-|:|\.\d+/g, '');
-                    const calendarLink = document.getElementById('google-calendar-link');
-                    calendarLink.classList.remove('hidden');
-                    calendarLink.href = `https://www.google.com/calendar/render?action=TEMPLATE&text=Walimah ${g.nickname} & ${b.nickname}&dates=${startTime}/${endTime}&details=Acara Pernikahan ${g.name} dan ${b.name}&location=${ev.address}`;
-                }
-            }
+</section>
 
-            // GALLERY - GUARD + AUTO CENTER
-            if(data.gallery.album && data.gallery.album.length > 0) {
-                const gallerySection = document.getElementById('gallery-section');
-                const galleryGrid = document.getElementById('gallery-grid');
-                gallerySection.classList.remove('hidden');
+<!-- LOVE STORY -->
 
-                let gridCols = 'grid-cols-2';
-                if(data.gallery.album.length === 1) gridCols = 'grid-cols-1 max-w-xs mx-auto';
-                if(data.gallery.album.length === 3) gridCols = 'grid-cols-3';
-                galleryGrid.className = `grid ${gridCols} gap-4`;
+<div class="divider"></div>
 
-                data.gallery.album.forEach((img, i) => {
-                    const rotation = i % 2 === 0? '-rotate-2' : 'rotate-2';
-                    galleryGrid.innerHTML += `
-                        <div class="polaroid ${rotation}">
-                            <img src="${basePath}${img}" class="w-full aspect-square object-cover" alt="Gallery ${i+1}" onerror="this.parentElement.style.display='none'">
-                        </div>
-                    `;
-                });
-            }
+<section id="love-story-section"
+class="fade-up">
 
-            // VIDEO - GUARD
-            if(data.gallery.videoYoutubeId && data.gallery.videoYoutubeId.trim()!== '') {
-                document.getElementById('video-section').classList.remove('hidden');
-                document.getElementById('video-frame').src = `https://www.youtube.com/embed/${data.gallery.videoYoutubeId}`;
-            }
+    <h2 class="font-serif text-4xl italic text-center text-theme mb-10">
+        Kisah Kami
+    </h2>
 
-            // GIFT - GUARD
-            if(data.digitalGift && data.digitalGift.length > 0) {
-                document.getElementById('gift-section').classList.remove('hidden');
-                const giftDetails = document.getElementById('gift-details');
-                data.digitalGift.forEach(gift => {
-                    giftDetails.innerHTML += `
-                        <div class="bg-white p-3 rounded-lg text-sm">
-                            <p class="font-bold">${gift.provider}</p>
-                            <p class="my-1">${gift.accountNumber}</p>
-                            <p class="text-xs">a.n ${gift.accountHolder}</p>
-                            <button onclick="navigator.clipboard.writeText('${gift.accountNumber}').then(() => alert('Nomor rekening disalin!'))" class="text-xs bg-theme/20 text-theme px-3 py-1 rounded-full mt-2">Salin No. Rekening</button>
-                        </div>
-                    `;
-                });
-            }
+    <div id="love-story"
+    class="space-y-6">
+    </div>
 
-            // RSVP - GUARD
-            if(data.logistics && data.logistics.rsvpWaNumber) {
-                document.getElementById('rsvp-section').classList.remove('hidden');
-                if(data.logistics.dressCode) document.getElementById('dresscode').textContent = `Dresscode: ${data.logistics.dressCode}`;
-                if(data.logistics.guestNote) document.getElementById('guest-note').textContent = data.logistics.guestNote;
-                const rsvpMessage = settings.islami?
-                    `Assalamualaikum. Saya, ${guestName.replace(/\+/g, ' ')}, insyaAllah akan hadir di acara Walimatul 'Ursy ${g.nickname} & ${b.nickname}. Jazakumullah khairan.` :
-                    `Halo, saya ${guestName.replace(/\+/g, ' ')} akan hadir di acara pernikahan ${g.nickname} & ${b.nickname}. Terima kasih.`;
-                document.getElementById('rsvp-link').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=${encodeURIComponent(rsvpMessage)}`;
-            }
+</section>
 
-            // FOOTER
-            document.getElementById('footer-names').innerHTML = `${g.nickname} & ${b.nickname}`;
+<!-- EVENT -->
 
-            // MUSIK + TOMBOL FALLBACK
-            document.getElementById('open-invitation').addEventListener('click', () => {
-                document.getElementById('cover').style.opacity = '0';
-                document.getElementById('app').style.opacity = '1';
-                setTimeout(() => document.getElementById('cover').style.display = 'none', 1000);
+<div class="divider"></div>
 
-                if(data.logistics.music) {
-                    globalAudio = new Audio(basePath + data.logistics.music);
-                    globalAudio.loop = true;
-                    globalAudio.volume = 0.7;
+<section class="glass rounded-[32px] p-8 fade-up">
 
-                    setTimeout(() => {
-                        globalAudio.play().catch(e => {
-                            const musicBtn = document.createElement('button');
-                            musicBtn.id = 'music-toggle';
-                            musicBtn.innerHTML = '🔊 Putar Musik';
-                            musicBtn.className = 'fixed bottom-4 right-4 bg-theme text-white rounded-full px-4 py-2 text-xs z-50 shadow-lg';
-                            musicBtn.onclick = () => {
-                                if(globalAudio.paused) {
-                                    globalAudio.play();
-                                    musicBtn.innerHTML = '⏸️ Pause';
-                                } else {
-                                    globalAudio.pause();
-                                    musicBtn.innerHTML = '🔊 Play';
-                                }
-                            };
-                            document.body.appendChild(musicBtn);
-                        });
-                    }, 300);
-                }
-            });
+    <h2 class="font-serif text-4xl italic text-center text-theme mb-10">
+        Save The Date
+    </h2>
 
-        }).catch(error => {
-            console.error('Error:', error);
-            document.getElementById('app').innerHTML = '<p class="text-center p-8">Mohon maaf, terjadi kesalahan saat memuat data undangan.</p>';
-        });
-    </script>
+    <div id="event-details"
+    class="space-y-8">
+    </div>
+
+    <!-- COUNTDOWN -->
+
+    <div class="mt-14">
+
+        <p class="text-center uppercase tracking-[.3em] text-[10px] opacity-60 mb-5">
+            Countdown
+        </p>
+
+        <div id="countdown"></div>
+
+    </div>
+
+</section>
+
+<!-- GALLERY -->
+
+<div class="divider"></div>
+
+<section id="gallery-section"
+class="fade-up">
+
+    <h2 class="font-serif text-4xl italic text-center text-theme mb-10">
+        Our Moments
+    </h2>
+
+    <div id="gallery-grid"
+    class="grid grid-cols-2 gap-4">
+    </div>
+
+</section>
+
+<!-- GIFT -->
+
+<div class="divider"></div>
+
+<section class="glass rounded-[32px] p-8 text-center fade-up">
+
+    <h2 class="font-serif text-4xl italic text-theme mb-5">
+        Wedding Gift
+    </h2>
+
+    <p class="text-sm leading-relaxed opacity-70 mb-8">
+        Doa restu Anda adalah hadiah terbaik bagi kami.
+    </p>
+
+    <div id="gift-details"
+    class="space-y-4">
+    </div>
+
+</section>
+
+<!-- RSVP -->
+
+<div class="divider"></div>
+
+<section class="text-center fade-up">
+
+    <h2 class="font-serif text-4xl italic text-theme mb-5">
+        RSVP
+    </h2>
+
+    <p id="guest-note"
+    class="text-sm leading-relaxed opacity-70 mb-8">
+    </p>
+
+    <a id="rsvp-link"
+    target="_blank"
+    class="inline-block bg-theme text-white px-10 py-4 rounded-full uppercase tracking-[.25em] text-xs shadow-xl">
+
+        Konfirmasi Kehadiran
+
+    </a>
+
+</section>
+
+<!-- FOOTER -->
+
+<div class="divider"></div>
+
+<footer class="text-center pb-16 fade-up">
+
+    <p class="font-arab text-3xl text-theme mb-4">
+        بَارَكَ اللهُ لَكُمَا
+    </p>
+
+    <p class="italic text-sm opacity-70 leading-relaxed">
+        Semoga Allah memberkahi pernikahan kami
+    </p>
+
+    <h2 id="footer-names"
+    class="font-serif text-5xl italic text-theme mt-8">
+    </h2>
+
+    <p class="mt-10 text-[10px] uppercase tracking-[.4em] opacity-40">
+        Digital Invitation — Omah Aksara
+    </p>
+
+</footer>
+
+</div>
+
+</main>
+
+<!-- MUSIC -->
+
+<button id="music-toggle"
+class="hidden fixed bottom-6 right-6 w-14 h-14 rounded-full z-50 text-sm shadow-xl">
+
+🔊
+
+</button>
+
+<audio id="audio" loop></audio>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const clientSlug = params.get('c');
+
+const guestName = params.get('to')?.replace(/\+/g,' ') || 'Tamu Undangan';
+
+const basePath = `../../public/clients/${clientSlug}/`;
+
+fetch(`${basePath}data.json`)
+.then(res => res.json())
+.then(data => {
+
+const g = data.couple.groom;
+const b = data.couple.bride;
+const pair = `${g.nickname} & ${b.nickname}`;
+
+const ev = data.events[0];
+
+/* SETTINGS */
+
+if(data.settings.themeColor)
+document.documentElement.style.setProperty('--theme-color', data.settings.themeColor);
+
+if(data.settings.bgColor)
+document.documentElement.style.setProperty('--bg-color', data.settings.bgColor);
+
+if(data.settings.textColor)
+document.documentElement.style.setProperty('--text-color', data.settings.textColor);
+
+/* COVER */
+
+document.getElementById('cover-names').textContent = pair;
+document.getElementById('guest-name').textContent = guestName;
+
+/* HERO */
+
+document.getElementById('hero-names').textContent = pair;
+
+document.getElementById('hero-date').textContent =
+new Date(ev.date).toLocaleDateString('id-ID',{
+weekday:'long',
+day:'numeric',
+month:'long',
+year:'numeric'
+});
+
+/* IMAGES */
+
+document.getElementById('cover-image').src =
+basePath + data.gallery.heroImage;
+
+document.getElementById('hero-image').src =
+basePath + data.gallery.heroImage;
+
+/* QUOTE */
+
+document.getElementById('quote-arab').textContent =
+data.quote.arab;
+
+document.getElementById('quote-text').textContent =
+`"${data.quote.text}"`;
+
+document.getElementById('quote-source').textContent =
+data.quote.source;
+
+/* COUPLE */
+
+function renderCouple(person,target){
+
+document.getElementById(target).innerHTML = `
+
+<img src="${basePath + person.image}"
+class="w-56 h-56 rounded-full mx-auto object-cover shadow-2xl border-[10px] border-white">
+
+<h2 class="font-serif text-5xl italic mt-8 text-theme">
+${person.name}
+</h2>
+
+<p class="mt-4 text-sm leading-relaxed opacity-70">
+${person.father} & ${person.mother}
+</p>
+
+`;
+
+}
+
+renderCouple(g,'groom-section');
+renderCouple(b,'bride-section');
+
+/* LOVE STORY */
+
+data.loveStory.forEach(item=>{
+
+document.getElementById('love-story').innerHTML += `
+
+<div class="glass rounded-[28px] p-6">
+
+<p class="uppercase tracking-[.3em] text-[10px] opacity-50">
+${item.date}
+</p>
+
+<h3 class="font-serif text-3xl italic text-theme mt-3">
+${item.title}
+</h3>
+
+<p class="mt-4 text-sm leading-relaxed opacity-70">
+${item.description}
+</p>
+
+</div>
+
+`;
+
+});
+
+/* EVENTS */
+
+data.events.forEach(event=>{
+
+document.getElementById('event-details').innerHTML += `
+
+<div class="text-center border border-white/30 rounded-[28px] p-6">
+
+<p class="uppercase tracking-[.3em] text-[10px] opacity-50">
+${event.title}
+</p>
+
+<h3 class="font-serif text-3xl italic text-theme mt-4">
+${new Date(event.date).toLocaleDateString('id-ID',{
+day:'numeric',
+month:'long',
+year:'numeric'
+})}
+</h3>
+
+<p class="mt-4 text-sm opacity-70">
+${event.startTime} - ${event.endTime} ${event.timezone}
+</p>
+
+<p class="mt-4 text-sm leading-relaxed opacity-60">
+${event.address}
+</p>
+
+<a href="${event.googleMaps}"
+target="_blank"
+class="inline-block mt-6 border-b border-theme text-xs uppercase tracking-[.2em]">
+
+Google Maps
+
+</a>
+
+</div>
+
+`;
+
+});
+
+/* COUNTDOWN */
+
+function startCountdown(){
+
+const countdownEl = document.getElementById('countdown');
+
+const target =
+new Date(`${ev.date}T${ev.startTime}:00+07:00`).getTime();
+
+function update(){
+
+const now = new Date().getTime();
+
+const distance = target - now;
+
+if(distance <= 0){
+
+countdownEl.innerHTML = `
+<div class="text-center">
+<div class="glass rounded-[28px] p-6">
+Hari Bahagia Telah Tiba 💍
+</div>
+</div>
+`;
+
+return;
+
+}
+
+const d = Math.floor(distance/(1000*60*60*24));
+const h = Math.floor((distance/(1000*60*60))%24);
+const m = Math.floor((distance/(1000*60))%60);
+const s = Math.floor((distance/1000)%60);
+
+countdownEl.innerHTML = `
+
+<div class="grid grid-cols-4 gap-3">
+
+<div class="glass rounded-[28px] py-5 text-center">
+<div class="font-serif text-3xl text-theme">${d}</div>
+<div class="text-[10px] uppercase tracking-[.2em] opacity-50 mt-2">Hari</div>
+</div>
+
+<div class="glass rounded-[28px] py-5 text-center">
+<div class="font-serif text-3xl text-theme">${h}</div>
+<div class="text-[10px] uppercase tracking-[.2em] opacity-50 mt-2">Jam</div>
+</div>
+
+<div class="glass rounded-[28px] py-5 text-center">
+<div class="font-serif text-3xl text-theme">${m}</div>
+<div class="text-[10px] uppercase tracking-[.2em] opacity-50 mt-2">Menit</div>
+</div>
+
+<div class="glass rounded-[28px] py-5 text-center">
+<div class="font-serif text-3xl text-theme">${s}</div>
+<div class="text-[10px] uppercase tracking-[.2em] opacity-50 mt-2">Detik</div>
+</div>
+
+</div>
+
+`;
+
+}
+
+update();
+setInterval(update,1000);
+
+}
+
+startCountdown();
+
+/* GALLERY */
+
+data.gallery.album.forEach(img=>{
+
+document.getElementById('gallery-grid').innerHTML += `
+
+<div class="gallery-card">
+
+<img src="${basePath}${img}"
+class="w-full aspect-square object-cover">
+
+</div>
+
+`;
+
+});
+
+/* GIFTS */
+
+data.digitalGift.forEach(gift=>{
+
+document.getElementById('gift-details').innerHTML += `
+
+<div class="bg-white rounded-[24px] p-5">
+
+<p class="uppercase tracking-[.3em] text-[10px] opacity-50">
+${gift.provider}
+</p>
+
+<h3 class="font-serif text-3xl text-theme mt-3">
+${gift.accountNumber}
+</h3>
+
+<p class="mt-2 text-xs opacity-60">
+a.n ${gift.accountHolder}
+</p>
+
+<button onclick="navigator.clipboard.writeText('${gift.accountNumber}')"
+class="mt-5 px-5 py-2 rounded-full bg-theme text-white text-[10px] uppercase tracking-[.2em]">
+
+Salin
+
+</button>
+
+</div>
+
+`;
+
+});
+
+/* RSVP */
+
+document.getElementById('guest-note').textContent =
+data.logistics.guestNote;
+
+document.getElementById('rsvp-link').href =
+`https://wa.me/${data.logistics.rsvpWaNumber}`;
+
+/* FOOTER */
+
+document.getElementById('footer-names').textContent =
+pair;
+
+/* OPEN */
+
+document.getElementById('openInvitation')
+.onclick = ()=>{
+
+document.getElementById('cover').style.opacity='0';
+
+document.getElementById('app').style.opacity='1';
+
+setTimeout(()=>{
+document.getElementById('cover').style.display='none';
+},1000);
+
+/* MUSIC */
+
+if(data.logistics.music){
+
+const audio = document.getElementById('audio');
+
+audio.src = basePath + data.logistics.music;
+
+audio.play();
+
+const btn = document.getElementById('music-toggle');
+
+btn.classList.remove('hidden');
+
+btn.onclick = ()=>{
+
+if(audio.paused){
+audio.play();
+btn.innerHTML='🔊';
+}else{
+audio.pause();
+btn.innerHTML='🔈';
+}
+
+};
+
+}
+
+/* ANIMATION */
+
+const observer = new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+}
+
+});
+
+});
+
+document.querySelectorAll('.fade-up').forEach(el=>{
+observer.observe(el);
+});
+
+};
+
+});
+
+</script>
+
 </body>
 </html>
+```
