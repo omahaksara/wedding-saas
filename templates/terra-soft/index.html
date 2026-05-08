@@ -16,18 +16,18 @@
             --accent-color: #E8DCCA;
         }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
-      .font-serif { font-family: 'Playfair Display', serif; }
-      .font-arab { font-family: 'Scheherazade New', serif; }
-      .bg-theme { background-color: var(--theme-color); }
-      .text-theme { color: var(--theme-color); }
-      .border-theme { border-color: var(--theme-color); }
-      .bg-accent { background-color: var(--accent-color); }
-      .cover-bg { background-color: var(--bg-color); }
-      .polaroid { background: white; padding: 12px 12px 40px 12px; box-shadow: 0 4px 12px rgba(0,0,0,.08); transition: transform 0.3s ease; }
-      .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
-      .fade-in { animation: fadeIn 0.8s ease-in; }
+     .font-serif { font-family: 'Playfair Display', serif; }
+     .font-arab { font-family: 'Scheherazade New', serif; }
+     .bg-theme { background-color: var(--theme-color); }
+     .text-theme { color: var(--theme-color); }
+     .border-theme { border-color: var(--theme-color); }
+     .bg-accent { background-color: var(--accent-color); }
+     .cover-bg { background-color: var(--bg-color); }
+     .polaroid { background: white; padding: 12px 12px 40px 12px; box-shadow: 0 4px 12px rgba(0,0,0,.08); transition: transform 0.3s ease; }
+     .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
+     .fade-in { animation: fadeIn 0.8s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-      .hidden { display: none!important; }
+     .hidden { display: none!important; }
     </style>
 </head>
 <body class="antialiased">
@@ -139,7 +139,6 @@
             <p id="footer-closing" class="font-arab text-2xl text-theme mb-2 hidden">بَارَكَ اللهُ لَكُماَ وَبَارَكَ عَلَيْكُماَ</p>
             <p class="font-serif text-2xl mt-6 text-theme">Terima Kasih</p>
             <p id="footer-names" class="font-serif text-3xl mt-2 text-theme"></p>
-            <!-- WATERMARK -->
             <div class="mt-8">
                 <a href="https://lynk.id/ondow/page/jasa-edit" target="_blank" class="text-[10px] text-gray-400 hover:text-theme tracking-[0.2em] uppercase">Aksara invitation</a>
             </div>
@@ -150,14 +149,9 @@
         const params = new URLSearchParams(window.location.search);
         const clientSlug = params.get('c');
         const guestName = params.get('to') || 'Tamu Undangan';
-
-        // AUTO-DETECT PATH - work di localhost & GitHub Pages
-        const basePath = window.location.hostname.includes('github.io')
-           ? `public/clients/${clientSlug}/`
-            : `../../public/clients/${clientSlug}/`;
-
-        const defaultAvatar = 'public/default-avatar.jpg';
-        let globalAudio = null;
+        const basePath = location.hostname.includes('github.io')
+          ? `public/clients/${clientSlug}/`
+           : `../../public/clients/${clientSlug}/`;
 
         if(!clientSlug) {
             document.getElementById('app').innerHTML = '<div class="p-8 text-center">Error: tambahkan?c=nama-client</div>';
@@ -170,12 +164,10 @@
                 const ev = data.events?.[0];
                 const settings = data.settings || {};
 
-                // WARNA IKUT TEMA
                 if(settings.themeColor) document.documentElement.style.setProperty('--theme-color', settings.themeColor);
                 if(settings.bgColor) document.documentElement.style.setProperty('--bg-color', settings.bgColor);
                 if(settings.textColor) document.documentElement.style.setProperty('--text-color', settings.textColor);
 
-                // RELIGION
                 const religion = settings.religion || 'umum';
                 const texts = {
                     islam: { event: "WALIMATUL 'URSY", bismillah: true },
@@ -189,7 +181,6 @@
                     document.getElementById('footer-closing').classList.remove('hidden');
                 }
 
-                // COVER & HERO
                 if(data.gallery.heroImage) {
                     document.getElementById('cover-image').src = basePath + data.gallery.heroImage;
                     document.getElementById('hero-image').src = basePath + data.gallery.heroImage;
@@ -204,7 +195,6 @@
                     document.getElementById('wedding-date').textContent = dateStr;
                 }
 
-                // QUOTE
                 if(data.quote?.text) {
                     document.getElementById('quote-section').classList.remove('hidden');
                     if(data.quote.arab) {
@@ -216,7 +206,6 @@
                 }
                 document.getElementById('guest-greeting').innerHTML = `Kepada Yth. <strong>${guestName.replace(/\+/g, ' ')}</strong>`;
 
-                // COUPLE
                 document.getElementById('groom-img').src = basePath + g.image;
                 document.getElementById('groom-name').textContent = g.name;
                 document.getElementById('groom-parents').textContent = `Putra dari ${g.father} & ${g.mother}`;
@@ -227,14 +216,12 @@
                 document.getElementById('bride-parents').textContent = `Putri dari ${b.father} & ${b.mother}`;
                 if(b.instagram) { const el = document.getElementById('bride-ig'); el.classList.remove('hidden'); el.textContent = b.instagram; el.href = `https://instagram.com/${b.instagram.replace('@','')}`; }
 
-                // LOVE STORY
                 if(data.loveStory?.length) {
                     document.getElementById('love-story-section').classList.remove('hidden');
                     const el = document.getElementById('love-story');
                     data.loveStory.forEach(i => el.innerHTML += `<div class="bg-white/60 p-4 rounded-lg"><p class="text-xs text-theme font-semibold">${i.date} - ${i.title}</p><p class="text-sm mt-2">${i.description}</p></div>`);
                 }
 
-                // EVENT + TOMBOL MAPS
                 if(data.events?.length) {
                     document.getElementById('event-section').classList.remove('hidden');
                     const list = document.getElementById('event-list');
@@ -264,7 +251,6 @@
                     }
                 }
 
-                // GALLERY
                 if(data.gallery.album?.length) {
                     document.getElementById('gallery-section').classList.remove('hidden');
                     const grid = document.getElementById('gallery-grid');
@@ -273,20 +259,17 @@
                     data.gallery.album.forEach(img => grid.innerHTML += `<div class="polaroid"><img src="${basePath}${img}" class="w-full aspect-square object-cover" onerror="this.parentElement.style.display='none'"></div>`);
                 }
 
-                // VIDEO
                 if(data.gallery.videoYoutubeId) {
                     document.getElementById('video-section').classList.remove('hidden');
                     document.getElementById('video-frame').src = `https://www.youtube.com/embed/${data.gallery.videoYoutubeId}`;
                 }
 
-                // GIFT
                 if(data.digitalGift?.length) {
                     document.getElementById('gift-section').classList.remove('hidden');
                     const gl = document.getElementById('gift-list');
                     data.digitalGift.forEach(gf => gl.innerHTML += `<div class="bg-white/70 p-4 rounded-lg"><p class="font-semibold">${gf.provider}</p><p class="text-lg font-mono my-1">${gf.accountNumber}</p><p class="text-xs">a.n ${gf.accountHolder}</p><button onclick="navigator.clipboard.writeText('${gf.accountNumber}')" class="text-xs bg-theme/20 text-theme px-3 py-1 rounded-full mt-2">Salin</button></div>`);
                 }
 
-                // RSVP
                 if(data.logistics?.rsvpWaNumber) {
                     document.getElementById('rsvp-section').classList.remove('hidden');
                     document.getElementById('guest-note').textContent = data.logistics.guestNote || '';
@@ -295,20 +278,20 @@
                     document.getElementById('rsvp-link').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=${encodeURIComponent(msg)}`;
                 }
 
-                // OPEN
                 document.getElementById('open-invitation').onclick = () => {
                     document.getElementById('cover').style.opacity = '0';
                     document.getElementById('app').style.opacity = '1';
                     setTimeout(() => document.getElementById('cover').style.display = 'none', 1000);
                     if(data.logistics?.music) {
-                        globalAudio = new Audio(basePath + data.logistics.music);
-                        globalAudio.loop = true;
-                        globalAudio.play().catch(()=>{});
+                        const audio = new Audio(basePath + data.logistics.music);
+                        audio.loop = true;
+                        audio.play().catch(()=>{});
                     }
                 };
             }).catch(err => {
                 document.getElementById('app').innerHTML = `<div class="p-8 text-center">Error load data: ${err}</div>`;
                 document.getElementById('app').style.opacity = '1';
+                document.getElementById('cover').style.display = 'none';
             });
         }
     </script>
