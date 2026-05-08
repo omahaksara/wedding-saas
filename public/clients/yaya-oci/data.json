@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "slug": "yaya-oci",
+    "template": "sage-syari",
+    "status": "published"
+  },
+  "couple": {
+    "groom": {
+      "name": "Muhammad Jakpar",
+      "nickname": "Yaya'",
+      "father": "Moh. Aliman (Alm)",
+      "mother": "Siti Kusnah (Almh)",
+      "image": "foto-pria.jpg",
+      "instagram": "@muh_djafar27"
+    },
+    "bride": {
+      "name": "Khosi Saimima",
+      "nickname": "Oci",
+      "father": "Maksum",
+      "mother": "Sholihah",
+      "image": "foto-wanita.jpg",
+      "instagram": "@khosisaimima17"
+    }
+  },
+  "events": [
+    {
+      "title": "Akad Nikah",
+      "date": "2026-09-06",
+      "startTime": "09:00",
+      "endTime": "10:00",
+      "timezone": "WIB",
+      "address": "Desa Petunasugi (SPD), Dusun 4",
+      "googleMaps": ""
+    },
+    {
+      "title": "Resepsi",
+      "date": "2026-09-06",
+      "startTime": "11:00",
+      "endTime": "Selesai",
+      "timezone": "WIB",
+      "address": "Desa Petunasugi (SPD), Dusun 4",
+      "googleMaps": ""
+    }
+  ],
+  "gallery": {
+    "heroImage": "foto-sampul.jpg",
+    "videoYoutubeId": "",
+    "album": [
+      "foto1.jpg",
+      "foto2.jpg",
+      "foto3.jpg"
+    ]
+  },
+  "digitalGift": [
+    {
+      "provider": "BRI",
+      "accountNumber": "519501024699536",
+      "accountHolder": "Khosi Saimima",
+      "qrImage": ""
+    },
+    {
+      "provider": "Mandiri",
+      "accountNumber": "1510022186495",
+      "accountHolder": "Muhammad Jakpar",
+      "qrImage": ""
+    }
+  ],
+  "logistics": {
+    "dressCode": "Formal",
+    "rsvpWaNumber": "6282261567928",
+    "guestNote": "Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu.",
+    "music": "musik.mp3"
+  },
+  "loveStory": [
+    {
+      "year": "Juni 2021",
+      "title": "First Meet",
+      "story": "Berawal dari sebuah tanggapan kecil di story, siapa sangka percakapan itu membawa kami pada babak baru yang lebih serius."
+    },
+    {
+      "year": "14 April 2024",
+      "title": "Engagement",
+      "story": "Hingga akhirnya, kami memutuskan untuk bersama, saling menjaga, dan kini siap melangkah ke pelaminan untuk hidup bersama."
+    }
+  ]
+}
