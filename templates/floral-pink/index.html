@@ -3,450 +3,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation</title>
+    <title>Undangan Pernikahan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --pink-light: #FFEAF1;
-            --pink-main: #FFB6C1;
-            --pink-dark: #FF8DA1;
-            --rose-gold: #E6B8A2;
-            --white: #FFFFFF;
-            --text: #6D5A5E;
-            --text-soft: #9A8A8F;
+            --theme-color: #FF8DA1;
+            --bg-color: #FFEAF1;
+            --text-color: #6D5A5E;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--pink-light);
-            color: var(--text);
-            overflow-x: hidden;
-            background-image: url('https://www.transparenttextures.com/patterns/pink-flowers.png');
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
+       .font-serif { font-family: 'Cormorant Garamond', serif; }
+       .font-arab { font-family: 'Scheherazade New', serif; }
+       .bg-theme { background-color: var(--theme-color); }
+       .text-theme { color: var(--theme-color); }
+       .border-theme { border-color: var(--theme-color); }
+       .cover-bg { background-color: var(--bg-color); }
+       .polaroid { background: white; padding: 10px 10px 35px 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+       .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
+       .torn {
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 C150,100 350,0 500,100 C650,0 850,100 1000,0 L1000,100 L0,100 Z" fill="black"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 C150,100 350,0 500,100 C650,0 850,100 1000,0 L1000,100 L0,100 Z" fill="black"/></svg>');
+            -webkit-mask-size: 100% 20px; mask-size: 100% 20px;
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            -webkit-mask-position: bottom; mask-position: bottom;
         }
-  .font-script { font-family: 'Alex Brush', cursive; }
-  .text-pink { color: var(--pink-dark); }
-  .bg-pink { background-color: var(--pink-main); }
-  .bg-rose { background-color: var(--rose-gold); }
-        
-        /* LOADER ESTETIK */
-        #loader {
-            position: fixed; inset: 0; z-index: 9999;
-            background: var(--pink-light);
-            display: flex; align-items: center; justify-content: center;
-            flex-direction: column;
-        }
-  .loader-heart {
-            font-size: 3rem; color: var(--pink-dark);
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        /* COVER SUPER ESTETIK */
-  .cover {
-            height: 100vh;
-            position: relative;
-            display: flex; align-items: center; justify-content: center;
-            text-align: center;
-            background-size: cover; background-position: center;
-            overflow: hidden;
-        }
-  .cover::before {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(180deg, rgba(255,234,241,0.3) 0%, rgba(255,234,241,0.9) 100%);
-            z-index: 1;
-        }
-        /* Floral Border */
-  .cover::after {
-            content: ''; position: absolute; inset: 0; z-index: 1;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,0 Q50,10 100,0 L100,100 Q50,90 0,100 Z" fill="none" stroke="%23FFB6C1" stroke-width="0.5" opacity="0.3"/></svg>');
-            background-size: cover; pointer-events: none;
-        }
-  .cover-content {
-            position: relative; z-index: 2; padding: 40px 30px;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(15px);
-            border-radius: 30px;
-            border: 2px solid rgba(255,182,193,0.3);
-            box-shadow: 0 20px 60px rgba(255,141,161,0.2);
-            max-width: 90%;
-            animation: fadeInUp 1s ease-out;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-  .cover.to { font-size: 0.85rem; letter-spacing: 3px; color: var(--text-soft); text-transform: uppercase; }
-  .cover.guest-name {
-            font-size: 1.4rem; margin: 10px 0 25px; font-weight: 600; color: var(--pink-dark);
-        }
-  .cover h1 {
-            font-family: 'Alex Brush', cursive;
-            font-size: 5rem;
-            color: var(--pink-dark);
-            line-height: 1;
-            text-shadow: 2px 2px 10px rgba(255,141,161,0.2);
-        }
-  .cover.date { margin: 25px 0; letter-spacing: 3px; font-size: 0.9rem; color: var(--text-soft); }
-  .btn-pink {
-            display: inline-block; background: linear-gradient(135deg, var(--pink-main), var(--pink-dark));
-            color: white; padding: 16px 45px; text-decoration: none; font-weight: 500;
-            letter-spacing: 2px; border-radius: 50px; transition: all 0.4s ease;
-            cursor: pointer; box-shadow: 0 8px 25px rgba(255,141,161,0.4);
-            border: none; font-family: 'Outfit', sans-serif; font-size: 0.85rem;
-        }
-  .btn-pink:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(255,141,161,0.5); }
-
-        /* MAIN CONTENT */
-  .container { max-width: 480px; margin: 0 auto; }
-        section { padding: 80px 25px; text-align: center; }
-  .section-title {
-            font-family: 'Alex Brush', cursive;
-            font-size: 4rem;
-            color: var(--pink-dark);
-            margin-bottom: 50px;
-            position: relative;
-        }
-  .section-title::after {
-            content: '🌸'; position: absolute; bottom: -20px; left: 50%;
-            transform: translateX(-50%); font-size: 1.5rem;
-        }
-
-        /* COUPLE CARD PINK */
-  .couple-wrap { display: grid; gap: 40px; }
-  .couple-card {
-            background: var(--white);
-            border-radius: 25px; padding: 25px;
-            box-shadow: 0 15px 40px rgba(255,141,161,0.15);
-            border: 2px solid rgba(255,182,193,0.2);
-            position: relative; overflow: hidden;
-        }
-  .couple-card::before {
-            content: ''; position: absolute; top: -50%; right: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,182,193,0.1) 0%, transparent 70%);
-        }
-  .couple-card img {
-            width: 100%; height: 380px; object-fit: cover;
-            border-radius: 20px; margin-bottom: 20px;
-        }
-  .couple-card h3 {
-            font-family: 'Alex Brush', cursive;
-            font-size: 3rem; color: var(--pink-dark); margin-bottom: 8px;
-        }
-  .couple-card p { color: var(--text-soft); font-size: 0.9rem; line-height: 1.6; }
-  .couple-card a { color: var(--pink-dark); text-decoration: none; font-weight: 500; }
-
-        /* CARD STYLE */
-  .pink-card {
-            background: var(--white); border-radius: 25px; padding: 35px 25px;
-            margin-bottom: 25px; text-align: left;
-            box-shadow: 0 15px 40px rgba(255,141,161,0.15);
-            border: 2px solid rgba(255,182,193,0.2);
-        }
-  .pink-card h3 { color: var(--pink-dark); font-size: 1.5rem; margin-bottom: 18px; font-weight: 600; }
-  .pink-card p { color: var(--text-soft); margin-bottom: 10px; line-height: 1.7; }
-
-        /* COUNTDOWN PINK */
-  .countdown-wrap {
-            display: flex; justify-content: center; gap: 15px;
-            margin: 30px 0 40px;
-        }
-  .countdown-box {
-            background: linear-gradient(135deg, var(--white), var(--pink-light));
-            border: 2px solid rgba(255,182,193,0.3);
-            border-radius: 20px; padding: 15px 10px; width: 75px;
-            box-shadow: 0 8px 20px rgba(255,141,161,0.15);
-        }
-  .countdown-box.num {
-            font-size: 2rem; font-weight: 600; color: var(--pink-dark);
-        }
-  .countdown-box.label {
-            font-size: 0.65rem; color: var(--text-soft); text-transform: uppercase; letter-spacing: 1px;
-        }
-
-        /* GALLERY SLIDER JELAS */
-  .gallery-slider { width: 100%; padding-bottom: 50px; }
-  .swiper-slide {
-            width: 85%; height: 450px; border-radius: 25px;
-            overflow: hidden; box-shadow: 0 15px 40px rgba(255,141,161,0.2);
-        }
-  .swiper-slide img { width: 100%; height: 100%; object-fit: cover; }
-  .swiper-pagination-bullet { background: var(--pink-main); opacity: 0.5; width: 10px; height: 10px; }
-  .swiper-pagination-bullet-active { background: var(--pink-dark); opacity: 1; width: 30px; border-radius: 5px; }
-
-  .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; margin-top: 25px; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(255,141,161,0.2); }
-  .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-  .gift-box img { max-width: 200px; margin: 25px auto; display: block; border-radius: 15px; box-shadow: 0 10px 30px rgba(255,141,161,0.2); }
-  .footer { padding: 70px 25px; font-size: 0.9rem; color: var(--text-soft); }
-
-  .music-btn {
-            position: fixed; bottom: 25px; right: 25px; z-index: 999;
-            width: 60px; height: 60px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--pink-main), var(--pink-dark));
-            color: white; border: 3px solid var(--white);
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem; box-shadow: 0 8px 30px rgba(255,141,161,0.5);
-            animation: pulse 2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-  .hidden { display: none!important; }
-  .reveal { opacity: 0; transform: translateY(30px); }
+       .hidden { display: none; }
     </style>
 </head>
-<body>
-    <div id="loader">
-        <div class="loader-heart"><i class="fas fa-heart"></i></div>
-        <p style="margin-top: 20px; color: var(--pink-dark); letter-spacing: 2px;">Loading...</p>
+<body class="antialiased">
+
+    <!-- COVER -->
+    <div id="cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center text-white transition-opacity duration-1000">
+        <img id="cover-image" class="absolute inset-0 w-full h-full object-cover" src="" crossorigin="anonymous">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+        <div class="relative z-10 p-8">
+            <p id="cover-bismillah" class="font-arab text-3xl mb-4 hidden">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+            <p id="cover-event-name" class="text-sm tracking-widest uppercase">WALIMATUL 'URSY</p>
+            <h1 id="cover-names" class="font-serif text-6xl my-4"></h1>
+            <p class="text-sm mt-8">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+            <p id="cover-guest" class="text-xl font-semibold mt-1"></p>
+            <button id="open-invitation" class="bg-white/20 backdrop-blur-sm border-white border text-white rounded-full px-8 py-3 mt-8 text-sm uppercase tracking-wider shadow-lg">Buka Undangan</button>
+        </div>
     </div>
 
-    <main id="main" class="container hidden">
-        <section id="cover" class="cover">
-            <div class="cover-content">
-                <p class="to">Kepada Yth.</p>
-                <p class="guest-name" id="guestName">Tamu Undangan</p>
-                <h1 id="coupleName"></h1>
-                <p class="date" id="weddingDate"></p>
-                <button class="btn-pink" id="openBtn">
-                    <i class="fas fa-envelope-open"></i> Buka Undangan
-                </button>
+    <div id="app" class="max-w-md mx-auto min-h-screen opacity-0 transition-opacity duration-1000">
+        <!-- HERO -->
+        <section id="hero-section" class="relative flex flex-col items-center justify-end text-center text-white">
+            <img id="hero-image" class="absolute inset-0 w-full h-full object-cover" src="" crossorigin="anonymous">
+            <div id="hero-overlay" class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div id="hero-content" class="relative z-10 p-8">
+                <p class="text-sm tracking-widest uppercase">PERNIKAHAN</p>
+                <h1 id="hero-names" class="font-serif text-6xl my-2"></h1>
+                <p id="hero-date" class="text-lg"></p>
             </div>
         </section>
 
-        <section id="couple">
-            <h2 class="section-title">Mempelai</h2>
-            <div class="couple-wrap">
-                <div class="couple-card reveal">
-                    <img id="groomImg" src="" alt="Mempelai Pria">
-                    <h3 id="groomName"></h3>
-                    <p id="groomParents"></p>
-                    <p><a id="groomIg" href="" target="_blank"></a></p>
+        <div class="p-8 text-center">
+            <!-- QUOTE/AYAT -->
+            <section id="quote-section" class="my-12 bg-white/60 p-6 rounded-2xl shadow-sm hidden">
+                <p id="quote-arab" class="font-arab text-2xl text-theme leading-relaxed hidden"></p>
+                <p id="quote-text" class="text-sm mt-4 italic"></p>
+                <p id="quote-source" class="text-xs font-semibold mt-2"></p>
+            </section>
+
+            <!-- COUPLE -->
+            <section id="couple" class="my-12">
+                <div id="groom-section" class="mb-8"></div>
+                <div class="font-serif text-5xl my-4 text-theme">&</div>
+                <div id="bride-section"></div>
+            </section>
+
+            <!-- LOVE STORY -->
+            <section id="love-story-section" class="my-16 hidden">
+                <h3 class="font-serif text-3xl mb-6 text-theme">Kisah Kami</h3>
+                <div id="love-story" class="space-y-6 text-left"></div>
+            </section>
+
+            <!-- EVENT -->
+            <section id="event-section" class="my-16 bg-white/60 p-6 rounded-2xl shadow-sm hidden">
+                <h3 class="font-serif text-3xl mb-6 text-theme">Save The Date</h3>
+                <div id="event-details" class="space-y-4"></div>
+
+                <div id="countdown-wrap" class="mt-8 hidden">
+                    <p class="text-xs uppercase tracking-widest mb-3">Menuju Hari Bahagia</p>
+                    <div id="countdown" class="flex justify-center space-x-4 text-center"></div>
                 </div>
-                <div class="couple-card reveal">
-                    <img id="brideImg" src="" alt="Mempelai Wanita">
-                    <h3 id="brideName"></h3>
-                    <p id="brideParents"></p>
-                    <p><a id="brideIg" href="" target="_blank"></a></p>
+
+                <a id="google-calendar-link" target="_blank" class="inline-block bg-theme text-white rounded-full px-6 py-2 mt-6 text-xs uppercase tracking-wider hidden">Simpan Tanggal</a>
+            </section>
+
+            <!-- GALLERY -->
+            <section id="gallery-section" class="my-16 hidden">
+                <h3 class="font-serif text-3xl mb-6 text-theme">Momen Bahagia</h3>
+                <div id="gallery-grid" class="grid gap-4"></div>
+            </section>
+
+            <!-- VIDEO -->
+            <section id="video-section" class="my-16 hidden">
+                <h3 class="font-serif text-3xl mb-6 text-theme">Video Prewedding</h3>
+                <div class="aspect-video rounded-lg overflow-hidden shadow-lg">
+                    <iframe id="video-frame" class="w-full h-full" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="events">
-            <h2 class="section-title">Save The Date</h2>
-            <div id="countdown" class="countdown-wrap reveal"></div>
-            <div id="eventList"></div>
-        </section>
+            <!-- GIFT -->
+            <section id="gift-section" class="my-16 bg-white/60 p-6 rounded-2xl shadow-sm hidden">
+                <h3 class="font-serif text-3xl mb-4 text-theme">Amplop Digital</h3>
+                <p class="text-xs mb-4">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika memberi adalah ungkapan tanda kasih, dapat melalui:</p>
+                <div id="gift-details" class="space-y-3"></div>
+            </section>
 
-        <section id="loveStory" class="hidden">
-            <h2 class="section-title">Perjalanan Cinta</h2>
-            <div id="storyList"></div>
-        </section>
+            <!-- RSVP -->
+            <section id="rsvp-section" class="my-16 hidden">
+                 <h3 class="font-serif text-3xl mb-4 text-theme">Konfirmasi Kehadiran</h3>
+                 <p id="guest-note" class="text-sm mb-4">Merupakan suatu kehormatan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+                 <p id="dresscode" class="text-xs mb-4"></p>
+                 <a id="rsvp-link" target="_blank" class="inline-block bg-theme text-white rounded-full px-8 py-3 text-sm uppercase tracking-wider shadow-lg">Konfirmasi via WhatsApp</a>
+            </section>
 
-        <section id="gallery">
-            <h2 class="section-title">Momen Bahagia</h2>
-            <div class="swiper gallery-slider">
-                <div class="swiper-wrapper" id="galleryWrapper"></div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </section>
+            <!-- FOOTER -->
+            <footer class="text-center py-8 mt-8">
+                <p id="footer-closing" class="font-arab text-2xl text-theme mb-2 hidden">بَارَكَ اللهُ لَكُماَ وَبَارَكَ عَلَيْكُماَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+                <p id="footer-closing-text" class="text-xs italic mb-4 hidden">"Semoga Allah memberkahimu dan memberkahi atasmu, serta mengumpulkan kalian berdua dalam kebaikan"</p>
+                <p class="text-sm">Terima kasih atas doa dan restu yang telah diberikan.</p>
+                <p class="font-serif text-2xl mt-6 text-theme">Kami yang berbahagia,</p>
+                <p id="footer-names" class="font-serif text-3xl mt-2 text-theme"></p>
+                <p class="text-xs mt-8">Digital Invitation by Omah Aksara</p>
+            </footer>
+        </div>
+    </div>
 
-        <section id="video" class="hidden">
-            <h2 class="section-title">Video Kami</h2>
-            <div class="video-wrapper" id="videoWrapper"></div>
-        </section>
-
-        <section id="gift" class="hidden">
-            <h2 class="section-title">Wedding Gift</h2>
-            <div id="giftList"></div>
-        </section>
-
-        <section id="logistics" class="hidden">
-            <h2 class="section-title">Informasi Acara</h2>
-            <div class="pink-card" id="logisticsBox"></div>
-        </section>
-
-        <section class="footer">
-            <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
-            <p style="margin-top: 25px; color: var(--pink-dark); font-family: 'Alex Brush', cursive; font-size: 2.5rem;" id="footerCouple"></p>
-        </section>
-    </main>
-
-    <button id="musicBtn" class="music-btn hidden">♫</button>
-    <audio id="bgMusic" loop></audio>
-
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script>
-        gsap.registerPlugin(ScrollTrigger);
         const params = new URLSearchParams(window.location.search);
         const clientSlug = params.get('c');
         const guestName = params.get('to') || 'Tamu Undangan';
         const basePath = `../../public/clients/${clientSlug}/`;
+        const defaultAvatar = '../../public/default-avatar.jpg';
+        let globalAudio = null;
 
         fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
-            // THEME
-            if (data.settings?.themeColor) document.documentElement.style.setProperty('--pink-dark', data.settings.themeColor);
-            document.title = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
-            
-            // COVER
-            document.getElementById('guestName').textContent = guestName.replace(/\+/g, ' ');
-            document.getElementById('coupleName').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
-            document.getElementById('cover').style.backgroundImage = `url('${basePath}${data.gallery.heroImage}')`;
-            const eventDate = new Date(data.events[0].date);
-            document.getElementById('weddingDate').textContent = eventDate.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            const g = data.couple.groom;
+            const b = data.couple.bride;
+            const ev = data.events && data.events.length > 0? data.events[0] : null;
+            const settings = data.settings || {};
 
-            // COUPLE
-            document.getElementById('groomImg').src = basePath + data.couple.groom.image;
-            document.getElementById('groomName').textContent = data.couple.groom.name;
-            document.getElementById('groomParents').textContent = `Putra dari ${data.couple.groom.father} & ${data.couple.groom.mother}`;
-            if (data.couple.groom.instagram) {
-                document.getElementById('groomIg').innerHTML = `<i class="fab fa-instagram"></i> ${data.couple.groom.instagram}`;
-                document.getElementById('groomIg').href = `https://instagram.com/${data.couple.groom.instagram.replace('@', '')}`;
-            }
-            document.getElementById('brideImg').src = basePath + data.couple.bride.image;
-            document.getElementById('brideName').textContent = data.couple.bride.name;
-            document.getElementById('brideParents').textContent = `Putri dari ${data.couple.bride.father} & ${data.couple.bride.mother}`;
-            if (data.couple.bride.instagram) {
-                document.getElementById('brideIg').innerHTML = `<i class="fab fa-instagram"></i> ${data.couple.bride.instagram}`;
-                document.getElementById('brideIg').href = `https://instagram.com/${data.couple.bride.instagram.replace('@', '')}`;
+            // 1. SETTINGS - WARNA BASE TEMPLATE, OVERRIDE KALAU ADA DI JSON
+            if(settings.themeColor) document.documentElement.style.setProperty('--theme-color', settings.themeColor);
+            if(settings.bgColor) document.documentElement.style.setProperty('--bg-color', settings.bgColor);
+            if(settings.textColor) document.documentElement.style.setProperty('--text-color', settings.textColor);
+
+            if(settings.islami) {
+                document.getElementById('cover-bismillah').classList.remove('hidden');
+                document.getElementById('footer-closing').classList.remove('hidden');
+                document.getElementById('footer-closing-text').classList.remove('hidden');
+                document.getElementById('cover-event-name').textContent = "WALIMATUL 'URSY";
             }
 
-            // COUNTDOWN
-            const countdownDate = new Date(`${data.events[0].date}T${data.events[0].startTime}:00`).getTime();
-            setInterval(() => {
-                const distance = countdownDate - new Date().getTime();
-                const d = Math.max(0, Math.floor(distance / 86400000));
-                const h = Math.max(0, Math.floor((distance % 86400000) / 3600000));
-                const m = Math.max(0, Math.floor((distance % 3600000) / 60000));
-                const s = Math.max(0, Math.floor((distance % 60000) / 1000));
-                document.getElementById('countdown').innerHTML = `
-                    <div class="countdown-box"><div class="num">${d}</div><div class="label">Hari</div></div>
-                    <div class="countdown-box"><div class="num">${h}</div><div class="label">Jam</div></div>
-                    <div class="countdown-box"><div class="num">${m}</div><div class="label">Menit</div></div>
-                    <div class="countdown-box"><div class="num">${s}</div><div class="label">Detik</div></div>
+            // 2. COVER & HERO IMAGE
+            const coverImg = document.getElementById('cover-image');
+            const heroImg = document.getElementById('hero-image');
+            if(data.gallery.heroImage) {
+                coverImg.crossOrigin = 'Anonymous';
+                heroImg.crossOrigin = 'Anonymous';
+                coverImg.src = basePath + data.gallery.heroImage;
+                heroImg.src = basePath + data.gallery.heroImage;
+
+                coverImg.addEventListener('load', function() {
+                    // AutoColor jalan kalau themeColor KOSONG + autoColor: true
+                    if(!settings.themeColor && settings.autoColor === true) {
+                        const colorThief = new ColorThief();
+                        const [r, g, b] = colorThief.getColor(coverImg);
+                        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                        if (brightness > 60 && brightness < 200) {
+                           document.documentElement.style.setProperty('--theme-color', `rgb(${r}, ${g}, ${b})`);
+                        }
+                    }
+                });
+            }
+
+            // 3. HERO FRAME STYLE
+            const heroSection = document.getElementById('hero-section');
+            const heroDate = ev? new Date(ev.date).toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) : '';
+
+            if(settings.heroStyle === 'polaroid') {
+                heroSection.className = 'relative p-8';
+                heroSection.innerHTML = `
+                    <div class="polaroid -rotate-2">
+                        <img src="${basePath + data.gallery.heroImage}" class="w-full aspect-[3/4] object-cover" crossorigin="anonymous" onerror="this.src='${defaultAvatar}'">
+                    </div>
+                    <div class="text-center mt-6">
+                        <p class="text-sm tracking-widest uppercase">PERNIKAHAN</p>
+                        <h1 class="font-serif text-6xl my-2 text-theme">${g.nickname} & ${b.nickname}</h1>
+                        <p class="text-lg">${heroDate}</p>
+                    </div>
                 `;
-            }, 1000);
-
-            // EVENTS
-            const eventList = document.getElementById('eventList');
-            data.events.forEach(ev => {
-                const date = new Date(ev.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-                eventList.innerHTML += `<div class="pink-card reveal"><h3>${ev.title}</h3><p><strong>${date}</strong></p><p>Pukul ${ev.startTime} - ${ev.endTime} ${ev.timezone}</p><p>${ev.address}</p>${ev.googleMaps? `<a href="${ev.googleMaps}" target="_blank" class="btn-pink" style="margin-top:20px; display: inline-block;"><i class="fas fa-map-marker-alt"></i> Lihat Lokasi</a>` : ''}</div>`;
-            });
-
-            // LOVE STORY
-            if (data.loveStory && data.loveStory.length > 0) {
-                document.getElementById('loveStory').classList.remove('hidden');
-                const storyList = document.getElementById('storyList');
-                data.loveStory.forEach(story => {
-                    storyList.innerHTML += `<div class="pink-card reveal"><h3><span style="color: var(--rose-gold);">${story.date}</span> - ${story.title}</h3><p>${story.description}</p></div>`;
-                });
+            } else if(settings.heroStyle === 'torn') {
+                heroSection.classList.add('torn');
+                document.getElementById('hero-names').innerHTML = `${g.nickname} & ${b.nickname}`;
+                document.getElementById('hero-date').textContent = heroDate;
+            } else {
+                heroSection.classList.add('h-screen');
+                document.getElementById('hero-names').innerHTML = `${g.nickname} & ${b.nickname}`;
+                document.getElementById('hero-date').textContent = heroDate;
             }
 
-            // GALLERY SLIDER JELAS
-            const galleryWrapper = document.getElementById('galleryWrapper');
-            if (data.gallery.album && data.gallery.album.length > 0) {
-                data.gallery.album.forEach(img => {
-                    galleryWrapper.innerHTML += `<div class="swiper-slide"><img src="${basePath}${img}" alt="Gallery"></div>`;
-                });
-                new Swiper('.gallery-slider', {
-                    effect: 'coverflow',
-                    grabCursor: true,
-                    centeredSlides: true,
-                    slidesPerView: 'auto',
-                    loop: true,
-                    coverflowEffect: { rotate: 0, stretch: 0, depth: 100, modifier: 2, slideShadows: false },
-                    autoplay: { delay: 3500, disableOnInteraction: false },
-                    pagination: { el: '.swiper-pagination', clickable: true }
-                });
-            } else { document.getElementById('gallery').classList.add('hidden'); }
+            // COVER
+            document.getElementById('cover-names').innerHTML = `${g.nickname} & ${b.nickname}`;
+            document.getElementById('cover-guest').textContent = guestName.replace(/\+/g, ' ');
 
-            // VIDEO
-            if (data.gallery.videoYoutubeId) {
-                document.getElementById('video').classList.remove('hidden');
-                document.getElementById('videoWrapper').innerHTML = `<iframe src="https://www.youtube.com/embed/${data.gallery.videoYoutubeId}" allowfullscreen></iframe>`;
-            }
-
-            // GIFT
-            if (data.digitalGift && data.digitalGift.length > 0) {
-                document.getElementById('gift').classList.remove('hidden');
-                const giftList = document.getElementById('giftList');
-                data.digitalGift.forEach(gift => {
-                    giftList.innerHTML += `<div class="pink-card gift-box reveal"><h3>${gift.provider}</h3><p style="font-size: 1.3rem; letter-spacing: 3px; margin: 15px 0;">${gift.accountNumber}</p><p>a.n ${gift.accountHolder}</p>${gift.qrImage? `<img src="${basePath}${gift.qrImage}" alt="QR Code">` : ''}<button onclick="navigator.clipboard.writeText('${gift.accountNumber}');this.innerHTML='<i class=\'fas fa-check\'></i> Tersalin'" class="btn-pink" style="margin-top:15px;"><i class="fas fa-copy"></i> Salin No. Rek</button></div>`;
-                });
-            }
-
-            // LOGISTICS
-            if (data.logistics && (data.logistics.dressCode || data.logistics.rsvpWaNumber || data.logistics.guestNote)) {
-                document.getElementById('logistics').classList.remove('hidden');
-                let html = '';
-                if (data.logistics.dressCode) html += `<p><strong>Dress Code:</strong> ${data.logistics.dressCode}</p>`;
-                if (data.logistics.guestNote) html += `<p><strong>Catatan:</strong> ${data.logistics.guestNote}</p>`;
-                if (data.logistics.rsvpWaNumber) {
-                    const waLink = `https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo, saya ${guestName.replace(/\+/g, ' ')} ingin konfirmasi kehadiran`;
-                    html += `<a href="${waLink}" target="_blank" class="btn-pink" style="margin-top: 20px; display: inline-block;"><i class="fab fa-whatsapp"></i> Konfirmasi WhatsApp</a>`;
+            // QUOTE - GUARD
+            if(data.quote && data.quote.text) {
+                document.getElementById('quote-section').classList.remove('hidden');
+                if(data.quote.arab) {
+                    document.getElementById('quote-arab').classList.remove('hidden');
+                    document.getElementById('quote-arab').textContent = data.quote.arab;
                 }
-                document.getElementById('logisticsBox').innerHTML = html;
+                document.getElementById('quote-text').textContent = `"${data.quote.text}"`;
+                document.getElementById('quote-source').textContent = data.quote.source || '';
             }
 
-            // MUSIC
-            if (data.logistics?.music) {
-                const audio = document.getElementById('bgMusic');
-                const musicBtn = document.getElementById('musicBtn');
-                audio.src = basePath + data.logistics.music;
-                musicBtn.classList.remove('hidden');
-                let isPlaying = false;
-                musicBtn.onclick = () => {
-                    if (isPlaying) { audio.pause(); musicBtn.innerHTML = '♫'; }
-                    else { audio.play(); musicBtn.innerHTML = '❚❚'; }
-                    isPlaying =!isPlaying;
-                };
-                document.getElementById('openBtn').addEventListener('click', () => {
-                    audio.play().then(() => { isPlaying = true; musicBtn.innerHTML = '❚❚'; }).catch(e => {});
+            // COUPLE FRAME
+            const renderCouple = (person, el) => {
+                let imgHtml = `<img src="${basePath + person.image}" class="w-full aspect-[3/4] object-cover" onerror="this.src='${defaultAvatar}'">`;
+                if(settings.coupleFrame === 'polaroid') {
+                    imgHtml = `<div class="polaroid w-48 mx-auto ${person.gender === 'groom'? '-rotate-3' : 'rotate-3'}">${imgHtml}</div>`;
+                } else if(settings.coupleFrame === 'circle') {
+                    imgHtml = `<img src="${basePath + person.image}" class="w-48 h-48 mx-auto rounded-full object-cover border-4 border-white shadow-lg" onerror="this.src='${defaultAvatar}'">`;
+                } else {
+                    imgHtml = `<img src="${basePath + person.image}" class="w-48 mx-auto rounded-lg object-cover shadow-lg" onerror="this.src='${defaultAvatar}'">`;
+                }
+
+                document.getElementById(el).innerHTML = `
+                    ${imgHtml}
+                    <h2 class="font-serif text-4xl mt-4 text-theme">${person.name}</h2>
+                    <p class="text-sm mt-1">${person.gender === 'groom'? 'Putra' : 'Putri'} dari Bapak ${person.father} <br> & Ibu ${person.mother}</p>
+                    ${person.instagram? `<a href="https://instagram.com/${person.instagram.replace('@','')}" target="_blank" class="text-xs text-theme mt-1 inline-block">${person.instagram}</a>` : ''}
+                `;
+            };
+            renderCouple({...g, gender: 'groom'}, 'groom-section');
+            renderCouple({...b, gender: 'bride'}, 'bride-section');
+
+            // LOVE STORY - GUARD
+            if(data.loveStory && data.loveStory.length > 0) {
+                document.getElementById('love-story-section').classList.remove('hidden');
+                const loveStoryEl = document.getElementById('love-story');
+                data.loveStory.forEach(item => {
+                    loveStoryEl.innerHTML += `
+                        <div class="bg-white/40 p-4 rounded-lg">
+                            <p class="text-xs text-theme font-semibold">${item.date} - ${item.title}</p>
+                            <p class="text-sm mt-2">${item.description}</p>
+                        </div>
+                    `;
                 });
             }
 
-            document.getElementById('footerCouple').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
-            
-            // OPEN INVITATION
-            document.getElementById('openBtn').addEventListener('click', (e) => {
-                e.preventDefault();
-                gsap.to('#cover', { opacity: 0, duration: 1, onComplete: () => {
-                    document.getElementById('cover').style.display = 'none';
-                    document.getElementById('main').classList.remove('hidden');
-                    initScroll();
-                    window.scrollTo({ top: document.getElementById('couple').offsetTop, behavior: 'smooth' });
-                }});
+            // EVENT - GUARD
+            if(data.events && data.events.length > 0) {
+                document.getElementById('event-section').classList.remove('hidden');
+                const eventDetails = document.getElementById('event-details');
+                data.events.forEach(event => {
+                    eventDetails.innerHTML += `
+                        <div class="border-t border-theme/20 pt-4 first:border-t-0 first:pt-0">
+                            <h4 class="font-semibold uppercase tracking-widest text-sm">${event.title}</h4>
+                            <p class="text-sm mt-1">${new Date(event.date).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                            <p class="text-sm">Pukul ${event.startTime} - ${event.endTime} ${event.timezone}</p>
+                            <p class="text-xs mt-2">${event.address}</p>
+                            ${event.googleMaps? `<a href="${event.googleMaps}" target="_blank" class="text-xs text-theme underline mt-1 inline-block">Lihat Lokasi</a>` : ''}
+                        </div>
+                    `;
+                });
+
+                // COUNTDOWN - Fix kurung + guard
+                if(ev) {
+                    document.getElementById('countdown-wrap').classList.remove('hidden');
+                    const countdownDate = new Date(`${ev.date}T${ev.startTime}:00`).getTime();
+                    const countdownEl = document.getElementById('countdown');
+                    setInterval(() => {
+                        const distance = countdownDate - new Date().getTime();
+                        const d = Math.max(0, Math.floor(distance / (1000 * 60 * 60 * 24)));
+                        const h = Math.max(0, Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+                        const m = Math.max(0, Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
+                        const s = Math.max(0, Math.floor((distance % (1000 * 60)) / 1000)); // Fixed
+                        countdownEl.innerHTML = `
+                            <div><div class="text-2xl font-serif">${d}</div><div class="text-xs">Hari</div></div>
+                            <div><div class="text-2xl font-serif">${h}</div><div class="text-xs">Jam</div></div>
+                            <div><div class="text-2xl font-serif">${m}</div><div class="text-xs">Menit</div></div>
+                            <div><div class="text-2xl font-serif">${s}</div><div class="text-xs">Detik</div></div>
+                        `;
+                    }, 1000);
+
+                    // GOOGLE CALENDAR
+                    const startTime = new Date(`${ev.date}T${ev.startTime}:00`).toISOString().replace(/-|:|\.\d+/g, '');
+                    const endTimeRaw = ev.endTime === 'Selesai'? '23:59' : ev.endTime;
+                    const endTime = new Date(`${ev.date}T${endTimeRaw}:00`).toISOString().replace(/-|:|\.\d+/g, '');
+                    const calendarLink = document.getElementById('google-calendar-link');
+                    calendarLink.classList.remove('hidden');
+                    calendarLink.href = `https://www.google.com/calendar/render?action=TEMPLATE&text=Walimah ${g.nickname} & ${b.nickname}&dates=${startTime}/${endTime}&details=Acara Pernikahan ${g.name} dan ${b.name}&location=${ev.address}`;
+                }
+            }
+
+            // GALLERY - GUARD + AUTO CENTER
+            if(data.gallery.album && data.gallery.album.length > 0) {
+                const gallerySection = document.getElementById('gallery-section');
+                const galleryGrid = document.getElementById('gallery-grid');
+                gallerySection.classList.remove('hidden');
+
+                let gridCols = 'grid-cols-2';
+                if(data.gallery.album.length === 1) gridCols = 'grid-cols-1 max-w-xs mx-auto';
+                if(data.gallery.album.length === 3) gridCols = 'grid-cols-3';
+                galleryGrid.className = `grid ${gridCols} gap-4`;
+
+                data.gallery.album.forEach((img, i) => {
+                    const rotation = i % 2 === 0? '-rotate-2' : 'rotate-2';
+                    galleryGrid.innerHTML += `
+                        <div class="polaroid ${rotation}">
+                            <img src="${basePath}${img}" class="w-full aspect-square object-cover" alt="Gallery ${i+1}" onerror="this.parentElement.style.display='none'">
+                        </div>
+                    `;
+                });
+            }
+
+            // VIDEO - GUARD
+            if(data.gallery.videoYoutubeId && data.gallery.videoYoutubeId.trim()!== '') {
+                document.getElementById('video-section').classList.remove('hidden');
+                document.getElementById('video-frame').src = `https://www.youtube.com/embed/${data.gallery.videoYoutubeId}`;
+            }
+
+            // GIFT - GUARD
+            if(data.digitalGift && data.digitalGift.length > 0) {
+                document.getElementById('gift-section').classList.remove('hidden');
+                const giftDetails = document.getElementById('gift-details');
+                data.digitalGift.forEach(gift => {
+                    giftDetails.innerHTML += `
+                        <div class="bg-white p-3 rounded-lg text-sm">
+                            <p class="font-bold">${gift.provider}</p>
+                            <p class="my-1">${gift.accountNumber}</p>
+                            <p class="text-xs">a.n ${gift.accountHolder}</p>
+                            <button onclick="navigator.clipboard.writeText('${gift.accountNumber}').then(() => alert('Nomor rekening disalin!'))" class="text-xs bg-theme/20 text-theme px-3 py-1 rounded-full mt-2">Salin No. Rekening</button>
+                        </div>
+                    `;
+                });
+            }
+
+            // RSVP - GUARD
+            if(data.logistics && data.logistics.rsvpWaNumber) {
+                document.getElementById('rsvp-section').classList.remove('hidden');
+                if(data.logistics.dressCode) document.getElementById('dresscode').textContent = `Dresscode: ${data.logistics.dressCode}`;
+                if(data.logistics.guestNote) document.getElementById('guest-note').textContent = data.logistics.guestNote;
+                const rsvpMessage = settings.islami?
+                    `Assalamualaikum. Saya, ${guestName.replace(/\+/g, ' ')}, insyaAllah akan hadir di acara Walimatul 'Ursy ${g.nickname} & ${b.nickname}. Jazakumullah khairan.` :
+                    `Halo, saya ${guestName.replace(/\+/g, ' ')} akan hadir di acara pernikahan ${g.nickname} & ${b.nickname}. Terima kasih.`;
+                document.getElementById('rsvp-link').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=${encodeURIComponent(rsvpMessage)}`;
+            }
+
+            // FOOTER
+            document.getElementById('footer-names').innerHTML = `${g.nickname} & ${b.nickname}`;
+
+            // MUSIK
+            document.getElementById('open-invitation').addEventListener('click', () => {
+                document.getElementById('cover').style.opacity = '0';
+                document.getElementById('app').style.opacity = '1';
+                setTimeout(() => document.getElementById('cover').style.display = 'none', 1000);
+
+                if(data.logistics.music) {
+                    globalAudio = new Audio(basePath + data.logistics.music);
+                    globalAudio.loop = true;
+                    globalAudio.volume = 0.7;
+
+                    setTimeout(() => {
+                        globalAudio.play().catch(e => {
+                            const musicBtn = document.createElement('button');
+                            musicBtn.id = 'music-toggle';
+                            musicBtn.innerHTML = '🔊 Putar Musik';
+                            musicBtn.className = 'fixed bottom-4 right-4 bg-theme text-white rounded-full px-4 py-2 text-xs z-50 shadow-lg';
+                            musicBtn.onclick = () => {
+                                if(globalAudio.paused) {
+                                    globalAudio.play();
+                                    musicBtn.innerHTML = '⏸️ Pause';
+                                } else {
+                                    globalAudio.pause();
+                                    musicBtn.innerHTML = '🔊 Play';
+                                }
+                            };
+                            document.body.appendChild(musicBtn);
+                        });
+                    }, 300);
+                }
             });
 
-            function initScroll() {
-                gsap.utils.toArray('.reveal').forEach(el => {
-                    gsap.fromTo(el, { opacity: 0, y: 30 }, {
-                        opacity: 1, y: 0, duration: 1,
-                        scrollTrigger: { trigger: el, start: 'top 85%' }
-                    });
-                });
-            }
-
-            // LOADER
-            setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-            }, 1000);
-
-        }).catch(err => {
-            document.getElementById('loader').innerHTML = '<div class="cover-content"><p style="color: var(--pink-dark);">Gagal memuat data undangan</p></div>';
-            console.error(err);
+        }).catch(error => {
+            console.error('Error:', error);
+            document.getElementById('app').innerHTML = '<p class="text-center p-8">Mohon maaf, terjadi kesalahan saat memuat data undangan.</p>';
         });
     </script>
 </body>
