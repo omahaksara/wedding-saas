@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Montserrat', sans-serif; background-color: #EAECE6; color: #3A4A3A; }
+     .font-serif { font-family: 'Cormorant Garamond', serif; }
+     .font-arab { font-family: 'Scheherazade New', serif; }
+     .bg-sage { background-color: #7A8B7A; }
+     .text-sage { color: #7A8B7A; }
+     .border-sage { border-color: #7A8B7A; }
+     .cover-bg { background-color: #FBF8F3; }
+     .polaroid { background: white; padding: 10px 10px 35px 10px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease; }
+     .polaroid:hover { transform: scale(1.03) rotate(0deg)!important; }
+     .no-scrollbar::-webkit-scrollbar { display: none; }
+     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- COVER LOCK SCREEN -->
+    <div id="cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center p-8 cover-bg transition-opacity duration-1000">
+        <p class="font-arab text-3xl text-sage mb-4">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+        <p class="text-sm tracking-widest uppercase">WALIMATUL 'URSY</p>
+        <h1 id="cover-names" class="font-serif text-5xl my-4 text-sage"></h1>
+        <p class="text-sm">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+        <p id="cover-guest" class="text-lg font-semibold mt-1"></p>
+        <button id="open-invitation" class="bg-sage text-white rounded-full px-8 py-3 mt-8 text-sm uppercase tracking-wider shadow-lg">Buka Undangan</button>
+    </div>
+
+    <div id="app" class="max-w-md mx-auto bg-[#FBF8F3] min-h-screen opacity-0 transition-opacity duration-1000">
+        <!-- HERO -->
+        <section class="relative h-[85vh] flex flex-col items-center justify-end text-center text-white p-8">
+            <img id="hero-image" class="absolute inset-0 w-full h-full object-cover" src="">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div class="relative z-10">
+                <p class="text-sm tracking-widest uppercase">PERNIKAHAN</p>
+                <h1 id="hero-names" class="font-serif text-6xl my-2"></h1>
+                <p id="hero-date" class="text-lg"></p>
+            </div>
+        </section>
+
+        <div class="p-8 text-center">
+            <!-- AYAT -->
+            <section class="my-8">
+                <p class="font-arab text-2xl text-sage leading-relaxed">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+                <p class="text-sm mt-4 italic text-gray-600">"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tentram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang."</p>
+                <p class="text-xs font-semibold mt-2">QS. Ar-Rum: 21</p>
+            </section>
+
+            <!-- PEMBUKA -->
+            <section class="my-12">
+                <p class="text-sm leading-relaxed">DENGAN MEMOHON RAHMAT & RIDHO ALLAH SUBHANAHU WA TA'ALA<br>KAMI BERMASUD MENYELENGGARAKAN AKAD NIKAH PUTRA-PUTRI KAMI</p>
+            </section>
+
+            <!-- COUPLE -->
+            <section id="couple" class="my-12">
+                <div class="mb-8">
+                    <div class="polaroid w-48 mx-auto -rotate-3">
+                        <img id="groom-img" class="w-full aspect-[3/4] object-cover" src="">
+                    </div>
+                    <h2 id="groom-name" class="font-serif text-4xl mt-4 text-sage"></h2>
+                    <p id="groom-parents" class="text-sm mt-1 text-gray-600"></p>
+                </div>
+                <div class="font-serif text-5xl my-4 text-sage">&</div>
+                <div>
+                    <div class="polaroid w-48 mx-auto rotate-3">
+                        <img id="bride-img" class="w-full aspect-[3/4] object-cover" src="">
+                    </div>
+                    <h2 id="bride-name" class="font-serif text-4xl mt-4 text-sage"></h2>
+                    <p id="bride-parents" class="text-sm mt-1 text-gray-600"></p>
+                </div>
+            </section>
+
+            <!-- EVENT -->
+            <section class="my-16 bg-white/60 p-6 rounded-2xl shadow-sm">
+                <h3 class="font-serif text-3xl mb-6 text-sage">Save The Date</h3>
+                <div id="event-details" class="space-y-4"></div>
+                <div id="countdown" class="flex justify-center space-x-4 text-center mt-6"></div>
+                <a id="google-calendar-link" target="_blank" class="inline-block bg-sage text-white rounded-full px-6 py-2 mt-6 text-xs uppercase tracking-wider">Simpan Tanggal</a>
+            </section>
+
+            <!-- GALLERY -->
+            <section class="my-16">
+                <h3 class="font-serif text-3xl mb-6 text-sage">Momen Bahagia</h3>
+                <div id="gallery-grid" class="grid grid-cols-2 gap-4"></div>
+            </section>
+
+            <!-- GIFT -->
+            <section class="my-16 bg-white/60 p-6 rounded-2xl shadow-sm">
+                <h3 class="font-serif text-3xl mb-4 text-sage">Amplop Digital</h3>
+                <p class="text-xs mb-4 text-gray-600">DOA RESTU ANDA ADALAH KADO TERINDAH BAGI KAMI. NAMUN JIKA MEMBERI ADALAH UNGKAPAN TANDA KASIH, DAPAT MELALUI:</p>
+                <div id="gift-details" class="space-y-3"></div>
+            </section>
+
+            <!-- RSVP -->
+            <section class="my-16">
+                 <h3 class="font-serif text-3xl mb-4 text-sage">Konfirmasi Kehadiran</h3>
+                 <p class="text-sm mb-4">Mohon konfirmasi kehadiran Anda melalui WhatsApp</p>
+                 <a id="rsvp-link" target="_blank" class="inline-block bg-sage text-white rounded-full px-8 py-3 text-sm uppercase tracking-wider shadow-lg">Kirim Pesan WA</a>
+            </section>
+            
+            <!-- ADAB -->
+            <section class="my-12 bg-sage/10 p-6 rounded-2xl">
+                <h4 class="font-semibold text-sm uppercase mb-2 text-sage">ADAB MENGHADIRI WALIMAH</h4>
+                <p class="text-xs leading-relaxed">DENGAN TIDAK MENGURANGI RASA HORMAT, KAMI MENGHARAPKAN TAMU UNDANGAN BERKENAN MEMAKAI BUSANA SOPAN & MENUTUP AURAT. SEMOGA ALLAH MEMBERKAHI ACARA KITA.</p>
+            </section>
+
+            <!-- CLOSING -->
+            <footer class="text-center py-8 mt-8">
+                <p class="font-arab text-2xl text-sage mb-2">بَارَكَ اللهُ لَكُماَ وَبَارَكَ عَلَيْكُماَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+                <p class="text-xs italic text-gray-600 mb-4">"Semoga Allah memberkahimu dan memberkahi atasmu, serta mengumpulkan kalian berdua dalam kebaikan"</p>
+                <p class="text-sm">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+                <p class="font-serif text-2xl mt-6 text-sage">Terima Kasih</p>
+                <p id="footer-names" class="font-serif text-3xl mt-2 text-sage"></p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const clientSlug = params.get('c');
+        const guestName = params.get('to') || 'Tamu Undangan';
+        const basePath = `../../public/clients/${clientSlug}/`;
+
+        fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
+            const g = data.couple.groom;
+            const b = data.couple.bride;
+            const ev = data.events[0];
+
+            // COVER
+            document.getElementById('cover-names').innerHTML = `${g.nickname} & ${b.nickname}`;
+            document.getElementById('cover-guest').textContent = guestName.replace(/\+/g, ' ');
+
+            // HERO
+            document.getElementById('hero-image').src
