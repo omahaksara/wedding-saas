@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C5A572;
+            --bg: #0F0F0F;
+            --bg-soft: #1A1A1A;
+            --text: #EAEAEA;
+            --text-muted: #888;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+       .container { max-width: 500px; margin: 0 auto; background: var(--bg); }
+       .cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+       .cover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15,15,15,0.3) 0%, var(--bg) 95%);
+        }
+       .cover-content { position: relative; z-index: 2; padding: 20px; }
+       .cover.to { font-size: 0.9rem; letter-spacing: 2px; color: var(--text-muted); }
+       .cover.guest-name { font-size: 1.5rem; margin: 10px 0 30px; font-weight: 500; }
+       .cover h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            color: var(--gold);
+            line-height: 1.1;
+            font-weight: 600;
+        }
+       .cover.date { margin: 30px 0; letter-spacing: 3px; }
+       .btn {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--bg);
+            padding: 14px 32px;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border: 1px solid var(--gold);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+       .btn:hover { background: transparent; color: var(--gold); }
+        section { padding: 80px 24px; text-align: center; }
+       .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+       .couple-grid { display: grid; gap: 40px; }
+       .couple-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            filter: grayscale(20%);
+        }
+       .couple-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-top: 20px;
+        }
+       .couple-item p { color: var(--text-muted); }
+       .event-card {
+            background: var(--bg-soft);
+            border: 1px solid #222;
+            padding: 32px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+       .event-card h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 16px; }
+       .event-card p { color: var(--text-muted); margin-bottom: 8px; }
+       .event-card.btn { margin-top: 16px; padding: 10px 24px; font-size: 0.9rem; }
+       .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+       .gallery-grid img { width: 100%; height: 250px; object-fit: cover; }
+       .gift-box { background: var(--bg-soft); padding: 32px; border: 1px solid #222; }
+       .gift-box img { max-width: 200px; margin: 20px auto; display: block; }
+       .footer { padding: 60px 24px; font-size: 0.9rem; color: var(--text-muted); }
+       .music-btn {
+            position: fixed; bottom: 20px; right: 20px; z-index: 999;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: var(--gold); color: var(--bg); border: none;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+        }
+       .hidden { display: none!important; }
+        #loader { position: fixed; inset: 0; background: var(--bg); z-index: 1000; }
+    </style>
+</head>
+<body>
+    <div id="loader" class="cover">
+        <div class="cover-content"><p>Loading...</p></div>
+    </div>
+
+    <main id="main" class="container hidden">
+        <section id="cover" class="cover">
+            <div class="cover-content">
+                <p class="to">Kepada Yth.</p>
+                <p class="guest-name" id="guestName">Tamu Undangan</p>
+                <h1 id="coupleName"></h1>
+                <p class="date" id="weddingDate"></p>
+                <a href="#couple" class="btn" id="openBtn">Buka Undangan</a>
+            </div>
+        </section>
+
+        <section id="couple">
+            <h2 class="section-title">Mempelai</h2>
+            <div class="couple-grid">
+                <div class="couple-item">
+                    <img id="groomImg" src="" alt="Mempelai Pria">
+                    <h3 id="groomName"></h3>
+                    <p id="groomParents"></p>
+                    <p id="groomIg"></p>
+                </div>
+                <div class="couple-item">
+                    <img id="brideImg" src="" alt="Mempelai Wanita">
+                    <h3 id="brideName"></h3>
+                    <p id="brideParents"></p>
+                    <p id="brideIg"></p>
+                </div>
+            </div>
+        </section>
+
+        <section id="events" style="background: var(--bg-soft);">
+            <h2 class="section-title">Save The Date</h2>
+            <div id="eventList"></div>
+        </section>
+
+        <section id="gallery">
+            <h2 class="section-title">Momen Bahagia</h2>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+
+        <section id="gift" class="hidden" style="background: var(--bg-soft);">
+            <h2 class="section-title">Wedding Gift</h2>
+            <div class="gift-box" id="giftBox"></div>
+        </section>
+
+        <section class="footer">
+            <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
+            <p style="margin-top: 20px; color: var(--gold);" id="footerCouple"></p>
+        </section>
+    </main>
+
+    <button id="musicBtn" class="music-btn hidden">♫</button>
+    <audio id="bgMusic" loop></audio>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const clientSlug = urlParams.get('c');
+        const guestName = urlParams.get('to') || 'Tamu Undangan';
+        const basePath = `../../public/clients/${clientSlug}/`;
+
+        fetch(`${basePath}data.json`)
+          .then(res => res.json())
+          .then(data => {
+                if (data.meta?.theme_color) {
+                    document.documentElement.style.setProperty('--gold', data.meta.theme_color);
+                }
+
+                document.title = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+                document.getElementById('guestName').textContent = guestName;
+                document.getElementById('coupleName').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+                document.getElementById('cover').style.backgroundImage = `url('${basePath}${data.gallery.heroImage}')`;
+
+                const eventDate = new Date(data.events[0].date);
+                document.getElementById('weddingDate').textContent = eventDate.toLocaleDateString('id-ID', {
+                    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+                });
+
+                document.getElementById('groomImg').src = basePath + data.couple.groom.image;
+                document.getElementById('groomName').textContent = data.couple.groom.name;
+                document.getElementById('groomParents').textContent = `Putra dari ${data.couple.groom.father} & ${data.couple.groom.mother}`;
+                if (data.couple.groom.instagram) document.getElementById('groomIg').textContent = data.couple.groom.instagram;
+
+                document.getElementById('brideImg').src = basePath + data.couple.bride.image;
+                document.getElementById('brideName').textContent = data.couple.bride.name;
+                document.getElementById('brideParents').textContent = `Putri dari ${data.couple.bride.father} & ${data.couple.bride.mother}`;
+                if (data.couple.bride.instagram) document.getElementById('brideIg').textContent = data.couple.bride.instagram;
+
+                const eventList = document.getElementById('eventList');
+                data.events.forEach(ev => {
+                    const date = new Date(ev.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+                    eventList.innerHTML += `
+                        <div class="event-card">
+                            <h3>${ev.title}</h3>
+                            <p><strong>${date}</strong></p>
+                            <p>Pukul ${ev.startTime} - ${ev.endTime} ${ev.timezone}</p>
+                            <p>${ev.address}</p>
+                            ${ev.googleMaps? `<a href="${ev.googleMaps}" target="_blank" class="btn">Lihat Lokasi</a>` : ''}
+                        </div>
+                    `;
+                });
+
+                const galleryGrid = document.getElementById('galleryGrid');
+                if (data.gallery.album && data.gallery.album.length > 0) {
+                    data.gallery.album.forEach(img => {
+                        galleryGrid.innerHTML += `<img src="${basePath}${img}" alt="Gallery">`;
+                    });
+                } else {
+                    document.getElementById('gallery').classList.add('hidden');
+                }
+
+                if (data.digitalGift && data.digitalGift.length > 0) {
+                    const gift = data.digitalGift[0];
+                    document.getElementById('gift').classList.remove('hidden');
+                    document.getElementById('giftBox').innerHTML = `
+                        <h3>${gift.provider}</h3>
+                        <p style="font-size: 1.2rem; letter-spacing: 2px; margin: 10px 0;">${gift.accountNumber}</p>
+                        <p>a.n ${gift.accountHolder}</p>
+                        ${gift.qrCode? `<img src="${basePath}${gift.qrCode}" alt="QR Code">` : ''}
+                    `;
+                }
+
+                if (data.config?.audioUrl) {
+                    const audio = document.getElementById('bgMusic');
+                    const musicBtn = document.getElementById('musicBtn');
+                    audio.src = basePath + data.config.audioUrl;
+                    musicBtn.classList.remove('hidden');
+                    musicBtn.onclick = () => {
+                        if (audio.paused) { audio.play(); musicBtn.textContent = '❚❚'; }
+                        else { audio.pause(); musicBtn.textContent = '♫'; }
+                    };
+                    document.getElementById('openBtn').onclick = () => audio.play().catch(e => {});
+                }
+
+                document.getElementById('footerCouple').textContent = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+                document.getElementById('loader').classList.add('hidden');
+                document.getElementById('main').classList.remove('hidden');
+            })
+          .catch(err => {
+                document.getElementById('loader').innerHTML = '<div class="cover-content"><p>Gagal memuat data.</p></div>';
+                console.error(err);
+            });
+    </script>
+</body>
+</html>
