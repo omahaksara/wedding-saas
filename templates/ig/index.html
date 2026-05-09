@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Undangan Instagram</title>
+<title>Instagram Wedding</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --bg:#fafafa;--card:#fff;--text:#262626;--muted:#8e8e8e;--border:#dbdbdb;
   --blue:#0095f6;--red:#ed4956;--blur:blur(20px) saturate(180%);
+  --theme:#c07a43;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -22,7 +23,7 @@ body{
 /* COVER */
 .cover{position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;flex-direction:column;
   background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
-  transition:opacity.6s,visibility.6s}
+  transition:opacity.6s ease,visibility.6s}
 .cover.hidden{opacity:0;visibility:hidden}
 .cover-card{background:rgba(255,255,255,.2);backdrop-filter:var(--blur);border:1px solid rgba(255,255,255,.3);
   border-radius:24px;padding:32px 28px;text-align:center;color:#fff;box-shadow:0 8px 32px rgba(0,0,0,.2)}
@@ -32,7 +33,7 @@ body{
   transition:all.3s cubic-bezier(0.165, 0.84, 0.44, 1)}
 .cover-btn:active{transform:scale(.96)}
 
-/* NAVBAR */
+/* NAVBAR GLASS */
 .navbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.8);backdrop-filter:var(--blur);
   border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-size:24px;font-weight:700}
@@ -56,7 +57,7 @@ body{
 .post-name{font-size:14px;font-weight:600}
 .post-location{font-size:12px;color:var(--muted)}
 .post-image{position:relative;aspect-ratio:1/1;background:#000;overflow:hidden}
-.post-image img{width:100%;height:100%;object-fit:cover}
+.post-image img{width:100%;height:100%;object-fit:cover;user-select:none}
 .double-tap-heart{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);font-size:80px;color:#fff;opacity:0;pointer-events:none;
   filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
 .double-tap-heart.active{animation:heartPop.8s cubic-bezier(0.165, 0.84, 0.44, 1)}
@@ -95,7 +96,7 @@ body{
 .detail-body b{display:block;font-weight:600;margin-bottom:2px}
 .detail-body span{color:var(--muted);font-size:13px}
 
-/* BOTTOM NAV */
+/* BOTTOM NAV GLASS */
 .bottom-nav{position:sticky;bottom:0;z-index:40;background:rgba(255,255,255,.8);backdrop-filter:var(--blur);
   border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:12px 0;font-size:26px}
 
@@ -118,8 +119,8 @@ body{
 <!-- COVER -->
 <div class="cover" id="cover">
   <div class="cover-card">
-    <div class="cover-title" id="coverNames">Budi & Ani</div>
-    <div class="cover-to" id="coverTo">Kepada Yth.<br>Bapak/Ibu/Saudara/i</div>
+    <div class="cover-title" id="coverNames">Loading...</div>
+    <div class="cover-to" id="coverTo">Kepada Yth.<br>Tamu Undangan</div>
     <button class="cover-btn" onclick="openInvite()">Buka Undangan</button>
   </div>
 </div>
@@ -130,10 +131,10 @@ body{
   <div class="nav-icons"><span>🤍</span><span>💬</span></div>
 </div>
 
-<!-- STORIES - AUTO DARI FOTO -->
+<!-- STORIES AUTO DARI GALLERY -->
 <div class="stories" id="stories"></div>
 
-<!-- FEED - AUTO GENERATE DARI FOTO CLIENT -->
+<!-- FEED AUTO GENERATE DARI FOTO CLIENT -->
 <div id="feed"></div>
 
 <!-- DETAILS -->
@@ -152,74 +153,74 @@ body{
 <audio id="bgMusic" loop></audio>
 
 <script>
-// AMBIL PARAM URL
+// SISTEM TARIK DATA KLIEN
 const params = new URLSearchParams(window.location.search);
-const clientSlug = params.get('c') || 'budi-ani';
-const guestName = params.get('to') || 'Tamu Undangan';
-const basePath = `/clients/${clientSlug}`;
+const clientSlug = params.get('c');
+const guestName = params.get('to')?.replace(/\+/g, ' ') || 'Tamu Undangan';
+const basePath = `../../public/clients/${clientSlug}/`;
+
+if(!clientSlug){
+  document.body.innerHTML = '<div style="height:100vh;display:flex;align-items:center;justify-content:center;font-size:12px;opacity:.5">CLIENT NOT FOUND</div>';
+  throw new Error('No client slug');
+}
+
+let clientData = {};
 
 // LOAD DATA.JSON
-let clientData = {};
-async function loadData(){
-  try{
-    const res = await fetch(`${basePath}/data.json`);
-    clientData = await res.json();
-    renderCover();
-    renderStories();
-    renderFeed();
-    renderDetails();
-    loadMusic();
-  }catch(e){
-    console.error('Gagal load data.json',e);
-  }
-}
-
-// COVER
-function renderCover(){
-  document.getElementById('coverNames').textContent = `${clientData.couple?.groom?.nickname || 'Groom'} & ${clientData.couple?.bride?.nickname || 'Bride'}`;
+fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
+  clientData = data;
+  const g = data.couple.groom;
+  const b = data.couple.bride;
+  const pair = `${g.nickname} & ${b.nickname}`;
+  const username = `${g.nickname}_${b.nickname}_wedding`.toLowerCase();
+  
+  // COVER
+  document.getElementById('coverNames').textContent = pair;
   document.getElementById('coverTo').innerHTML = `Kepada Yth.<br>${guestName}`;
-}
-
-function openInvite(){
-  document.getElementById('cover').classList.add('hidden');
-  document.getElementById('bgMusic').play().catch(()=>{});
-  document.getElementById('musicBtn').classList.add('playing');
-}
-
-// STORIES DARI GALLERY
-function renderStories(){
+  document.title = `${pair} - Instagram Wedding`;
+  
+  // THEME COLOR
+  if(data.settings?.themeColor) document.documentElement.style.setProperty('--theme', data.settings.themeColor);
+  
+  // STORIES - 5 foto pertama
   const stories = document.getElementById('stories');
-  const photos = clientData.gallery?.album || [];
-  photos.slice(0,5).forEach((img,i)=>{
+  const album = data.gallery?.album || [];
+  const storyTitles = ['Prewed','Akad','Resepsi','Venue','Details','Momen'];
+  album.slice(0,6).forEach((img,i)=>{
     const div = document.createElement('div');
     div.className = 'story';
     div.innerHTML = `
-      <div class="story-ring"><img src="${basePath}/${img}" alt=""></div>
-      <div class="story-name">${['Prewed','Akad','Resepsi','Venue','Detail'][i]||'Story'}</div>`;
+      <div class="story-ring"><img src="${basePath}${img}" alt=""></div>
+      <div class="story-name">${storyTitles[i]||'Story'}</div>`;
     stories.appendChild(div);
   });
-}
-
-// FEED AUTO GENERATE DARI FOTO
-function renderFeed(){
-  const feed = document.getElementById('feed');
-  const photos = clientData.gallery?.album || [];
-  const username = `${clientData.couple?.groom?.nickname||'groom'}_${clientData.couple?.bride?.nickname||'bride'}_wedding`.toLowerCase();
   
-  photos.forEach((img,i)=>{
+  // FEED - SEMUA FOTO JADI POST
+  const feed = document.getElementById('feed');
+  album.forEach((img,i)=>{
+    const likes = Math.floor(Math.random()*2000)+500;
+    const captions = [
+      data.quote?.text || 'Bismillah. Kami mengundang Anda.',
+      'Momen bahagia kami 💍',
+      'Menuju hari H ❤️',
+      'Save the date!',
+      'Counting days...',
+      'Alhamdulillah'
+    ];
+    
     const post = document.createElement('div');
     post.className = 'post reveal';
     post.innerHTML = `
       <div class="post-header">
-        <div class="post-avatar"><img src="${basePath}/${clientData.couple?.groom?.image||img}" alt=""></div>
+        <div class="post-avatar"><img src="${basePath}${data.couple.groom.image}" alt=""></div>
         <div class="post-user">
           <div class="post-name">${username}</div>
-          <div class="post-location">${clientData.events?.[0]?.address?.split(',')[0]||'Indonesia'}</div>
+          <div class="post-location">${data.events[0]?.address?.split(',')[0]||'Indonesia'}</div>
         </div>
         <div style="font-size:20px">⋯</div>
       </div>
       <div class="post-image" ondblclick="doubleTapLike(${i})">
-        <img src="${basePath}/${img}" alt="">
+        <img src="${basePath}${img}" alt="">
         <div class="double-tap-heart" id="heart${i}">❤️</div>
       </div>
       <div class="post-actions">
@@ -228,14 +229,20 @@ function renderFeed(){
         <div class="action-btn">📤</div>
         <div class="action-btn save-btn">🔖</div>
       </div>
-      <div class="post-likes"><span id="likeCount${i}">${Math.floor(Math.random()*2000)+500}</span> likes</div>
+      <div class="post-likes"><span id="likeCount${i}">${likes.toLocaleString('id')}</span> likes</div>
       <div class="post-caption">
-        <b>${username}</b> ${i===0? clientData.quote?.text||'Bismillah. Kami mengundang Anda.' : 'Momen bahagia kami ❤️'}
-        <br><br><span style="color:var(--blue)">#${clientData.couple?.groom?.nickname||''}${clientData.couple?.bride?.nickname||''}Day #Wedding</span>
+        <b>${username}</b> ${captions[i%captions.length]}
+        ${i===0?`<br><br>${new Date(data.events[0].date).toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}<br>📍 ${data.events[0].address}`:''}
+        <br><br><span style="color:var(--blue)">#${g.nickname}${b.nickname}Day #Wedding</span>
       </div>
       <div class="post-time">${i+1} HARI YANG LALU</div>
       <div class="comments" id="comments${i}">
-        <div class="comment-list" id="commentList${i}"></div>
+        <div class="comment-list" id="commentList${i}">
+          <div class="comment">
+            <div class="comment-avatar" style="background:linear-gradient(45deg,#f09433,#dc2743)"></div>
+            <div class="comment-body"><b>keluarga_${g.nickname.toLowerCase()}</b> Barakallahu lakuma 🤲</div>
+          </div>
+        </div>
         <div class="comment-input">
           <input type="text" id="commentInput${i}" placeholder="Tambahkan komentar..." oninput="checkComment(${i})">
           <button id="sendComment${i}" onclick="addComment(${i})">Kirim</button>
@@ -244,31 +251,40 @@ function renderFeed(){
     feed.appendChild(post);
   });
   
-  document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
-}
-
-// DETAILS
-function renderDetails(){
-  const wrap = document.getElementById('eventDetails');
-  clientData.events?.forEach(ev=>{
-    const div = document.createElement('div');
-    div.className = 'detail-item';
-    div.innerHTML = `
-      <div class="detail-icon">${ev.title.includes('Akad')?'💍':'🎉'}</div>
-      <div class="detail-body">
-        <b>${ev.title}</b>
-        <span>${ev.date} • ${ev.startTime} ${ev.timezone}<br>${ev.address} • <a href="${ev.googleMaps}" target="_blank" style="color:var(--blue)">Maps</a></span>
+  // DETAILS
+  const eventWrap = document.getElementById('eventDetails');
+  data.events.forEach(ev=>{
+    eventWrap.innerHTML += `
+      <div class="detail-item">
+        <div class="detail-icon">${ev.title.includes('Akad')?'💍':'🎉'}</div>
+        <div class="detail-body">
+          <b>${ev.title}</b>
+          <span>${new Date(ev.date).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})} • ${ev.startTime} ${ev.timezone}<br>
+          ${ev.address} • <a href="${ev.googleMaps}" target="_blank" style="color:var(--blue)">Maps</a></span>
+        </div>
       </div>`;
-    wrap.appendChild(div);
   });
+  
+  // MUSIC
+  if(data.logistics?.music){
+    document.getElementById('bgMusic').src = basePath + data.logistics.music;
+  }
+  
+  // REVEAL ANIMATION
+  document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+  
+}).catch(err=>{
+  console.error(err);
+  document.body.innerHTML = `<div style="height:100vh;display:flex;align-items:center;justify-content:center;font-size:12px;opacity:.5">DATA NOT FOUND</div>`;
+});
+
+// FUNCTIONS
+function openInvite(){
+  document.getElementById('cover').classList.add('hidden');
+  document.getElementById('bgMusic').play().catch(()=>{});
+  document.getElementById('musicBtn').classList.add('playing');
 }
 
-// MUSIC
-function loadMusic(){
-  if(clientData.logistics?.music){
-    document.getElementById('bgMusic').src = `${basePath}/${clientData.logistics.music}`;
-  }
-}
 function toggleMusic(){
   const music = document.getElementById('bgMusic');
   const btn = document.getElementById('musicBtn');
@@ -276,7 +292,6 @@ function toggleMusic(){
   else{music.pause();btn.classList.remove('playing')}
 }
 
-// LIKE
 const likes = {};
 function toggleLike(btn,i){
   likes[i] =!likes[i];
@@ -295,7 +310,6 @@ function doubleTapLike(i){
   if(!likes[i]) document.querySelectorAll('.like-btn')[i].click();
 }
 
-// COMMENTS
 function toggleComments(i){
   document.getElementById(`comments${i}`).classList.toggle('show');
 }
@@ -312,21 +326,17 @@ function addComment(i){
   div.className = 'comment';
   div.innerHTML = `
     <div class="comment-avatar" style="background:linear-gradient(45deg,#0095f6,#00d4ff)"></div>
-    <div class="comment-body"><b>${guestName}</b> ${text}<div class="comment-time">Baru saja</div></div>`;
+    <div class="comment-body"><b>${guestName}</b> ${text}</div>`;
   list.appendChild(div);
   input.value = '';
   checkComment(i);
 }
 
-// SCROLL REVEAL
 const revealObs = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{
     if(e.isIntersecting){e.target.classList.add('show');revealObs.unobserve(e.target)}
   });
 },{threshold:.1});
-
-// INIT
-loadData();
 </script>
 
 </body>
