@@ -7,10 +7,7 @@
   },
   "settings": {
     "islami": true,
-    "religion": "islam",
-    "themeColor": "#8B6F5C",
-    "bgColor": "#F9F6F1",
-    "textColor": "#3E3A35",
+    "religion": "islam", 
     "heroStyle": "full",
     "coupleFrame": "circle",
     "autoColor": false
