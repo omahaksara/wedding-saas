@@ -1,4 +1,9 @@
-K PARTY • SYARI • GEN Z --<!DOCTYPE html>
+<!-- ========================= -->
+<!-- OMAH AKSARA — KENZ BLUSH v3.1 -->
+<!-- PINK PARTY • SYARI • GEN Z -->
+<!-- ========================= -->
+
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -18,30 +23,22 @@ K PARTY • SYARI • GEN Z --<!DOCTYPE html>
 :root{--pink:#F4C2C2;--pink-dark:#E7A1A1;--bg:#FFF7F7;--text:#5C4B51;--accent:#FBEAEB}
 html{scroll-behavior:smooth}
 body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url('https://www.transparenttextures.com/patterns/glitter.png');opacity:.08;pointer-events:none;z-index:1}
 .font-script{font-family:'Great Vibes',cursive}
 .font-serif{font-family:'DM Serif Display',serif}
 .font-arab{font-family:'Scheherazade New',serif}
-
-/* GLITTER BG */
-body::before{content:'';position:fixed;inset:0;background-image:url('https://www.transparenttextures.com/patterns/glitter.png');opacity:.08;pointer-events:none;z-index:1}
 .bg-blush{background:linear-gradient(180deg,var(--bg) 0%,var(--accent) 100%)}
 .text-pink{color:var(--pink-dark)}
 .bg-pink{background:var(--pink)}
 .border-pink{border-color:var(--pink)}
-
-/* POLAROID MODERN */
-.polaroid{background:#fff;padding:12px 12px 45px;box-shadow:0 8px 25px -5px rgba(231,161,.4);transform:rotate(-2deg);transition:all.6s cubic-bezier(.22,1,.36,1)}
+.polaroid{background:#fff;padding:12px 12px 50px;box-shadow:0 8px 25px -5px rgba(231,161,161,.4);transform:rotate(-2deg);transition:all.6s cubic-bezier(.22,1,.36,1)}
 .polaroid:nth-child(even){transform:rotate(2deg)}
 .polaroid:hover{transform:rotate(0) scale(1.03);z-index:10}
-.polaroid p{font-family:'Great Vibes',cursive;color:var(--pink-dark);text-align:center;margin-top:8px;font-size:20px}
-
-/* HANDWRITTEN TITLE */
+.polaroid p{font-family:'Great Vibes',cursive;color:var(--pink-dark);text-align:center;margin-top:8px;font-size:22px}
+.polaroid a{font-family:'Outfit',sans-serif;font-size:11px;color:var(--pink-dark);text-align:center;display:block;margin-top:2px;opacity:.7}
+.polaroid a:hover{opacity:1;text-decoration:underline}
 .title-script{font-family:'Great Vibes',cursive;color:var(--pink-dark);font-size:3.5rem;line-height:1}
-
-/* COUNTDOWN */
 .count-item{background:rgba(255,255,255,.6);backdrop-filter:blur(10px);border:1px solid rgba(244,194,194,.4)}
-
-/* REVEAL */
 .reveal{opacity:0;transform:translateY(50px)}
 #cover{transition:opacity 1.2s ease,transform 1.2s ease}
 </style>
@@ -68,7 +65,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url('https://www
 
 <main id="app" class="max-w-md mx-auto opacity-0">
   <!-- HERO -->
-  <section class="relative h-[95vh] flex items-end justify-center text-center overflow-hidden">
+  <section class="relative h-[85vh] flex items-end justify-center text-center overflow-hidden">
     <img id="hero-img" class="absolute inset-0 w-full h-full object-cover">
     <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
     <div class="relative z-10 px-8 pb-20">
@@ -87,7 +84,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url('https://www
       <p id="quote-arab" class="font-arab text-xl text-pink mt-6"></p>
     </section>
 
-    <!-- COUPLE POLAROID -->
+    <!-- COUPLE POLAROID + IG -->
     <section class="reveal">
       <div id="groom-card" class="polaroid max-w-[280px] mx-auto"></div>
       <div class="font-script text-6xl text-pink text-center my-8">&</div>
@@ -114,7 +111,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url('https://www
     </section>
 
     <!-- DRESSCODE -->
-    <section class="text-center bg-white rounded-[30px] p-8 shadow-lg shadow-pink/10 reveal">
+    <section class="text-center bg-white rounded-3xl p-8 shadow-lg shadow-pink/10 reveal">
       <h2 class="title-script mb-6">Dresscode</h2>
       <div class="flex justify-center gap-4 mb-4">
         <div class="w-8 h-8 rounded-full bg-pink"></div>
@@ -132,7 +129,7 @@ body::before{content:'';position:fixed;inset:0;background-image:url('https://www
     </section>
 
     <!-- RSVP QR -->
-    <section class="text-center bg-white rounded-[30px] p-8 shadow-lg shadow-pink/10 reveal">
+    <section class="text-center bg-white rounded-3xl p-8 shadow-lg shadow-pink/10 reveal">
       <h2 class="title-script mb-6">rsvp</h2>
       <div id="qrcode" class="flex justify-center mb-4"></div>
       <p class="text-xs opacity-60">Scan atau klik tombol di bawah</p>
@@ -167,7 +164,7 @@ const base = `../../public/clients/${slug}/`;
 fetch(`${base}data.json`).then(r=>r.json()).then(d=>{
   gsap.registerPlugin(ScrollTrigger);
   
-  // THEME: override pink kalau ada di settings
+  // THEME
   if(d.settings?.themeColor) document.documentElement.style.setProperty('--pink-dark', d.settings.themeColor);
   if(d.settings?.bgColor) document.documentElement.style.setProperty('--bg', d.settings.bgColor);
   
@@ -185,9 +182,22 @@ fetch(`${base}data.json`).then(r=>r.json()).then(d=>{
   document.getElementById('quote-text').textContent = `"${d.quote.text}"`;
   document.getElementById('quote-arab').textContent = d.quote.arab;
   
-  // COUPLE POLAROID
-  document.getElementById('groom-card').innerHTML = `<img src="${base+g.image}" class="w-full aspect-[3/4] object-cover rounded-lg"><p>${g.nickname}</p>`;
-  document.getElementById('bride-card').innerHTML = `<img src="${base+b.image}" class="w-full aspect-[3/4] object-cover rounded-lg"><p>${b.nickname}</p>`;
+  // COUPLE POLAROID + IG FIX
+  const groomIg = g.instagramUrl || `https://instagram.com/${g.instagram}`;
+  const brideLink = b.lynkUrl || `https://instagram.com/${b.instagram}`;
+  
+  document.getElementById('groom-card').innerHTML = `
+    <img src="${base+g.image}" class="w-full aspect-[3/4] object-cover rounded-lg">
+    <p>${g.nickname}</p>
+    <a href="${groomIg}" target="_blank">@${g.instagram}</a>
+    ${g.phone? `<a href="https://wa.me/62${g.phone.replace(/^0/,'')}" target="_blank" class="text-[10px] opacity-50">Chat WhatsApp</a>` : ''}
+  `;
+  
+  document.getElementById('bride-card').innerHTML = `
+    <img src="${base+b.image}" class="w-full aspect-[3/4] object-cover rounded-lg">
+    <p>${b.nickname}</p>
+    <a href="${brideLink}" target="_blank">${b.lynkUrl? 'lynk.id/ondow' : '@'+b.instagram}</a>
+  `;
   
   // COUNTDOWN
   const target = new Date(`${ev.date}T${ev.startTime}:00+07:00`).getTime();
@@ -199,16 +209,16 @@ fetch(`${base}data.json`).then(r=>r.json()).then(d=>{
     cd.innerHTML = [['Days',dd],['Hours',hh],['Minutes',mm],['Seconds',ss]].map(([l,v])=>`<div class="count-item rounded-2xl py-4"><div class="font-serif text-3xl text-pink">${v}</div><div class="text-[10px] uppercase tracking-[.2em] opacity-50 mt-1">${l}</div></div>`).join('');
   }; up(); setInterval(up,1000);
   
-  // LOVE STORY
+  // LOVE STORY - pakai date & description
   d.loveStory.forEach(i=>{
-    document.getElementById('love-story').innerHTML += `<div class="bg-white rounded-[25px] p-6 shadow-sm"><p class="text-[10px] uppercase tracking-[.3em] opacity-50">${i.date}</p><h3 class="font-serif text-2xl text-pink mt-2">${i.title}</h3><p class="mt-3 text-sm opacity-70 leading-relaxed">${i.description}</p></div>`
+    document.getElementById('love-story').innerHTML += `<div class="bg-white rounded-3xl p-6 shadow-sm"><p class="text-[10px] uppercase tracking-[.3em] opacity-50">${i.date}</p><h3 class="font-serif text-2xl text-pink mt-2">${i.title}</h3><p class="mt-3 text-sm opacity-70 leading-relaxed">${i.description}</p></div>`
   });
   
   // EVENT
   document.getElementById('event-date-big').textContent = new Date(ev.date).getDate();
   document.getElementById('event-venue').textContent = ev.address;
   d.events.forEach(e=>{
-    document.getElementById('event-details').innerHTML += `<div class="text-center bg-white rounded-[25px] p-6 shadow-sm"><p class="font-script text-3xl text-pink">${e.title}</p><p class="text-sm mt-2">${e.startTime} - ${e.endTime} ${e.timezone}</p><a href="${e.googleMaps}" target="_blank" class="inline-block mt-4 text-xs underline text-pink">View Location</a></div>`
+    document.getElementById('event-details').innerHTML += `<div class="text-center bg-white rounded-3xl p-6 shadow-sm"><p class="font-script text-3xl text-pink">${e.title}</p><p class="text-sm mt-2">${e.startTime} - ${e.endTime} ${e.timezone}</p><a href="${e.googleMaps}" target="_blank" class="inline-block mt-4 text-xs underline text-pink">View Location</a></div>`
   });
   
   // DRESSCODE
@@ -222,13 +232,13 @@ fetch(`${base}data.json`).then(r=>r.json()).then(d=>{
   });
   
   // RSVP QR
-  const waLink = `https://wa.me/${d.logistics.rsvpWaNumber}?text=Halo, saya ${guest} mau konfirmasi hadir untuk ${pair}`;
+  const waLink = `https://wa.me/62${d.logistics.rsvpWaNumber.replace(/^0/,'')}?text=Halo, saya ${guest} mau konfirmasi hadir untuk ${pair}`;
   new QRCode(document.getElementById('qrcode'), {text: waLink, width: 128, height: 128, colorDark: "#E7A1A1", colorLight: "#ffffff"});
   document.getElementById('rsvp-link').href = waLink;
   
   // GIFT
   d.digitalGift.forEach(gf=>{
-    document.getElementById('gifts').innerHTML += `<div class="bg-white rounded-[25px] p-5 text-center shadow-sm"><p class="text-xs uppercase tracking-[.3em] opacity-50">${gf.provider}</p><h3 class="font-serif text-2xl text-pink mt-2">${gf.accountNumber}</h3><p class="text-xs opacity-60 mt-1">a.n ${gf.accountHolder}</p>${gf.qrImage?`<img src="${base+gf.qrImage}" class="w-24 mx-auto mt-3">`:''}</div>`
+    document.getElementById('gifts').innerHTML += `<div class="bg-white rounded-3xl p-5 text-center shadow-sm"><p class="text-xs uppercase tracking-[.3em] opacity-50">${gf.provider}</p><h3 class="font-serif text-2xl text-pink mt-2">${gf.accountNumber}</h3><p class="text-xs opacity-60 mt-1">a.n ${gf.accountHolder}</p>${gf.qrImage?`<img src="${base+gf.qrImage}" class="w-24 mx-auto mt-3">`:''}</div>`
   });
   
   // CLOSING
@@ -236,9 +246,7 @@ fetch(`${base}data.json`).then(r=>r.json()).then(d=>{
   document.getElementById('footer-names').textContent = pair;
   
   // MUSIC
-  if(d.logistics.music){
-    const a=document.getElementById('audio'); a.src=base+d.logistics.music;
-  }
+  if(d.logistics.music) document.getElementById('audio').src = base + d.logistics.music;
   
   // LOADER + OPEN
   document.getElementById('loader').style.display='none';
@@ -247,7 +255,6 @@ fetch(`${base}data.json`).then(r=>r.json()).then(d=>{
       document.getElementById('cover').style.display='none';
       gsap.to('#app',{opacity:1,duration:1});
       if(d.logistics.music) document.getElementById('audio').play();
-      // REVEAL ANIM
       gsap.utils.toArray('.reveal').forEach(el=>{
         gsap.fromTo(el,{opacity:0,y:60},{opacity:1,y:0,duration:1.2,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%'}})
       });
