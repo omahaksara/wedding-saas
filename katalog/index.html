@@ -1,347 +1,297 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omah Aksara - Katalog Undangan Digital Profesional</title>
+    <meta name="description" content="Katalog resmi template undangan digital Omah Aksara. Custom warna, musik, foto, video, dan nama tamu tanpa batas.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #FDFCFB;
+            --primary: #C87941;
+            --primary-dark: #b06836;
+            --text: #3E322B;
+            --muted: #8B7E74;
+            --card: #FFFFFF;
+            --border: rgba(90, 62, 43, 0.08);
+            --shadow: 0 10px 30px -10px rgba(90, 62, 43, 0.12);
+        }
 
-<title>Omah Aksara - Undangan Digital Premium</title>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 24px 40px;
+            background: linear-gradient(to bottom, #F7F2EE, var(--bg));
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(24px, 5vw, 40px);
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+        .hero p {
+            font-size: 16px;
+            color: var(--muted);
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
 
-<style>
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+        .feat-item {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: 0.3s;
+        }
+        .feat-item:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .feat-item h3 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: var(--primary); }
+        .feat-item p { font-size: 13px; color: var(--muted); }
 
-:root{
-    --bg:#faf7f4;
-    --primary:#c07a43;
-    --text:#3b2f2a;
-    --muted:#8b7d74;
-    --card:#fff;
-    --border:rgba(0,0,0,.08);
-    --shadow:0 10px 30px rgba(0,0,0,.06);
-}
+        /* Why Section */
+        .why { padding: 80px 20px; background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .why h2 { text-align: center; font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 16px; }
+        .why .sub { text-align: center; max-width: 700px; margin: 0 auto 40px; color: var(--muted); }
+        .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+        .why-card { padding: 30px; background: var(--bg); border-radius: 20px; transition: 0.3s; }
+        .why-card:hover { background: #F7F2EE; }
+        .why-card h3 { font-size: 18px; margin-bottom: 10px; }
+        .why-card p { font-size: 14px; color: var(--muted); }
 
-*{margin:0;padding:0;box-sizing:border-box}
+        /* Gallery Section (Scroll Samping) */
+        .gallery { padding: 60px 0; overflow: hidden; }
+        .gallery h2 { text-align: center; font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 8px; }
+        .gallery-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 20px;
+            gap: 15px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .gallery-container::-webkit-scrollbar { display: none; }
+        .gallery-item {
+            flex: 0 0 280px;
+            scroll-snap-align: center;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #eee;
+            box-shadow: var(--shadow);
+            aspect-ratio: 1/1;
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.05); }
 
-body{
-    font-family:'Plus Jakarta Sans',sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.6;
-}
+        /* Catalog Grid */
+        .container { max-width: 1200px; margin: 0 auto; padding: 60px 20px 100px; }
+        .section-header { text-align: center; margin-bottom: 40px; }
+        .section-header h2 { font-family: 'Playfair Display', serif; font-size: 32px; }
+        .section-header .line { width: 50px; height: 2px; background: var(--primary); margin: 12px auto; opacity: 0.5; }
 
-/* HERO */
-.hero{
-    text-align:center;
-    padding:70px 20px 30px;
-    background:linear-gradient(to bottom,#f7efe9,transparent);
-}
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 1024px) { .grid { grid-template-columns: repeat(4, 1fr); } }
 
-.logo{
-    font-family:'Playfair Display',serif;
-    font-size:40px;
-    color:var(--primary);
-}
+        .card {
+            background: var(--card);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow);
+        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(90, 62, 43, 0.15); }
+        .thumb { position: relative; aspect-ratio: 3/4; overflow: hidden; background: #eee; }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .card:hover .thumb img { transform: scale(1.1); }
+        .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+        .card-body .tag { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: 1px; margin-bottom: 4px; }
+        .title { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 12px; color: var(--text); }
+        
+        .actions { display: grid; grid-template-columns: 1fr; gap: 8px; }
+        @media (min-width: 480px) { .actions { grid-template-columns: 1fr 1fr; } }
 
-.hero h1{
-    font-family:'Playfair Display',serif;
-    font-size:34px;
-    margin-top:10px;
-}
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            text-align: center;
+            border: 1.5px solid transparent;
+        }
+        .btn-outline { border-color: var(--primary); color: var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: white; }
+        .btn-filled { background: var(--primary); color: white; }
+        .btn-filled:hover { background: var(--primary-dark); }
 
-.hero p{
-    color:var(--muted);
-    max-width:600px;
-    margin:10px auto;
-}
+        .skeleton { height: 400px; background: white; border-radius: 24px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
 
-/* FEATURES */
-.features-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:16px;
-    padding:0 20px;
-    margin:30px auto;
-    max-width:1000px;
-}
+        footer { text-align: center; padding: 60px 20px; background: #F7F2EE; }
+        footer p { font-size: 14px; color: var(--muted); }
+        footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
 
-.feat-item{
-    background:#fff;
-    padding:18px;
-    border-radius:14px;
-    border:1px solid var(--border);
-    text-align:center;
-    box-shadow:var(--shadow);
-}
-
-.feat-item h3{
-    font-size:13px;
-    margin-bottom:6px;
-}
-
-/* WHY SECTION */
-.why{
-    max-width:1000px;
-    margin:60px auto;
-    padding:0 20px;
-}
-
-.why h2{
-    font-family:'Playfair Display',serif;
-    text-align:center;
-    font-size:28px;
-    margin-bottom:10px;
-}
-
-.why p.sub{
-    text-align:center;
-    color:var(--muted);
-    max-width:600px;
-    margin:0 auto 30px;
-}
-
-.why-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:16px;
-}
-
-.why-card{
-    background:#fff;
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:18px;
-    box-shadow:var(--shadow);
-}
-
-.why-card h3{
-    font-size:14px;
-    margin-bottom:8px;
-    color:var(--primary);
-}
-
-.why-card p{
-    font-size:13px;
-    color:var(--muted);
-}
-
-/* GALERI */
-.gallery{
-    max-width:1100px;
-    margin:80px auto;
-    padding:0 20px;
-}
-
-.gallery h2{
-    font-family:'Playfair Display',serif;
-    text-align:center;
-    font-size:28px;
-    margin-bottom:10px;
-}
-
-.gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-    gap:12px;
-}
-
-.gallery-grid img{
-    width:100%;
-    border-radius:14px;
-    box-shadow:var(--shadow);
-    transition:.3s;
-}
-
-.gallery-grid img:hover{
-    transform:scale(1.05);
-}
-
-/* TEMPLATE GRID */
-.container{
-    max-width:1100px;
-    margin:auto;
-    padding:20px;
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:16px;
-}
-
-.card{
-    background:#fff;
-    border-radius:18px;
-    overflow:hidden;
-    border:1px solid var(--border);
-    box-shadow:var(--shadow);
-}
-
-.thumb img{
-    width:100%;
-    aspect-ratio:3/4;
-    object-fit:cover;
-}
-
-.card-body{
-    padding:14px;
-}
-
-.title{
-    font-family:'Playfair Display',serif;
-    font-size:18px;
-}
-
-/* BUTTON */
-.btn{
-    display:inline-block;
-    padding:10px 12px;
-    border-radius:10px;
-    font-size:13px;
-    text-decoration:none;
-    font-weight:600;
-}
-
-.btn-outline{
-    border:1px solid var(--primary);
-    color:var(--primary);
-}
-
-.btn-fill{
-    background:var(--primary);
-    color:#fff;
-}
-
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:60px 20px;
-    color:var(--muted);
-    font-size:13px;
-}
-
-</style>
+        @media (max-width: 480px) {
+            .gallery-item { flex: 0 0 220px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- HERO -->
-<div class="hero">
-    <div class="logo">Omah Aksara</div>
-    <h1>Budi & Ani</h1>
-    <p>Undangan digital modern, elegan, dan penuh cerita cinta.</p>
-</div>
+    <header class="hero">
+        <div class="logo">Omah Aksara</div>
+        <h1>Elegansi Dalam Undangan Digital</h1>
+        <p>Hadirkan kesan pertama yang mendalam untuk hari bahagia Anda dengan koleksi template premium kami.</p>
+    </header>
 
-<!-- FEATURES -->
-<div class="features-grid">
-
-    <div class="feat-item">
-        <h3>Full Custom</h3>
-        <p>Bisa ubah warna, font, konsep.</p>
-    </div>
-
-    <div class="feat-item">
-        <h3>Media Support</h3>
-        <p>Foto, video, dan musik favorit.</p>
-    </div>
-
-    <div class="feat-item">
-        <h3>Nama Tamu Otomatis</h3>
-        <p>1 link untuk semua tamu.</p>
-    </div>
-
-</div>
-
-<!-- WHY DIGITAL -->
-<section class="why">
-
-    <h2>Kenapa Undangan Digital?</h2>
-
-    <p class="sub">
-        Sekarang bukan zamannya undangan kertas.  
-        Ini era undangan digital yang lebih hidup, hemat, dan elegan.
-    </p>
-
-    <div class="why-grid">
-
-        <div class="why-card">
-            <h3>🎵 Request Lagu</h3>
-            <p>Bisa pakai lagu kenangan atau musik favorit pasangan.</p>
+    <!-- FEATURES -->
+    <section class="features-grid">
+        <div class="feat-item">
+            <h3>Full Custom</h3>
+            <p>Bebas ubah warna, font, konsep.</p>
         </div>
-
-        <div class="why-card">
-            <h3>📸 Galeri Cerita</h3>
-            <p>Foto & video perjalanan cinta tampil lebih hidup.</p>
+        <div class="feat-item">
+            <h3>Media Support</h3>
+            <p>Foto, video, dan musik favorit.</p>
         </div>
-
-        <div class="why-card">
-            <h3>💌 Personal</h3>
-            <p>Nama tamu otomatis bikin lebih eksklusif.</p>
+        <div class="feat-item">
+            <h3>Nama Tamu Otomatis</h3>
+            <p>1 link untuk semua tamu.</p>
         </div>
+    </section>
 
-        <div class="why-card">
-            <h3>⚡ Hemat</h3>
-            <p>Tanpa cetak, cukup 1 link langsung tersebar.</p>
+    <!-- WHY DIGITAL -->
+    <section class="why">
+        <h2>Kenapa Undangan Digital?</h2>
+        <p class="sub">Sekarang bukan zamannya undangan kertas. Ini era undangan digital yang lebih hidup, hemat, dan elegan.</p>
+        <div class="why-grid">
+            <div class="why-card"><h3>🎵 Request Lagu</h3><p>Bisa pakai lagu kenangan atau musik favorit pasangan.</p></div>
+            <div class="why-card"><h3>📸 Galeri Cerita</h3><p>Foto & video perjalanan cinta tampil lebih hidup.</p></div>
+            <div class="why-card"><h3>💌 Personal</h3><p>Nama tamu otomatis bikin lebih eksklusif.</p></div>
+            <div class="why-card"><h3>⚡ Hemat</h3><p>Tanpa cetak, cukup 1 link langsung tersebar.</p></div>
         </div>
+    </section>
 
-    </div>
-
-</section>
-
-<!-- GALERI -->
-<section class="gallery">
-
-    <h2>Galeri Inspirasi</h2>
-
-    <p style="text-align:center;color:var(--muted);margin-bottom:20px">
-        Cocok untuk yang belum punya foto prewedding (bisa pakai kartun / islami / formal)
-    </p>
-
-    <div class="gallery-grid">
-
-        <img src="fotocontoh/kartun (1).jpg">
-        <img src="fotocontoh/kartun (2).jpg">
-        <img src="fotocontoh/kartun (3).jpg">
-        <img src="fotocontoh/kartun formal (1).jpg">
-        <img src="fotocontoh/islami (1).jpg">
-        <img src="fotocontoh/islami (2).jpg">
-
-    </div>
-
-</section>
-
-<!-- TEMPLATE -->
-<div class="container">
-    <div class="grid" id="grid"></div>
-</div>
-
-<!-- FOOTER -->
-<footer>
-© 2026 Omah Aksara — Digital Invitation Studio
-</footer>
-
-<script>
-
-const grid=document.getElementById("grid");
-
-const templates=["elegance-motion","soft-classic","gold-rustic"];
-
-templates.forEach(name=>{
-grid.innerHTML+=`
-<div class="card">
-    <div class="thumb">
-        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800">
-    </div>
-    <div class="card-body">
-        <div class="title">${name.replace(/-/g," ")}</div>
-        <div style="margin-top:10px;display:flex;gap:8px">
-            <a href="#" class="btn btn-outline">Demo</a>
-            <a href="#" class="btn btn-fill">Pesan</a>
+    <!-- CATALOG -->
+    <main class="container">
+        <div class="section-header">
+            <h2>Koleksi Template Premium</h2>
+            <div class="line"></div>
         </div>
-    </div>
-</div>`;
-});
+        <div id="grid" class="grid"></div>
+    </main>
 
-</script>
+    <!-- GALLERY SCROLL -->
+    <section class="gallery">
+        <h2>Galeri Inspirasi</h2>
+        <p style="text-align:center; color:var(--muted); font-size:14px; margin-bottom: 10px;">Geser untuk melihat (Kartun, Islami, & Formal)</p>
+        <div class="gallery-container">
+            <div class="gallery-item"><img src="fotocontoh/islami (1).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/islami (2).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/islami (3).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/kartun (1).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/kartun (2).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/kartun (3).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/kartun (4).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/kartun formal (1).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/kartun formal (2).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/kartun formal (3).jpg"></div>
+        </div>
+    </section>
 
+    <footer>
+        <p>© 2026 Omah Aksara • Crafting Digital Memories</p>
+        <p>Follow kami <a href="https://lynk.id/ondow" target="_blank">@ridwanondow</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('grid');
+            const demoClient = 'budi-ani';
+            const waNumber = '6285796461157';
+            const fallbackImg = 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80';
+
+            function toTitleCase(str) {
+                return str.replace(/-/g, ' ').replace(/\s+/g, ' ').trim()
+                    .split(' ')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                    .join(' ');
+            }
+
+            function createCard(folderName, index) {
+                const name = toTitleCase(folderName);
+                const demoUrl = `https://omahaksara.github.io/invitation/templates/${folderName}/?c=${demoClient}&to=Nama-Tamu`;
+                const imageUrl = `https://raw.githubusercontent.com/omahaksara/invitation/main/templates/${folderName}/preview.jpg`;
+                const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent('Halo Omah Aksara, saya tertarik pesan template ' + name)}`;
+
+                const card = document.createElement('article');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="thumb"><img src="${imageUrl}" alt="${name}" onerror="this.src='${fallbackImg}'"></div>
+                    <div class="card-body">
+                        <span class="tag">Premium Series</span>
+                        <h3 class="title">${name}</h3>
+                        <div class="actions">
+                            <a href="${demoUrl}" target="_blank" class="btn btn-outline">Lihat Demo</a>
+                            <a href="${waUrl}" target="_blank" class="btn btn-filled">Pesan</a>
+                        </div>
+                    </div>`;
+                return card;
+            }
+
+            async function loadTemplates() {
+                grid.innerHTML = Array(4).fill('<div class="skeleton"></div>').join('');
+                try {
+                    const res = await fetch('https://api.github.com/repos/omahaksara/invitation/contents/templates');
+                    const data = await res.json();
+                    const folders = data.filter(item => item.type === 'dir').map(item => item.name);
+                    grid.innerHTML = '';
+                    folders.forEach((f, i) => grid.appendChild(createCard(f, i)));
+                } catch (e) {
+                    grid.innerHTML = '<p class="empty">Gagal memuat katalog.</p>';
+                }
+            }
+            loadTemplates();
+        });
+    </script>
 </body>
 </html>
