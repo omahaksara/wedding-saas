@@ -1,9 +1,9 @@
 {
   "meta": {
-    "slug": "budi-ani",
+    "slug": "budianto-meilani",
     "template": "elegance-motion",
     "status": "published",
-    "created": "2026-05-08"
+    "created": "2026-05-09"
   },
   "settings": {
     "islami": true,
@@ -17,20 +17,23 @@
   },
   "couple": {
     "groom": {
-      "name": "Budi Santoso",
-      "nickname": "Budi",
-      "father": "Sukirman",
-      "mother": "Sumiati",
+      "name": "Budianto, S.Pd.",
+      "nickname": "Budianto",
+      "father": "Ngatno Sudrajat",
+      "mother": "Mariati",
       "image": "foto-pria.jpg",
-      "instagram": "@budi.testing"
+      "instagram": "ridwan_ondow",
+      "instagramUrl": "https://www.instagram.com/ridwan_ondow/",
+      "phone": "085796461157"
     },
     "bride": {
-      "name": "Ani Lestari",
-      "nickname": "Ani",
-      "father": "Joko",
-      "mother": "Sri",
+      "name": "Meilani",
+      "nickname": "Meilani",
+      "father": "Sudirman",
+      "mother": "Smelia",
       "image": "foto-wanita.jpg",
-      "instagram": "@ani.testing"
+      "instagram": "ondow",
+      "lynkUrl": "https://lynk.id/ondow"
     }
   },
   "quote": {
@@ -45,8 +48,8 @@
       "startTime": "09:00",
       "endTime": "10:00",
       "timezone": "WIB",
-      "address": "Desa Petunasugi (SPD), Dusun 4",
-      "googleMaps": "https://maps.app.goo.gl/"
+      "address": "Tinombala, Dusun III, Gedung Ondow Design",
+      "googleMaps": "https://maps.app.goo.gl/F9vu7REAqQVUHnLm7_"
     },
     {
       "title": "Walimatul 'Ursy",
@@ -54,8 +57,8 @@
       "startTime": "11:00",
       "endTime": "Selesai",
       "timezone": "WIB",
-      "address": "Desa Petunasugi (SPD), Dusun 4",
-      "googleMaps": "https://maps.app.goo.gl/Qq53Fxud81nXDmFC7"
+      "address": "Tinombala, Dusun III, Gedung Ondow Design",
+      "googleMaps": "https://maps.app.goo.gl/F9vu7REAqQVUHnLm7_"
     }
   ],
   "gallery": {
@@ -72,25 +75,19 @@
     {
       "provider": "BRI",
       "accountNumber": "1234567890",
-      "accountHolder": "Ani Lestari",
+      "accountHolder": "Meilani",
       "qrImage": "qr-bri.png"
     },
     {
       "provider": "Mandiri",
       "accountNumber": "0987654321",
-      "accountHolder": "Budi Santoso",
+      "accountHolder": "Budianto",
       "qrImage": "qr-mandiri.png"
-    },
-    {
-      "provider": "DANA",
-      "accountNumber": "081234567890",
-      "accountHolder": "Budi Santoso",
-      "qrImage": ""
     }
   ],
   "logistics": {
     "dressCode": "Batik, Kemeja Bebas, Sopan & Menutup Aurat",
-    "rsvpWaNumber": "6281234567890",
+    "rsvpWaNumber": "085796461157",
     "guestNote": "Dengan tidak mengurangi rasa hormat, kami mengharapkan tamu undangan berkenan memakai busana batik bebas, sopan & menutup aurat. Semoga Allah memberkahi acara kita.",
     "music": "musik.mp3"
   },
