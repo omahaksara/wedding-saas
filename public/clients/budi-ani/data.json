@@ -1,6 +1,6 @@
 {
   "meta": {
-    "slug": "budianto-meilani",
+    "slug": "budi-ani",
     "template": "elegance-motion",
     "status": "published",
     "created": "2026-05-09"
@@ -18,7 +18,7 @@
   "couple": {
     "groom": {
       "name": "Budianto, S.Pd.",
-      "nickname": "Budianto",
+      "nickname": "Budi",
       "father": "Ngatno Sudrajat",
       "mother": "Mariati",
       "image": "foto-pria.jpg",
@@ -28,7 +28,7 @@
     },
     "bride": {
       "name": "Meilani",
-      "nickname": "Meilani",
+      "nickname": "Ani",
       "father": "Sudirman",
       "mother": "Smelia",
       "image": "foto-wanita.jpg",
@@ -75,7 +75,7 @@
     {
       "provider": "BRI",
       "accountNumber": "1234567890",
-      "accountHolder": "Meilani",
+      "accountHolder": "Ani",
       "qrImage": "qr-bri.png"
     },
     {
@@ -86,9 +86,9 @@
     }
   ],
   "logistics": {
-    "dressCode": "Batik, Kemeja Bebas, Sopan & Menutup Aurat",
+    "dressCode": "Batik / Kemeja Bebas",
     "rsvpWaNumber": "085796461157",
-    "guestNote": "Dengan tidak mengurangi rasa hormat, kami mengharapkan tamu undangan berkenan memakai busana batik bebas, sopan & menutup aurat. Semoga Allah memberkahi acara kita.",
+    "guestNote": "Dengan tidak mengurangi rasa hormat, kami mengharapkan tamu undangan berkenan memakai busana batik atau kemeja bebas, sopan & menutup aurat. Semoga Allah memberkahi acara kita.",
     "music": "musik.mp3"
   },
   "loveStory": [
