@@ -1,288 +1,265 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omah Aksara - Undangan Digital Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
-<title>Omah Aksara - Katalog Undangan Digital</title>
+    <style>
+        :root {
+            --bg: #fbf8f5;
+            --primary: #c07a43;
+            --primary-dark: #a06535;
+            --text: #2f2a25;
+            --muted: #7d726a;
+            --card: #ffffff;
+            --border: rgba(0,0,0,.06);
+            --shadow: 0 10px 30px rgba(0,0,0,.08);
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
 
-<style>
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 80px 20px 40px;
+            background: linear-gradient(to bottom, #f7efe9, var(--bg));
+        }
+        .logo { font-family: 'Playfair Display', serif; font-size: 40px; color: var(--primary); font-weight: 700; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 5vw, 36px); margin-top: 10px; }
+        .hero p { max-width: 700px; margin: 15px auto; color: var(--muted); font-size: 15px; }
 
-:root{
-  --bg:#fbf8f5;
-  --card:#ffffff;
-  --text:#2f2a25;
-  --muted:#7d726a;
-  --primary:#c07a43;
-  --shadow:0 10px 30px rgba(0,0,0,.08);
-}
+        /* FEATURES */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .feature {
+            background: var(--card);
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: 0.3s;
+        }
+        .feature:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .feature h3 { font-size: 14px; margin-bottom: 8px; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
+        .feature p { font-size: 13px; color: var(--muted); }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+        /* VALUE */
+        .value { max-width: 900px; margin: 60px auto; text-align: center; padding: 0 20px; }
+        .value h2 { font-family: 'Playfair Display', serif; margin-bottom: 10px; font-size: 28px; }
+        .value p { color: var(--muted); font-size: 15px; }
 
-body{
-  font-family:'Plus Jakarta Sans',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-}
+        /* GALLERY SCROLL */
+        .gallery-scroll { padding: 20px 0 60px; overflow: hidden; }
+        .gallery-header { text-align: center; margin-bottom: 20px; }
+        .gallery-header h2 { font-family: 'Playfair Display', serif; font-size: 24px; }
+        .gallery-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 0 20px 20px;
+            gap: 15px;
+            scrollbar-width: none;
+        }
+        .gallery-container::-webkit-scrollbar { display: none; }
+        .gallery-item {
+            flex: 0 0 250px;
+            scroll-snap-align: center;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        @media (max-width: 480px) { .gallery-item { flex: 0 0 200px; } }
 
-/* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:40px 20px;
-  background:linear-gradient(to bottom,#f7efe9,#fbf8f5);
-}
+        /* GRID CATALOG */
+        .catalog-section { padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
+        .section-title { text-align: center; margin-bottom: 30px; }
+        .section-title h2 { font-family: 'Playfair Display', serif; font-size: 30px; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 1024px) { .grid { grid-template-columns: repeat(4, 1fr); } }
 
-.logo{
-  font-family:'Playfair Display',serif;
-  font-size:44px;
-  color:var(--primary);
-  margin-bottom:10px;
-}
+        .card {
+            background: var(--card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+        .card:hover { transform: translateY(-8px); }
+        .thumb { aspect-ratio: 3/4; overflow: hidden; background: #eee; }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .card-body { padding: 15px; text-align: center; }
+        .card-body h3 { font-size: 14px; margin-bottom: 12px; font-family: 'Playfair Display', serif; }
 
-.hero h1{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(28px,5vw,48px);
-}
+        /* BUTTONS */
+        .actions { display: flex; flex-direction: column; gap: 8px; }
+        .btn-sm { 
+            padding: 10px; font-size: 12px; border-radius: 10px; 
+            text-decoration: none; font-weight: 600; transition: 0.2s;
+            text-align: center;
+        }
+        .btn-fill { background: var(--primary); color: #fff; }
+        .btn-line { border: 1.5px solid var(--primary); color: var(--primary); }
+        .btn-fill:hover { background: var(--primary-dark); }
+        .btn-line:hover { background: var(--primary); color: #fff; }
 
-.hero p{
-  max-width:700px;
-  margin-top:15px;
-  color:var(--muted);
-}
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 80px 20px;
+            margin-top: 60px;
+            background: linear-gradient(to right, #f6e7db, #ffffff);
+        }
+        .cta h2 { font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 10px; }
+        .btn-main {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 16px 32px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .btn-main:hover { transform: scale(1.05); background: var(--primary-dark); }
 
-/* SCROLL INDICATOR */
-.scroll{
-  margin-top:40px;
-  font-size:12px;
-  color:var(--muted);
-  animation:float 2s infinite;
-}
+        .skeleton { height: 350px; background: #eee; border-radius: 20px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%{opacity:.6} 50%{opacity:1} 100%{opacity:.6} }
 
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(6px);}
-}
-
-/* SECTION */
-.section{
-  padding:80px 20px;
-  max-width:1100px;
-  margin:auto;
-}
-
-/* VALUE */
-.value{
-  text-align:center;
-}
-
-.value h2{
-  font-family:'Playfair Display',serif;
-  margin-bottom:10px;
-}
-
-.value p{
-  color:var(--muted);
-  max-width:800px;
-  margin:auto;
-}
-
-/* FEATURES */
-.features{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  margin-top:50px;
-}
-
-.feature{
-  background:var(--card);
-  padding:20px;
-  border-radius:16px;
-  box-shadow:var(--shadow);
-  transition:.3s;
-}
-
-.feature:hover{
-  transform:translateY(-6px);
-}
-
-.feature h3{
-  font-size:14px;
-  margin-bottom:8px;
-}
-
-/* GALLERY */
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
-  margin-top:50px;
-}
-
-@media(min-width:768px){
-  .gallery{
-    grid-template-columns:repeat(3,1fr);
-  }
-}
-
-.card{
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  background:#fff;
-  transition:.3s;
-}
-
-.card:hover{
-  transform:scale(1.03);
-}
-
-.card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  aspect-ratio:3/4;
-}
-
-/* CTA */
-.cta{
-  text-align:center;
-  padding:90px 20px;
-  background:linear-gradient(to right,#f6e7db,#fff);
-}
-
-.cta h2{
-  font-family:'Playfair Display',serif;
-  margin-bottom:10px;
-}
-
-.btn{
-  display:inline-block;
-  margin-top:20px;
-  padding:14px 24px;
-  background:var(--primary);
-  color:#fff;
-  border-radius:12px;
-  text-decoration:none;
-}
-
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:40px;
-  color:var(--muted);
-  font-size:13px;
-}
-
-</style>
+        footer { text-align: center; padding: 40px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
+    </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="logo">Omah Aksara</div>
-  <h1>Katalog Undangan Digital Premium</h1>
-  <p>
-    Undangan modern bukan lagi sekadar informasi.
-    Tapi pengalaman elegan yang bisa dirasakan dari HP tamu undangan.
-  </p>
+    <header class="hero">
+        <div class="logo">Omah Aksara</div>
+        <h1>Undangan Digital Era Modern</h1>
+        <p>Di zaman sekarang, undangan bukan lagi kertas. Tapi pengalaman interaktif yang bisa dibuka dari HP, lengkap dengan musik, foto, dan cerita.</p>
+    </header>
 
-  <div class="scroll">↓ Scroll untuk lihat fitur</div>
-</section>
+    <section class="features">
+        <div class="feature"><h3>🎵 Request Musik</h3><p>Pilih lagu favorit untuk diputar di undanganmu.</p></div>
+        <div class="feature"><h3>🖼️ Galeri Custom</h3><p>Bisa pakai foto prewedding atau ilustrasi kartun.</p></div>
+        <div class="feature"><h3>📱 Auto Nama</h3><p>Nama tamu otomatis muncul eksklusif di link WA.</p></div>
+        <div class="feature"><h3>🎨 Full Custom</h3><p>Warna, font, dan konsep bebas request sepuasnya.</p></div>
+    </section>
 
-<!-- VALUE -->
-<section class="section value">
-  <h2>Kenapa Harus Undangan Digital?</h2>
-  <p>
-    Lebih hemat, lebih cepat, bisa pakai musik, bisa pakai video,
-    dan tampil lebih modern dibanding undangan kertas.
-  </p>
+    <section class="value">
+        <h2>Kenapa Undangan Digital?</h2>
+        <p>Lebih hemat, lebih cepat, lebih elegan, dan bisa diakses kapan saja. Tidak akan rusak atau hilang, dan bisa disimpan selamanya sebagai kenangan digital.</p>
+    </section>
 
-  <div class="features">
-    <div class="feature">
-      <h3>🎵 Musik Undangan</h3>
-      <p>Bisa request lagu sesuai suasana acara.</p>
-    </div>
+    <!-- KATALOG UTAMA -->
+    <section class="catalog-section">
+        <div class="section-title">
+            <h2>Koleksi Template</h2>
+        </div>
+        <div id="catalog-grid" class="grid">
+            <!-- Loading Skeleton -->
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+            <div class="skeleton"></div>
+        </div>
+    </section>
 
-    <div class="feature">
-      <h3>🖼️ Galeri Kartun</h3>
-      <p>Solusi untuk yang tidak punya foto prewedding.</p>
-    </div>
+    <!-- GALERI SCROLL -->
+    <section class="gallery-scroll">
+        <div class="gallery-header">
+            <h2>Galeri Inspirasi</h2>
+            <p style="font-size: 13px; color: var(--muted); margin-top: 5px;">(Geser untuk melihat ilustrasi & foto)</p>
+        </div>
+        <div class="gallery-container">
+            <div class="gallery-item"><img src="fotocontoh/islami (1).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/islami (2).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/islami (3).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/kartun (1).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/kartun (2).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/kartun formal (1).jpg"></div>
+            <div class="gallery-item"><img src="fotocontoh/kartun formal (2).jpg"></div>
+        </div>
+    </section>
 
-    <div class="feature">
-      <h3>📱 Link Nama Tamu</h3>
-      <p>Undangan otomatis sesuai nama penerima.</p>
-    </div>
+    <section class="cta">
+        <h2>Siap Upgrade Undanganmu?</h2>
+        <p>Jadikan momen sekali seumur hidup lebih berkesan dengan undangan digital premium.</p>
+        <a class="btn-main" href="https://wa.me/6285796461157">Konsultasi Sekarang</a>
+    </section>
 
-    <div class="feature">
-      <h3>🎨 Full Custom</h3>
-      <p>Warna, font, konsep bisa disesuaikan.</p>
-    </div>
-  </div>
-</section>
+    <footer>
+        © 2026 Omah Aksara — Undangan Digital Premium<br>
+        Crafting Digital Memories
+    </footer>
 
-<!-- GALLERY -->
-<section class="section">
-  <div class="value">
-    <h2>Inspirasi Visual</h2>
-    <p>Alternatif aesthetic untuk undangan tanpa foto pribadi.</p>
-  </div>
+    <script>
+        const grid = document.getElementById('catalog-grid');
+        const waNumber = '6285796461157';
+        
+        function toTitleCase(str) {
+            return str.replace(/-/g, ' ').split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+        }
 
-  <div class="gallery">
+        async function loadCatalog() {
+            try {
+                const res = await fetch('https://api.github.com/repos/omahaksara/invitation/contents/templates');
+                const data = await res.json();
+                const folders = data.filter(item => item.type === 'dir').map(item => item.name);
+                
+                grid.innerHTML = '';
+                folders.forEach(folder => {
+                    const name = toTitleCase(folder);
+                    const thumb = `https://raw.githubusercontent.com/omahaksara/invitation/main/templates/${folder}/preview.jpg`;
+                    const demo = `https://omahaksara.github.io/invitation/templates/${folder}/?c=budi-ani&to=Nama-Tamu`;
+                    const waLink = `https://wa.me/${waNumber}?text=Halo Omah Aksara, saya tertarik pesan template ${name}`;
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e">
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1519741497674-611481863552">
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1523438097201-512ae7d59c6b">
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
-    </div>
-
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d">
-    </div>
-
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta">
-  <h2>Undangan Kamu Masih Kertas?</h2>
-  <p>
-    Saatnya upgrade ke undangan digital yang lebih modern, elegan, dan berkelas.
-  </p>
-
-  <a class="btn" href="https://wa.me/6285796461157">Konsultasi Sekarang</a>
-</section>
-
-<footer>
-  © 2026 Omah Aksara — Digital Invitation Studio
-</footer>
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <div class="thumb"><img src="${thumb}" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?w=400'"></div>
+                        <div class="card-body">
+                            <h3>${name}</h3>
+                            <div class="actions">
+                                <a href="${demo}" target="_blank" class="btn-sm btn-line">Lihat Demo</a>
+                                <a href="${waLink}" target="_blank" class="btn-sm btn-fill">Pesan</a>
+                            </div>
+                        </div>`;
+                    grid.appendChild(card);
+                });
+            } catch (e) {
+                grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;">Gagal memuat katalog.</p>';
+            }
+        }
+        loadCatalog();
+    </script>
 
 </body>
 </html>
