@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omah Aksara — Editorial Luxe Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@200;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --luxe-gold: #c5a059; 
+            --deep-mocca: #2c2420;
+            --soft-cream: #f9f7f2;
+        }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--soft-cream); 
+            color: var(--deep-mocca);
+            overflow-x: hidden;
+        }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        
+        /* Smooth Scroll Smoothing */
+        html { scroll-behavior: smooth; }
+
+        /* Editorial Border */
+        .editorial-frame {
+            position: fixed;
+            inset: 20px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* Luxury Reveal Effect */
+        .reveal-up { opacity: 0; transform: translateY(50px); }
+        .parallax-bg { transform: scale(1.2); transition: transform 0.5s ease-out; }
+
+        /* Section Styling */
+        section { min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        
+        .gold-divider { width: 1px; height: 100px; background: linear-gradient(to bottom, transparent, var(--luxe-gold), transparent); }
+    </style>
+</head>
+<body>
+    <div class="editorial-frame"></div>
+
+    <section id="cover" class="flex-col text-center px-6">
+        <div class="overflow-hidden mb-8 w-full max-w-sm">
+            <img id="main-photo" src="" class="w-full h-[50vh] object-cover scale-110 grayscale hover:grayscale-0 transition-all duration-1000">
+        </div>
+        <p class="text-[10px] tracking-[.8em] uppercase mb-4 opacity-60">The Wedding Celebration</p>
+        <h1 id="couple-title" class="text-6xl font-serif italic mb-10"></h1>
+        <button onclick="startExperience()" class="border border-luxe-gold px-12 py-4 text-[10px] tracking-[.4em] uppercase hover:bg-[#c5a059] hover:text-white transition-all">Explore</button>
+    </section>
+
+    <div id="main-content" class="hidden">
+        
+        <section class="bg-white">
+            <div class="max-w-xl text-center px-10">
+                <p id="arab-text" class="text-3xl font-serif mb-8 text-luxe-gold"></p>
+                <p id="indo-text" class="text-lg italic font-serif leading-relaxed opacity-80"></p>
+                <p id="sumber-text" class="text-[9px] tracking-[.3em] uppercase mt-6 font-bold"></p>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <div class="h-[50vh] md:h-screen overflow-hidden">
+                <img id="pria-foto" src="" class="w-full h-full object-cover parallax-bg">
+            </div>
+            <div class="flex flex-col justify-center p-12 bg-white">
+                <h2 class="text-[10px] tracking-[.5em] uppercase opacity-40 mb-4">The Groom</h2>
+                <h3 id="pria-nama" class="text-5xl font-serif mb-4"></h3>
+                <p id="pria-ortu" class="text-sm opacity-60 italic"></p>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-0">
+            <div class="flex flex-col justify-center p-12 bg-[#2c2420] text-white order-2 md:order-1">
+                <h2 class="text-[10px] tracking-[.5em] uppercase opacity-40 mb-4 text-white/50">The Bride</h2>
+                <h3 id="wanita-nama" class="text-5xl font-serif mb-4 text-white"></h3>
+                <p id="wanita-ortu" class="text-sm opacity-60 italic text-white/70"></p>
+            </div>
+            <div class="h-[50vh] md:h-screen overflow-hidden order-1 md:order-2">
+                <img id="wanita-foto" src="" class="w-full h-full object-cover parallax-bg">
+            </div>
+        </section>
+
+        <section class="flex-col py-20">
+            <h2 class="text-[10px] tracking-[.8em] uppercase mb-20">Journal of Love</h2>
+            <div id="story-list" class="w-full max-w-4xl px-6 space-y-32">
+                </div>
+        </section>
+
+        <section class="bg-white flex-col py-20 text-center">
+            <div class="gold-divider mb-12"></div>
+            <div id="event-list" class="space-y-20"></div>
+            <div class="gold-divider mt-12"></div>
+        </section>
+
+        <footer class="py-32 text-center bg-[#f9f7f2]">
+            <p id="footer-names" class="text-5xl font-serif italic mb-10"></p>
+            <p class="text-[8px] tracking-[.5em] opacity-40 uppercase">Handcrafted with love by Omah Aksara</p>
+        </footer>
+    </div>
+
+    <audio id="audio" loop></audio>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get('c') || 'budi-ani';
+        const path = `../../public/clients/${slug}/`;
+
+        // MASTER FETCH SINKRON DENGAN JSON UNIVERSAL
+        fetch(`${path}data.json`).then(res => res.json()).then(data => {
+            // Mapping Dasar
+            document.getElementById('couple-title').innerHTML = `${data.mempelai.pria.panggilan} <span class="text-2xl font-sans not-italic">&</span> ${data.mempelai.wanita.panggilan}`;
+            document.getElementById('main-photo').src = path + data.galeri.cover;
+            
+            // Religi
+            document.getElementById('arab-text').textContent = data.content_religius.quote_arab;
+            document.getElementById('indo-text').textContent = data.content_religius.quote_indo;
+            document.getElementById('sumber-text').textContent = data.content_religius.quote_sumber;
+
+            // Mempelai
+            document.getElementById('pria-nama').textContent = data.mempelai.pria.nama;
+            document.getElementById('pria-ortu').textContent = `Putra dari ${data.mempelai.pria.ayah} & ${data.mempelai.pria.ibu}`;
+            document.getElementById('pria-foto').src = path + data.mempelai.pria.foto;
+            
+            document.getElementById('wanita-nama').textContent = data.mempelai.wanita.nama;
+            document.getElementById('wanita-ortu').textContent = `Putri dari ${data.mempelai.wanita.ayah} & ${data.mempelai.wanita.ibu}`;
+            document.getElementById('wanita-foto').src = path + data.mempelai.wanita.foto;
+
+            // Story
+            data.cerita.forEach((c, i) => {
+                document.getElementById('story-list').innerHTML += `
+                    <div class="reveal-up flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12">
+                        <img src="${path + c.foto}" class="w-full md:w-1/2 h-80 object-cover shadow-2xl">
+                        <div class="text-center md:text-left">
+                            <h4 class="text-3xl font-serif italic mb-4 text-luxe-gold">${c.momen}</h4>
+                            <p class="text-sm leading-relaxed opacity-70">${c.teks}</p>
+                        </div>
+                    </div>`;
+            });
+
+            // Events
+            data.acara.forEach(e => {
+                document.getElementById('event-list').innerHTML += `
+                    <div class="reveal-up">
+                        <h4 class="text-[10px] tracking-[.4em] uppercase text-luxe-gold mb-4">${e.label}</h4>
+                        <p class="text-4xl font-serif mb-2">${e.tanggal}</p>
+                        <p class="text-sm mb-6 opacity-60">${e.waktu}</p>
+                        <p class="text-[11px] uppercase tracking-widest font-bold">${e.lokasi}</p>
+                    </div>`;
+            });
+
+            document.getElementById('footer-names').textContent = `${data.mempelai.pria.panggilan} & ${data.mempelai.wanita.panggilan}`;
+            document.getElementById('audio').src = path + data.info.music;
+        });
+
+        function startExperience() {
+            document.getElementById('audio').play();
+            gsap.to("#cover", { opacity: 0, duration: 1, onComplete: () => {
+                document.getElementById('cover').classList.add('hidden');
+                const content = document.getElementById('main-content');
+                content.classList.remove('hidden');
+                initScrollAnimations();
+            }});
+        }
+
+        function initScrollAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            gsap.utils.toArray(".reveal-up").forEach(el => {
+                gsap.to(el, {
+                    scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
+                    opacity: 1, y: 0, duration: 1.5, ease: "power4.out"
+                });
+            });
+
+            gsap.utils.toArray(".parallax-bg").forEach(img => {
+                gsap.to(img, {
+                    scrollTrigger: { trigger: img, scrub: true },
+                    scale: 1, ease: "none"
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+
+```
