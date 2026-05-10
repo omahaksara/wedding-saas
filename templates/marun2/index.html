@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omah Aksara — Premium Wedding Invitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --marun: #8b0000; --putih: #ffffff; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--putih); color: #2d2d2d; overflow-x: hidden; }
+        .font-aesthetic { font-family: 'Dancing Script', cursive; }
+        .grain { position: fixed; inset: -100%; width: 300%; height: 300%; background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain_Noise.png'); opacity: .02; pointer-events: none; z-index: 99; }
+        .reveal { opacity: 0; transform: translateY(40px); }
+        
+        .btn-marun {
+            background: var(--marun); color: white; padding: 16px 45px; border-radius: 50px;
+            font-size: 10px; letter-spacing: 4px; font-weight: 800; text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(139, 0, 0, 0.15); transition: 0.4s;
+        }
+
+        .gallery-item { position: relative; overflow: hidden; border-radius: 20px; aspect-ratio: 4/5; }
+        .gallery-overlay {
+            position: absolute; inset: 0; background: linear-gradient(to top, rgba(139,0,0,0.85), transparent);
+            opacity: 0; transition: 0.5s; display: flex; align-items: flex-end; padding: 25px;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+
+    <div id="cover" class="fixed inset-0 z-[100] flex flex-col items-center justify-center text-center bg-white px-8">
+        <p class="text-[9px] tracking-[.6em] uppercase opacity-40 mb-10">You're Invited To The Wedding of</p>
+        <h1 id="cover-names" class="text-6xl font-aesthetic text-[#8b0000] mb-12"></h1>
+        
+        <div class="flex justify-center items-center space-x-6 mb-16">
+            <div class="text-center">
+                <span id="days" class="text-5xl font-extrabold text-gray-800">00</span>
+                <p class="text-[8px] tracking-widest uppercase opacity-40">Days</p>
+            </div>
+            <div class="h-10 w-px bg-marun/20"></div>
+            <div class="text-center">
+                <span id="hours" class="text-5xl font-extrabold text-gray-800">00</span>
+                <p class="text-[8px] tracking-widest uppercase opacity-40">Hours</p>
+            </div>
+            <div class="h-10 w-px bg-marun/20"></div>
+            <div class="text-center">
+                <span id="minutes" class="text-5xl font-extrabold text-gray-800">00</span>
+                <p class="text-[8px] tracking-widest uppercase opacity-40">Mins</p>
+            </div>
+        </div>
+
+        <div class="mb-12">
+            <p class="text-[10px] opacity-30 uppercase tracking-[.4em] mb-3">Special Invitation For:</p>
+            <p id="guest-name" class="text-2xl font-aesthetic text-marun border-b border-marun/10 pb-2 px-10 inline-block"></p>
+        </div>
+        <button onclick="openInvitation()" class="btn-marun">Open Invitation</button>
+    </div>
+
+    <main id="app" class="max-w-md mx-auto opacity-0 shadow-2xl bg-white">
+        <section class="relative h-[90vh] flex flex-col items-center justify-end pb-24 text-center">
+            <img id="hero-img" class="absolute inset-0 w-full h-full object-cover" src="">
+            <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
+            <div class="relative z-10">
+                <h2 id="hero-names" class="text-7xl font-aesthetic text-marun mb-4"></h2>
+                <p id="hero-date" class="text-[10px] tracking-[.5em] uppercase font-bold opacity-50"></p>
+            </div>
+        </section>
+
+        <section class="py-28 px-8">
+            <div class="text-center mb-16">
+                <h3 class="text-4xl font-aesthetic text-marun mb-2">Our Story</h3>
+                <p class="text-[8px] tracking-[.3em] uppercase opacity-30">Touch photos to see our journey</p>
+            </div>
+            <div id="gallery-grid" class="grid grid-cols-1 gap-8"></div>
+        </section>
+
+        <section class="px-8 py-24 bg-[#fffcfc]">
+            <div id="event-list" class="space-y-12"></div>
+        </section>
+
+        <footer class="py-32 text-center bg-white border-t border-gray-100">
+            <p id="footer-names" class="text-5xl font-aesthetic text-marun"></p>
+            <p class="text-[9px] tracking-[.6em] opacity-20 uppercase mt-16">Design by Omah Aksara</p>
+        </footer>
+    </main>
+
+    <audio id="audio" loop></audio>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const slug = params.get('c') || 'budi-ani'; //
+        const guest = params.get('to')?.replace(/\+/g, ' ') || 'Tamu Undangan'; //
+        const path = `../../public/clients/${slug}/`;
+
+        fetch(`${path}data.json`).then(res => res.json()).then(data => {
+            const pair = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`; //
+            
+            document.getElementById('cover-names').textContent = pair;
+            document.getElementById('hero-names').textContent = pair;
+            document.getElementById('footer-names').textContent = pair;
+            document.getElementById('guest-name').textContent = guest;
+            document.getElementById('hero-img').src = path + data.gallery.heroImage;
+            document.getElementById('hero-date').textContent = new Date(data.events[0].date).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+
+            // Countdown Logic
+            const eventTime = new Date(`${data.events[0].date}T${data.events[0].startTime}`).getTime();
+            setInterval(() => {
+                const diff = eventTime - new Date().getTime();
+                if (diff > 0) {
+                    document.getElementById('days').innerText = Math.floor(diff / 864e5).toString().padStart(2, '0');
+                    document.getElementById('hours').innerText = Math.floor((diff % 864e5) / 36e5).toString().padStart(2, '0');
+                    document.getElementById('minutes').innerText = Math.floor((diff % 36e5) / 6e4).toString().padStart(2, '0');
+                }
+            }, 1000);
+
+            // Gallery with Stories from loveStory JSON
+            data.gallery.album.forEach((img, i) => {
+                const story = data.loveStory[i] || { title: 'Chapter ' + (i+1), description: 'Momen indah kami.' };
+                document.getElementById('gallery-grid').innerHTML += `
+                    <div class="gallery-item reveal">
+                        <img src="${path + img}" class="w-full h-full object-cover">
+                        <div class="gallery-overlay">
+                            <div class="text-white">
+                                <p class="text-[8px] uppercase tracking-widest opacity-60 mb-1">${story.date || ''}</p>
+                                <h4 class="font-aesthetic text-3xl mb-2">${story.title}</h4>
+                                <p class="text-[10px] leading-relaxed opacity-80">${story.description}</p>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+
+            // Events Rendering
+            data.events.forEach(e => {
+                document.getElementById('event-list').innerHTML += `
+                    <div class="text-center reveal">
+                        <span class="px-5 py-2 border border-marun/20 rounded-full text-[9px] font-bold text-marun uppercase tracking-widest">${e.title}</span>
+                        <p class="text-3xl font-extrabold text-gray-800 mt-6 mb-2">${new Date(e.date).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'})}</p>
+                        <p class="text-xs opacity-50 font-semibold mb-8">${e.startTime} - ${e.endTime}</p>
+                        <p class="text-[11px] px-12 leading-relaxed opacity-40 mb-8">${e.address}</p>
+                        <a href="${e.googleMaps}" target="_blank" class="text-marun text-[9px] font-extrabold tracking-widest uppercase border-b-2 border-marun/10 pb-1">Open Location</a>
+                    </div>`;
+            });
+        });
+
+        function openInvitation() {
+            document.getElementById('audio').src = path + 'musik.mp3';
+            document.getElementById('audio').play();
+            gsap.to("#cover", { y: "-100%", duration: 1.5, ease: "power4.inOut", onComplete: () => {
+                document.getElementById('cover').style.display = 'none';
+                document.getElementById('app').style.opacity = '1';
+                const obs = new IntersectionObserver(ents => {
+                    ents.forEach(en => { if(en.isIntersecting) gsap.to(en.target, { opacity: 1, y: 0, duration: 1 }); });
+                });
+                document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+            }});
+        }
+    </script>
+</body>
+</html>
