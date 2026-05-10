@@ -3,118 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Pernikahan — Putih Marun Edition</title>
+    <title>Undangan Pernikahan — Omah Aksara Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Variabel Warna Marun sesuai Template Video */
-        :root { --marun: #8b0000; --putih-bg: #ffffff; --aksen-soft: #fff5f5; }
-        
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--putih-bg); color: #2d2d2d; overflow-x: hidden; }
+        :root { --marun: #8b0000; --putih: #ffffff; --aksen: #fffafa; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--putih); color: #2d2d2d; overflow-x: hidden; }
         .font-aesthetic { font-family: 'Dancing Script', cursive; }
-        
-        /* Efek Grain halus agar tidak flat */
         .grain { position: fixed; inset: -100%; width: 300%; height: 300%; background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain_Noise.png'); opacity: .02; pointer-events: none; z-index: 99; }
-
-        .reveal { opacity: 0; transform: translateY(30px); }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s ease; }
         
-        /* Button Marun Premium */
-        .btn-marun {
-            background: var(--marun);
-            color: white;
-            padding: 16px 45px;
-            border-radius: 50px;
-            font-size: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            font-weight: 800;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 20px rgba(139, 0, 0, 0.2);
-        }
-        .btn-marun:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(139, 0, 0, 0.3); }
+        /* Button Style */
+        .btn-premium { background: var(--marun); color: white; padding: 16px 40px; border-radius: 50px; font-size: 10px; letter-spacing: 4px; font-weight: 800; text-transform: uppercase; transition: 0.4s; box-shadow: 0 10px 20px rgba(139, 0, 0, 0.15); }
+        .btn-premium:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(139, 0, 0, 0.25); }
 
-        .card-event {
-            border: 1px solid #f3f3f3;
-            padding: 40px 25px;
-            border-radius: 24px;
-            background: white;
-            transition: transform 0.3s ease;
-        }
+        /* Story Overlay in Gallery */
+        .gallery-item { position: relative; overflow: hidden; border-radius: 20px; aspect-ratio: 4/5; }
+        .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(139,0,0,0.8), transparent); opacity: 0; transition: 0.5s; display: flex; align-items: flex-end; padding: 20px; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
 
-        /* Frame Foto Lengkung Halus */
-        .photo-frame {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-            /* Foto sekarang berwarna asli, tidak hitam putih */
-        }
-
-        .text-marun { color: var(--marun); }
-        .bg-marun-soft { background-color: var(--aksen-soft); }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--marun); border-radius: 10px; }
     </style>
 </head>
 <body class="antialiased">
     <div class="grain"></div>
 
-    <div id="cover" class="fixed inset-0 z-[100] flex flex-col items-center justify-center text-center bg-white">
-        <div class="relative z-10 px-8">
-            <p class="text-[9px] tracking-[.6em] uppercase opacity-40 mb-8">The Wedding Announcement</p>
-            <h1 id="cover-names" class="text-6xl font-aesthetic text-marun mb-6"></h1>
-            <h2 class="text-4xl font-[800] tracking-tighter leading-[0.9] mb-12 uppercase">These Kids<br>Are Getting<br>Married</h2>
-            
-            <div class="mb-14">
-                <p class="text-[10px] opacity-40 uppercase tracking-[.3em] mb-3 font-semibold">Special Invitation For:</p>
-                <p id="guest-name" class="text-2xl font-aesthetic text-marun border-b border-marun/10 pb-2 px-6 inline-block"></p>
+    <div id="cover" class="fixed inset-0 z-[100] flex flex-col items-center justify-center text-center bg-white px-8">
+        <p class="text-[9px] tracking-[.6em] uppercase opacity-40 mb-10">You are cordially invited</p>
+        <h1 id="cover-names" class="text-6xl font-aesthetic text-marun mb-12"></h1>
+        
+        <div id="countdown-cover" class="flex justify-center items-center space-x-6 mb-16">
+            <div class="text-center">
+                <span id="days" class="text-5xl font-[800] tracking-tighter block text-gray-800">00</span>
+                <span class="text-[8px] tracking-[.3em] uppercase opacity-40 font-bold">Days</span>
             </div>
-
-            <button onclick="openInvitation()" class="btn-marun">Open Experience</button>
+            <div class="h-10 w-px bg-marun/20"></div>
+            <div class="text-center">
+                <span id="hours" class="text-5xl font-[800] tracking-tighter block text-gray-800">00</span>
+                <span class="text-[8px] tracking-[.3em] uppercase opacity-40 font-bold">Hours</span>
+            </div>
+            <div class="h-10 w-px bg-marun/20"></div>
+            <div class="text-center">
+                <span id="minutes" class="text-5xl font-[800] tracking-tighter block text-gray-800">00</span>
+                <span class="text-[8px] tracking-[.3em] uppercase opacity-40 font-bold">Mins</span>
+            </div>
         </div>
+
+        <div class="mb-14">
+            <p class="text-[10px] opacity-30 uppercase tracking-[.4em] mb-3">Yth. Bapak/Ibu/Saudara/i</p>
+            <p id="guest-name" class="text-2xl font-aesthetic text-marun border-b border-marun/10 pb-2 px-8 inline-block"></p>
+        </div>
+
+        <button onclick="openInvitation()" class="btn-premium">Open Experience</button>
     </div>
 
-    <main id="app" class="max-w-md mx-auto opacity-0 bg-white">
+    <main id="app" class="max-w-md mx-auto opacity-0 bg-white shadow-2xl">
         
-        <section class="relative h-[90vh] flex flex-col items-center justify-end pb-20 text-center">
+        <section class="relative h-[95vh] flex flex-col items-center justify-end pb-24 text-center overflow-hidden">
             <img id="hero-img" class="absolute inset-0 w-full h-full object-cover" src="">
-            <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
-            <div class="relative z-10 px-6">
-                <p class="text-[9px] tracking-[.6em] uppercase font-bold text-marun mb-4">Save The Date</p>
-                <h1 id="hero-names" class="text-6xl font-aesthetic text-marun mb-3"></h1>
-                <p id="hero-date" class="text-[10px] tracking-[.4em] uppercase font-bold opacity-60"></p>
+            <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
+            <div class="relative z-10 px-8">
+                <h2 id="hero-names" class="text-7xl font-aesthetic text-marun mb-4"></h2>
+                <div class="w-16 h-px bg-marun/30 mx-auto my-8"></div>
+                <p id="hero-date" class="text-[10px] tracking-[.5em] uppercase font-bold opacity-60"></p>
             </div>
         </section>
 
-        <section class="px-10 py-32 text-center reveal">
-            <div class="w-10 h-[2px] bg-marun mx-auto mb-10 opacity-20"></div>
-            <p id="quote-text" class="text-lg italic leading-relaxed text-gray-700 font-light px-2"></p>
-            <p id="quote-source" class="text-[10px] uppercase tracking-[.4em] mt-8 font-extrabold text-marun"></p>
-        </section>
-
-        <section class="px-8 py-24 space-y-32 bg-marun-soft/50">
+        <section class="px-8 py-28 space-y-36">
             <div id="groom-box" class="reveal text-center"></div>
-            <div class="text-center font-aesthetic text-6xl text-marun opacity-10 italic">&</div>
+            <div class="text-center font-aesthetic text-7xl text-marun/10 italic py-4">&</div>
             <div id="bride-box" class="reveal text-center"></div>
         </section>
 
-        <section class="px-6 py-28">
-            <h3 class="text-center text-[10px] tracking-[.6em] uppercase opacity-30 mb-16 font-bold">Event Details</h3>
-            <div id="event-list" class="space-y-8"></div>
+        <section class="px-8 py-28 bg-[#fffcfc]">
+            <h3 class="text-center text-[10px] tracking-[.6em] uppercase opacity-30 mb-20 font-bold">The Holy Matrimony</h3>
+            <div id="event-list" class="space-y-12"></div>
         </section>
 
-        <section class="py-12 bg-gray-50">
-            <div id="gallery-grid" class="grid grid-cols-2 gap-3 px-3"></div>
+        <section class="py-28">
+            <div class="px-10 mb-16 text-center">
+                <h3 class="text-4xl font-aesthetic text-marun mb-4">Our Moments</h3>
+                <p class="text-[9px] tracking-[.3em] uppercase opacity-40">Ketuk foto untuk melihat kisah</p>
+            </div>
+            <div id="gallery-grid" class="grid grid-cols-1 gap-6 px-8"></div>
         </section>
 
-        <section class="px-8 py-28 text-center">
+        <section class="px-8 py-28 text-center bg-gray-50">
             <h3 class="text-4xl font-aesthetic text-marun mb-12">Wedding Gift</h3>
-            <p class="text-[10px] uppercase tracking-widest opacity-40 mb-10">Kirim kado digital melalui:</p>
-            <div id="gift-list" class="space-y-5"></div>
+            <div id="gift-list" class="space-y-6"></div>
         </section>
 
-        <footer class="py-32 text-center bg-white border-t border-gray-100">
+        <footer class="py-32 text-center bg-white">
             <p id="footer-names" class="text-5xl font-aesthetic text-marun"></p>
-            <p class="text-[9px] tracking-[.5em] opacity-20 uppercase mt-12">Digital Invitation — Omah Aksara</p>
+            <p class="text-[9px] tracking-[.6em] opacity-20 uppercase mt-16">Created by Omah Aksara</p>
         </footer>
     </main>
 
@@ -129,52 +114,73 @@
         fetch(`${path}data.json`).then(res => res.json()).then(data => {
             const pair = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
             
-            // Map Data ke Element
+            // Basic UI
             document.getElementById('cover-names').textContent = pair;
             document.getElementById('hero-names').textContent = pair;
             document.getElementById('footer-names').textContent = pair;
             document.getElementById('guest-name').textContent = guest;
             document.getElementById('hero-img').src = path + data.gallery.heroImage;
-            document.getElementById('quote-text').textContent = data.quote.text;
-            document.getElementById('quote-source').textContent = data.quote.source;
             document.getElementById('hero-date').textContent = new Date(data.events[0].date).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
 
-            // Render Pengantin
-            const drawCouple = (p, target, label) => {
-                document.getElementById(target).innerHTML = `
-                    <div class="w-64 h-85 mx-auto mb-10 overflow-hidden rounded-[40px] shadow-2xl shadow-marun/5">
-                        <img src="${path + p.image}" class="w-full h-full object-cover">
+            // Countdown Logic
+            const eventDate = new Date(`${data.events[0].date}T${data.events[0].startTime}:00`).getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const diff = eventDate - now;
+                if (diff > 0) {
+                    document.getElementById('days').innerText = Math.floor(diff / 864e5).toString().padStart(2, '0');
+                    document.getElementById('hours').innerText = Math.floor((diff % 864e5) / 36e5).toString().padStart(2, '0');
+                    document.getElementById('minutes').innerText = Math.floor((diff % 36e5) / 6e4).toString().padStart(2, '0');
+                }
+            }, 1000);
+
+            // Render Couple
+            const renderP = (p, t, l) => {
+                document.getElementById(t).innerHTML = `
+                    <div class="relative w-72 h-96 mx-auto mb-10 p-2 border border-marun/5 rounded-[40px]">
+                        <img src="${path + p.image}" class="w-full h-full object-cover rounded-[35px]">
                     </div>
                     <h3 class="text-3xl font-bold text-gray-800">${p.name}</h3>
-                    <p class="text-[10px] uppercase tracking-[.3em] opacity-40 mt-4 font-semibold text-marun">${label} Bpk. ${p.father} & Ibu ${p.mother}</p>`;
+                    <p class="text-[10px] uppercase tracking-[.3em] opacity-40 mt-4 text-marun font-bold">${l} Bpk. ${p.father} & Ibu ${p.mother}</p>`;
             };
-            drawCouple(data.couple.groom, 'groom-box', 'Putra');
-            drawCouple(data.couple.bride, 'bride-box', 'Putri');
+            renderP(data.couple.groom, 'groom-box', 'Putra');
+            renderP(data.couple.bride, 'bride-box', 'Putri');
 
-            // Render Acara
+            // Render Events
             data.events.forEach(e => {
                 document.getElementById('event-list').innerHTML += `
-                    <div class="card-event text-center reveal">
-                        <h4 class="text-[9px] tracking-[.5em] uppercase text-marun font-bold mb-6">${e.title}</h4>
-                        <p class="text-2xl font-[800] mb-2 tracking-tight text-gray-800">${new Date(e.date).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'})}</p>
-                        <p class="text-sm font-semibold opacity-60 mb-8">${e.startTime} - ${e.endTime}</p>
-                        <p class="text-xs px-8 opacity-50 leading-relaxed">${e.address}</p>
-                        <a href="${e.googleMaps}" target="_blank" class="inline-block mt-10 border-b border-marun/20 text-marun text-[9px] tracking-[.3em] uppercase font-bold pb-1">Petunjuk Lokasi</a>
+                    <div class="text-center reveal">
+                        <div class="mb-6 inline-block px-6 py-2 border border-marun/10 rounded-full text-[9px] tracking-[.4em] text-marun font-bold uppercase">${e.title}</div>
+                        <p class="text-3xl font-extrabold text-gray-800 mb-2">${new Date(e.date).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'})}</p>
+                        <p class="text-sm font-semibold opacity-50 mb-8">${e.startTime} - ${e.endTime}</p>
+                        <p class="text-xs px-10 leading-relaxed opacity-40 font-medium">${e.address}</p>
+                        <a href="${e.googleMaps}" target="_blank" class="mt-8 inline-block text-[9px] tracking-[.3em] uppercase font-extrabold text-marun border-b-2 border-marun/20 pb-1">Buka Peta</a>
                     </div>`;
             });
 
-            // Render Gallery
-            data.gallery.album.forEach(img => {
-                document.getElementById('gallery-grid').innerHTML += `<img src="${path + img}" class="w-full aspect-[4/5] object-cover rounded-2xl shadow-sm">`;
+            // Render Gallery with Stories (from Love Story JSON)
+            data.gallery.album.forEach((img, index) => {
+                const story = data.loveStory[index] || { title: 'Momen Indah', description: 'Kebersamaan yang abadi.' };
+                document.getElementById('gallery-grid').innerHTML += `
+                    <div class="gallery-item reveal">
+                        <img src="${path + img}" class="w-full h-full object-cover">
+                        <div class="gallery-overlay">
+                            <div class="text-white">
+                                <p class="text-[8px] uppercase tracking-widest opacity-70 mb-1">${story.date || 'Our Memory'}</p>
+                                <h4 class="font-aesthetic text-2xl mb-2">${story.title}</h4>
+                                <p class="text-[10px] leading-relaxed opacity-90 font-light">${story.description}</p>
+                            </div>
+                        </div>
+                    </div>`;
             });
 
             // Render Gift
             data.digitalGift.forEach(g => {
                 document.getElementById('gift-list').innerHTML += `
-                    <div class="bg-white p-8 rounded-3xl border border-gray-100 reveal shadow-sm">
-                        <p class="text-[9px] font-extrabold text-marun opacity-40 uppercase tracking-[.4em] mb-4">${g.provider}</p>
-                        <p class="text-2xl font-[800] tracking-[.2em] text-gray-800">${g.accountNumber}</p>
-                        <p class="text-[10px] opacity-50 mt-3 uppercase font-semibold">A.N ${g.accountHolder}</p>
+                    <div class="bg-white p-10 rounded-[30px] border border-gray-100 reveal shadow-sm">
+                        <p class="text-[9px] font-bold text-marun tracking-[.5em] uppercase mb-4 opacity-40">${g.provider}</p>
+                        <p class="text-2xl font-extrabold tracking-widest text-gray-800">${g.accountNumber}</p>
+                        <p class="text-[10px] opacity-50 mt-2 font-bold uppercase tracking-widest">A.N ${g.accountHolder}</p>
                     </div>`;
             });
         });
@@ -182,14 +188,12 @@
         function openInvitation() {
             const audio = document.getElementById('audio');
             audio.src = path + 'musik.mp3'; 
-            audio.play().catch(e => console.log("Audio play failed"));
+            audio.play().catch(() => {});
 
-            // Animasi transisi smooth GSAP
             gsap.to("#cover", { 
-                opacity: 0, 
-                y: -50,
-                duration: 1.2, 
-                ease: "power3.inOut", 
+                y: "-100%", 
+                duration: 1.5, 
+                ease: "power4.inOut", 
                 onComplete: () => {
                     document.getElementById('cover').style.display = 'none';
                     document.getElementById('app').style.opacity = '1';
