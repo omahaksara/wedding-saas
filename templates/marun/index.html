@@ -3,210 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Digital — Omah Aksara</title>
+    <title>Undangan Pernikahan — Putih Marun Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { --theme-color: #A0846A; --bg-color: #0a0a0a; --text-color: #D1D5DB; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; }
-        .font-serif { font-family: 'Cormorant Garamond', serif; }
-        .font-arab { font-family: 'Scheherazade New', serif; }
+        /* Variabel Warna Marun sesuai Template Video */
+        :root { --marun: #8b0000; --putih-bg: #ffffff; --aksen-soft: #fff5f5; }
         
-        /* Grain Animation */
-        .grain { position: fixed; inset: -100%; width: 300%; height: 300%; background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain_Noise.png'); opacity: .04; animation: g 8s steps(10) infinite; pointer-events: none; z-index: 99; }
-        @keyframes g { 0%, 100% { transform:translate(0,0) } 50% { transform:translate(-5%,10%) } }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--putih-bg); color: #2d2d2d; overflow-x: hidden; }
+        .font-aesthetic { font-family: 'Dancing Script', cursive; }
+        
+        /* Efek Grain halus agar tidak flat */
+        .grain { position: fixed; inset: -100%; width: 300%; height: 300%; background: url('https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Grain_Noise.png'); opacity: .02; pointer-events: none; z-index: 99; }
 
-        .polaroid { background: white; padding: 10px 10px 35px 10px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
-        .reveal { opacity: 0; transform: translateY(40px); }
-        .btn-glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); }
+        .reveal { opacity: 0; transform: translateY(30px); }
+        
+        /* Button Marun Premium */
+        .btn-marun {
+            background: var(--marun);
+            color: white;
+            padding: 16px 45px;
+            border-radius: 50px;
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 800;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 20px rgba(139, 0, 0, 0.2);
+        }
+        .btn-marun:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(139, 0, 0, 0.3); }
+
+        .card-event {
+            border: 1px solid #f3f3f3;
+            padding: 40px 25px;
+            border-radius: 24px;
+            background: white;
+            transition: transform 0.3s ease;
+        }
+
+        /* Frame Foto Lengkung Halus */
+        .photo-frame {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            /* Foto sekarang berwarna asli, tidak hitam putih */
+        }
+
+        .text-marun { color: var(--marun); }
+        .bg-marun-soft { background-color: var(--aksen-soft); }
     </style>
 </head>
 <body class="antialiased">
     <div class="grain"></div>
 
-    <div id="cover" class="fixed inset-0 z-[100] flex flex-col items-center justify-center text-center text-white bg-zinc-950">
-        <img id="cover-image" class="absolute inset-0 w-full h-full object-cover opacity-40 grayscale" src="" crossorigin="anonymous">
-        <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-zinc-950"></div>
-        <div class="relative z-10 p-8">
-            <p id="cover-bismillah" class="font-arab text-3xl mb-6 hidden">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
-            <p class="text-[9px] tracking-[.5em] uppercase opacity-50 mb-4">You're Invited To The Wedding of</p>
-            <h1 id="cover-names" class="font-serif text-6xl italic my-6 leading-tight"></h1>
-            <div class="mt-12 space-y-2">
-                <p class="text-[10px] opacity-40 uppercase tracking-widest">Special Guest</p>
-                <p id="cover-guest" class="text-2xl font-serif italic border-b border-white/10 pb-4 px-6 inline-block"></p>
+    <div id="cover" class="fixed inset-0 z-[100] flex flex-col items-center justify-center text-center bg-white">
+        <div class="relative z-10 px-8">
+            <p class="text-[9px] tracking-[.6em] uppercase opacity-40 mb-8">The Wedding Announcement</p>
+            <h1 id="cover-names" class="text-6xl font-aesthetic text-marun mb-6"></h1>
+            <h2 class="text-4xl font-[800] tracking-tighter leading-[0.9] mb-12 uppercase">These Kids<br>Are Getting<br>Married</h2>
+            
+            <div class="mb-14">
+                <p class="text-[10px] opacity-40 uppercase tracking-[.3em] mb-3 font-semibold">Special Invitation For:</p>
+                <p id="guest-name" class="text-2xl font-aesthetic text-marun border-b border-marun/10 pb-2 px-6 inline-block"></p>
             </div>
-            <button id="open-invitation" class="mt-12 btn-glass text-white rounded-full px-12 py-4 text-[10px] uppercase tracking-[.4em] hover:bg-white hover:text-black transition-all duration-1000">Enter Experience</button>
+
+            <button onclick="openInvitation()" class="btn-marun">Open Experience</button>
         </div>
     </div>
 
-    <main id="app" class="max-w-md mx-auto opacity-0 border-x border-zinc-900/50">
-        <section id="hero-section" class="relative flex flex-col items-center justify-center min-h-screen overflow-hidden"></section>
-
-        <section id="quote-section" class="px-10 py-32 text-center reveal">
-            <p id="quote-arab" class="font-arab text-4xl mb-8 leading-relaxed text-white hidden"></p>
-            <p id="quote-text" class="font-serif text-xl italic opacity-90 leading-relaxed"></p>
-            <p id="quote-source" class="text-[9px] uppercase tracking-[.4em] mt-8 opacity-40"></p>
-        </section>
-
-        <section class="px-8 py-20 space-y-32 bg-zinc-900/10">
-            <div id="groom-section" class="reveal text-center"></div>
-            <div class="reveal text-center font-serif text-5xl opacity-10 italic">&</div>
-            <div id="bride-section" class="reveal text-center"></div>
-        </section>
-
-        <section id="story-section" class="px-10 py-24 hidden">
-            <h3 class="font-serif text-3xl italic mb-12 text-center text-white">Our Journey</h3>
-            <div id="story-container" class="space-y-12 border-l border-zinc-800 ml-2 pl-8"></div>
-        </section>
-
-        <section class="px-8 py-24 bg-zinc-900/30">
-            <h3 class="font-serif text-4xl italic mb-16 text-center text-white">The Celebration</h3>
-            <div id="event-details" class="space-y-8"></div>
-            
-            <div class="mt-20 text-center reveal">
-                <p id="dress-code-text" class="text-[10px] uppercase tracking-[.4em] mb-12 opacity-50"></p>
-                <div id="countdown" class="flex justify-center space-x-8"></div>
+    <main id="app" class="max-w-md mx-auto opacity-0 bg-white">
+        
+        <section class="relative h-[90vh] flex flex-col items-center justify-end pb-20 text-center">
+            <img id="hero-img" class="absolute inset-0 w-full h-full object-cover" src="">
+            <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
+            <div class="relative z-10 px-6">
+                <p class="text-[9px] tracking-[.6em] uppercase font-bold text-marun mb-4">Save The Date</p>
+                <h1 id="hero-names" class="text-6xl font-aesthetic text-marun mb-3"></h1>
+                <p id="hero-date" class="text-[10px] tracking-[.4em] uppercase font-bold opacity-60"></p>
             </div>
         </section>
 
-        <section id="gallery-section" class="py-24 hidden">
-            <h3 class="font-serif text-3xl italic mb-12 px-10 text-white">Gallery</h3>
-            <div id="gallery-grid" class="grid grid-cols-2 gap-1 px-1 bg-zinc-900/50"></div>
+        <section class="px-10 py-32 text-center reveal">
+            <div class="w-10 h-[2px] bg-marun mx-auto mb-10 opacity-20"></div>
+            <p id="quote-text" class="text-lg italic leading-relaxed text-gray-700 font-light px-2"></p>
+            <p id="quote-source" class="text-[10px] uppercase tracking-[.4em] mt-8 font-extrabold text-marun"></p>
         </section>
 
-        <section id="gift-section" class="px-8 py-24 text-center hidden">
-            <h3 class="font-serif text-3xl italic mb-10 text-white">Wedding Gift</h3>
-            <div id="gift-details" class="space-y-4"></div>
+        <section class="px-8 py-24 space-y-32 bg-marun-soft/50">
+            <div id="groom-box" class="reveal text-center"></div>
+            <div class="text-center font-aesthetic text-6xl text-marun opacity-10 italic">&</div>
+            <div id="bride-box" class="reveal text-center"></div>
         </section>
 
-        <footer class="px-10 py-32 text-center border-t border-zinc-900">
-            <p id="guest-note" class="text-sm opacity-60 italic mb-12 leading-relaxed"></p>
-            <a id="rsvp-link" target="_blank" class="inline-block border border-zinc-700 px-12 py-5 text-[10px] tracking-[.4em] uppercase hover:bg-white hover:text-black transition-all">WhatsApp RSVP</a>
-            <p id="footer-names" class="font-serif text-5xl italic text-white mt-32"></p>
-            <p class="text-[8px] tracking-[.6em] opacity-20 uppercase mt-12">Handcrafted by Omah Aksara</p>
+        <section class="px-6 py-28">
+            <h3 class="text-center text-[10px] tracking-[.6em] uppercase opacity-30 mb-16 font-bold">Event Details</h3>
+            <div id="event-list" class="space-y-8"></div>
+        </section>
+
+        <section class="py-12 bg-gray-50">
+            <div id="gallery-grid" class="grid grid-cols-2 gap-3 px-3"></div>
+        </section>
+
+        <section class="px-8 py-28 text-center">
+            <h3 class="text-4xl font-aesthetic text-marun mb-12">Wedding Gift</h3>
+            <p class="text-[10px] uppercase tracking-widest opacity-40 mb-10">Kirim kado digital melalui:</p>
+            <div id="gift-list" class="space-y-5"></div>
+        </section>
+
+        <footer class="py-32 text-center bg-white border-t border-gray-100">
+            <p id="footer-names" class="text-5xl font-aesthetic text-marun"></p>
+            <p class="text-[9px] tracking-[.5em] opacity-20 uppercase mt-12">Digital Invitation — Omah Aksara</p>
         </footer>
     </main>
 
-    <button id="music-btn" class="hidden fixed bottom-8 left-8 w-12 h-12 rounded-full btn-glass flex items-center justify-center z-[110]">
-        <span class="text-[8px] tracking-tighter">MUSIC</span>
-    </button>
     <audio id="audio" loop></audio>
 
     <script>
         const params = new URLSearchParams(window.location.search);
-        const clientSlug = params.get('c') || 'budi-ani'; // Default slug for test
-        const guestName = params.get('to')?.replace(/\+/g, ' ') || 'Tamu Undangan';
-        const basePath = `../../public/clients/${clientSlug}/`;
-        
-        fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
-            const settings = data.settings || {};
+        const slug = params.get('c') || 'budi-ani'; 
+        const guest = params.get('to')?.replace(/\+/g, ' ') || 'Tamu Undangan';
+        const path = `../../public/clients/${slug}/`;
+
+        fetch(`${path}data.json`).then(res => res.json()).then(data => {
             const pair = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
-
-            // 1. COVER & TITLE
-            document.title = `Undangan: ${pair}`;
-            document.getElementById('cover-names').textContent = pair;
-            document.getElementById('cover-guest').textContent = guestName;
-            const cImg = document.getElementById('cover-image');
-            cImg.src = basePath + data.gallery.heroImage;
-
-            // 2. HERO RENDERER
-            const heroSec = document.getElementById('hero-section');
-            const heroDate = new Date(data.events[0].date).toLocaleDateString('id-ID', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
             
-            heroSec.innerHTML = `
-                <img src="${basePath + data.gallery.heroImage}" class="absolute inset-0 w-full h-full object-cover opacity-30 grayscale">
-                <div class="relative z-10 text-center px-10">
-                    <h2 class="font-serif text-7xl text-white italic animate__animated animate__fadeInUp">${pair}</h2>
-                    <div class="w-12 h-px bg-white/20 mx-auto my-10"></div>
-                    <p class="text-[10px] tracking-[.5em] uppercase opacity-60">${heroDate}</p>
-                </div>`;
+            // Map Data ke Element
+            document.getElementById('cover-names').textContent = pair;
+            document.getElementById('hero-names').textContent = pair;
+            document.getElementById('footer-names').textContent = pair;
+            document.getElementById('guest-name').textContent = guest;
+            document.getElementById('hero-img').src = path + data.gallery.heroImage;
+            document.getElementById('quote-text').textContent = data.quote.text;
+            document.getElementById('quote-source').textContent = data.quote.source;
+            document.getElementById('hero-date').textContent = new Date(data.events[0].date).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
 
-            // 3. QUOTE & ISLAMI
-            if(settings.islami) document.getElementById('cover-bismillah').classList.remove('hidden');
-            if(data.quote?.text) {
-                document.getElementById('quote-arab').textContent = data.quote.arab;
-                document.getElementById('quote-arab').classList.toggle('hidden', !data.quote.arab);
-                document.getElementById('quote-text').textContent = `"${data.quote.text}"`;
-                document.getElementById('quote-source').textContent = data.quote.source;
-            }
-
-            // 4. COUPLE
-            const renderPerson = (p, target, isGroom) => {
+            // Render Pengantin
+            const drawCouple = (p, target, label) => {
                 document.getElementById(target).innerHTML = `
-                    <div class="w-64 h-80 mx-auto overflow-hidden grayscale hover:grayscale-0 transition duration-1000 border border-zinc-800">
-                        <img src="${basePath + p.image}" class="w-full h-full object-cover shadow-2xl">
+                    <div class="w-64 h-85 mx-auto mb-10 overflow-hidden rounded-[40px] shadow-2xl shadow-marun/5">
+                        <img src="${path + p.image}" class="w-full h-full object-cover">
                     </div>
-                    <h2 class="font-serif text-4xl italic text-white mt-10">${p.name}</h2>
-                    <p class="text-[9px] uppercase tracking-[.4em] opacity-40 mt-4">${isGroom?'Putra':'Putri'} Bpk. ${p.father} & Ibu ${p.mother}</p>
-                    <a href="${isGroom ? p.instagramUrl : p.lynkUrl}" target="_blank" class="inline-block mt-6 text-[8px] tracking-[.3em] uppercase opacity-30 border-b border-zinc-800 pb-1">Connect</a>`;
+                    <h3 class="text-3xl font-bold text-gray-800">${p.name}</h3>
+                    <p class="text-[10px] uppercase tracking-[.3em] opacity-40 mt-4 font-semibold text-marun">${label} Bpk. ${p.father} & Ibu ${p.mother}</p>`;
             };
-            renderPerson(data.couple.groom, 'groom-section', true);
-            renderPerson(data.couple.bride, 'bride-section', false);
+            drawCouple(data.couple.groom, 'groom-box', 'Putra');
+            drawCouple(data.couple.bride, 'bride-box', 'Putri');
 
-            // 5. LOVE STORY (Dinamis)
-            if(data.loveStory?.length) {
-                const storySec = document.getElementById('story-section');
-                storySec.classList.remove('hidden');
-                data.loveStory.forEach(item => {
-                    document.getElementById('story-container').innerHTML += `
-                        <div class="reveal relative">
-                            <span class="absolute -left-[41px] top-1 w-4 h-4 bg-zinc-950 border border-zinc-700 rounded-full"></span>
-                            <p class="text-[10px] tracking-widest uppercase opacity-40 mb-2">${item.date}</p>
-                            <h4 class="font-serif text-2xl text-white italic mb-3">${item.title}</h4>
-                            <p class="text-sm opacity-60 leading-relaxed">${item.description}</p>
-                        </div>`;
-                });
-            }
-
-            // 6. EVENTS & DRESS CODE
+            // Render Acara
             data.events.forEach(e => {
-                document.getElementById('event-details').innerHTML += `
-                    <div class="border border-zinc-900 p-10 text-center reveal">
-                        <p class="text-[9px] tracking-[.5em] uppercase opacity-40 mb-6">${e.title}</p>
-                        <p class="font-serif text-3xl text-white italic mb-3">${new Date(e.date).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'})}</p>
-                        <p class="text-xs mb-8 opacity-60 font-light">${e.startTime} — ${e.endTime}</p>
-                        <p class="text-xs leading-loose opacity-50 px-4">${e.address}</p>
-                        <a href="${e.googleMaps}" target="_blank" class="inline-block mt-10 border border-zinc-800 px-8 py-3 text-[9px] tracking-[.3em] uppercase hover:bg-white hover:text-black transition-all">View Location</a>
+                document.getElementById('event-list').innerHTML += `
+                    <div class="card-event text-center reveal">
+                        <h4 class="text-[9px] tracking-[.5em] uppercase text-marun font-bold mb-6">${e.title}</h4>
+                        <p class="text-2xl font-[800] mb-2 tracking-tight text-gray-800">${new Date(e.date).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'})}</p>
+                        <p class="text-sm font-semibold opacity-60 mb-8">${e.startTime} - ${e.endTime}</p>
+                        <p class="text-xs px-8 opacity-50 leading-relaxed">${e.address}</p>
+                        <a href="${e.googleMaps}" target="_blank" class="inline-block mt-10 border-b border-marun/20 text-marun text-[9px] tracking-[.3em] uppercase font-bold pb-1">Petunjuk Lokasi</a>
                     </div>`;
             });
-            if(data.logistics.dressCode) document.getElementById('dress-code-text').textContent = `Dress Code: ${data.logistics.dressCode}`;
 
-            // 7. GALLERY
-            if(data.gallery.album?.length) {
-                document.getElementById('gallery-section').classList.remove('hidden');
-                data.gallery.album.forEach(img => {
-                    document.getElementById('gallery-grid').innerHTML += `<img src="${basePath + img}" class="w-full aspect-[4/5] object-cover grayscale hover:grayscale-0 transition duration-1000">`;
-                });
-            }
+            // Render Gallery
+            data.gallery.album.forEach(img => {
+                document.getElementById('gallery-grid').innerHTML += `<img src="${path + img}" class="w-full aspect-[4/5] object-cover rounded-2xl shadow-sm">`;
+            });
 
-            // 8. GIFT
-            if(data.digitalGift?.length) {
-                document.getElementById('gift-section').classList.remove('hidden');
-                data.digitalGift.forEach(gift => {
-                    document.getElementById('gift-details').innerHTML += `
-                        <div class="bg-zinc-900/20 border border-zinc-900 p-8 reveal">
-                            <p class="text-[9px] opacity-40 uppercase tracking-[.4em] mb-4">${gift.provider}</p>
-                            <p class="font-serif text-2xl text-white tracking-widest">${gift.accountNumber}</p>
-                            <p class="text-[10px] opacity-40 mt-2 uppercase tracking-widest">a.n ${gift.accountHolder}</p>
-                            <button onclick="navigator.clipboard.writeText('${gift.accountNumber}'); alert('Nomor Rekening Disalin')" class="mt-8 text-[8px] border border-zinc-800 px-6 py-2 uppercase opacity-40 hover:opacity-100">Copy Number</button>
-                        </div>`;
-                });
-            }
+            // Render Gift
+            data.digitalGift.forEach(g => {
+                document.getElementById('gift-list').innerHTML += `
+                    <div class="bg-white p-8 rounded-3xl border border-gray-100 reveal shadow-sm">
+                        <p class="text-[9px] font-extrabold text-marun opacity-40 uppercase tracking-[.4em] mb-4">${g.provider}</p>
+                        <p class="text-2xl font-[800] tracking-[.2em] text-gray-800">${g.accountNumber}</p>
+                        <p class="text-[10px] opacity-50 mt-3 uppercase font-semibold">A.N ${g.accountHolder}</p>
+                    </div>`;
+            });
+        });
 
-            // 9. FOOTER & RSVP
-            document.getElementById('guest-note').textContent = data.logistics.guestMessage;
-            document.getElementById('footer-names').textContent = pair;
-            document.getElementById('rsvp-link').href = `https://wa.me/${data.logistics.contactWaNumber}?text=Halo, saya ${guestName} ingin mengonfirmasi kehadiran...`;
+        function openInvitation() {
+            const audio = document.getElementById('audio');
+            audio.src = path + 'musik.mp3'; 
+            audio.play().catch(e => console.log("Audio play failed"));
 
-            // 10. OPEN LOGIC & ANIMATION
-            document.getElementById('open-invitation').onclick = () => {
-                gsap.to("#cover", { y: "-100%", duration: 1.5, ease: "power4.inOut", onComplete: () => {
+            // Animasi transisi smooth GSAP
+            gsap.to("#cover", { 
+                opacity: 0, 
+                y: -50,
+                duration: 1.2, 
+                ease: "power3.inOut", 
+                onComplete: () => {
                     document.getElementById('cover').style.display = 'none';
-                    gsap.to("#app", { opacity: 1, duration: 1 });
+                    document.getElementById('app').style.opacity = '1';
                     
-                    // Reveal Observer
                     const observer = new IntersectionObserver((entries) => {
                         entries.forEach(entry => {
                             if(entry.isIntersecting) {
@@ -215,39 +202,9 @@
                         });
                     }, { threshold: 0.1 });
                     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-                }});
-
-                // Play Music
-                if(data.logistics.music) {
-                    const audio = document.getElementById('audio');
-                    audio.src = basePath + data.logistics.music;
-                    audio.play().catch(() => console.log("Autoplay blocked"));
-                    const mBtn = document.getElementById('music-btn');
-                    mBtn.classList.remove('hidden');
-                    mBtn.onclick = () => {
-                        if(audio.paused) { audio.play(); mBtn.style.opacity = 1; }
-                        else { audio.pause(); mBtn.style.opacity = 0.5; }
-                    };
                 }
-            };
-
-            // 11. COUNTDOWN
-            const targetDate = new Date(`${data.events[0].date}T${data.events[0].startTime}`).getTime();
-            setInterval(() => {
-                const now = new Date().getTime();
-                const dist = targetDate - now;
-                const d = Math.floor(dist / 864e5), h = Math.floor((dist % 864e5) / 36e5), m = Math.floor((dist % 36e5) / 6e4), s = Math.floor((dist % 6e4) / 1000);
-                document.getElementById('countdown').innerHTML = `
-                    <div class="text-center"><span class="font-serif text-4xl text-white">${d}</span><span class="text-[8px] opacity-30 uppercase block">Day</span></div>
-                    <div class="text-center"><span class="font-serif text-4xl text-white">${h}</span><span class="text-[8px] opacity-30 uppercase block">Hrs</span></div>
-                    <div class="text-center"><span class="font-serif text-4xl text-white">${m}</span><span class="text-[8px] opacity-30 uppercase block">Min</span></div>
-                    <div class="text-center"><span class="font-serif text-4xl text-white">${s}</span><span class="text-[8px] opacity-30 uppercase block">Sec</span></div>`;
-            }, 1000);
-
-        }).catch(err => {
-            console.error("Critical Error:", err);
-            document.body.innerHTML = `<div class="h-screen flex items-center justify-center text-[10px] tracking-[.5em] opacity-30">DATA NOT FOUND</div>`;
-        });
+            });
+        }
     </script>
 </body>
 </html>
