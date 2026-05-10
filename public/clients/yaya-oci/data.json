@@ -1,7 +1,7 @@
 {
   "meta": {
     "slug": "yaya-oci",
-    "template": "terra-soft",
+    "template": "mocha-romantic-frame",
     "status": "published"
   },
   "settings": {
@@ -13,7 +13,7 @@
   "couple": {
     "groom": {
       "name": "Muhammad Jakpar",
-      "nickname": "Yaya'",
+      "nickname": "Yaya",
       "father": "Moh. Aliman (Alm)",
       "mother": "Siti Kusnah (Almh)",
       "image": "foto-pria.jpg",
@@ -47,7 +47,7 @@
       "title": "Walimatul 'Ursy",
       "date": "2026-09-06",
       "startTime": "11:00",
-      "endTime": "Selesai",
+      "endTime": "23:59",
       "timezone": "WITA",
       "address": "Desa Petunasugi (SPD), Dusun 4",
       "googleMaps": "https://maps.app.goo.gl/D7Gm19awuXrkZmPN7?g_st=ac"
