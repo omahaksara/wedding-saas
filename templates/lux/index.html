@@ -3,192 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omah Aksara — Editorial Luxe Edition</title>
+    <title>Omah Aksara — Private Editorial Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@200;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Inter:wght@100;300;400&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --luxe-gold: #c5a059; 
-            --deep-mocca: #2c2420;
-            --soft-cream: #f9f7f2;
+            --luxe-gold: #b39359; 
+            --deep-mocca: #1a1715;
+            --soft-cream: #fcfbf7;
+            --muted-gold: #d4c3a1;
         }
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+            font-family: 'Inter', sans-serif; 
             background: var(--soft-cream); 
             color: var(--deep-mocca);
             overflow-x: hidden;
         }
         .font-serif { font-family: 'Cormorant Garamond', serif; }
         
-        /* Smooth Scroll Smoothing */
-        html { scroll-behavior: smooth; }
-
-        /* Editorial Border */
+        /* Editorial Frame - Thinner & More Elegant */
         .editorial-frame {
-            position: fixed;
-            inset: 20px;
-            border: 1px solid rgba(197, 160, 89, 0.3);
-            pointer-events: none;
-            z-index: 100;
+            position: fixed; inset: 0;
+            border: 25px solid var(--soft-cream);
+            pointer-events: none; z-index: 100;
+        }
+        .inner-line {
+            position: fixed; inset: 40px;
+            border: 0.5px solid rgba(179, 147, 89, 0.2);
+            pointer-events: none; z-index: 101;
         }
 
-        /* Luxury Reveal Effect */
-        .reveal-up { opacity: 0; transform: translateY(50px); }
-        .parallax-bg { transform: scale(1.2); transition: transform 0.5s ease-out; }
+        /* Luxury Typography */
+        .char { display: inline-block; transform: translateY(100%); }
+        .stagger-text { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
 
-        /* Section Styling */
-        section { min-height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        /* Custom Section */
+        .section-padding { padding: 120px 24px; }
         
-        .gold-divider { width: 1px; height: 100px; background: linear-gradient(to bottom, transparent, var(--luxe-gold), transparent); }
+        /* Image Reveal Mask */
+        .img-reveal-wrapper {
+            position: relative; overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            transition: clip-path 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .img-reveal-wrapper.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+
+        .luxe-btn {
+            position: relative; overflow: hidden;
+            border: 1px solid var(--luxe-gold);
+            padding: 18px 48px; font-size: 10px; letter-spacing: 0.5em;
+            text-transform: uppercase; transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .luxe-btn:hover { background: var(--luxe-gold); color: white; letter-spacing: 0.7em; }
+
+        /* Grain Effect for Texture */
+        .grain {
+            position: fixed; inset: 0; z-index: 200;
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_filmgrain.png");
+            opacity: 0.03; pointer-events: none;
+        }
     </style>
 </head>
 <body>
+    <div class="grain"></div>
     <div class="editorial-frame"></div>
+    <div class="inner-line"></div>
 
-    <section id="cover" class="flex-col text-center px-6">
-        <div class="overflow-hidden mb-8 w-full max-w-sm">
-            <img id="main-photo" src="" class="w-full h-[50vh] object-cover scale-110 grayscale hover:grayscale-0 transition-all duration-1000">
+    <!-- PRELOADER / COVER -->
+    <section id="cover" class="flex-col h-screen text-center justify-center bg-[#fcfbf7] z-[150] fixed inset-0">
+        <div class="reveal-wrapper mb-10">
+            <h2 class="font-serif italic text-2xl opacity-60">The Private Invitation</h2>
         </div>
-        <p class="text-[10px] tracking-[.8em] uppercase mb-4 opacity-60">The Wedding Celebration</p>
-        <h1 id="couple-title" class="text-6xl font-serif italic mb-10"></h1>
-        <button onclick="startExperience()" class="border border-luxe-gold px-12 py-4 text-[10px] tracking-[.4em] uppercase hover:bg-[#c5a059] hover:text-white transition-all">Explore</button>
+        <div class="w-[1px] h-24 bg-luxe-gold/30 mx-auto my-8"></div>
+        <h1 id="couple-title" class="text-7xl md:text-8xl font-serif mb-12 tracking-tighter"></h1>
+        <div class="mt-4">
+            <button onclick="startExperience()" class="luxe-btn">Enter Gallery</button>
+        </div>
     </section>
 
-    <div id="main-content" class="hidden">
+    <!-- MAIN CONTENT -->
+    <div id="main-content" class="opacity-0 transition-opacity duration-1000">
         
-        <section class="bg-white">
-            <div class="max-w-xl text-center px-10">
-                <p id="arab-text" class="text-3xl font-serif mb-8 text-luxe-gold"></p>
-                <p id="indo-text" class="text-lg italic font-serif leading-relaxed opacity-80"></p>
-                <p id="sumber-text" class="text-[9px] tracking-[.3em] uppercase mt-6 font-bold"></p>
+        <!-- HERO SECTION -->
+        <section class="min-h-screen pt-32 flex-col">
+            <div class="img-reveal-wrapper w-full max-w-lg mx-auto" id="hero-reveal">
+                <img id="main-photo" src="" class="w-full h-[70vh] object-cover contrast-[1.1] brightness-[0.9]">
+            </div>
+            <div class="text-center mt-12 px-6 reveal-up">
+                <p class="text-[10px] tracking-[0.8em] uppercase opacity-40 mb-4">Volume I — Eternal Union</p>
+                <p id="hero-date" class="font-serif italic text-3xl"></p>
             </div>
         </section>
 
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-0">
-            <div class="h-[50vh] md:h-screen overflow-hidden">
-                <img id="pria-foto" src="" class="w-full h-full object-cover parallax-bg">
-            </div>
-            <div class="flex flex-col justify-center p-12 bg-white">
-                <h2 class="text-[10px] tracking-[.5em] uppercase opacity-40 mb-4">The Groom</h2>
-                <h3 id="pria-nama" class="text-5xl font-serif mb-4"></h3>
-                <p id="pria-ortu" class="text-sm opacity-60 italic"></p>
-            </div>
-        </section>
-
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-0">
-            <div class="flex flex-col justify-center p-12 bg-[#2c2420] text-white order-2 md:order-1">
-                <h2 class="text-[10px] tracking-[.5em] uppercase opacity-40 mb-4 text-white/50">The Bride</h2>
-                <h3 id="wanita-nama" class="text-5xl font-serif mb-4 text-white"></h3>
-                <p id="wanita-ortu" class="text-sm opacity-60 italic text-white/70"></p>
-            </div>
-            <div class="h-[50vh] md:h-screen overflow-hidden order-1 md:order-2">
-                <img id="wanita-foto" src="" class="w-full h-full object-cover parallax-bg">
+        <!-- QUOTE SECTION -->
+        <section class="bg-white section-padding">
+            <div class="max-w-3xl mx-auto text-center px-10">
+                <div class="w-12 h-[1px] bg-luxe-gold mx-auto mb-12"></div>
+                <p id="arab-text" class="text-4xl font-serif mb-10 text-luxe-gold leading-relaxed"></p>
+                <p id="indo-text" class="text-xl italic font-serif leading-relaxed opacity-70 px-4 md:px-20"></p>
+                <div class="w-12 h-[1px] bg-luxe-gold mx-auto mt-12"></div>
             </div>
         </section>
 
-        <section class="flex-col py-20">
-            <h2 class="text-[10px] tracking-[.8em] uppercase mb-20">Journal of Love</h2>
-            <div id="story-list" class="w-full max-w-4xl px-6 space-y-32">
-                </div>
+        <!-- GROOM SECTION -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center">
+            <div class="md:col-span-7 h-[80vh] overflow-hidden">
+                <img id="pria-foto" src="" class="w-full h-full object-cover parallax-bg grayscale hover:grayscale-0 transition-all duration-[2s]">
+            </div>
+            <div class="md:col-span-5 p-16 md:p-24">
+                <span class="text-[9px] tracking-[0.6em] uppercase text-luxe-gold block mb-6">Gentleman</span>
+                <h3 id="pria-nama" class="text-6xl font-serif mb-8 leading-tight"></h3>
+                <p id="pria-ortu" class="text-sm opacity-50 font-light leading-loose tracking-widest uppercase text-[10px]"></p>
+            </div>
         </section>
 
-        <section class="bg-white flex-col py-20 text-center">
-            <div class="gold-divider mb-12"></div>
-            <div id="event-list" class="space-y-20"></div>
-            <div class="gold-divider mt-12"></div>
+        <!-- BRIDE SECTION -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center bg-[#1a1715] text-[#fcfbf7]">
+            <div class="md:col-span-5 p-16 md:p-24 order-2 md:order-1">
+                <span class="text-[9px] tracking-[0.6em] uppercase text-muted-gold block mb-6">The Lady</span>
+                <h3 id="wanita-nama" class="text-6xl font-serif mb-8 leading-tight"></h3>
+                <p id="wanita-ortu" class="text-sm opacity-50 font-light leading-loose tracking-widest uppercase text-[10px]"></p>
+            </div>
+            <div class="md:col-span-7 h-[80vh] overflow-hidden order-1 md:order-2">
+                <img id="wanita-foto" src="" class="w-full h-full object-cover parallax-bg contrast-[1.1]">
+            </div>
         </section>
 
-        <footer class="py-32 text-center bg-[#f9f7f2]">
-            <p id="footer-names" class="text-5xl font-serif italic mb-10"></p>
-            <p class="text-[8px] tracking-[.5em] opacity-40 uppercase">Handcrafted with love by Omah Aksara</p>
+        <!-- EVENT SECTION -->
+        <section class="section-padding bg-white">
+            <div class="text-center mb-24">
+                <h2 class="text-[10px] tracking-[1em] uppercase opacity-40">The Itinerary</h2>
+            </div>
+            <div id="event-list" class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 px-10">
+                <!-- Data from JSON -->
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="section-padding text-center bg-white border-t border-gray-100">
+            <h2 id="footer-names" class="text-8xl font-serif italic mb-16 tracking-tighter opacity-80"></h2>
+            <div class="flex justify-center gap-8 mb-20 opacity-60">
+                <div class="w-px h-12 bg-luxe-gold"></div>
+            </div>
+            <p class="text-[9px] tracking-[0.8em] opacity-30 uppercase">Private Collection by Omah Aksara</p>
         </footer>
     </div>
 
-    <audio id="audio" loop></audio>
+    <audio id="audio" loop preloade="auto"></audio>
 
     <script>
         const params = new URLSearchParams(window.location.search);
         const slug = params.get('c') || 'budi-ani';
         const path = `../../public/clients/${slug}/`;
 
-        // MASTER FETCH SINKRON DENGAN JSON UNIVERSAL
         fetch(`${path}data.json`).then(res => res.json()).then(data => {
-            // Mapping Dasar
-            document.getElementById('couple-title').innerHTML = `${data.mempelai.pria.panggilan} <span class="text-2xl font-sans not-italic">&</span> ${data.mempelai.wanita.panggilan}`;
-            document.getElementById('main-photo').src = path + data.galeri.cover;
+            // Setup Names
+            const groomNick = data.mempelai.pria.panggilan;
+            const brideNick = data.mempelai.wanita.panggilan;
+            document.getElementById('couple-title').innerHTML = `${groomNick} <span class="text-3xl italic mx-2">&</span> ${brideNick}`;
+            document.getElementById('footer-names').innerHTML = `${groomNick} <span class="text-4xl">/</span> ${brideNick}`;
             
+            // Assets
+            document.getElementById('main-photo').src = path + data.galeri.cover;
+            document.getElementById('hero-date').textContent = data.acara[0].tanggal;
+            document.getElementById('pria-foto').src = path + data.mempelai.pria.foto;
+            document.getElementById('wanita-foto').src = path + data.mempelai.wanita.foto;
+            document.getElementById('audio').src = path + data.info.music;
+
             // Religi
             document.getElementById('arab-text').textContent = data.content_religius.quote_arab;
             document.getElementById('indo-text').textContent = data.content_religius.quote_indo;
-            document.getElementById('sumber-text').textContent = data.content_religius.quote_sumber;
 
-            // Mempelai
+            // Details
             document.getElementById('pria-nama').textContent = data.mempelai.pria.nama;
-            document.getElementById('pria-ortu').textContent = `Putra dari ${data.mempelai.pria.ayah} & ${data.mempelai.pria.ibu}`;
-            document.getElementById('pria-foto').src = path + data.mempelai.pria.foto;
-            
+            document.getElementById('pria-ortu').textContent = `First born son of Mr. ${data.mempelai.pria.ayah} & Mrs. ${data.mempelai.pria.ibu}`;
             document.getElementById('wanita-nama').textContent = data.mempelai.wanita.nama;
-            document.getElementById('wanita-ortu').textContent = `Putri dari ${data.mempelai.wanita.ayah} & ${data.mempelai.wanita.ibu}`;
-            document.getElementById('wanita-foto').src = path + data.mempelai.wanita.foto;
+            document.getElementById('wanita-ortu').textContent = `The daughter of Mr. ${data.mempelai.wanita.ayah} & Mrs. ${data.mempelai.wanita.ibu}`;
 
-            // Story
-            data.cerita.forEach((c, i) => {
-                document.getElementById('story-list').innerHTML += `
-                    <div class="reveal-up flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12">
-                        <img src="${path + c.foto}" class="w-full md:w-1/2 h-80 object-cover shadow-2xl">
-                        <div class="text-center md:text-left">
-                            <h4 class="text-3xl font-serif italic mb-4 text-luxe-gold">${c.momen}</h4>
-                            <p class="text-sm leading-relaxed opacity-70">${c.teks}</p>
-                        </div>
-                    </div>`;
-            });
-
-            // Events
-            data.acara.forEach(e => {
+            // Events with Editorial Style
+            data.acara.forEach((e, i) => {
                 document.getElementById('event-list').innerHTML += `
-                    <div class="reveal-up">
-                        <h4 class="text-[10px] tracking-[.4em] uppercase text-luxe-gold mb-4">${e.label}</h4>
-                        <p class="text-4xl font-serif mb-2">${e.tanggal}</p>
-                        <p class="text-sm mb-6 opacity-60">${e.waktu}</p>
-                        <p class="text-[11px] uppercase tracking-widest font-bold">${e.lokasi}</p>
+                    <div class="reveal-up border-b border-gray-100 pb-12">
+                        <span class="text-[9px] text-luxe-gold font-bold tracking-[0.4em] uppercase">0${i+1} — ${e.label}</span>
+                        <h4 class="text-4xl font-serif mt-6 mb-2">${e.tanggal}</h4>
+                        <p class="text-sm italic opacity-60 mb-8 font-serif">${e.waktu}</p>
+                        <p class="text-[11px] leading-relaxed tracking-[0.2em] uppercase font-semibold">${e.lokasi}</p>
                     </div>`;
             });
-
-            document.getElementById('footer-names').textContent = `${data.mempelai.pria.panggilan} & ${data.mempelai.wanita.panggilan}`;
-            document.getElementById('audio').src = path + data.info.music;
         });
 
         function startExperience() {
-            document.getElementById('audio').play();
-            gsap.to("#cover", { opacity: 0, duration: 1, onComplete: () => {
-                document.getElementById('cover').classList.add('hidden');
-                const content = document.getElementById('main-content');
-                content.classList.remove('hidden');
-                initScrollAnimations();
-            }});
+            const audio = document.getElementById('audio');
+            audio.volume = 0.5;
+            audio.play();
+
+            // Luxury Transition
+            gsap.to("#cover", { 
+                y: "-100%", 
+                duration: 2, 
+                ease: "expo.inOut",
+                onComplete: () => {
+                    document.getElementById('cover').style.display = 'none';
+                    document.getElementById('main-content').classList.remove('opacity-0');
+                    document.getElementById('hero-reveal').classList.add('active');
+                    initLuxuryAnimations();
+                }
+            });
         }
 
-        function initScrollAnimations() {
+        function initLuxuryAnimations() {
             gsap.registerPlugin(ScrollTrigger);
             
+            // Subtle Reveal for Text
             gsap.utils.toArray(".reveal-up").forEach(el => {
-                gsap.to(el, {
-                    scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none none" },
-                    opacity: 1, y: 0, duration: 1.5, ease: "power4.out"
-                });
+                gsap.fromTo(el, 
+                    { opacity: 0, y: 30 },
+                    { 
+                        scrollTrigger: { trigger: el, start: "top 90%" },
+                        opacity: 1, y: 0, duration: 1.8, ease: "power2.out"
+                    }
+                );
             });
 
+            // Parallax with Zoom Effect
             gsap.utils.toArray(".parallax-bg").forEach(img => {
                 gsap.to(img, {
-                    scrollTrigger: { trigger: img, scrub: true },
-                    scale: 1, ease: "none"
+                    scrollTrigger: { trigger: img, scrub: 1.5 },
+                    scale: 1.15,
+                    y: -20
                 });
             });
         }
     </script>
 </body>
 </html>
-
-```
