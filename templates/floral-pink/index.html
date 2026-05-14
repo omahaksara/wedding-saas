@@ -1,84 +1,264 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Undangan Pernikahan</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.2/color-thief.umd.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-:root{--theme-color:#FF8DA1;--bg-color:#FFEAF1;--text-color:#6D5A5E}
-body{font-family:'Montserrat',sans-serif;background:var(--bg-color);color:var(--text-color)}
-.font-serif{font-family:'Cormorant Garamond',serif}.font-arab{font-family:'Scheherazade New',serif}
-.bg-theme{background:var(--theme-color)}.text-theme{color:var(--theme-color)}.border-theme{border-color:var(--theme-color)}
-.cover-bg{background:var(--bg-color)}.polaroid{background:white;padding:10px 10px 35px;box-shadow:0 6px 15px rgba(0,0,0,.1)}
-.hidden{display:none!important}
-</style>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <style>
+        :root { --theme-color: #8B7355; --bg-color: #FAF7F2; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg-color); color: #3E3E3E; overflow-x: hidden; }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        .font-script { font-family: 'Parisienne', cursive; }
+        .reveal { opacity: 0; transform: translateY(30px); }
+        .polaroid { background: white; padding: 10px 10px 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        .music-spin { animation: spin 6s linear infinite; }
+        @keyframes spin { from {transform: rotate(0)} to {transform: rotate(360deg)} }
+    </style>
 </head>
 <body>
-<div id="cover" class="fixed inset-0 z-50 flex flex-col items-center justify-center text-center text-white cover-bg">
-<img id="cover-image" class="absolute inset-0 w-full h-full object-cover" crossorigin="anonymous" onerror="this.style.display='none'">
-<div class="absolute inset-0 backdrop-blur-sm bg-gradient-to-t from-black/70 via-black/30 to-white/10"></div>
-<div class="relative z-10 p-8">
-<p id="cover-bismillah" class="font-arab text-3xl mb-4 hidden">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
-<p id="cover-event-name" class="text-sm tracking-widest uppercase">THE WEDDING</p>
-<h1 id="cover-names" class="font-serif text-6xl my-4"></h1>
-<p class="text-sm mt-8">Kepada Yth.</p>
-<p id="cover-guest" class="text-xl font-semibold"></p>
-<button id="open-invitation" class="bg-white/20 backdrop-blur border border-white rounded-full px-8 py-3 mt-8 text-sm uppercase">Buka Undangan</button>
-</div></div>
 
-<div id="app" class="max-w-md mx-auto min-h-screen opacity-0">
-<section id="hero" class="relative h-screen flex items-end justify-center text-center text-white">
-<img id="hero-image" class="absolute inset-0 w-full h-full object-cover" crossorigin="anonymous" onerror="this.parentElement.style.background='var(--bg-color)'">
-<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-<div class="relative z-10 p-8"><p>PERNIKAHAN</p><h1 id="hero-names" class="font-serif text-6xl my-2"></h1><p id="hero-date"></p></div>
-</section>
+<!-- LOADER -->
+<div id="loader" class="fixed inset-0 z-[99] bg-[#FAF7F2] flex items-center justify-center">
+    <div class="w-10 h-10 border-4 border-t-transparent border-[#8B7355] rounded-full animate-spin"></div>
+</div>
 
-<div class="p-8 text-center">
-<section id="quote-section" class="my-12 bg-white/60 p-6 rounded-2xl hidden"><p id="quote-arab" class="font-arab text-2xl text-theme hidden"></p><p id="quote-text" class="italic mt-4"></p><p id="quote-source" class="text-xs mt-2"></p></section>
+<!-- COVER -->
+<div id="cover" class="fixed inset-0 z-50 flex items-center justify-center text-center text-white overflow-hidden">
+    <img id="cover-image" class="absolute inset-0 w-full h-full object-cover scale-105" src="">
+    <div class="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+    <div class="relative z-10 p-8 space-y-6">
+        <p id="bismillah" class="font-serif text-2xl hidden">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+        <p id="cover-event-name" class="tracking-[0.3em] text-xs uppercase opacity-80">The Wedding Of</p>
+        <h1 id="cover-names" class="font-script text-7xl"></h1>
+        <div class="py-8">
+            <p class="text-xs italic opacity-80 mb-2">Kepada Yth.</p>
+            <p id="cover-guest" class="text-2xl font-semibold border-b border-white/30 pb-1 inline-block"></p>
+        </div>
+        <button id="open-invitation" class="bg-white text-black rounded-full px-10 py-4 text-sm uppercase tracking-widest font-bold shadow-2xl active:scale-95 transition-all">
+            Buka Undangan
+        </button>
+    </div>
+</div>
 
-<section class="my-12"><div id="groom-section"></div><div class="font-serif text-5xl my-4 text-theme">&</div><div id="bride-section"></div></section>
+<!-- MAIN APP -->
+<div id="app" class="max-w-md mx-auto opacity-0 shadow-2xl bg-white/40 backdrop-blur-lg">
+    
+    <!-- HERO -->
+    <section class="relative h-[110vh] flex items-center justify-center text-center text-white">
+        <img id="hero-image" class="absolute inset-0 w-full h-full object-cover" src="">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+        <div class="relative z-10 px-8">
+            <h1 id="hero-names" class="font-script text-7xl my-4"></h1>
+            <p id="hero-date" class="text-sm tracking-widest uppercase"></p>
+        </div>
+    </section>
 
-<section id="event-section" class="my-16 bg-white/60 p-6 rounded-2xl hidden"><h3 class="font-serif text-3xl mb-6 text-theme">Save The Date</h3><div id="event-details"></div><div id="countdown-wrap" class="mt-8 hidden"><div id="countdown" class="flex justify-center space-x-4"></div></div></section>
+    <div class="px-6 py-16 space-y-28">
+        
+        <!-- QUOTE -->
+        <section id="quote-section" class="reveal text-center space-y-6">
+            <div class="opacity-20 text-4xl" style="color:var(--theme-color)"><i class="fa-solid fa-quote-left"></i></div>
+            <p id="quote-arab" class="font-serif text-2xl leading-loose italic" style="color:var(--theme-color)"></p>
+            <p id="quote-text" class="text-sm leading-relaxed px-4 opacity-80"></p>
+            <p id="quote-source" class="text-[10px] uppercase tracking-[0.3em] font-bold" style="color:var(--theme-color)"></p>
+        </section>
 
-<section id="gallery-section" class="my-16 hidden"><h3 class="font-serif text-3xl mb-6 text-theme">Momen Bahagia</h3><div id="gallery-grid" class="grid gap-4"></div></section>
+        <!-- COUPLE -->
+        <section class="space-y-16 text-center">
+            <div id="groom-section" class="reveal"></div>
+            <div class="font-script text-6xl opacity-20" style="color:var(--theme-color)">&</div>
+            <div id="bride-section" class="reveal"></div>
+        </section>
 
-<section id="gift-section" class="my-16 bg-white/60 p-6 rounded-2xl hidden"><h3 class="font-serif text-3xl mb-4 text-theme">Amplop Digital</h3><div id="gift-details"></div></section>
+        <!-- LOVE STORY -->
+        <section id="story-section" class="reveal hidden">
+            <h3 class="font-serif text-4xl text-center mb-12" style="color:var(--theme-color)">Our Story</h3>
+            <div id="story-list" class="space-y-8 relative before:content-[''] before:absolute before:left-4 before:top-0 before:bottom-0 before:w-0.5 before:bg-black/5"></div>
+        </section>
 
-<section id="rsvp-section" class="my-16 hidden"><a id="rsvp-link" class="bg-theme text-white rounded-full px-8 py-3 uppercase">Konfirmasi WA</a></section>
+        <!-- EVENT -->
+        <section id="event-section" class="reveal">
+            <div class="bg-white/80 p-8 rounded-[2.5rem] shadow-sm text-center border border-black/5">
+                <h3 class="font-serif text-3xl mb-10" style="color:var(--theme-color)">Save The Date</h3>
+                <div id="event-details" class="space-y-10"></div>
+            </div>
+        </section>
 
-<footer class="py-8"><p id="footer-closing" class="font-arab text-2xl text-theme hidden"></p><p class="font-serif text-2xl mt-6 text-theme">Terima Kasih</p><p id="footer-names" class="font-serif text-3xl mt-2 text-theme"></p></footer>
+        <!-- VIDEO -->
+        <section id="video-section" class="reveal hidden">
+            <h3 class="font-serif text-3xl text-center mb-8" style="color:var(--theme-color)">Prewedding Video</h3>
+            <div class="rounded-3xl overflow-hidden shadow-xl aspect-video bg-black">
+                <iframe id="youtube-frame" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </section>
 
-<!-- WATERMARK -->
-<div class="text-center pb-6"><a href="https://lynk.id/ondow/page/jasa-edit" target="_blank" class="text- text-gray-400 hover:text-theme tracking-widest uppercase">Aksara invitation</a></div>
-</div></div>
+        <!-- GALLERY -->
+        <section id="gallery-section" class="reveal hidden">
+            <h3 class="font-serif text-4xl text-center mb-10" style="color:var(--theme-color)">Our Gallery</h3>
+            <div id="gallery-grid" class="columns-2 gap-4 space-y-4"></div>
+        </section>
+
+        <!-- GIFT -->
+        <section id="gift-section" class="reveal hidden">
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-sm text-center">
+                <h3 class="font-serif text-3xl mb-8" style="color:var(--theme-color)">Wedding Gift</h3>
+                <div id="gift-list" class="space-y-4"></div>
+            </div>
+        </section>
+
+        <!-- RSVP -->
+        <section id="rsvp-section" class="reveal text-center">
+            <a id="rsvp-link" target="_blank" class="bg-black text-white rounded-full px-10 py-4 uppercase text-[10px] tracking-widest shadow-lg inline-block active:scale-95 transition-all">
+                Konfirmasi Kehadiran
+            </a>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="py-20 text-center space-y-6">
+            <p id="footer-bismillah" class="font-serif text-2xl hidden">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</p>
+            <h3 id="footer-names" class="font-script text-5xl" style="color:var(--theme-color)"></h3>
+            <div class="pt-10 opacity-30 text-[9px] tracking-[0.3em] uppercase">Aksara Invitation</div>
+        </footer>
+    </div>
+</div>
+
+<button id="music-btn" class="fixed bottom-6 right-6 w-12 h-12 bg-white/80 backdrop-blur rounded-full z-[60] shadow-xl text-black hidden">
+    <i class="fa-solid fa-music music-spin"></i>
+</button>
+<audio id="bg-music" loop></audio>
 
 <script>
-const params=new URLSearchParams(location.search);const c=params.get('c');const to=params.get('to')||'Tamu Undangan';const base=`../../public/clients/${c}/`;
-fetch(base+'data.json').then(r=>r.json()).then(d=>{
-const g=d.couple.groom,b=d.couple.bride,ev=d.events[0],s=d.settings||{};
-if(s.themeColor)document.documentElement.style.setProperty('--theme-color',s.themeColor);
-const rel=s.religion||'umum';const txt={islam:{e:"WALIMATUL 'URSY",b:true},kristen:{e:"HOLY MATRIMONY",b:false},hindu:{e:"PAWIWAHAN",b:false},umum:{e:"THE WEDDING",b:false}}[rel];
-document.getElementById('cover-event-name').textContent=txt.e;if(txt.b){document.getElementById('cover-bismillah').classList.remove('hidden');document.getElementById('footer-closing').classList.remove('hidden')}
+    gsap.registerPlugin(ScrollTrigger);
+    const params = new URLSearchParams(location.search);
+    const c = params.get('c');
+    const to = (params.get('to') || 'Tamu Undangan').replace(/\+/g, ' ');
+    const base = `../../public/clients/${c}/`;
 
-if(d.gallery.heroImage){document.getElementById('cover-image').src=base+d.gallery.heroImage;document.getElementById('hero-image').src=base+d.gallery.heroImage}
-document.getElementById('cover-names').textContent=`${g.nickname} & ${b.nickname}`;document.getElementById('cover-guest').textContent=to.replace(/\+/g,' ');
-document.getElementById('hero-names').textContent=`${g.nickname} & ${b.nickname}`;document.getElementById('hero-date').textContent=new Date(ev.date).toLocaleDateString('id-ID',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    fetch(base + 'data.json').then(r => r.json()).then(d => {
+        const { couple:cp, events:ev, gallery:gl, quote:qt, digitalGift:dg, logistics:lg, loveStory:ls, settings:st } = d;
 
-if(d.quote?.text){document.getElementById('quote-section').classList.remove('hidden');if(d.quote.arab){document.getElementById('quote-arab').classList.remove('hidden');document.getElementById('quote-arab').textContent=d.quote.arab}document.getElementById('quote-text').textContent=`"${d.quote.text}"`;document.getElementById('quote-source').textContent=d.quote.source}
+        // Theme & Religion Filter
+        if(st.religion === "islam") {
+            document.getElementById('bismillah').classList.remove('hidden');
+            document.getElementById('footer-bismillah').classList.remove('hidden');
+            document.getElementById('cover-event-name').innerText = "Walimatul 'Ursy";
+        }
 
-const render=(p,el)=>{document.getElementById(el).innerHTML=`<div class="polaroid w-48 mx-auto"><img src="${base+p.image}" class="w-full aspect-[3/4] object-cover" onerror="this.src='../../public/default-avatar.jpg'"></div><h2 class="font-serif text-4xl mt-4 text-theme">${p.name}</h2><p class="text-sm">${p.father} & ${p.mother}</p>`};
-render(g,'groom-section');render(b,'bride-section');
+        // Names
+        const nameStr = `${cp.groom.nickname} & ${cp.bride.nickname}`;
+        document.getElementById('cover-names').innerText = nameStr;
+        document.getElementById('hero-names').innerText = nameStr;
+        document.getElementById('footer-names').innerText = nameStr;
+        document.getElementById('cover-guest').innerText = to;
 
-if(d.events?.length){document.getElementById('event-section').classList.remove('hidden');const ed=document.getElementById('event-details');d.events.forEach(e=>ed.innerHTML+=`<div class="border-t border-theme/20 pt-4 first:border-0"><h4 class="uppercase text-sm">${e.title}</h4><p>${new Date(e.date).toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long'})}</p><p>${e.startTime} WIB</p></div>`);document.getElementById('countdown-wrap').classList.remove('hidden');const cd=new Date(`${ev.date}T${ev.startTime}`).getTime();setInterval(()=>{const d=Math.floor((cd-Date.now())/(1000*60*60*24));document.getElementById('countdown').innerHTML=`<div><div class="text-2xl font-serif">${d}</div><div class="text-xs">Hari</div></div>`},1000)}
+        // Images
+        const heroSrc = gl.heroImage ? base + gl.heroImage : '../../public/default.jpg';
+        document.getElementById('cover-image').src = heroSrc;
+        document.getElementById('hero-image').src = heroSrc;
 
-if(d.gallery.album?.length){document.getElementById('gallery-section').classList.remove('hidden');const gg=document.getElementById('gallery-grid');gg.className=`grid ${d.gallery.album.length===1?'grid-cols-1':'grid-cols-2'} gap-4`;d.gallery.album.forEach(i=>gg.innerHTML+=`<div class="polaroid"><img src="${base+i}" class="aspect-square object-cover"></div>`)}
+        // Date
+        if(ev.length) document.getElementById('hero-date').innerText = new Date(ev[0].date).toLocaleDateString('id-ID', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
 
-if(d.digitalGift?.length){document.getElementById('gift-section').classList.remove('hidden');const gd=document.getElementById('gift-details');d.digitalGift.forEach(gf=>gd.innerHTML+=`<div class="bg-white p-3 rounded-lg my-2"><p class="font-bold">${gf.provider}</p><p>${gf.accountNumber}</p><p class="text-xs">a.n ${gf.accountHolder}</p></div>`)}
+        // Quote
+        if(qt?.text) {
+            document.getElementById('quote-arab').innerText = qt.arab || "";
+            document.getElementById('quote-text').innerText = qt.text;
+            document.getElementById('quote-source').innerText = qt.source;
+        }
 
-document.getElementById('rsvp-link').href=`https://wa.me/${d.logistics.rsvpWaNumber}?text=Halo saya ${to}`;
-document.getElementById('footer-names').textContent=`${g.nickname} & ${b.nickname}`;
-document.getElementById('open-invitation').onclick=()=>{document.getElementById('cover').style.display='none';document.getElementById('app').style.opacity=1;if(d.logistics.music)new Audio(base+d.logistics.music).play().catch(()=>{})};
-});
-</script></body></html>
+        // Couple
+        const renderC = (p, id) => {
+            document.getElementById(id).innerHTML = `
+                <div class="polaroid w-52 mx-auto"><img src="${base + p.image}" class="w-full aspect-[3/4] object-cover" onerror="this.src='../../public/default.jpg'"></div>
+                <h2 class="font-script text-5xl mt-6" style="color:var(--theme-color)">${p.name}</h2>
+                <p class="text-[10px] uppercase tracking-widest mt-3 opacity-60">Putra/i dari</p>
+                <p class="text-sm font-semibold">${p.father} & ${p.mother}</p>
+                ${p.instagram ? `<a href="${p.instagramUrl}" class="inline-block mt-4 text-sm opacity-50"><i class="fa-brands fa-instagram mr-1"></i>${p.instagram}</a>` : ''}`;
+        };
+        renderC(cp.groom, 'groom-section');
+        renderC(cp.bride, 'bride-section');
+
+        // Love Story
+        if(ls?.length) {
+            document.getElementById('story-section').classList.remove('hidden');
+            ls.forEach(s => {
+                document.getElementById('story-list').innerHTML += `
+                    <div class="relative pl-10">
+                        <div class="absolute left-3 top-2 w-2.5 h-2.5 bg-black/20 rounded-full border-4 border-[#FAF7F2]"></div>
+                        <p class="text-[10px] uppercase font-bold opacity-40">${s.date}</p>
+                        <h4 class="font-serif text-xl" style="color:var(--theme-color)">${s.title}</h4>
+                        <p class="text-xs leading-relaxed opacity-70">${s.description}</p>
+                    </div>`;
+            });
+        }
+
+        // Events
+        ev.forEach(e => {
+            document.getElementById('event-details').innerHTML += `
+                <div class="space-y-2">
+                    <h4 class="font-bold tracking-widest uppercase text-[10px]" style="color:var(--theme-color)">${e.title}</h4>
+                    <p class="text-xl font-serif font-bold">${new Date(e.date).toLocaleDateString('id-ID', {weekday:'long', day:'numeric', month:'long'})}</p>
+                    <p class="text-xs uppercase">${e.startTime} - ${e.endTime}</p>
+                    <p class="text-[11px] px-6 opacity-60">${e.address}</p>
+                    <a href="${e.googleMaps}" target="_blank" class="inline-block mt-4 text-[10px] border-b border-black/20 pb-1">LIHAT LOKASI</a>
+                </div>`;
+        });
+
+        // Video
+        if(gl.videoYoutubeId) {
+            document.getElementById('video-section').classList.remove('hidden');
+            document.getElementById('youtube-frame').src = `https://www.youtube.com/embed/${gl.videoYoutubeId}`;
+        }
+
+        // Gallery
+        if(gl.album?.length) {
+            document.getElementById('gallery-section').classList.remove('hidden');
+            gl.album.forEach(i => {
+                document.getElementById('gallery-grid').innerHTML += `<img src="${base + i}" class="w-full rounded-2xl shadow-sm">`;
+            });
+        }
+
+        // Gifts
+        if(dg?.length) {
+            document.getElementById('gift-section').classList.remove('hidden');
+            dg.forEach(g => {
+                document.getElementById('gift-list').innerHTML += `
+                    <div class="p-5 rounded-2xl bg-[#FAF7F2] border border-black/5">
+                        <p class="text-[10px] font-bold opacity-40 uppercase">${g.provider}</p>
+                        <p class="text-xl font-serif font-bold py-1">${g.accountNumber}</p>
+                        <p class="text-xs opacity-60 mb-3">a.n ${g.accountHolder}</p>
+                        <button onclick="navigator.clipboard.writeText('${g.accountNumber}'); alert('Nomor rekening disalin!')" class="text-[9px] bg-white border border-black/10 px-4 py-1.5 rounded-full shadow-sm active:bg-black active:text-white transition-all">SALIN REKENING</button>
+                    </div>`;
+            });
+        }
+
+        // Music & Open
+        const audio = document.getElementById('bg-music');
+        if(lg.music) audio.src = base + lg.music;
+        
+        document.getElementById('open-invitation').onclick = () => {
+            if(lg.music) { audio.play(); document.getElementById('music-btn').classList.remove('hidden'); }
+            gsap.to('#cover', { y: '-100%', duration: 1.5, ease: 'power4.inOut', onComplete: () => document.getElementById('cover').remove() });
+            gsap.to('#app', { opacity: 1, duration: 1.5 });
+        };
+
+        document.getElementById('music-btn').onclick = () => {
+            if(audio.paused) { audio.play(); document.querySelector('.fa-music').classList.add('music-spin'); }
+            else { audio.pause(); document.querySelector('.fa-music').classList.remove('music-spin'); }
+        };
+
+        // Scroll Animation Trigger
+        document.querySelectorAll('.reveal').forEach(el => {
+            gsap.to(el, { opacity: 1, y: 0, duration: 1, scrollTrigger: { trigger: el, start: 'top 85%' } });
+        });
+
+        document.getElementById('loader').remove();
+    }).catch(e => { console.error(e); });
+</script>
+</body>
+</html>
