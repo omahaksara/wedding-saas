@@ -1,74 +1,47 @@
-<!-- ===================================== -->
-<!-- ELEGANCE MOTION - REPAIRED VERSION    -->
-<!-- OMAH AKSARA DIGITAL INVITATION       -->
-<!-- ===================================== -->
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Wedding Invitation</title>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
     <style>
-        :root{
-            --theme-color:#8B7355;
-            --bg-color:#FAF7F2;
-            --text-color:#3E3E3E;
-            --accent-color:#B76E79;
-            --gold:#D6B97A;
-        }
-        *{ margin:0; padding:0; box-sizing:border-box; }
-        html{ scroll-behavior:smooth; }
-        body{ background:var(--bg-color); color:var(--text-color); font-family:'Montserrat',sans-serif; overflow-x:hidden; position:relative; }
-        body::before{ content:''; position:fixed; inset:0; background-image:url('https://www.transparenttextures.com/patterns/noise.png'); opacity:.03; z-index:999; pointer-events:none; }
+        :root{ --theme-color:#8B7355; --bg-color:#FAF7F2; --text-color:#3E3E3E; --accent-color:#B76E79; --gold:#D6B97A; }
+        body{ background:var(--bg-color); color:var(--text-color); font-family:'Montserrat',sans-serif; overflow-x:hidden; }
         .font-script{ font-family:'Parisienne',cursive; }
         .font-serif{ font-family:'Cormorant Garamond',serif; }
         .text-theme{ color:var(--theme-color); }
         .text-gold{ color:var(--gold); }
         .cover-overlay{ background: linear-gradient(to top, rgba(0,0,0,.88), rgba(0,0,0,.45), rgba(0,0,0,.2)); }
-        .btn-theme{ background: linear-gradient(135deg, var(--theme-color), var(--accent-color)); color:white; transition:.5s; }
-        .btn-theme:hover{ transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,.2); }
+        .btn-theme{ background: linear-gradient(135deg, var(--theme-color), var(--accent-color)); color:white; }
         .reveal{ opacity:0; }
         .glass-card{ background:rgba(255,255,255,.4); backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,.2); }
-        .gallery-item{ overflow:hidden; border-radius:26px; }
-        .gallery-item img{ transition:1s; }
-        .gallery-item:hover img{ transform:scale(1.06); }
-        .soft-glow{ position:absolute; width:320px; height:320px; border-radius:999px; background:rgba(255,255,255,.08); filter:blur(100px); }
         .music-spin{ animation:spin 8s linear infinite; }
         @keyframes spin{ from{transform:rotate(0)} to{transform:rotate(360deg)} }
         .float-soft{ animation:floatSoft 5s ease-in-out infinite; }
         @keyframes floatSoft{ 0%, 100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-        @media(max-width:640px){ #hero-names, #cover-names{ font-size:5rem!important; line-height:1; } }
     </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
 <div id="loader" class="fixed inset-0 z-[9999] bg-[#FAF7F2] flex items-center justify-center">
     <div class="text-center">
         <div class="w-12 h-12 border-2 border-[#8B7355] border-t-transparent rounded-full animate-spin mx-auto"></div>
-        <p class="mt-5 text-xs tracking-[0.3em] uppercase text-[#8B7355]">Loading Invitation</p>
     </div>
 </div>
 
-<!-- COVER -->
 <div id="cover" class="fixed inset-0 z-50 flex items-center justify-center text-center text-white overflow-hidden">
     <img id="cover-image" class="absolute inset-0 w-full h-full object-cover" src="" />
     <div class="absolute inset-0 cover-overlay"></div>
     <div class="relative z-10 px-8">
         <p class="uppercase tracking-[0.4em] text-xs mb-6">The Wedding Of</p>
-        <h1 id="cover-names" class="font-script text-8xl text-gold mb-6">Loading...</h1>
+        <h1 id="cover-names" class="font-script text-7xl text-gold mb-6">Loading...</h1>
         <p class="text-sm">Kepada Yth.</p>
         <p id="cover-guest" class="text-xl font-semibold mt-2">Tamu Undangan</p>
         <button id="open-invitation" class="btn-theme rounded-full px-10 py-4 mt-10 shadow-2xl uppercase tracking-widest text-sm">
@@ -77,55 +50,56 @@
     </div>
 </div>
 
-<!-- APP CONTENT -->
 <div id="app" class="opacity-0">
     <section id="hero-section" class="relative h-screen flex items-end justify-center text-center text-white overflow-hidden">
         <img id="hero-image" src="" class="absolute inset-0 w-full h-full object-cover" />
         <div class="absolute inset-0 cover-overlay"></div>
         <div class="relative z-10 pb-24 px-8">
-            <p class="uppercase tracking-[0.4em] text-xs">We Are Getting Married</p>
-            <h1 id="hero-names" class="font-script text-8xl text-gold my-5">Loading...</h1>
-            <p id="hero-date" class="text-sm tracking-[0.3em] uppercase">Loading...</p>
+            <h1 id="hero-names" class="font-script text-7xl text-gold my-5">Loading...</h1>
+            <p id="hero-date" class="text-sm tracking-[0.3em] uppercase"></p>
         </div>
     </section>
 
     <div class="max-w-md mx-auto px-6 py-12">
-        <!-- QUOTE -->
         <section id="quote-section" class="my-20 text-center reveal hidden">
             <i class="fa-solid fa-quote-left text-3xl opacity-20 text-theme"></i>
-            <p id="quote-arab" class="font-serif text-2xl text-theme italic leading-relaxed mt-8 hidden"></p>
-            <p id="quote-text" class="text-sm leading-relaxed mt-6"></p>
+            <p id="quote-arab" class="font-serif text-2xl text-theme italic mt-8 hidden"></p>
+            <p id="quote-text" class="text-sm mt-6"></p>
             <p id="quote-source" class="text-xs tracking-[0.3em] uppercase mt-5 text-theme"></p>
         </section>
 
-        <!-- COUPLE -->
         <section class="my-24 text-center">
             <div id="groom-section" class="reveal"></div>
             <div class="font-script text-7xl text-gold my-12 reveal">&</div>
             <div id="bride-section" class="reveal"></div>
         </section>
 
-        <!-- EVENT -->
-        <section id="event-section" class="my-24 reveal hidden">
-            <h3 class="font-serif text-4xl text-center text-theme mb-14">Save The Date</h3>
-            <div id="event-details" class="space-y-6"></div>
+        <section id="love-story-section" class="my-24 reveal hidden">
+            <h3 class="font-serif text-4xl text-center text-theme mb-10">Our Story</h3>
+            <div id="love-story-list" class="space-y-8"></div>
         </section>
 
-        <!-- GALLERY -->
+        <section id="event-section" class="my-24 reveal hidden">
+            <h3 class="font-serif text-4xl text-center text-theme mb-10">Save The Date</h3>
+            <div id="event-list" class="space-y-6"></div>
+        </section>
+
         <section id="gallery-section" class="my-24 reveal hidden">
-            <h3 class="font-serif text-4xl text-center text-theme mb-14">Our Gallery</h3>
+            <h3 class="font-serif text-4xl text-center text-theme mb-10">Our Gallery</h3>
             <div id="gallery-grid" class="columns-2 gap-3 space-y-3"></div>
         </section>
 
-        <!-- FOOTER -->
+        <section id="gift-section" class="my-24 reveal hidden">
+            <h3 class="font-serif text-4xl text-center text-theme mb-10">Wedding Gift</h3>
+            <div id="gift-list" class="space-y-5"></div>
+        </section>
+
         <footer class="text-center py-24 reveal">
-            <p class="text-sm mt-8 leading-relaxed">Atas kehadiran dan doa restunya, kami ucapkan terima kasih.</p>
-            <h3 id="footer-names" class="font-script text-6xl text-gold mt-10"></h3>
+            <h3 id="footer-names" class="font-script text-5xl text-gold"></h3>
             <p class="text-[10px] opacity-50 mt-10">Digital Invitation by Omah Aksara</p>
         </footer>
     </div>
 
-    <!-- MUSIC TOGGLE -->
     <button id="music-toggle" class="fixed bottom-5 right-5 bg-white/20 backdrop-blur-xl border border-white/20 text-white rounded-full w-14 h-14 z-50 shadow-2xl flex items-center justify-center hidden">
         <i class="fa-solid fa-music"></i>
     </button>
@@ -135,89 +109,104 @@
 
 <script>
     gsap.registerPlugin(ScrollTrigger);
-
     const params = new URLSearchParams(window.location.search);
     const clientSlug = params.get('c');
-    const guestName = params.get('to') || 'Tamu Undangan';
+    const guestName = (params.get('to') || 'Tamu Undangan').replace(/\+/g, ' ');
     const basePath = `../../public/clients/${clientSlug}/`;
     const defaultImage = '../../public/default.jpg';
 
-    fetch(`${basePath}data.json`)
-    .then(res => res.json())
-    .then(data => {
-        const g = data.couple?.groom || {};
-        const b = data.couple?.bride || {};
-        const logistics = data.logistics || {};
-        const gallery = data.gallery || {};
-        const events = data.events || [];
+    fetch(`${basePath}data.json`).then(res => res.json()).then(data => {
+        const { couple, settings, quote, gallery, events, loveStory, digitalGift, logistics } = data;
 
-        // Global Music Setup
-        const music = document.getElementById('bg-music');
-        const musicBtn = document.getElementById('music-toggle');
+        if(settings?.themeColor) document.documentElement.style.setProperty('--theme-color', settings.themeColor);
 
-        if(logistics.music) {
-            // Kita coba dua path: path client atau path folder music umum
-            music.src = basePath + logistics.music;
-            musicBtn.classList.remove('hidden');
-            musicBtn.classList.add('music-spin');
-        }
-
-        // Display Names
-        const coupleNames = `${g.nickname || 'Pria'} & ${b.nickname || 'Wanita'}`;
-        document.getElementById('cover-names').innerText = coupleNames;
-        document.getElementById('hero-names').innerText = coupleNames;
-        document.getElementById('footer-names').innerText = coupleNames;
-        document.getElementById('cover-guest').innerText = guestName.replace(/\+/g, ' ');
-
-        // Images
+        // Names & Hero
+        const names = `${couple.groom.nickname} & ${couple.bride.nickname}`;
+        document.getElementById('cover-names').innerText = names;
+        document.getElementById('hero-names').innerText = names;
+        document.getElementById('footer-names').innerText = names;
+        document.getElementById('cover-guest').innerText = guestName;
+        
         const heroImg = gallery.heroImage ? basePath + gallery.heroImage : defaultImage;
         document.getElementById('cover-image').src = heroImg;
         document.getElementById('hero-image').src = heroImg;
 
-        // Date Hero
-        if(events.length > 0) {
+        if(events?.length > 0) {
             document.getElementById('hero-date').innerText = new Date(events[0].date).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
         }
 
-        // Loader Removal
-        gsap.to('#loader', { opacity: 0, duration: 1, onComplete: () => document.getElementById('loader').remove() });
+        // Quote
+        if(quote?.text) {
+            document.getElementById('quote-section').classList.remove('hidden');
+            if(quote.arab) { document.getElementById('quote-arab').innerText = quote.arab; document.getElementById('quote-arab').classList.remove('hidden'); }
+            document.getElementById('quote-text').innerText = quote.text;
+            document.getElementById('quote-source').innerText = quote.source || '';
+        }
 
-        // OPEN INVITATION
-        document.getElementById('open-invitation').addEventListener('click', () => {
-            // Play music
-            if(music.src) {
-                music.play().catch(e => console.log("Autoplay blocked"));
-            }
+        // Couple
+        const renderC = (p, id) => {
+            document.getElementById(id).innerHTML = `
+                <img src="${basePath + p.image}" class="w-40 h-40 object-cover rounded-full mx-auto border-4 border-white shadow-xl float-soft" onerror="this.src='${defaultImage}'">
+                <h2 class="font-script text-4xl text-gold mt-5">${p.name}</h2>
+                <p class="text-xs mt-2">Putra/i dari Bapak ${p.father} & Ibu ${p.mother}</p>`;
+        };
+        renderC(couple.groom, 'groom-section');
+        renderC(couple.bride, 'bride-section');
 
-            gsap.timeline()
-            .to('#cover', { scale: 1.1, opacity: 0, duration: 1.5, ease: 'power3.inOut', onComplete: () => document.getElementById('cover').style.display = 'none' })
-            .to('#app', { opacity: 1, duration: 1 }, "-=1");
-        });
-
-        // Toggle Music
-        musicBtn.addEventListener('click', () => {
-            if(music.paused) {
-                music.play();
-                musicBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
-                musicBtn.classList.add('music-spin');
-            } else {
-                music.pause();
-                musicBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-                musicBtn.classList.remove('music-spin');
-            }
-        });
-
-        // Standard Reveal Animation
-        gsap.utils.toArray('.reveal').forEach((el) => {
-            gsap.fromTo(el, { opacity: 0, y: 50 }, {
-                opacity: 1, y: 0, duration: 1.2, scrollTrigger: { trigger: el, start: 'top 90%' }
+        // Story
+        if(loveStory?.length > 0) {
+            document.getElementById('love-story-section').classList.remove('hidden');
+            loveStory.forEach(s => {
+                document.getElementById('love-story-list').innerHTML += `<div class="glass-card p-5 rounded-2xl"><h4 class="font-serif text-xl text-theme">${s.title}</h4><p class="text-[10px] uppercase mb-2">${s.date}</p><p class="text-xs">${s.description}</p></div>`;
             });
+        }
+
+        // Events
+        if(events?.length > 0) {
+            document.getElementById('event-section').classList.remove('hidden');
+            events.forEach(e => {
+                document.getElementById('event-list').innerHTML += `<div class="glass-card p-6 rounded-[2rem] text-center"><h4 class="font-serif text-2xl text-theme">${e.title}</h4><p class="text-sm mt-3">${e.date}<br>${e.startTime} - Selesai</p><p class="text-xs mt-4 italic">${e.address}</p></div>`;
+            });
+        }
+
+        // Gallery
+        if(gallery.album?.length > 0) {
+            document.getElementById('gallery-section').classList.remove('hidden');
+            gallery.album.forEach(img => {
+                document.getElementById('gallery-grid').innerHTML += `<div class="gallery-item"><img src="${basePath + img}" class="w-full rounded-xl"></div>`;
+            });
+        }
+
+        // Gift
+        if(digitalGift?.length > 0) {
+            document.getElementById('gift-section').classList.remove('hidden');
+            digitalGift.forEach(g => {
+                document.getElementById('gift-list').innerHTML += `<div class="glass-card p-5 rounded-2xl text-center"><p class="text-xs uppercase">${g.provider}</p><p class="text-xl font-serif my-2">${g.accountNumber}</p><p class="text-xs">a.n ${g.accountHolder}</p></div>`;
+            });
+        }
+
+        // Music
+        const music = document.getElementById('bg-music');
+        const mBtn = document.getElementById('music-toggle');
+        if(logistics.music) { music.src = basePath + logistics.music; mBtn.classList.remove('hidden'); }
+
+        // Interactions
+        document.getElementById('open-invitation').addEventListener('click', () => {
+            if(music.src) music.play().catch(() => {});
+            gsap.to('#cover', { y: '-100%', duration: 1.5, ease: 'power4.inOut', onComplete: () => document.getElementById('cover').remove() });
+            gsap.to('#app', { opacity: 1, duration: 1 });
+            mBtn.classList.add('music-spin');
         });
 
-    })
-    .catch(err => {
-        console.error("Error loading data:", err);
-        document.body.innerHTML = `<div class="h-screen flex items-center justify-center text-center"><div><h2 class="text-xl">Undangan Tidak Ditemukan</h2><p class="opacity-60">Cek parameter URL (?c=slug)</p></div></div>`;
+        mBtn.addEventListener('click', () => {
+            if(music.paused) { music.play(); mBtn.classList.add('music-spin'); }
+            else { music.pause(); mBtn.classList.remove('music-spin'); }
+        });
+
+        gsap.to('#loader', { opacity: 0, duration: 0.5, onComplete: () => document.getElementById('loader').remove() });
+        gsap.utils.toArray('.reveal').forEach(el => {
+            gsap.fromTo(el, { opacity: 0, y: 30 }, { opacity: 1, y: 0, scrollTrigger: { trigger: el, start: 'top 90%' } });
+        });
     });
 </script>
 </body>
