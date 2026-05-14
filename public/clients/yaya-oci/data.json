@@ -6,9 +6,9 @@
   },
   "settings": {
     "islami": true,
-    "religion": "islam",
-    "heroStyle": "full",
-    "coupleFrame": "polaroid"
+    "themeColor": "#8B7355",
+    "coupleFrame": "polaroid",
+    "autoColor": true
   },
   "couple": {
     "groom": {
@@ -41,7 +41,7 @@
       "endTime": "10:00",
       "timezone": "WITA",
       "address": "Desa Petunasugi (SPD), Dusun 4",
-      "googleMaps": "https://maps.app.goo.gl/D7Gm19awuXrkZmPN7?g_st=ac"
+      "googleMaps": "https://maps.google.com/?q=Desa+Petunasugi"
     },
     {
       "title": "Walimatul 'Ursy",
@@ -50,7 +50,19 @@
       "endTime": "23:59",
       "timezone": "WITA",
       "address": "Desa Petunasugi (SPD), Dusun 4",
-      "googleMaps": "https://maps.app.goo.gl/D7Gm19awuXrkZmPN7?g_st=ac"
+      "googleMaps": "https://maps.google.com/?q=Desa+Petunasugi"
+    }
+  ],
+  "loveStory": [
+    {
+      "date": "Juni 2021",
+      "title": "First Meet",
+      "description": "Berawal dari sebuah tanggapan kecil di story."
+    },
+    {
+      "date": "14 April 2024",
+      "title": "Khitbah",
+      "description": "Kami memutuskan untuk bersama dalam ridho-Nya."
     }
   ],
   "gallery": {
@@ -74,21 +86,9 @@
     }
   ],
   "logistics": {
-    "dressCode": "Sopan & Bebas",
+    "music": "musik.mp3",
     "rsvpWaNumber": "6282261567928",
-    "guestNote": "Dengan tidak mengurangi rasa hormat, kami mengharapkan tamu undangan berkenan memakai busana sopan & menutup aurat.",
-    "music": "musik.mp3"
-  },
-  "loveStory": [
-    {
-      "date": "Juni 2021",
-      "title": "First Meet",
-      "description": "Berawal dari sebuah tanggapan kecil di story."
-    },
-    {
-      "date": "14 April 2024",
-      "title": "Khitbah",
-      "description": "Kami memutuskan untuk bersama dalam ridho-Nya."
-    }
-  ]
+    "dressCode": "Sopan & Bebas",
+    "guestNote": "Tanpa mengurangi rasa hormat, kami mengharapkan tamu undangan berkenan hadir."
+  }
 }
