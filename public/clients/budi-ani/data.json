@@ -1,11 +1,10 @@
 {
   "settings": {
-    "themeColor": "#6F806A",
-    "bgColor": "#F5F1EA",
-    "textColor": "#2D352E",
-    "islami": true,
-    "fontPrimary": "Cormorant Garamond",
-    "fontSecondary": "Montserrat"
+    "themeColor": "#8B7355",
+    "bgColor": "#FAF7F2",
+    "textColor": "#3E3E3E",
+    "accentColor": "#B76E79",
+    "islami": true
   },
   "couple": {
     "groom": {
@@ -13,16 +12,16 @@
       "nickname": "Budi",
       "father": "Bapak Ahmad Santoso",
       "mother": "Ibu Siti Aminah",
-      "image": "groom.jpg",
-      "instagram": "@budi_santoso"
+      "image": "foto-pria.jpg",
+      "instagram": "budi_santoso"
     },
     "bride": {
       "name": "Ani Wijaya, S.E.",
       "nickname": "Ani",
       "father": "Bapak Heru Wijaya",
       "mother": "Ibu Ratna Wijaya",
-      "image": "bride.jpg",
-      "instagram": "@ani_wijaya"
+      "image": "foto-wanita.jpg",
+      "instagram": "ani_wijaya"
     }
   },
   "quote": {
@@ -38,58 +37,24 @@
       "endTime": "10:00",
       "timezone": "WIB",
       "address": "Kediaman Mempelai Wanita, Jl. Mawar No. 123, Jakarta",
-      "googleMaps": "https://maps.google.com/?q=Jakarta"
-    },
-    {
-      "title": "Resepsi",
-      "date": "2024-12-12",
-      "startTime": "11:00",
-      "endTime": "14:00",
-      "timezone": "WIB",
-      "address": "Gedung Serbaguna, Jl. Melati No. 45, Jakarta",
-      "googleMaps": "https://maps.google.com/?q=Jakarta"
-    }
-  ],
-  "loveStory": [
-    {
-      "date": "Januari 2020",
-      "title": "Pertama Bertemu",
-      "description": "Kami bertemu di sebuah perpustakaan kota saat sedang mencari buku yang sama."
-    },
-    {
-      "date": "Maret 2022",
-      "title": "Menjalin Komitmen",
-      "description": "Setelah dua tahun berteman, kami memutuskan untuk melangkah ke jenjang yang lebih serius."
+      "googleMaps": "https://maps.google.com"
     }
   ],
   "gallery": {
-    "heroImage": "hero.jpg",
-    "album": [
-      "gal1.jpg",
-      "gal2.jpg",
-      "gal3.jpg",
-      "gal4.jpg",
-      "gal5.jpg",
-      "gal6.jpg"
-    ],
-    "video": "https://www.youtube.com/embed/xxxxxx"
+    "heroImage": "foto-sampul.jpg",
+    "videoYoutubeId": "dQw4w9WgXcQ",
+    "album": ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"]
   },
-  "gift": [
+  "digitalGift": [
     {
-      "bankName": "Bank BCA",
+      "provider": "Bank BCA",
       "accountNumber": "123456789",
       "accountHolder": "Budi Santoso"
-    },
-    {
-      "bankName": "Bank Mandiri",
-      "accountNumber": "987654321",
-      "accountHolder": "Ani Wijaya"
     }
   ],
   "logistics": {
-    "music": "background-music.mp3",
+    "music": "musik.mp3",
     "rsvpWaNumber": "628123456789",
-    "guestNote": "Tanpa mengurangi rasa hormat, kami memohon kehadiran Bapak/Ibu untuk memberikan doa restu.",
-    "showProkes": true
+    "guestNote": "Tanpa mengurangi rasa hormat, kami memohon doa restu Bapak/Ibu."
   }
 }
