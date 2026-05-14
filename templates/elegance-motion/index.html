@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation</title>
+    <title>Undangan Pernikahan Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -16,32 +16,8 @@
         .font-script { font-family: 'Parisienne', cursive; }
         .font-serif { font-family: 'Cormorant Garamond', serif; }
         .reveal { opacity: 0; transform: translateY(30px); }
-        
-        /* CSS Polaroid Default */
-        .polaroid-frame {
-            background: white;
-            padding: 12px 12px 45px 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            border-radius: 2px;
-            display: inline-block;
-            transition: 0.5s;
-        }
-        .polaroid-pria { transform: rotate(-3deg); }
-        .polaroid-wanita { transform: rotate(3deg); }
-        .polaroid-frame img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
-
-        .btn-main {
-            background: var(--theme);
-            color: white;
-            padding: 12px 35px;
-            border-radius: 99px;
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            box-shadow: 0 10px 20px rgba(139, 115, 85, 0.3);
-        }
-
-        /* Countdown Box */
+        .polaroid-frame { background: white; padding: 12px 12px 40px 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-radius: 2px; display: inline-block; }
+        .btn-main { background: var(--theme); color: white; padding: 12px 30px; border-radius: 99px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .cd-item { background: white; padding: 10px; border-radius: 12px; min-width: 65px; border: 1px solid rgba(0,0,0,0.05); }
     </style>
 </head>
@@ -64,14 +40,15 @@
         
         <section class="relative h-[90vh] flex flex-col items-center justify-end pb-20 text-center text-white">
             <img id="hero-img" class="absolute inset-0 w-full h-full object-cover" src="">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
             <div class="relative z-10">
                 <h2 id="names-hero" class="font-script text-6xl text-gold"></h2>
                 <p id="date-hero" class="text-sm mt-4 tracking-[0.2em] font-light uppercase"></p>
             </div>
         </section>
 
-        <section class="py-12 px-6 text-center reveal">
+        <section id="countdown-wrap" class="py-12 px-6 text-center reveal hidden">
+            <p class="text-[9px] uppercase tracking-[0.3em] mb-6 opacity-50">Menuju Hari Bahagia</p>
             <div class="flex justify-center gap-3">
                 <div class="cd-item"><span id="days" class="text-xl font-bold text-[var(--theme)]">0</span><p class="text-[8px] uppercase">Hari</p></div>
                 <div class="cd-item"><span id="hours" class="text-xl font-bold text-[var(--theme)]">0</span><p class="text-[8px] uppercase">Jam</p></div>
@@ -82,26 +59,24 @@
 
         <section class="py-20 px-8 text-center bg-[#FAF7F2]">
             <div class="reveal mb-16">
-                <div class="polaroid-frame polaroid-pria w-56">
-                    <img id="groom-img" src="">
-                </div>
+                <div class="polaroid-frame rotate-[-3deg] w-56"><img id="groom-img" src=""></div>
                 <h3 id="groom-name" class="font-script text-4xl text-[var(--theme)] mt-8"></h3>
                 <p id="groom-parents" class="text-[11px] mt-2 opacity-60"></p>
             </div>
-
             <div class="font-script text-5xl opacity-10 my-10">&</div>
-
-            <div class="reveal">
-                <div class="polaroid-frame polaroid-wanita w-56">
-                    <img id="bride-img" src="">
-                </div>
+            <div class="reveal mb-10">
+                <div class="polaroid-frame rotate-[3deg] w-56"><img id="bride-img" src=""></div>
                 <h3 id="bride-name" class="font-script text-4xl text-[var(--theme)] mt-8"></h3>
                 <p id="bride-parents" class="text-[11px] mt-2 opacity-60"></p>
             </div>
         </section>
 
-        <div id="dynamic-area" class="px-8 pb-20"></div>
+        <div id="dynamic-area"></div>
 
+        <footer class="py-12 text-center border-t border-black/5">
+            <p class="font-script text-3xl text-gold" id="footer-names"></p>
+            <p class="text-[10px] opacity-40 mt-4 tracking-widest uppercase">Digital Invitation by Omah Aksara</p>
+        </footer>
     </div>
 
     <script>
@@ -114,81 +89,90 @@
         document.getElementById('guest-name').innerText = (params.get('to') || 'Tamu Undangan').replace(/\+/g, ' ');
 
         fetch(`${path}data.json`).then(r => r.json()).then(data => {
-            // Meta & Settings
-            if(data.settings.islami) document.getElementById('bismillah').classList.remove('hidden');
             if(data.settings.themeColor) document.documentElement.style.setProperty('--theme', data.settings.themeColor);
+            if(data.settings.islami) document.getElementById('bismillah').classList.remove('hidden');
 
-            // Names & Hero
             const pair = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
             document.getElementById('names-cover').innerText = pair;
             document.getElementById('names-hero').innerText = pair;
+            document.getElementById('footer-names').innerText = pair;
             document.getElementById('cover-img').src = path + data.gallery.heroImage;
             document.getElementById('hero-img').src = path + data.gallery.heroImage;
             
-            const firstEvent = new Date(data.events[0].date);
-            document.getElementById('date-hero').innerText = firstEvent.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-
-            // Groom & Bride
             document.getElementById('groom-name').innerText = data.couple.groom.name;
             document.getElementById('groom-img').src = path + data.couple.groom.image;
             document.getElementById('groom-parents').innerText = `Putra dari ${data.couple.groom.father} & ${data.couple.groom.mother}`;
-            
             document.getElementById('bride-name').innerText = data.couple.bride.name;
             document.getElementById('bride-img').src = path + data.couple.bride.image;
             document.getElementById('bride-parents').innerText = `Putri dari ${data.couple.bride.father} & ${data.couple.bride.mother}`;
 
-            // Countdown Logic
-            const target = new Date(`${data.events[0].date}T${data.events[0].startTime}`).getTime();
-            setInterval(() => {
-                const now = new Date().getTime();
-                const diff = target - now;
-                if(diff > 0) {
-                    document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                    document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
-                }
-            }, 1000);
+            // Countdown
+            if(data.events[0]) {
+                document.getElementById('countdown-wrap').classList.remove('hidden');
+                const target = new Date(`${data.events[0].date}T${data.events[0].startTime}`).getTime();
+                setInterval(() => {
+                    const diff = target - new Date().getTime();
+                    if(diff > 0) {
+                        document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                        document.getElementById('secs').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+                    }
+                }, 1000);
+            }
 
-            // Injeksi Konten Sesuai Data
             let html = '';
-            
-            // Story
-            if(data.loveStory) {
-                html += `<div class="reveal mt-20 text-center">
-                    <h4 class="font-serif text-3xl mb-10 text-[var(--theme)]">Our Journey</h4>
-                    <div class="space-y-8 border-l-2 border-[var(--theme)]/20 ml-4 pl-6 text-left">
-                        ${data.loveStory.map(s => `<div><p class="text-[10px] text-gold font-bold uppercase">${s.date}</p><h5 class="font-serif text-lg">${s.title}</h5><p class="text-xs opacity-70">${s.description}</p></div>`).join('')}
-                    </div>
-                </div>`;
+            // Quote
+            if(data.quote) {
+                html += `<section class="reveal py-20 px-8 text-center italic">
+                    <i class="fa-solid fa-quote-left text-2xl opacity-10 mb-4 block"></i>
+                    ${data.quote.arab ? `<p class="font-serif text-2xl text-[var(--theme)] mb-6 leading-loose">${data.quote.arab}</p>` : ''}
+                    <p class="text-sm font-light leading-relaxed">"${data.quote.text}"</p>
+                    <p class="text-[10px] font-bold mt-4 tracking-[0.2em] uppercase">— ${data.quote.source}</p>
+                </section>`;
             }
 
             // Events
-            html += `<div class="reveal mt-20 text-center">
-                <h4 class="font-serif text-3xl mb-8 text-[var(--theme)]">Acara</h4>
+            html += `<section class="reveal py-10 px-8 text-center">
+                <h4 class="font-serif text-3xl mb-8 text-[var(--theme)]">Save The Date</h4>
                 ${data.events.map(e => `
                     <div class="p-8 rounded-3xl bg-[#FAF7F2] border border-black/5 mb-6">
                         <h5 class="font-serif text-2xl text-[var(--theme)] mb-2">${e.title}</h5>
                         <p class="text-xs font-bold">${e.date}</p>
                         <p class="text-[10px] opacity-60 mb-4">${e.startTime} - ${e.endTime} ${e.timezone}</p>
-                        <p class="text-[11px] mb-4">${e.address}</p>
-                        <a href="${e.googleMaps}" target="_blank" class="btn-main text-[9px] inline-block">Buka Maps</a>
+                        <p class="text-[11px] mb-6">${e.address}</p>
+                        <a href="${e.googleMaps}" target="_blank" class="btn-main text-[9px] inline-block">Lihat Lokasi</a>
                     </div>
                 `).join('')}
-            </div>`;
+            </section>`;
+
+            // Gallery
+            if(data.gallery.album) {
+                html += `<section class="reveal py-20 px-4 text-center">
+                    <h4 class="font-serif text-3xl mb-8 text-[var(--theme)]">Our Gallery</h4>
+                    <div class="grid grid-cols-2 gap-2">${data.gallery.album.map(img => `<div class="aspect-square rounded-lg overflow-hidden shadow-md"><img src="${path+img}" class="w-full h-full object-cover"></div>`).join('')}</div>
+                </section>`;
+            }
+
+            // Video
+            if(data.gallery.videoYoutubeId) {
+                html += `<section class="reveal py-20 px-6 text-center"><h4 class="font-serif text-3xl mb-8 text-[var(--theme)]">Prewedding Video</h4><div class="aspect-video rounded-2xl overflow-hidden shadow-2xl border-4 border-white"><iframe class="w-full h-full" src="https://www.youtube.com/embed/${data.gallery.videoYoutubeId}"></iframe></div></section>`;
+            }
 
             // Gift
             if(data.digitalGift) {
-                html += `<div class="reveal mt-20 text-center">
-                    <h4 class="font-serif text-3xl mb-8 text-[var(--theme)]">Digital Gift</h4>
-                    ${data.digitalGift.map(g => `
-                        <div class="p-6 bg-[#FAF7F2] rounded-2xl mb-4 border-dashed border-2 border-[var(--theme)]/20">
-                            <p class="text-xs font-bold text-gold uppercase">${g.provider}</p>
-                            <p class="text-xl font-serif tracking-widest my-1">${g.accountNumber}</p>
-                            <p class="text-[10px] opacity-50 uppercase">a.n ${g.accountHolder}</p>
-                        </div>
-                    `).join('')}
-                </div>`;
+                html += `<section class="reveal py-20 px-8 text-center"><h4 class="font-serif text-3xl mb-8 text-[var(--theme)]">Digital Gift</h4>
+                ${data.digitalGift.map(g => `<div class="p-6 bg-[#FAF7F2] rounded-2xl mb-4 border-dashed border-2 border-[var(--theme)]/20"><p class="text-[10px] font-bold text-gold uppercase">${g.provider}</p><p class="text-xl font-serif tracking-[0.2em] my-1">${g.accountNumber}</p><p class="text-[9px] opacity-50 uppercase">a.n ${g.accountHolder}</p></div>`).join('')}
+                </section>`;
+            }
+
+            // RSVP
+            if(data.logistics.rsvpWaNumber) {
+                html += `<section class="reveal py-20 px-8 text-center bg-[#FAF7F2] rounded-t-[50px]">
+                    <h4 class="font-serif text-3xl mb-4 text-[var(--theme)]">RSVP</h4>
+                    <p class="text-[11px] opacity-70 mb-8 px-4">${data.logistics.guestNote || ''}</p>
+                    <a href="https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo, saya ingin konfirmasi kehadiran..." class="btn-main inline-block">Konfirmasi via WhatsApp</a>
+                </section>`;
             }
 
             document.getElementById('dynamic-area').innerHTML = html;
