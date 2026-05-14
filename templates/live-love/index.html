@@ -1,298 +1,192 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>LIVE LOVE — Invitation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omah Aksara — Private Invitation</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Montserrat:wght@100;300;400&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #090909;
-            --card: rgba(255,255,255,.06);
-            --line: rgba(255,255,255,.08);
-            --text: #f5f5f5;
-            --pink: #ff0050;
-            --cyan: #00f2ea;
+        :root { --accent: #6F806A; --bg: #F5F1EA; --text: #2D352E; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        
+        /* Layout Aesthetic */
+        .editorial-frame { position: fixed; inset: 0; border: 20px solid var(--bg); pointer-events: none; z-index: 100; }
+        .inner-line { position: fixed; inset: 35px; border: 0.5px solid rgba(111, 128, 106, 0.3); pointer-events: none; z-index: 101; }
+
+        .btn-luxe {
+            border: 1px solid var(--accent); padding: 16px 40px; font-size: 11px;
+            letter-spacing: 0.4em; text-transform: uppercase; transition: all 0.5s ease;
         }
+        .btn-luxe:hover { background: var(--accent); color: white; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { background: var(--bg); color: var(--text); overflow-x: hidden; font-family: 'Poppins', sans-serif; }
-        .font-space { font-family: 'Space Grotesk', sans-serif; }
-
-        /* Animated BG */
-        .bg-animated {
-            position: fixed; inset: 0; z-index: -5;
-            background: radial-gradient(circle at top left, rgba(255,0,80,.2), transparent 40%),
-                        radial-gradient(circle at bottom right, rgba(0,242,234,.2), transparent 40%), #090909;
+        .reveal-mask {
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            transition: clip-path 1.5s cubic-bezier(0.77, 0, 0.175, 1);
         }
-
-        .blur-orb {
-            position: fixed; width: 300px; height: 300px; border-radius: 999px;
-            filter: blur(100px); opacity: .25; z-index: -4;
-        }
-        .orb1 { background: var(--pink); top: -120px; left: -120px; animation: float1 12s infinite alternate ease-in-out; }
-        .orb2 { background: var(--cyan); bottom: -120px; right: -120px; animation: float2 15s infinite alternate ease-in-out; }
-
-        @keyframes float1 { from { transform: translate(0,0); } to { transform: translate(100px,60px); } }
-        @keyframes float2 { from { transform: translate(0,0); } to { transform: translate(-80px,-40px); } }
-
-        /* Glassmorphism */
-        .glass { background: var(--card); backdrop-filter: blur(20px); border: 1px solid var(--line); }
-
-        /* Live Badge */
-        .live-badge {
-            padding: 8px 16px; border-radius: 999px; background: rgba(255,0,80,.2);
-            border: 1px solid var(--pink); font-size: 10px; letter-spacing: .2em; font-weight: bold;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } }
-
-        /* Floating Comments */
-        .comment {
-            position: absolute; right: 20px; max-width: 220px; padding: 10px 14px;
-            border-radius: 15px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.1);
-            backdrop-filter: blur(10px); font-size: 11px; animation: commentFloat 8s linear infinite; opacity: 0;
-        }
-        @keyframes commentFloat {
-            0% { opacity: 0; transform: translateY(20px); }
-            10% { opacity: 1; transform: translateY(0); }
-            90% { opacity: 1; }
-            100% { opacity: 0; transform: translateY(-100px); }
-        }
-
-        /* Floating Emoji */
-        .reaction { position: fixed; bottom: -50px; font-size: 24px; animation: fly 6s linear infinite; opacity: 0; z-index: -1; }
-        @keyframes fly {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 0.6; }
-            100% { transform: translateY(-110vh) translateX(30px); opacity: 0; }
-        }
-
-        .btn-live {
-            background: linear-gradient(135deg, var(--pink), var(--cyan));
-            color: white; border: none; border-radius: 999px; padding: 16px 32px;
-            font-size: 12px; font-weight: 700; letter-spacing: .2em; transition: .4s;
-        }
-        .btn-live:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,0,80,0.4); }
-
-        /* Reveal & Layout */
-        .section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 40px 24px; position: relative; }
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        .gallery-grid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 20px; }
-        ::-webkit-scrollbar { width: 0; }
+        .reveal-mask.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
     </style>
 </head>
-
 <body>
-    <div class="bg-animated"></div>
-    <div class="blur-orb orb1"></div>
-    <div class="blur-orb orb2"></div>
+    <div class="editorial-frame"></div>
+    <div class="inner-line"></div>
 
-    <!-- Floating Reactions -->
-    <div class="reaction" style="left:15%; animation-delay:0s">❤️</div>
-    <div class="reaction" style="left:40%; animation-delay:2s">✨</div>
-    <div class="reaction" style="left:65%; animation-delay:4s">💍</div>
-    <div class="reaction" style="left:85%; animation-delay:1s">😭</div>
-
-    <!-- COVER SECTION -->
-    <section id="cover" class="section items-center text-center">
-        <div class="live-badge mb-6">LIVE ● 12.8K VIEWS</div>
-        <p class="uppercase tracking-[.4em] text-[10px] opacity-60 mb-4">The Exclusive Streaming of</p>
-        
-        <h1 id="coverNames" class="font-space text-6xl font-bold leading-none tracking-tighter">
-            <!-- JS Data -->
-        </h1>
-
-        <div class="mt-12">
-            <p class="text-[10px] opacity-40 uppercase tracking-[.3em] mb-2">GUEST STAR</p>
-            <h2 id="guestName" class="text-2xl font-bold font-space bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">
-                <!-- JS Data -->
-            </h2>
-            <p id="joinNotif" class="text-[11px] mt-2 text-cyan-400 italic opacity-0 transition-opacity duration-1000">joined the room...</p>
+    <!-- PRELOADER / OPENING -->
+    <section id="opening" class="fixed inset-0 z-[200] bg-[#F5F1EA] flex flex-col items-center justify-center text-center">
+        <div class="mb-10">
+            <h2 class="font-serif italic text-2xl opacity-60">The Wedding of</h2>
+            <div class="w-px h-16 bg-[#6F806A]/40 mx-auto my-6"></div>
+            <h1 id="coupleNameHeader" class="text-6xl md:text-8xl font-serif tracking-tighter italic"></h1>
         </div>
-
-        <button id="openBtn" class="btn-live mt-16">TAP TO JOIN LIVE</button>
-
-        <!-- Fake Comments Animation -->
-        <div class="comment" style="top: 20%; animation-delay: 1s;">😭 Cantik banget weyy!</div>
-        <div class="comment" style="top: 35%; animation-delay: 4s;">Samawa ya kalian ✨</div>
-        <div class="comment" style="top: 50%; animation-delay: 2s;">Aaa akhirnya tayang! ❤️</div>
+        <button onclick="unlockInvitation()" class="btn-luxe">Buka Undangan</button>
     </section>
 
-    <!-- MAIN CONTENT -->
-    <main id="app" class="hidden">
-        <!-- HERO IMAGE -->
-        <section class="section reveal">
-            <div class="glass rounded-[40px] overflow-hidden">
-                <img id="heroImage" class="w-full h-[450px] object-cover" src="">
-                <div class="p-8 text-center">
-                    <p class="uppercase tracking-[.4em] text-[10px] opacity-40 mb-3">NOW STREAMING</p>
-                    <h2 id="heroNames" class="font-space text-4xl font-bold"></h2>
-                    <p id="weddingDateText" class="opacity-60 mt-4 text-sm"></p>
-                </div>
+    <!-- CONTENT -->
+    <main id="mainContent" class="hidden">
+        <!-- HERO -->
+        <section class="min-h-screen flex flex-col items-center pt-32 pb-20 px-6">
+            <div id="heroMask" class="reveal-mask w-full max-w-2xl">
+                <img id="heroImg" src="" class="w-full h-[75vh] object-cover contrast-[1.05]">
+            </div>
+            <div class="mt-12 text-center">
+                <p class="text-[10px] tracking-[0.6em] uppercase opacity-50 mb-4">Official Invitation</p>
+                <h2 id="mainDate" class="text-4xl font-serif italic"></h2>
             </div>
         </section>
 
-        <!-- MEMPELAI PROFILE -->
-        <section class="section reveal">
-            <div class="glass rounded-[40px] p-8">
-                <div class="flex items-center gap-4 mb-10">
-                    <img id="profileImage" class="w-16 h-16 rounded-full border-2 border-pink-500 p-0.5 object-cover">
-                    <div>
-                        <h2 id="username" class="font-space font-bold text-xl"></h2>
-                        <p class="text-xs text-cyan-400">The Hosts are now Live! 🔴</p>
-                    </div>
-                </div>
+        <!-- QUOTE -->
+        <section class="py-32 px-10 text-center max-w-4xl mx-auto">
+            <p id="quoteArab" class="text-3xl font-serif text-[#6F806A] mb-8 leading-relaxed"></p>
+            <p id="quoteText" class="italic opacity-70 font-serif text-lg leading-relaxed mb-4"></p>
+            <span id="quoteSource" class="text-[10px] tracking-widest uppercase opacity-40"></span>
+        </section>
 
-                <div class="space-y-10">
-                    <div>
-                        <span class="text-[10px] bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full uppercase tracking-widest font-bold">Groom</span>
-                        <h3 id="groomName" class="font-space text-3xl font-bold mt-3"></h3>
-                        <p id="groomParent" class="opacity-60 text-sm mt-2 leading-relaxed"></p>
-                    </div>
-                    <div>
-                        <span class="text-[10px] bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full uppercase tracking-widest font-bold">Bride</span>
-                        <h3 id="brideName" class="font-space text-3xl font-bold mt-3"></h3>
-                        <p id="brideParent" class="opacity-60 text-sm mt-2 leading-relaxed"></p>
-                    </div>
-                </div>
+        <!-- BRIDE & GROOM -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-0 border-y border-[#6F806A]/10">
+            <div class="p-16 md:p-24 flex flex-col justify-center border-b md:border-b-0 md:border-r border-[#6F806A]/10">
+                <span class="text-[9px] tracking-[0.5em] uppercase text-[#6F806A] mb-6">The Groom</span>
+                <img id="groomImg" src="" class="w-32 h-32 rounded-full object-cover mb-8 grayscale">
+                <h3 id="groomFullName" class="text-4xl font-serif mb-4"></h3>
+                <p id="groomParents" class="text-[10px] opacity-60 leading-loose uppercase tracking-widest"></p>
+            </div>
+            <div class="p-16 md:p-24 flex flex-col justify-center bg-[#2D352E] text-[#F5F1EA]">
+                <span class="text-[9px] tracking-[0.5em] uppercase text-[#6F806A] mb-6">The Bride</span>
+                <img id="brideImg" src="" class="w-32 h-32 rounded-full object-cover mb-8">
+                <h3 id="brideFullName" class="text-4xl font-serif mb-4"></h3>
+                <p id="brideParents" class="text-[10px] opacity-60 leading-loose uppercase tracking-widest"></p>
             </div>
         </section>
 
-        <!-- COUNTDOWN -->
-        <section class="section reveal text-center">
-            <h2 class="font-space text-4xl font-bold mb-12 uppercase tracking-tighter italic">Coming Soon</h2>
-            <div class="flex justify-center gap-3">
-                <div class="glass w-20 py-4 rounded-3xl"><span id="days" class="text-2xl font-bold block">00</span><span class="text-[9px] opacity-40 uppercase">Days</span></div>
-                <div class="glass w-20 py-4 rounded-3xl"><span id="hours" class="text-2xl font-bold block">00</span><span class="text-[9px] opacity-40 uppercase">Hrs</span></div>
-                <div class="glass w-20 py-4 rounded-3xl"><span id="minutes" class="text-2xl font-bold block">00</span><span class="text-[9px] opacity-40 uppercase">Min</span></div>
-                <div class="glass w-20 py-4 rounded-3xl"><span id="seconds" class="text-2xl font-bold block">00</span><span class="text-[9px] opacity-40 uppercase">Sec</span></div>
+        <!-- EVENTS -->
+        <section class="py-32 px-6">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16" id="eventContainer">
+                <!-- Events via JS -->
             </div>
         </section>
 
-        <!-- ITINERARY -->
-        <section class="section reveal">
-            <h2 class="font-space text-5xl font-bold mb-10 tracking-tighter">EVENT<br><span class="text-pink-500">STREAM</span></h2>
-            <div id="eventWrapper" class="space-y-4"></div>
-        </section>
-
-        <!-- GALLERY LOOKBOOK -->
-        <section id="gallerySection" class="section reveal hidden">
-            <h2 class="font-space text-4xl font-bold mb-8 uppercase italic">Moments</h2>
-            <div id="galleryGrid" class="grid grid-cols-2 gap-3"></div>
-        </section>
-
-        <!-- FOOTER RSVP -->
-        <section class="section reveal text-center">
-            <div class="glass rounded-[40px] p-10 bg-gradient-to-b from-white/5 to-transparent">
-                <h2 class="font-space text-5xl font-bold leading-none mb-6 italic">SEE YOU<br>ON LIVE!</h2>
-                <p id="guestNote" class="opacity-60 text-sm leading-relaxed mb-10"></p>
-                <a id="rsvpBtn" target="_blank" class="btn-live inline-block">CONFIRM JOIN ROOM →</a>
+        <!-- STORY -->
+        <section class="py-32 bg-white/50">
+            <h2 class="text-center font-serif text-5xl mb-20 italic">Our Story</h2>
+            <div class="max-w-2xl mx-auto px-10 space-y-16" id="storyContainer">
+                <!-- Story via JS -->
             </div>
         </section>
+
+        <footer class="py-40 text-center">
+            <div class="w-px h-20 bg-[#6F806A]/30 mx-auto mb-10"></div>
+            <p class="text-[10px] tracking-[0.8em] opacity-40 uppercase">Thank You</p>
+            <h2 id="footerCouple" class="text-7xl font-serif italic mt-8 opacity-80"></h2>
+        </footer>
     </main>
 
-    <audio id="music" loop></audio>
+    <audio id="bgm" loop></audio>
 
     <script>
         const params = new URLSearchParams(window.location.search);
-        const clientSlug = params.get('c');
-        const guest = params.get('to')?.replace(/\+/g,' ') || 'Tamu Terhormat';
-        const basePath = `../../public/clients/${clientSlug}/`;
+        const slug = params.get('c') || 'default'; 
+        const path = `../../public/clients/${slug}/`;
 
-        fetch(`${basePath}data.json`)
-        .then(res => res.json())
-        .then(data => {
-            const { groom, bride } = data.couple;
-            const pair = `${groom.nickname} & ${bride.nickname}`;
+        fetch(`${path}data.json`)
+            .then(res => res.json())
+            .then(data => {
+                // Settings & Global
+                document.documentElement.style.setProperty('--accent', data.settings.themeColor);
+                document.documentElement.style.setProperty('--bg', data.settings.bgColor);
+                document.documentElement.style.setProperty('--text', data.settings.textColor);
 
-            // Set Title & Names
-            document.title = `LIVE: ${pair} Wedding`;
-            document.getElementById('coverNames').innerHTML = `${groom.nickname.toUpperCase()}<br>&<br>${bride.nickname.toUpperCase()}`;
-            document.getElementById('guestName').textContent = guest;
-            document.getElementById('heroNames').textContent = pair;
-            document.getElementById('heroImage').src = basePath + data.gallery.heroImage;
-            
-            // Profile
-            document.getElementById('profileImage').src = basePath + groom.image;
-            document.getElementById('username').textContent = `@${groom.nickname.toLowerCase()}_${bride.nickname.toLowerCase()}`;
-            document.getElementById('groomName').textContent = groom.name;
-            document.getElementById('groomParent').textContent = `Putra dari ${groom.father} & ${groom.mother}`;
-            document.getElementById('brideName').textContent = bride.name;
-            document.getElementById('brideParent').textContent = `Putri dari ${bride.father} & ${bride.mother}`;
+                // Names
+                const pair = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
+                document.getElementById('coupleNameHeader').innerText = pair;
+                document.getElementById('footerCouple').innerText = pair;
 
-            // Date Formatting
-            const dateObj = new Date(data.events[0].date);
-            const formatted = dateObj.toLocaleDateString('id-ID', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
-            document.getElementById('weddingDateText').textContent = formatted;
+                // Media
+                document.getElementById('heroImg').src = path + data.gallery.heroImage;
+                document.getElementById('groomImg').src = path + data.couple.groom.image;
+                document.getElementById('brideImg').src = path + data.couple.bride.image;
+                document.getElementById('bgm').src = path + data.logistics.music;
 
-            // Events
-            data.events.forEach(e => {
-                document.getElementById('eventWrapper').innerHTML += `
-                    <div class="glass rounded-[30px] p-6 border-l-4 border-pink-500">
-                        <p class="text-[10px] uppercase opacity-40 mb-1">${e.title}</p>
-                        <h3 class="font-space text-2xl font-bold">${e.startTime}</h3>
-                        <p class="text-xs opacity-60 mt-2">${e.address}</p>
-                        ${e.googleMaps ? `<a href="${e.googleMaps}" target="_blank" class="inline-block mt-4 text-[10px] text-cyan-400 font-bold uppercase tracking-widest">Open Location</a>` : ''}
+                // Couple Details
+                document.getElementById('groomFullName').innerText = data.couple.groom.name;
+                document.getElementById('groomParents').innerText = `Son of ${data.couple.groom.father} & ${data.couple.groom.mother}`;
+                document.getElementById('brideFullName').innerText = data.couple.bride.name;
+                document.getElementById('brideParents').innerText = `Daughter of ${data.couple.bride.father} & ${data.couple.bride.mother}`;
+
+                // Quote
+                document.getElementById('quoteArab').innerText = data.quote.arab;
+                document.getElementById('quoteText').innerText = data.quote.text;
+                document.getElementById('quoteSource').innerText = data.quote.source;
+                document.getElementById('mainDate').innerText = data.events[0].date;
+
+                // Map Events
+                const eventHtml = data.events.map((ev, i) => `
+                    <div class="border-l border-[#6F806A]/20 pl-10 pb-10">
+                        <span class="text-[9px] text-[#6F806A] font-bold tracking-[0.4em] uppercase">Part 0${i+1}</span>
+                        <h4 class="text-4xl font-serif mt-4 mb-2">${ev.title}</h4>
+                        <p class="text-sm italic opacity-60 mb-6">${ev.date} | ${ev.startTime} - ${ev.endTime} ${ev.timezone}</p>
+                        <p class="text-[11px] leading-relaxed tracking-widest uppercase font-medium max-w-xs">${ev.address}</p>
+                        <a href="${ev.googleMaps}" target="_blank" class="inline-block mt-8 text-[9px] tracking-[0.3em] uppercase border-b border-[#6F806A] pb-1">View Location</a>
                     </div>
-                `;
+                `).join('');
+                document.getElementById('eventContainer').innerHTML = eventHtml;
+
+                // Map Story
+                const storyHtml = data.loveStory.map(s => `
+                    <div class="text-center">
+                        <span class="text-[10px] text-[#6F806A] tracking-[0.5em] uppercase">${s.date}</span>
+                        <h4 class="text-2xl font-serif italic mt-2 mb-4">${s.title}</h4>
+                        <p class="text-sm opacity-60 leading-relaxed font-light">${s.description}</p>
+                    </div>
+                `).join('');
+                document.getElementById('storyContainer').innerHTML = storyHtml;
+            })
+            .catch(e => console.error("JSON Error: ", e));
+
+        function unlockInvitation() {
+            const audio = document.getElementById('bgm');
+            audio.play().catch(() => console.log("Audio play deferred"));
+            
+            gsap.to("#opening", { 
+                y: "-100%", duration: 1.5, ease: "expo.inOut", 
+                onComplete: () => {
+                    document.getElementById('opening').style.display = 'none';
+                    document.getElementById('mainContent').classList.remove('hidden');
+                    document.getElementById('heroMask').classList.add('active');
+                    initScrollAnims();
+                } 
             });
-
-            // Gallery
-            if(data.gallery.album?.length) {
-                document.getElementById('gallerySection').classList.remove('hidden');
-                data.gallery.album.forEach(img => {
-                    document.getElementById('galleryGrid').innerHTML += `<img src="${basePath + img}" class="reveal" loading="lazy">`;
-                });
-            }
-
-            // Music & RSVP
-            if(data.logistics.music) document.getElementById('music').src = basePath + data.logistics.music;
-            document.getElementById('guestNote').textContent = data.logistics.guestNote;
-            document.getElementById('rsvpBtn').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo ${groom.nickname} & ${bride.nickname}, Saya ${guest} konfirmasi akan hadir!`;
-
-            // Open Animation
-            document.getElementById('openBtn').onclick = () => {
-                document.getElementById('cover').style.transform = 'translateY(-100%)';
-                document.getElementById('cover').style.transition = '1.2s cubic-bezier(0.7, 0, 0.3, 1)';
-                document.getElementById('app').classList.remove('hidden');
-                setTimeout(() => { document.getElementById('cover').classList.add('hidden'); }, 1200);
-                document.getElementById('music').play().catch(()=>{});
-                initReveal();
-            };
-
-            // Join Notification Effect
-            setTimeout(() => { document.getElementById('joinNotif').style.opacity = '1'; }, 1500);
-
-            // Countdown Logic
-            const target = new Date(`${data.events[0].date}T${data.events[0].startTime}:00`).getTime();
-            setInterval(() => {
-                const now = new Date().getTime();
-                const dist = target - now;
-                if(dist < 0) return;
-                document.getElementById('days').innerText = Math.floor(dist / (1000*60*60*24));
-                document.getElementById('hours').innerText = Math.floor((dist % (1000*60*60*24)) / (1000*60*60));
-                document.getElementById('minutes').innerText = Math.floor((dist % (1000*60*60)) / (1000*60));
-                document.getElementById('seconds').innerText = Math.floor((dist % (1000*60)) / 1000);
-            }, 1000);
-        });
-
-        function initReveal() {
-            const obs = new IntersectionObserver(ents => {
-                ents.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         }
 
-        function copyRek(text, btn) {
-            navigator.clipboard.writeText(text);
-            const old = btn.innerText;
-            btn.innerText = 'COPIED!';
-            setTimeout(() => btn.innerText = old, 2000);
+        function initScrollAnims() {
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.utils.toArray("section").forEach(section => {
+                gsap.from(section, {
+                    scrollTrigger: { trigger: section, start: "top 80%" },
+                    opacity: 0, y: 50, duration: 1.2, ease: "power2.out"
+                });
+            });
         }
     </script>
 </body>
