@@ -1,1103 +1,299 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-<title>LIVE LOVE — Invitation</title>
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-
-<style>
-
-:root{
-    --bg:#090909;
-    --card:rgba(255,255,255,.06);
-    --line:rgba(255,255,255,.08);
-    --text:#f5f5f5;
-    --pink:#ff0050;
-    --cyan:#00f2ea;
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:var(--bg);
-    color:var(--text);
-    overflow-x:hidden;
-    font-family:'Poppins',sans-serif;
-}
-
-/* fonts */
-.font-space{
-    font-family:'Space Grotesk',sans-serif;
-}
-
-/* animated bg */
-.bg-animated{
-    position:fixed;
-    inset:0;
-    z-index:-5;
-
-    background:
-    radial-gradient(circle at top left,
-    rgba(255,0,80,.25),
-    transparent 30%),
-
-    radial-gradient(circle at bottom right,
-    rgba(0,242,234,.25),
-    transparent 30%),
-
-    #090909;
-}
-
-.blur-orb{
-    position:fixed;
-    width:300px;
-    height:300px;
-    border-radius:999px;
-    filter:blur(100px);
-    opacity:.25;
-    z-index:-4;
-}
-
-.orb1{
-    background:#ff0050;
-    top:-120px;
-    left:-120px;
-    animation:float1 12s infinite alternate ease-in-out;
-}
-
-.orb2{
-    background:#00f2ea;
-    bottom:-120px;
-    right:-120px;
-    animation:float2 15s infinite alternate ease-in-out;
-}
-
-@keyframes float1{
-    from{
-        transform:translate(0,0);
-    }
-    to{
-        transform:translate(100px,60px);
-    }
-}
-
-@keyframes float2{
-    from{
-        transform:translate(0,0);
-    }
-    to{
-        transform:translate(-80px,-40px);
-    }
-}
-
-/* glass */
-.glass{
-    background:var(--card);
-    backdrop-filter:blur(20px);
-    border:1px solid var(--line);
-}
-
-/* live badge */
-.live-badge{
-    padding:10px 18px;
-    border-radius:999px;
-    background:rgba(255,0,80,.18);
-    border:1px solid rgba(255,0,80,.45);
-
-    font-size:11px;
-    letter-spacing:.25em;
-
-    animation:pulse 1.4s infinite;
-}
-
-@keyframes pulse{
-    0%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.06);
-    }
-    100%{
-        transform:scale(1);
-    }
-}
-
-/* sections */
-.section{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    padding:32px 24px;
-    position:relative;
-}
-
-/* floating comments */
-.comment{
-    position:absolute;
-    right:14px;
-
-    max-width:240px;
-
-    padding:10px 14px;
-
-    border-radius:18px;
-
-    background:rgba(255,255,255,.08);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    backdrop-filter:blur(10px);
-
-    font-size:12px;
-
-    animation:commentFloat 12s linear infinite;
-}
-
-.comment:nth-child(1){
-    top:18%;
-    animation-delay:0s;
-}
-
-.comment:nth-child(2){
-    top:32%;
-    animation-delay:2s;
-}
-
-.comment:nth-child(3){
-    top:46%;
-    animation-delay:4s;
-}
-
-.comment:nth-child(4){
-    top:60%;
-    animation-delay:6s;
-}
-
-@keyframes commentFloat{
-
-    0%{
-        opacity:0;
-        transform:translateX(80px);
-    }
-
-    10%{
-        opacity:1;
-        transform:translateX(0);
-    }
-
-    85%{
-        opacity:1;
-    }
-
-    100%{
-        opacity:0;
-        transform:translateY(-40px);
-    }
-
-}
-
-/* floating emoji */
-.reaction{
-    position:fixed;
-    bottom:-50px;
-    font-size:24px;
-    animation:fly 8s linear infinite;
-    opacity:.7;
-    z-index:-1;
-}
-
-.r1{
-    left:10%;
-    animation-delay:0s;
-}
-
-.r2{
-    left:35%;
-    animation-delay:2s;
-}
-
-.r3{
-    left:60%;
-    animation-delay:4s;
-}
-
-.r4{
-    left:85%;
-    animation-delay:6s;
-}
-
-@keyframes fly{
-    from{
-        transform:translateY(0) scale(1);
-        opacity:0;
-    }
-
-    10%{
-        opacity:1;
-    }
-
-    to{
-        transform:translateY(-110vh) scale(1.6);
-        opacity:0;
-    }
-}
-
-/* button */
-.btn-live{
-    background:linear-gradient(
-    135deg,
-    var(--pink),
-    var(--cyan));
-
-    color:white;
-
-    border:none;
-
-    border-radius:999px;
-
-    padding:16px 28px;
-
-    font-size:12px;
-
-    font-weight:600;
-
-    letter-spacing:.25em;
-
-    transition:.4s;
-}
-
-.btn-live:hover{
-    transform:scale(1.05);
-}
-
-/* countdown */
-.count-box{
-    width:78px;
-    height:78px;
-    border-radius:24px;
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-}
-
-/* reveal */
-.reveal{
-    opacity:0;
-    transform:translateY(50px);
-    transition:1.2s;
-}
-
-.reveal.active{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* gallery */
-.gallery-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.gallery-grid img{
-    width:100%;
-    aspect-ratio:1/1;
-    object-fit:cover;
-    border-radius:24px;
-    border:1px solid rgba(255,255,255,.06);
-}
-
-/* scrollbar */
-::-webkit-scrollbar{
-    width:0;
-}
-
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>LIVE LOVE — Invitation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #090909;
+            --card: rgba(255,255,255,.06);
+            --line: rgba(255,255,255,.08);
+            --text: #f5f5f5;
+            --pink: #ff0050;
+            --cyan: #00f2ea;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; font-family: 'Poppins', sans-serif; }
+        .font-space { font-family: 'Space Grotesk', sans-serif; }
+
+        /* Animated BG */
+        .bg-animated {
+            position: fixed; inset: 0; z-index: -5;
+            background: radial-gradient(circle at top left, rgba(255,0,80,.2), transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(0,242,234,.2), transparent 40%), #090909;
+        }
+
+        .blur-orb {
+            position: fixed; width: 300px; height: 300px; border-radius: 999px;
+            filter: blur(100px); opacity: .25; z-index: -4;
+        }
+        .orb1 { background: var(--pink); top: -120px; left: -120px; animation: float1 12s infinite alternate ease-in-out; }
+        .orb2 { background: var(--cyan); bottom: -120px; right: -120px; animation: float2 15s infinite alternate ease-in-out; }
+
+        @keyframes float1 { from { transform: translate(0,0); } to { transform: translate(100px,60px); } }
+        @keyframes float2 { from { transform: translate(0,0); } to { transform: translate(-80px,-40px); } }
+
+        /* Glassmorphism */
+        .glass { background: var(--card); backdrop-filter: blur(20px); border: 1px solid var(--line); }
+
+        /* Live Badge */
+        .live-badge {
+            padding: 8px 16px; border-radius: 999px; background: rgba(255,0,80,.2);
+            border: 1px solid var(--pink); font-size: 10px; letter-spacing: .2em; font-weight: bold;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } }
+
+        /* Floating Comments */
+        .comment {
+            position: absolute; right: 20px; max-width: 220px; padding: 10px 14px;
+            border-radius: 15px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.1);
+            backdrop-filter: blur(10px); font-size: 11px; animation: commentFloat 8s linear infinite; opacity: 0;
+        }
+        @keyframes commentFloat {
+            0% { opacity: 0; transform: translateY(20px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-100px); }
+        }
+
+        /* Floating Emoji */
+        .reaction { position: fixed; bottom: -50px; font-size: 24px; animation: fly 6s linear infinite; opacity: 0; z-index: -1; }
+        @keyframes fly {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            100% { transform: translateY(-110vh) translateX(30px); opacity: 0; }
+        }
+
+        .btn-live {
+            background: linear-gradient(135deg, var(--pink), var(--cyan));
+            color: white; border: none; border-radius: 999px; padding: 16px 32px;
+            font-size: 12px; font-weight: 700; letter-spacing: .2em; transition: .4s;
+        }
+        .btn-live:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,0,80,0.4); }
+
+        /* Reveal & Layout */
+        .section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 40px 24px; position: relative; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .gallery-grid img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 20px; }
+        ::-webkit-scrollbar { width: 0; }
+    </style>
 </head>
 
 <body>
+    <div class="bg-animated"></div>
+    <div class="blur-orb orb1"></div>
+    <div class="blur-orb orb2"></div>
 
-<div class="bg-animated"></div>
+    <!-- Floating Reactions -->
+    <div class="reaction" style="left:15%; animation-delay:0s">❤️</div>
+    <div class="reaction" style="left:40%; animation-delay:2s">✨</div>
+    <div class="reaction" style="left:65%; animation-delay:4s">💍</div>
+    <div class="reaction" style="left:85%; animation-delay:1s">😭</div>
 
-<div class="blur-orb orb1"></div>
-<div class="blur-orb orb2"></div>
+    <!-- COVER SECTION -->
+    <section id="cover" class="section items-center text-center">
+        <div class="live-badge mb-6">LIVE ● 12.8K VIEWS</div>
+        <p class="uppercase tracking-[.4em] text-[10px] opacity-60 mb-4">The Exclusive Streaming of</p>
+        
+        <h1 id="coverNames" class="font-space text-6xl font-bold leading-none tracking-tighter">
+            <!-- JS Data -->
+        </h1>
 
-<!-- emoji -->
-<div class="reaction r1">❤️</div>
-<div class="reaction r2">✨</div>
-<div class="reaction r3">💍</div>
-<div class="reaction r4">😭</div>
-
-<!-- COVER -->
-<section id="cover" class="section items-center text-center overflow-hidden">
-
-    <div class="live-badge mb-8">
-        LIVE ● 12.8K
-    </div>
-
-    <p class="uppercase tracking-[.4em] text-xs opacity-50 mb-4">
-        TikTok Live Wedding
-    </p>
-
-    <h1 id="coverNames"
-        class="font-space text-6xl font-bold leading-none">
-    </h1>
-
-    <p id="coverDate"
-       class="mt-8 text-sm opacity-60">
-    </p>
-
-    <div class="mt-10">
-        <p class="text-[11px] opacity-40 uppercase tracking-[.3em]">
-            Kepada Yth
-        </p>
-
-        <p id="guestName"
-           class="mt-3 text-xl">
-        </p>
-    </div>
-
-    <button id="openBtn"
-            class="btn-live mt-14">
-        TAP TO JOIN LIVE
-    </button>
-
-    <!-- comments -->
-    <div class="comment">
-        😭 akhirnya nikah juga
-    </div>
-
-    <div class="comment">
-        masyaAllah couple goals
-    </div>
-
-    <div class="comment">
-        vibesnya aesthetic banget
-    </div>
-
-    <div class="comment">
-        semoga samawa 🤍
-    </div>
-
-</section>
-
-<main id="app" class="hidden">
-
-<!-- HERO -->
-<section class="section reveal text-center">
-
-    <div class="glass rounded-[40px] overflow-hidden">
-
-        <img id="heroImage"
-             class="w-full h-[420px] object-cover">
-
-        <div class="p-8">
-
-            <p class="uppercase tracking-[.4em]
-                      text-xs opacity-40 mb-4">
-                The Wedding Of
-            </p>
-
-            <h2 id="heroNames"
-                class="font-space text-5xl font-bold">
+        <div class="mt-12">
+            <p class="text-[10px] opacity-40 uppercase tracking-[.3em] mb-2">GUEST STAR</p>
+            <h2 id="guestName" class="text-2xl font-bold font-space bg-gradient-to-r from-white to-gray-500 bg-clip-text text-transparent">
+                <!-- JS Data -->
             </h2>
-
-            <p class="opacity-60 mt-6">
-                scrolling sampai halal ✨
-            </p>
-
+            <p id="joinNotif" class="text-[11px] mt-2 text-cyan-400 italic opacity-0 transition-opacity duration-1000">joined the room...</p>
         </div>
 
-    </div>
+        <button id="openBtn" class="btn-live mt-16">TAP TO JOIN LIVE</button>
 
-</section>
+        <!-- Fake Comments Animation -->
+        <div class="comment" style="top: 20%; animation-delay: 1s;">😭 Cantik banget weyy!</div>
+        <div class="comment" style="top: 35%; animation-delay: 4s;">Samawa ya kalian ✨</div>
+        <div class="comment" style="top: 50%; animation-delay: 2s;">Aaa akhirnya tayang! ❤️</div>
+    </section>
 
-<!-- COUPLE -->
-<section class="section reveal">
-
-    <div class="glass rounded-[40px] p-8">
-
-        <div class="flex items-center gap-4">
-
-            <img id="profileImage"
-                 class="w-20 h-20 rounded-full object-cover border border-white/10">
-
-            <div>
-
-                <h2 id="username"
-                    class="font-space text-2xl font-bold">
-                </h2>
-
-                <p class="text-sm opacity-50">
-                    following each other forever
-                </p>
-
+    <!-- MAIN CONTENT -->
+    <main id="app" class="hidden">
+        <!-- HERO IMAGE -->
+        <section class="section reveal">
+            <div class="glass rounded-[40px] overflow-hidden">
+                <img id="heroImage" class="w-full h-[450px] object-cover" src="">
+                <div class="p-8 text-center">
+                    <p class="uppercase tracking-[.4em] text-[10px] opacity-40 mb-3">NOW STREAMING</p>
+                    <h2 id="heroNames" class="font-space text-4xl font-bold"></h2>
+                    <p id="weddingDateText" class="opacity-60 mt-4 text-sm"></p>
+                </div>
             </div>
+        </section>
 
-        </div>
+        <!-- MEMPELAI PROFILE -->
+        <section class="section reveal">
+            <div class="glass rounded-[40px] p-8">
+                <div class="flex items-center gap-4 mb-10">
+                    <img id="profileImage" class="w-16 h-16 rounded-full border-2 border-pink-500 p-0.5 object-cover">
+                    <div>
+                        <h2 id="username" class="font-space font-bold text-xl"></h2>
+                        <p class="text-xs text-cyan-400">The Hosts are now Live! 🔴</p>
+                    </div>
+                </div>
 
-        <div class="mt-12 space-y-12">
-
-            <div>
-
-                <p class="text-xs uppercase tracking-[.3em]
-                          opacity-40 mb-3">
-                    Groom
-                </p>
-
-                <h3 id="groomName"
-                    class="font-space text-4xl font-bold">
-                </h3>
-
-                <p id="groomParent"
-                   class="opacity-60 mt-3">
-                </p>
-
+                <div class="space-y-10">
+                    <div>
+                        <span class="text-[10px] bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full uppercase tracking-widest font-bold">Groom</span>
+                        <h3 id="groomName" class="font-space text-3xl font-bold mt-3"></h3>
+                        <p id="groomParent" class="opacity-60 text-sm mt-2 leading-relaxed"></p>
+                    </div>
+                    <div>
+                        <span class="text-[10px] bg-cyan-500/20 text-cyan-400 px-3 py-1 rounded-full uppercase tracking-widest font-bold">Bride</span>
+                        <h3 id="brideName" class="font-space text-3xl font-bold mt-3"></h3>
+                        <p id="brideParent" class="opacity-60 text-sm mt-2 leading-relaxed"></p>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div>
-
-                <p class="text-xs uppercase tracking-[.3em]
-                          opacity-40 mb-3">
-                    Bride
-                </p>
-
-                <h3 id="brideName"
-                    class="font-space text-4xl font-bold">
-                </h3>
-
-                <p id="brideParent"
-                   class="opacity-60 mt-3">
-                </p>
-
+        <!-- COUNTDOWN -->
+        <section class="section reveal text-center">
+            <h2 class="font-space text-4xl font-bold mb-12 uppercase tracking-tighter italic">Coming Soon</h2>
+            <div class="flex justify-center gap-3">
+                <div class="glass w-20 py-4 rounded-3xl"><span id="days" class="text-2xl font-bold block">00</span><span class="text-[9px] opacity-40 uppercase">Days</span></div>
+                <div class="glass w-20 py-4 rounded-3xl"><span id="hours" class="text-2xl font-bold block">00</span><span class="text-[9px] opacity-40 uppercase">Hrs</span></div>
+                <div class="glass w-20 py-4 rounded-3xl"><span id="minutes" class="text-2xl font-bold block">00</span><span class="text-[9px] opacity-40 uppercase">Min</span></div>
+                <div class="glass w-20 py-4 rounded-3xl"><span id="seconds" class="text-2xl font-bold block">00</span><span class="text-[9px] opacity-40 uppercase">Sec</span></div>
             </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- COUNTDOWN -->
-<section class="section reveal text-center">
-
-    <p class="uppercase tracking-[.4em]
-              text-xs opacity-40 mb-6">
-        countdown live
-    </p>
-
-    <h2 id="eventDate"
-        class="font-space text-5xl font-bold mb-16">
-    </h2>
-
-    <div class="flex justify-center gap-4">
-
-        <div class="glass count-box">
-            <span id="days"
-                  class="text-2xl font-bold">
-                  00
-            </span>
-
-            <span class="text-[10px] opacity-40 uppercase">
-                Days
-            </span>
-        </div>
-
-        <div class="glass count-box">
-            <span id="hours"
-                  class="text-2xl font-bold">
-                  00
-            </span>
-
-            <span class="text-[10px] opacity-40 uppercase">
-                Hrs
-            </span>
-        </div>
-
-        <div class="glass count-box">
-            <span id="minutes"
-                  class="text-2xl font-bold">
-                  00
-            </span>
-
-            <span class="text-[10px] opacity-40 uppercase">
-                Min
-            </span>
-        </div>
-
-        <div class="glass count-box">
-            <span id="seconds"
-                  class="text-2xl font-bold">
-                  00
-            </span>
-
-            <span class="text-[10px] opacity-40 uppercase">
-                Sec
-            </span>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- EVENTS -->
-<section class="section reveal">
-
-    <div>
-
-        <h2 class="font-space text-5xl font-bold mb-10">
-            event stream
-        </h2>
-
-        <div id="eventWrapper"
-             class="space-y-6">
-        </div>
-
-    </div>
-
-</section>
-
-<!-- STORY -->
-<section id="storySection"
-         class="section reveal hidden">
-
-    <h2 class="font-space text-5xl font-bold mb-12">
-        our chats
-    </h2>
-
-    <div id="storyWrapper"
-         class="space-y-6">
-    </div>
-
-</section>
-
-<!-- GALLERY -->
-<section id="gallerySection"
-         class="section reveal hidden">
-
-    <h2 class="font-space text-5xl font-bold mb-12">
-        moments
-    </h2>
-
-    <div id="galleryGrid"
-         class="gallery-grid">
-    </div>
-
-</section>
-
-<!-- VIDEO -->
-<section id="videoSection"
-         class="section reveal hidden">
-
-    <h2 class="font-space text-5xl font-bold mb-12">
-        our reels
-    </h2>
-
-    <div class="glass rounded-[40px] overflow-hidden">
-
-        <div class="aspect-video">
-
-            <iframe id="youtubeFrame"
-                    class="w-full h-full"
-                    frameborder="0"
-                    allowfullscreen>
-            </iframe>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- GIFT -->
-<section id="giftSection"
-         class="section reveal hidden">
-
-    <h2 class="font-space text-5xl font-bold mb-12">
-        send gift
-    </h2>
-
-    <div id="giftWrapper"
-         class="space-y-6">
-    </div>
-
-</section>
-
-<!-- RSVP -->
-<section class="section reveal text-center">
-
-    <div class="glass rounded-[40px] p-10">
-
-        <p class="uppercase tracking-[.4em]
-                  text-xs opacity-40 mb-6">
-            join our live moment
-        </p>
-
-        <h2 class="font-space text-5xl font-bold leading-tight">
-            SEE YOU
-            <br>
-            ON OUR DAY
-        </h2>
-
-        <p id="guestNote"
-           class="opacity-60 mt-8 leading-relaxed">
-        </p>
-
-        <a id="rsvpBtn"
-           target="_blank"
-           class="inline-block btn-live mt-12">
-            JOIN THE PARTY →
-        </a>
-
-    </div>
-
-</section>
-
-</main>
-
-<audio id="music" loop></audio>
-
-<script>
-
-/* PARAMS */
-const params = new URLSearchParams(window.location.search);
-
-const clientSlug = params.get('c');
-
-const guest =
-params.get('to')?.replace(/\+/g,' ')
-|| 'Tamu Undangan';
-
-const basePath =
-`../../public/clients/${clientSlug}/`;
-
-/* FETCH JSON */
-fetch(`${basePath}data.json`)
-
-.then(res => res.json())
-
-.then(data => {
-
-    const groom = data.couple.groom;
-    const bride = data.couple.bride;
-
-    const pair =
-    `${groom.nickname} & ${bride.nickname}`;
-
-    /* dynamic colors */
-    if(data.settings.themeColor){
-        document.documentElement.style
-        .setProperty('--pink',
-        data.settings.themeColor);
-    }
-
-    /* cover */
-    document.getElementById('coverNames')
-    .innerHTML =
-    `${groom.nickname}<br>&<br>${bride.nickname}`;
-
-    document.getElementById('guestName')
-    .textContent = guest;
-
-    /* date */
-    const eventDate =
-    new Date(data.events[0].date);
-
-    const formattedDate =
-    eventDate.toLocaleDateString(
-    'id-ID',
-    {
-        weekday:'long',
-        day:'numeric',
-        month:'long',
-        year:'numeric'
-    });
-
-    document.getElementById('coverDate')
-    .textContent = formattedDate;
-
-    /* hero */
-    document.getElementById('heroImage')
-    .src =
-    basePath + data.gallery.heroImage;
-
-    document.getElementById('heroNames')
-    .textContent = pair;
-
-    /* profile */
-    document.getElementById('profileImage')
-    .src =
-    basePath + groom.image;
-
-    document.getElementById('username')
-    .textContent =
-    `@${groom.nickname.toLowerCase()}.${bride.nickname.toLowerCase()}`;
-
-    document.getElementById('groomName')
-    .textContent = groom.name;
-
-    document.getElementById('groomParent')
-    .textContent =
-    `Putra dari ${groom.father} & ${groom.mother}`;
-
-    document.getElementById('brideName')
-    .textContent = bride.name;
-
-    document.getElementById('brideParent')
-    .textContent =
-    `Putri dari ${bride.father} & ${bride.mother}`;
-
-    document.getElementById('eventDate')
-    .textContent =
-    formattedDate.toUpperCase();
-
-    /* events */
-    data.events.forEach(event => {
-
-        document.getElementById('eventWrapper')
-        .innerHTML += `
-
-        <div class="glass rounded-[32px] p-8">
-
-            <p class="text-xs uppercase
-                      tracking-[.3em]
-                      opacity-40 mb-3">
-
-                ${event.title}
-
-            </p>
-
-            <h3 class="font-space
-                       text-4xl font-bold">
-
-                ${event.startTime}
-
-            </h3>
-
-            <p class="mt-4 opacity-60">
-
-                ${event.address}
-
-            </p>
-
-            ${
-                event.googleMaps
-                ?
-
-                `<a href="${event.googleMaps}"
-                    target="_blank"
-                    class="inline-block mt-6
-                           text-xs opacity-70">
-
-                    Open Maps →
-
-                </a>`
-
-                : ''
+        </section>
+
+        <!-- ITINERARY -->
+        <section class="section reveal">
+            <h2 class="font-space text-5xl font-bold mb-10 tracking-tighter">EVENT<br><span class="text-pink-500">STREAM</span></h2>
+            <div id="eventWrapper" class="space-y-4"></div>
+        </section>
+
+        <!-- GALLERY LOOKBOOK -->
+        <section id="gallerySection" class="section reveal hidden">
+            <h2 class="font-space text-4xl font-bold mb-8 uppercase italic">Moments</h2>
+            <div id="galleryGrid" class="grid grid-cols-2 gap-3"></div>
+        </section>
+
+        <!-- FOOTER RSVP -->
+        <section class="section reveal text-center">
+            <div class="glass rounded-[40px] p-10 bg-gradient-to-b from-white/5 to-transparent">
+                <h2 class="font-space text-5xl font-bold leading-none mb-6 italic">SEE YOU<br>ON LIVE!</h2>
+                <p id="guestNote" class="opacity-60 text-sm leading-relaxed mb-10"></p>
+                <a id="rsvpBtn" target="_blank" class="btn-live inline-block">CONFIRM JOIN ROOM →</a>
+            </div>
+        </section>
+    </main>
+
+    <audio id="music" loop></audio>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const clientSlug = params.get('c');
+        const guest = params.get('to')?.replace(/\+/g,' ') || 'Tamu Terhormat';
+        const basePath = `../../public/clients/${clientSlug}/`;
+
+        fetch(`${basePath}data.json`)
+        .then(res => res.json())
+        .then(data => {
+            const { groom, bride } = data.couple;
+            const pair = `${groom.nickname} & ${bride.nickname}`;
+
+            // Set Title & Names
+            document.title = `LIVE: ${pair} Wedding`;
+            document.getElementById('coverNames').innerHTML = `${groom.nickname.toUpperCase()}<br>&<br>${bride.nickname.toUpperCase()}`;
+            document.getElementById('guestName').textContent = guest;
+            document.getElementById('heroNames').textContent = pair;
+            document.getElementById('heroImage').src = basePath + data.gallery.heroImage;
+            
+            // Profile
+            document.getElementById('profileImage').src = basePath + groom.image;
+            document.getElementById('username').textContent = `@${groom.nickname.toLowerCase()}_${bride.nickname.toLowerCase()}`;
+            document.getElementById('groomName').textContent = groom.name;
+            document.getElementById('groomParent').textContent = `Putra dari ${groom.father} & ${groom.mother}`;
+            document.getElementById('brideName').textContent = bride.name;
+            document.getElementById('brideParent').textContent = `Putri dari ${bride.father} & ${bride.mother}`;
+
+            // Date Formatting
+            const dateObj = new Date(data.events[0].date);
+            const formatted = dateObj.toLocaleDateString('id-ID', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+            document.getElementById('weddingDateText').textContent = formatted;
+
+            // Events
+            data.events.forEach(e => {
+                document.getElementById('eventWrapper').innerHTML += `
+                    <div class="glass rounded-[30px] p-6 border-l-4 border-pink-500">
+                        <p class="text-[10px] uppercase opacity-40 mb-1">${e.title}</p>
+                        <h3 class="font-space text-2xl font-bold">${e.startTime}</h3>
+                        <p class="text-xs opacity-60 mt-2">${e.address}</p>
+                        ${e.googleMaps ? `<a href="${e.googleMaps}" target="_blank" class="inline-block mt-4 text-[10px] text-cyan-400 font-bold uppercase tracking-widest">Open Location</a>` : ''}
+                    </div>
+                `;
+            });
+
+            // Gallery
+            if(data.gallery.album?.length) {
+                document.getElementById('gallerySection').classList.remove('hidden');
+                data.gallery.album.forEach(img => {
+                    document.getElementById('galleryGrid').innerHTML += `<img src="${basePath + img}" class="reveal" loading="lazy">`;
+                });
             }
 
-        </div>
-        `;
-    });
+            // Music & RSVP
+            if(data.logistics.music) document.getElementById('music').src = basePath + data.logistics.music;
+            document.getElementById('guestNote').textContent = data.logistics.guestNote;
+            document.getElementById('rsvpBtn').href = `https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo ${groom.nickname} & ${bride.nickname}, Saya ${guest} konfirmasi akan hadir!`;
 
-    /* story */
-    if(data.loveStory?.length){
+            // Open Animation
+            document.getElementById('openBtn').onclick = () => {
+                document.getElementById('cover').style.transform = 'translateY(-100%)';
+                document.getElementById('cover').style.transition = '1.2s cubic-bezier(0.7, 0, 0.3, 1)';
+                document.getElementById('app').classList.remove('hidden');
+                setTimeout(() => { document.getElementById('cover').classList.add('hidden'); }, 1200);
+                document.getElementById('music').play().catch(()=>{});
+                initReveal();
+            };
 
-        document.getElementById('storySection')
-        .classList.remove('hidden');
+            // Join Notification Effect
+            setTimeout(() => { document.getElementById('joinNotif').style.opacity = '1'; }, 1500);
 
-        data.loveStory.forEach((item,i)=>{
-
-            document.getElementById('storyWrapper')
-            .innerHTML += `
-
-            <div class="glass
-                        rounded-[28px]
-                        p-5
-                        ${i % 2 ? 'ml-auto border border-cyan-400/20 max-w-[85%]' : 'max-w-[85%]'}">
-
-                <p class="text-xs opacity-40 mb-2">
-
-                    ${item.date}
-
-                </p>
-
-                <h3 class="font-bold mb-3">
-
-                    ${item.title}
-
-                </h3>
-
-                <p class="opacity-70 leading-relaxed">
-
-                    ${item.description}
-
-                </p>
-
-            </div>
-            `;
-        });
-    }
-
-    /* gallery */
-    if(data.gallery.album?.length){
-
-        document.getElementById('gallerySection')
-        .classList.remove('hidden');
-
-        data.gallery.album.forEach(img=>{
-
-            document.getElementById('galleryGrid')
-            .innerHTML += `
-
-            <img src="${basePath + img}"
-                 loading="lazy"
-                 onerror="this.style.display='none'">
-
-            `;
-        });
-    }
-
-    /* youtube */
-    if(data.gallery.videoYoutubeId){
-
-        document.getElementById('videoSection')
-        .classList.remove('hidden');
-
-        document.getElementById('youtubeFrame')
-        .src =
-        `https://www.youtube.com/embed/${data.gallery.videoYoutubeId}`;
-    }
-
-    /* gifts */
-    if(data.digitalGift?.length){
-
-        document.getElementById('giftSection')
-        .classList.remove('hidden');
-
-        data.digitalGift.forEach(gift=>{
-
-            document.getElementById('giftWrapper')
-            .innerHTML += `
-
-            <div class="glass rounded-[32px] p-8">
-
-                <p class="text-xs uppercase
-                          tracking-[.3em]
-                          opacity-40 mb-3">
-
-                    ${gift.provider}
-
-                </p>
-
-                <h3 class="font-space
-                           text-3xl font-bold">
-
-                    ${gift.accountNumber}
-
-                </h3>
-
-                <p class="opacity-60 mt-3">
-
-                    a.n ${gift.accountHolder}
-
-                </p>
-
-                <button
-                    onclick="copyRek('${gift.accountNumber}',this)"
-                    class="btn-live mt-6">
-
-                    COPY
-
-                </button>
-
-            </div>
-            `;
-        });
-    }
-
-    /* note */
-    document.getElementById('guestNote')
-    .textContent =
-    data.logistics.guestNote;
-
-    /* rsvp */
-    document.getElementById('rsvpBtn')
-    .href =
-    `https://wa.me/${data.logistics.rsvpWaNumber}?text=Halo saya ${guest} konfirmasi hadir`;
-
-    /* music */
-    const music =
-    document.getElementById('music');
-
-    if(data.logistics.music){
-
-        music.src =
-        basePath + data.logistics.music;
-    }
-
-    /* open */
-    document.getElementById('openBtn')
-    .onclick = ()=>{
-
-        document.getElementById('app')
-        .classList.remove('hidden');
-
-        window.scrollTo({
-            top:window.innerHeight,
-            behavior:'smooth'
+            // Countdown Logic
+            const target = new Date(`${data.events[0].date}T${data.events[0].startTime}:00`).getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const dist = target - now;
+                if(dist < 0) return;
+                document.getElementById('days').innerText = Math.floor(dist / (1000*60*60*24));
+                document.getElementById('hours').innerText = Math.floor((dist % (1000*60*60*24)) / (1000*60*60));
+                document.getElementById('minutes').innerText = Math.floor((dist % (1000*60*60)) / (1000*60));
+                document.getElementById('seconds').innerText = Math.floor((dist % (1000*60)) / 1000);
+            }, 1000);
         });
 
-        music.play().catch(()=>{});
-    };
-
-    /* countdown */
-    const target =
-    new Date(
-    `${data.events[0].date}T${data.events[0].startTime}:00`
-    ).getTime();
-
-    setInterval(()=>{
-
-        const now =
-        new Date().getTime();
-
-        const dist =
-        target - now;
-
-        if(dist < 0){
-
-            document.getElementById('days')
-            .innerHTML = '00';
-
-            document.getElementById('hours')
-            .innerHTML = '00';
-
-            document.getElementById('minutes')
-            .innerHTML = '00';
-
-            document.getElementById('seconds')
-            .innerHTML = '00';
-
-            return;
+        function initReveal() {
+            const obs = new IntersectionObserver(ents => {
+                ents.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
         }
 
-        const d =
-        Math.floor(
-        dist / (1000*60*60*24));
-
-        const h =
-        Math.floor(
-        (dist % (1000*60*60*24))
-        / (1000*60*60));
-
-        const m =
-        Math.floor(
-        (dist % (1000*60*60))
-        / (1000*60));
-
-        const s =
-        Math.floor(
-        (dist % (1000*60))
-        / 1000);
-
-        document.getElementById('days')
-        .innerHTML = d;
-
-        document.getElementById('hours')
-        .innerHTML = h;
-
-        document.getElementById('minutes')
-        .innerHTML = m;
-
-        document.getElementById('seconds')
-        .innerHTML = s;
-
-    },1000);
-
-})
-
-.catch(err=>{
-
-    console.error(err);
-
-    document.body.innerHTML = `
-    <div class="min-h-screen
-                flex items-center
-                justify-center
-                text-center
-                p-8">
-
-        <div>
-
-            <h2 class="text-3xl font-bold mb-4">
-                DATA NOT FOUND
-            </h2>
-
-            <p class="opacity-50">
-                pastikan slug client benar
-            </p>
-
-        </div>
-
-    </div>
-    `;
-});
-
-/* reveal */
-const observer =
-new IntersectionObserver(entries=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target
-            .classList.add('active');
+        function copyRek(text, btn) {
+            navigator.clipboard.writeText(text);
+            const old = btn.innerText;
+            btn.innerText = 'COPIED!';
+            setTimeout(() => btn.innerText = old, 2000);
         }
-
-    });
-
-},{threshold:.15});
-
-document.querySelectorAll('.reveal')
-.forEach(el=>{
-
-    observer.observe(el);
-
-});
-
-/* copy */
-function copyRek(text,btn){
-
-    navigator.clipboard.writeText(text);
-
-    btn.innerHTML = 'COPIED';
-
-    setTimeout(()=>{
-
-        btn.innerHTML = 'COPY';
-
-    },2000);
-}
-
-</script>
-
+    </script>
 </body>
 </html>
