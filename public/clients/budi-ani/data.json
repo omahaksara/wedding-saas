@@ -1,105 +1,95 @@
 {
-  "meta": {
-    "slug": "budi-ani",
-    "template": "kenz-pinterest",
-    "status": "published",
-    "created": "2026-05-09"
-  },
   "settings": {
+    "themeColor": "#6F806A",
+    "bgColor": "#F5F1EA",
+    "textColor": "#2D352E",
     "islami": true,
-    "religion": "islam"
+    "fontPrimary": "Cormorant Garamond",
+    "fontSecondary": "Montserrat"
   },
   "couple": {
     "groom": {
-      "name": "Budianto, S.Pd.",
+      "name": "Budi Santoso, S.T.",
       "nickname": "Budi",
-      "father": "Ngatno Sudrajat",
-      "mother": "Mariati",
-      "image": "foto-pria.jpg",
-      "instagram": "ridwan_ondow",
-      "instagramUrl": "https://www.instagram.com/ridwan_ondow/",
-      "phone": "6285796461157"
+      "father": "Bapak Ahmad Santoso",
+      "mother": "Ibu Siti Aminah",
+      "image": "groom.jpg",
+      "instagram": "@budi_santoso"
     },
     "bride": {
-      "name": "Meilani",
+      "name": "Ani Wijaya, S.E.",
       "nickname": "Ani",
-      "father": "Sudirman",
-      "mother": "Smelia",
-      "image": "foto-wanita.jpg",
-      "instagram": "ondow",
-      "lynkUrl": "https://lynk.id/ondow"
+      "father": "Bapak Heru Wijaya",
+      "mother": "Ibu Ratna Wijaya",
+      "image": "bride.jpg",
+      "instagram": "@ani_wijaya"
     }
   },
   "quote": {
-    "arab": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
-    "text": "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan hidup dari jenismu sendiri, supaya kamu merasa tentram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang.",
+    "arab": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا",
+    "text": "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya.",
     "source": "QS. Ar-Rum: 21"
   },
   "events": [
     {
       "title": "Akad Nikah",
-      "date": "2026-09-06",
-      "startTime": "09:00",
+      "date": "2024-12-12",
+      "startTime": "08:00",
       "endTime": "10:00",
       "timezone": "WIB",
-      "address": "Gedung Ondow Design, Tinombala Dusun III",
-      "googleMaps": "https://maps.app.goo.gl/F9vu7REAqQVUHnLm7"
+      "address": "Kediaman Mempelai Wanita, Jl. Mawar No. 123, Jakarta",
+      "googleMaps": "https://maps.google.com/?q=Jakarta"
     },
     {
-      "title": "Walimatul 'Ursy",
-      "date": "2026-09-06",
+      "title": "Resepsi",
+      "date": "2024-12-12",
       "startTime": "11:00",
-      "endTime": "Selesai",
+      "endTime": "14:00",
       "timezone": "WIB",
-      "address": "Gedung Ondow Design, Tinombala Dusun III",
-      "googleMaps": "https://maps.app.goo.gl/F9vu7REAqQVUHnLm7"
+      "address": "Gedung Serbaguna, Jl. Melati No. 45, Jakarta",
+      "googleMaps": "https://maps.google.com/?q=Jakarta"
+    }
+  ],
+  "loveStory": [
+    {
+      "date": "Januari 2020",
+      "title": "Pertama Bertemu",
+      "description": "Kami bertemu di sebuah perpustakaan kota saat sedang mencari buku yang sama."
+    },
+    {
+      "date": "Maret 2022",
+      "title": "Menjalin Komitmen",
+      "description": "Setelah dua tahun berteman, kami memutuskan untuk melangkah ke jenjang yang lebih serius."
     }
   ],
   "gallery": {
-    "heroImage": "foto-sampul.jpg",
-    "videoYoutubeId": "tDw51Am2nLI",
+    "heroImage": "hero.jpg",
     "album": [
-      "foto1.jpg",
-      "foto2.jpg",
-      "foto3.jpg",
-      "foto4.jpg"
-    ]
+      "gal1.jpg",
+      "gal2.jpg",
+      "gal3.jpg",
+      "gal4.jpg",
+      "gal5.jpg",
+      "gal6.jpg"
+    ],
+    "video": "https://www.youtube.com/embed/xxxxxx"
   },
-  "digitalGift": [
+  "gift": [
     {
-      "provider": "BRI",
-      "accountNumber": "1234567890",
-      "accountHolder": "Meilani",
-      "qrImage": "qr-bri.png"
+      "bankName": "Bank BCA",
+      "accountNumber": "123456789",
+      "accountHolder": "Budi Santoso"
     },
     {
-      "provider": "Mandiri",
-      "accountNumber": "0987654321",
-      "accountHolder": "Budianto",
-      "qrImage": "qr-mandiri.png"
+      "bankName": "Bank Mandiri",
+      "accountNumber": "987654321",
+      "accountHolder": "Ani Wijaya"
     }
   ],
   "logistics": {
-    "dressCode": "Batik Coklat",
-    "contactWaNumber": "6285796461157",
-    "guestMessage": "Mohon doa restu agar pernikahan kami senantiasa dalam lindungan dan keberkahan Allah SWT.",
-    "music": "musik.mp3"
-  },
-  "loveStory": [
-    {
-      "date": "Juni 2021",
-      "title": "First Meet",
-      "description": "Berawal dari sebuah tanggapan kecil di story, siapa sangka percakapan itu membawa kami pada babak baru yang lebih serius."
-    },
-    {
-      "date": "14 April 2024",
-      "title": "Khitbah",
-      "description": "Hingga akhirnya, kami memutuskan untuk bersama, saling menjaga, dan kini siap melangkah ke pelaminan untuk hidup bersama dalam ridho-Nya."
-    },
-    {
-      "date": "06 September 2026",
-      "title": "Menuju Halal",
-      "description": "InsyaAllah kami akan mengikat janji suci pernikahan."
-    }
-  ]
+    "music": "background-music.mp3",
+    "rsvpWaNumber": "628123456789",
+    "guestNote": "Tanpa mengurangi rasa hormat, kami memohon kehadiran Bapak/Ibu untuk memberikan doa restu.",
+    "showProkes": true
+  }
 }
