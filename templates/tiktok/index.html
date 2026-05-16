@@ -11,7 +11,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700&family=Amiri:wght=400;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -40,7 +40,7 @@
             padding: 0;
         }
 
-    .tiktok-container {
+        .tiktok-container {
             height: 100dvh;
             width: 100%;
             overflow-y: auto;
@@ -50,9 +50,9 @@
             -webkit-overflow-scrolling: touch; /* smooth di iOS */
             scrollbar-width: none;
         }
-    .tiktok-container::-webkit-scrollbar { display: none; }
+        .tiktok-container::-webkit-scrollbar { display: none; }
 
-    .tt-slide {
+        .tt-slide {
             height: 100dvh;
             width: 100vw;
             scroll-snap-align: start;
@@ -65,7 +65,7 @@
             flex-shrink: 0;
         }
 
-    .tt-bg {
+        .tt-bg {
             position: absolute;
             inset: 0;
             width: 100%;
@@ -73,14 +73,14 @@
             object-fit: cover;
             z-index: 1;
         }
-    .tt-overlay {
+        .tt-overlay {
             position: absolute;
             inset: 0;
             background: linear-gradient(180deg, transparent 0%, transparent 40%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.75) 100%);
             z-index: 2;
         }
 
-    .tt-content {
+        .tt-content {
             position: relative;
             z-index: 3;
             width: 100%;
@@ -91,11 +91,11 @@
             margin-bottom: env(safe-area-inset-bottom, 16px);
         }
 
-    .tt-caption {
+        .tt-caption {
             flex: 1;
             padding-right: 24px;
         }
-    .tt-username {
+        .tt-username {
             font-size: 15px;
             font-weight: 700;
             margin-bottom: 6px;
@@ -104,7 +104,7 @@
             gap: 4px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.6);
         }
-    .tt-username.verified {
+        .tt-username .verified {
             width: 14px;
             height: 14px;
             background: #20D5EC;
@@ -115,17 +115,18 @@
             font-size: 8px;
             color: #000;
             font-weight: 900;
+            margin-left: 4px;
         }
-    .tt-desc {
+        .tt-desc {
             font-size: 13.5px;
             line-height: 1.45;
             margin-bottom: 8px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.7);
             font-weight: 400;
         }
-    .tt-hashtag { color: #ffffff; font-weight: 600; margin-left: 2px; }
+        .tt-hashtag { color: #ffffff; font-weight: 600; margin-left: 2px; }
 
-    .tt-music {
+        .tt-music {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -135,7 +136,7 @@
             white-space: nowrap;
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
-    .tt-music-ticker {
+        .tt-music-ticker {
             display: inline-block;
             animation: tickerMarquee 10s linear infinite;
         }
@@ -144,7 +145,7 @@
             100% { transform: translate3d(-50%, 0, 0); }
         }
 
-    .tt-actions {
+        .tt-actions {
             display: flex;
             flex-direction: column;
             gap: 16px;
@@ -152,18 +153,18 @@
             padding-bottom: 4px;
             z-index: 10;
         }
-    .tt-action {
+        .tt-action {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 2px;
             cursor: pointer;
         }
-    .tt-action-btn {
+        .tt-action-btn {
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: rgba(255,255,0.15);
+            background: rgba(255,255,255,0.15);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             display: flex;
@@ -171,37 +172,37 @@
             justify-content: center;
             transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
         }
-    .tt-action-btn svg { width: 24px; height: 24px; fill: #ffffff; }
-    .tt-action-btn:active { transform: scale(0.85); }
-    .tt-action-btn.liked svg {
+        .tt-action-btn svg { width: 24px; height: 24px; fill: #ffffff; }
+        .tt-action-btn:active { transform: scale(0.85); }
+        .tt-action-btn.liked svg {
             fill: var(--tiktok-accent);
         }
-    .tt-action-btn.liked {
+        .tt-action-btn.liked {
             animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes heartPop {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.25); }
         }
-    .tt-action-count {
+        .tt-action-count {
             font-size: 11.5px;
             font-weight: 600;
             text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-            color: rgba(255,255,0.9);
+            color: rgba(255,255,255,0.9);
         }
 
-    .tt-avatar-container {
+        .tt-avatar-container {
             position: relative;
             margin-bottom: 8px;
         }
-    .tt-avatar {
+        .tt-avatar {
             width: 46px;
             height: 46px;
             border-radius: 50%;
             border: 1.5px solid #fff;
             object-fit: cover;
         }
-    .tt-avatar-plus {
+        .tt-avatar-plus {
             position: absolute;
             bottom: -5px;
             left: 50%;
@@ -219,12 +220,12 @@
             box-shadow: 0 1px 4px rgba(0,0,0,0.3);
             transition: all 0.3s;
         }
-    .tt-avatar-container.followed.tt-avatar-plus {
+        .tt-avatar-container.followed .tt-avatar-plus {
             transform: translateX(-50%) scale(0);
             opacity: 0;
         }
 
-    .tt-music-disc {
+        .tt-music-disc {
             width: 42px;
             height: 42px;
             border-radius: 50%;
@@ -237,7 +238,7 @@
             align-items: center;
             justify-content: center;
         }
-    .tt-music-disc-thumb {
+        .tt-music-disc-thumb {
             width: 100%;
             height: 100%;
             border-radius: 50%;
@@ -245,7 +246,7 @@
         }
         @keyframes spinDisc { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-    .tt-cover {
+        .tt-cover {
             position: fixed;
             inset: 0;
             z-index: 999;
@@ -257,7 +258,7 @@
             text-align: center;
             padding: 24px;
         }
-    .tt-cover-btn {
+        .tt-cover-btn {
             background: var(--tiktok-accent);
             color: white;
             border: none;
@@ -270,22 +271,22 @@
             box-shadow: 0 4px 14px rgba(254, 44, 85, 0.3);
             transition: opacity 0.2s;
         }
-    .tt-cover-btn:active { opacity: 0.85; }
+        .tt-cover-btn:active { opacity: 0.85; }
 
-    .tt-progress {
+        .tt-progress {
             position: fixed;
             top: 0; left: 0; right: 0;
             height: 2px;
             background: rgba(255,255,255,0.15);
             z-index: 100;
         }
-    .tt-progress-bar {
+        .tt-progress-bar {
             height: 100%;
             background: rgba(255,255,255,0.85);
             width: 0%;
         }
 
-    .tt-heart {
+        .tt-heart {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(0);
@@ -294,7 +295,7 @@
             opacity: 0;
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
         }
-    .tt-heart.show { animation: heartFloat 0.8s ease-out forwards; }
+        .tt-heart.show { animation: heartFloat 0.8s ease-out forwards; }
         @keyframes heartFloat {
             0% { transform: translate(-50%, -50%) scale(0) rotate(-15deg); opacity: 0; }
             10% { transform: translate(-50%, -50%) scale(1.2) rotate(10deg); opacity: 0.9; }
@@ -303,8 +304,8 @@
             100% { transform: translate(-50%, -50%) scale(0.8) translateY(-80px) rotate(15deg); opacity: 0; }
         }
 
-   .font-arab { font-family: 'Amiri', serif; }
-   .hide { display: none!important; }
+        .font-arab { font-family: 'Amiri', serif; }
+        .hide { display: none!important; }
     </style>
 </head>
 <body>
@@ -328,6 +329,7 @@
         let likes = {};
         let music = document.getElementById('bgMusic');
         let slugPath = '';
+        let globalSlides = []; // Menyimpan data slide secara global agar mudah diakses
 
         async function init() {
             const params = new URLSearchParams(window.location.search);
@@ -362,14 +364,15 @@
 
         function renderFeed() {
             const feed = document.getElementById('feed');
-            const slides = [];
             const getImg = (path) => (path && path.trim()!== "")? (path.startsWith('http')? path : slugPath + path) : "https://images.unsplash.com/photo-1519741497674-611481863552?w=800";
 
             const g = D.couple.groom;
             const b = D.couple.bride;
 
+            globalSlides = []; // Reset data global
+
             // 1. COVER
-            slides.push({
+            globalSlides.push({
                 bg: getImg(D.gallery.heroImage),
                 username: `${g.nickname.toLowerCase()}_${b.nickname.toLowerCase()}`,
                 desc: `We’re getting married! ${formatDate(D.events[0].date)} ✨`,
@@ -381,7 +384,7 @@
 
             // 2. QUOTE
             if (D.settings.islami && D.quote) {
-                slides.push({
+                globalSlides.push({
                     bg: getImg(D.gallery.album[0]),
                     username: `${g.nickname.toLowerCase()}_${b.nickname.toLowerCase()}`,
                     desc: D.quote.text,
@@ -393,7 +396,7 @@
             }
 
             // 3. GROOM
-            slides.push({
+            globalSlides.push({
                 bg: getImg(g.image),
                 username: g.instagram.replace('@',''),
                 desc: `Groom: ${g.name}\nPutra dari ${g.father} & ${g.mother}`,
@@ -404,7 +407,7 @@
             });
 
             // 4. BRIDE
-            slides.push({
+            globalSlides.push({
                 bg: getImg(b.image),
                 username: b.instagram.replace('@',''),
                 desc: `Bride: ${b.name}\nPutri dari ${b.father} & ${b.mother}`,
@@ -416,7 +419,7 @@
 
             // 5. EVENTS
             D.events.forEach((e) => {
-                slides.push({
+                globalSlides.push({
                     bg: getImg(D.gallery.album[1]),
                     username: `${g.nickname.toLowerCase()}_${b.nickname.toLowerCase()}`,
                     desc: `<b style="color:${D.settings.accentColor}">${e.title}</b><br>🗓 ${formatDate(e.date)}<br>⏰ ${e.startTime}-${e.endTime} ${e.timezone}<br>📍 ${e.address}`,
@@ -430,7 +433,7 @@
 
             // 6. COUNTDOWN
             if (D.settings.showCountdown) {
-                slides.push({
+                globalSlides.push({
                     bg: getImg(D.gallery.album[2]),
                     username: `${g.nickname.toLowerCase()}_${b.nickname.toLowerCase()}`,
                     desc: `Menghitung hari menuju momen sakral ⏰`,
@@ -445,7 +448,7 @@
             // 7. LOVE STORY
             if (D.settings.showLoveStory) {
                 D.loveStory.forEach(s => {
-                    slides.push({
+                    globalSlides.push({
                         bg: getImg(D.gallery.album[3]),
                         username: `${g.nickname.toLowerCase()}_${b.nickname.toLowerCase()}`,
                         desc: `<b>${s.year} - ${s.title}</b><br>${s.description}`,
@@ -458,7 +461,7 @@
             }
 
             // 8. GALLERY
-            slides.push({
+            globalSlides.push({
                 bg: getImg(D.gallery.album[3]),
                 username: `${g.nickname.toLowerCase()}_${b.nickname.toLowerCase()}`,
                 desc: `Potret kebahagiaan kami dalam lensa waktu ✨`,
@@ -469,8 +472,8 @@
             });
 
             // 9. LIVE STREAMING
-            if (D.liveStreaming.enabled) {
-                slides.push({
+            if (D.liveStreaming && D.liveStreaming.enabled) {
+                globalSlides.push({
                     bg: getImg(D.gallery.heroImage),
                     username: `${g.nickname.toLowerCase()}_${b.nickname.toLowerCase()}`,
                     desc: `Saksikan live streaming pernikahan kami di ${D.liveStreaming.platform}`,
@@ -483,7 +486,7 @@
             }
 
             // 10. RSVP
-            slides.push({
+            globalSlides.push({
                 bg: getImg(D.gallery.heroImage),
                 username: `${g.nickname.toLowerCase()}_${b.nickname.toLowerCase()}`,
                 desc: `Kehadiran & doa restu Anda adalah hadiah terindah. Tap tombol share untuk konfirmasi via WhatsApp`,
@@ -495,9 +498,9 @@
             });
 
             // 11. DIGITAL GIFT
-            if (D.digitalGift.length > 0) {
+            if (D.digitalGift && D.digitalGift.length > 0) {
                 const giftText = D.digitalGift.map(d => `${d.provider}: ${d.accountNumber} a.n ${d.accountHolder}`).join('\n');
-                slides.push({
+                globalSlides.push({
                     bg: getImg(D.gallery.album[0]),
                     username: `${g.nickname.toLowerCase()}_${b.nickname.toLowerCase()}`,
                     desc: `Tanpa mengurangi rasa hormat, bagi yang ingin memberi hadiah:\n${giftText}`,
@@ -509,7 +512,7 @@
                 });
             }
 
-            feed.innerHTML = slides.map((s, i) => `
+            feed.innerHTML = globalSlides.map((s, i) => `
                 <div class="tt-slide" data-index="${i}" ${s.isCountdown? 'data-countdown="true"' : ''}>
                     <img src="${s.bg}" class="tt-bg" alt="">
                     <div class="tt-overlay"></div>
@@ -536,6 +539,7 @@
                                     <img src="${s.avatar}" class="tt-avatar" alt="Avatar">
                                     <div class="tt-avatar-plus">+</div>
                                 </div>
+                            </div>
                             <div class="tt-action" onclick="toggleLike(${i})">
                                 <div class="tt-action-btn" id="like-${i}">
                                     <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
@@ -544,11 +548,11 @@
                             </div>
                             <div class="tt-action" onclick="openComment()">
                                 <div class="tt-action-btn">
-                                    <svg viewBox="0 0 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                                    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
                                 </div>
                                 <div class="tt-action-count">${s.comments}</div>
                             </div>
-                            <div class="tt-action" onclick="handleShare(${i}, ${s.isRSVP || false}, ${s.isEvent || false}, '${s.maps || ''}', ${s.isLive || false}, ${s.isGift || false})">
+                            <div class="tt-action" onclick="handleShare(${i})">
                                 <div class="tt-action-btn">
                                     <svg viewBox="0 0 24 24"><path d="M10 9V5l7 7-7 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z"/></svg>
                                 </div>
@@ -564,7 +568,7 @@
                 </div>
             `).join('');
 
-            // Double tap
+            // Double tap mendeteksi perangkat mobile/touch
             document.querySelectorAll('.tt-slide').forEach(slide => {
                 let lastTap = 0;
                 slide.addEventListener('touchend', (e) => {
@@ -596,7 +600,7 @@
         function toggleLike(index, forceLike = false) {
             const btn = document.getElementById(`like-${index}`);
             const countEl = document.getElementById(`like-count-${index}`);
-            if(!btn ||!countEl) return;
+            if(!btn || !countEl) return;
 
             if (!likes[index] || forceLike) {
                 likes[index] = true;
@@ -620,7 +624,7 @@
             const heart = slide.querySelector('.tt-heart');
             if(!heart) return;
             heart.classList.remove('show');
-            void heart.offsetWidth;
+            void heart.offsetWidth; // trigger reflow
             heart.classList.add('show');
         }
 
@@ -635,16 +639,19 @@
             }
         }
 
-        function handleShare(index, isRSVP, isEvent, maps, isLive, isGift) {
-            if (isRSVP) {
+        function handleShare(index) {
+            const s = globalSlides[index];
+            if (!s) return;
+
+            if (s.isRSVP) {
                 const waNum = D.logistics.rsvpWaNumber;
                 const text = `Halo ${D.couple.groom.nickname} & ${D.couple.bride.nickname}, saya *${D.guest.name}* konfirmasi akan HADIR di acara pernikahan kalian. Terima kasih!`;
                 window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(text)}`, '_blank');
-            } else if (isEvent && maps) {
-                window.open(maps, '_blank');
-            } else if (isLive) {
+            } else if (s.isEvent && s.maps) {
+                window.open(s.maps, '_blank');
+            } else if (s.isLive) {
                 window.open(D.liveStreaming.url, '_blank');
-            } else if (isGift) {
+            } else if (s.isGift) {
                 const firstRek = D.digitalGift[0];
                 navigator.clipboard.writeText(firstRek.accountNumber);
                 alert(`No. rekening ${firstRek.provider} berhasil disalin!`);
@@ -662,8 +669,9 @@
             alert('Kirim ucapan selamat langsung via WhatsApp ya! 💕');
         }
 
+        /***** Utility / Fungsi Tambahan *****/
         function updateCountdown() {
-            if(!D.events ||!D.events[0]) return;
+            if(!D.events || !D.events[0]) return;
             const target = new Date(`${D.events[0].date}T${D.events[0].startTime}:00`).getTime();
             const now = new Date().getTime();
             const diff = target - now;
@@ -699,7 +707,7 @@
             const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
             const d = new Date(dateStr);
             if(isNaN(d.getTime())) return dateStr;
-            return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+            return `${days[d.getDay()]} , ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
         }
 
         function parseCount(str) {
