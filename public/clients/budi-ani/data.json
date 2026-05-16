@@ -32,7 +32,7 @@
     }
   },
   "quote": {
-    "arab": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا",
+    "arab": "وَمِنْ آيَاتِهِ أَنْ خَلَقَ Lَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا",
     "text": "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya.",
     "source": "QS. Ar-Rum: 21"
   },
@@ -79,12 +79,26 @@
   "gallery": {
     "heroImage": "foto-sampul.jpg",
     "videoYoutubeId": "dQw4w9WgXcQ",
-    "album": ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"]
+    "album": [
+      "foto1.jpg", 
+      "foto2.jpg", 
+      "foto3.jpg", 
+      "foto4.jpg"
+    ]
   },
   "protocols": [
-    { "icon": "😷", "label": "Gunakan Masker Bila Kurang Fit" },
-    { "icon": "🧼", "label": "Gunakan Hand Sanitizer" },
-    { "icon": "🙏", "label": "Salam Jarak Jauh Disarankan" }
+    { 
+      "icon": "😷", 
+      "label": "Gunakan Masker Bila Kurang Fit" 
+    },
+    { 
+      "icon": "🧼", 
+      "label": "Gunakan Hand Sanitizer" 
+    },
+    { 
+      "icon": "🙏", 
+      "label": "Salam Jarak Jauh Disarankan" 
+    }
   ],
   "digitalGift": [
     {
