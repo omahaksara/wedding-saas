@@ -4,7 +4,14 @@
     "bgColor": "#FAF7F2",
     "textColor": "#3E3E3E",
     "accentColor": "#B76E79",
-    "islami": true
+    "islami": true,
+    "showCountdown": true,
+    "showLoveStory": true,
+    "showProtocols": true
+  },
+  "guest": {
+    "name": "Tamu Undangan",
+    "group": "Keluarga & Kerabat"
   },
   "couple": {
     "groom": {
@@ -29,6 +36,21 @@
     "text": "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya.",
     "source": "QS. Ar-Rum: 21"
   },
+  "countdown": {
+    "targetDate": "2026-11-12T08:00:00+07:00"
+  },
+  "loveStory": [
+    {
+      "year": "2023",
+      "title": "Pertama Bertemu",
+      "description": "Awal mula dipertemukan dalam satu ruang lingkup kerja yang sama, membangun komunikasi, dan menemukan banyak kesamaan visi."
+    },
+    {
+      "year": "2025",
+      "title": "Khitbah (Lamaran)",
+      "description": "Pertemuan dua keluarga besar untuk mengikat komitmen yang lebih serius dan menentukan hari baik menuju pernikahan."
+    }
+  ],
   "events": [
     {
       "title": "Akad Nikah",
@@ -38,23 +60,48 @@
       "timezone": "WIB",
       "address": "Kediaman Mempelai Wanita, Jl. Mawar No. 123, Jakarta",
       "googleMaps": "https://maps.google.com"
+    },
+    {
+      "title": "Resepsi Pernikahan",
+      "date": "2026-11-12",
+      "startTime": "11:00",
+      "endTime": "14:00",
+      "timezone": "WIB",
+      "address": "Gedung Pertemuan Utama, Jl. Mawar No. 124, Jakarta",
+      "googleMaps": "https://maps.google.com"
     }
   ],
+  "liveStreaming": {
+    "enabled": true,
+    "platform": "YouTube Live",
+    "url": "https://youtube.com"
+  },
   "gallery": {
     "heroImage": "foto-sampul.jpg",
     "videoYoutubeId": "dQw4w9WgXcQ",
     "album": ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"]
   },
+  "protocols": [
+    { "icon": "😷", "label": "Gunakan Masker Bila Kurang Fit" },
+    { "icon": "🧼", "label": "Gunakan Hand Sanitizer" },
+    { "icon": "🙏", "label": "Salam Jarak Jauh Disarankan" }
+  ],
   "digitalGift": [
     {
       "provider": "Bank BCA",
       "accountNumber": "123456789",
       "accountHolder": "Budi Santoso"
+    },
+    {
+      "provider": "Kirim Hadiah Fisik",
+      "accountNumber": "Jl. Mawar No. 123, Jakarta",
+      "accountHolder": "Rumah Mempelai Wanita (Ani)"
     }
   ],
   "logistics": {
     "music": "musik.mp3",
     "rsvpWaNumber": "628123456789",
+    "dressCode": "Earth Tone / Pastel",
     "guestNote": "Tanpa mengurangi rasa hormat, kami memohon doa restu Bapak/Ibu."
   }
 }
