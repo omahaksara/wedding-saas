@@ -3,65 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omah Aksara — Private Editorial Edition</title>
-    
-    <!-- Core Framework & Engine -->
+    <title>Wedding Invitation</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,600&family=Inter:wght@100;200;300;400;500&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,600&family=Inter:wght@100;200;300;400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        :root { 
-            --luxe-gold: #b39359; 
+        :root {
+            --luxe-gold: #b39359;
             --deep-mocca: #1a1715;
             --soft-cream: #fcfbf7;
             --muted-gold: #d4c3a1;
             --white-pure: #ffffff;
         }
-        
+
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: var(--soft-cream); 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--soft-cream);
             color: var(--deep-mocca);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             line-height: 1.8;
         }
-        .font-serif { font-family: 'Cormorant Garamond', serif; }
-        
-        /* Thin Editorial Framework Borders */
-        .editorial-frame {
+       .font-serif { font-family: 'Cormorant Garamond', serif; }
+       .font-arab { font-family: 'Amiri', serif; }
+
+       .editorial-frame {
             position: fixed; inset: 0;
             border: 20px solid var(--soft-cream);
             pointer-events: none; z-index: 140;
             transition: border-color 0.5s ease;
         }
-        .inner-line {
+       .inner-line {
             position: fixed; inset: 32px;
             border: 0.5px solid rgba(179, 147, 89, 0.25);
             pointer-events: none; z-index: 141;
         }
 
         @media (max-width: 640px) {
-            .editorial-frame { border-width: 12px; }
-            .inner-line { inset: 18px; }
+           .editorial-frame { border-width: 12px; }
+           .inner-line { inset: 18px; }
         }
 
-        /* Cinematographic Image Masking */
-        .img-reveal-wrapper {
+       .img-reveal-wrapper {
             position: relative; overflow: hidden;
             clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
             transition: clip-path 1.8s cubic-bezier(0.76, 0, 0.24, 1);
         }
-        .img-reveal-wrapper.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+       .img-reveal-wrapper.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
 
-        /* Premium Editorial Buttons */
-        .luxe-btn {
+       .luxe-btn {
             position: relative; overflow: hidden;
             border: 1px solid var(--luxe-gold);
             padding: 16px 44px; font-size: 10px; letter-spacing: 0.4em;
@@ -70,20 +67,18 @@
             color: var(--deep-mocca);
             cursor: pointer;
         }
-        .luxe-btn:hover { background: var(--luxe-gold); color: white; letter-spacing: 0.5em; }
+       .luxe-btn:hover { background: var(--luxe-gold); color: white; letter-spacing: 0.5em; }
 
-        /* Fine Grain Texture Filter Overlay */
-        .grain {
+       .grain {
             position: fixed; inset: 0; z-index: 190;
             background-image: url("https://upload.wikimedia.org/wikipedia/commons/7/76/1k_filmgrain.png");
             opacity: 0.025; pointer-events: none;
         }
 
-        /* Floating Audio Component */
-        .music-floater {
+       .music-floater {
             position: fixed; bottom: 35px; right: 35px; z-index: 130; cursor: pointer;
         }
-        .disk-wrap {
+       .disk-wrap {
             width: 52px;
             height: 52px;
             background: rgba(255, 255, 255, 0.9);
@@ -94,25 +89,26 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             animation: spin 12s linear infinite;
         }
-        .disk-wrap.paused { animation-play-state: paused; }
+       .disk-wrap.paused { animation-play-state: paused; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* Custom Input Styling for Luxury Look */
-        .luxe-input {
+       .luxe-input {
             width: 100%; background: transparent; border-bottom: 1px solid rgba(26,23,21,0.2);
             padding: 12px 4px; font-size: 12px; font-weight: 300; letter-spacing: 0.1em;
             outline: none; transition: border-color 0.4s;
         }
-        .luxe-input:focus { border-color: var(--luxe-gold); }
+       .luxe-input:focus { border-color: var(--luxe-gold); }
 
-        /* Custom Toast Notification */
         #luxe-toast {
             position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(100px);
             background: var(--deep-mocca); color: var(--soft-cream); padding: 12px 28px;
-            font-size: 10px; letter-spacing: 0.2em; uppercase; z-index: 500; opacity: 0;
+            font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; z-index: 500; opacity: 0;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         #luxe-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+       .hide { display: none!important; }
+       .scrollbar-thin::-webkit-scrollbar { width: 3px; }
+       .scrollbar-thin::-webkit-scrollbar-thumb { background: var(--luxe-gold); }
     </style>
 </head>
 <body>
@@ -121,14 +117,14 @@
     <div class="editorial-frame"></div>
     <div class="inner-line"></div>
 
-    <!-- PRELOADER / SURAT COVER DEPAN -->
+    <!-- COVER -->
     <section id="cover" class="flex flex-col h-screen text-center justify-center bg-[#fcfbf7] z-[250] fixed inset-0 px-6">
         <div class="mb-4">
             <h2 class="font-serif italic text-xl opacity-60 text-stone-500 tracking-wide">The Private Invitation</h2>
         </div>
         <div class="w-[40px] h-[0.5px] bg-[#b39359]/40 mx-auto my-6"></div>
         <h1 id="couple-title" class="text-5xl md:text-7xl font-serif font-light text-stone-800 leading-tight tracking-wide mb-14"></h1>
-        
+
         <div class="mb-10">
             <p class="uppercase tracking-[0.4em] text-[8px] text-stone-400 mb-2">Kangge Hurmat:</p>
             <h3 id="guest-name" class="font-serif text-2xl font-light italic text-stone-700">Tamu Undangan</h3>
@@ -139,10 +135,10 @@
         </div>
     </section>
 
-    <!-- ARCHITECTURE MAIN CONTENT WRAPPER -->
+    <!-- MAIN CONTENT -->
     <div id="main-content" class="opacity-0 transition-opacity duration-1000 max-w-screen-md mx-auto bg-white min-h-screen relative shadow-2xl z-10">
-        
-        <!-- COMPONENT 1: MASTER HERO -->
+
+        <!-- HERO -->
         <section class="min-h-screen pt-32 pb-20 flex flex-col justify-center px-8">
             <div class="img-reveal-wrapper w-full max-w-md mx-auto shadow-sm" id="hero-reveal">
                 <img id="main-photo" src="" class="w-full h-[65vh] object-cover contrast-[1.03] brightness-[0.97]">
@@ -153,8 +149,8 @@
             </div>
         </section>
 
-        <!-- COMPONENT 2: SACRED RELIGIOUS QUOTE -->
-        <section class="bg-white py-28 border-t border-stone-100">
+        <!-- QUOTE -->
+        <section id="quote-section" class="bg-white py-28 border-t border-stone-100">
             <div class="max-w-xl mx-auto text-center px-8">
                 <p id="arab-text" class="font-arab text-3xl mb-10 text-[var(--luxe-gold)] leading-loose tracking-wide"></p>
                 <p id="indo-text" class="font-serif text-lg italic leading-relaxed text-stone-600 font-light"></p>
@@ -163,7 +159,7 @@
             </div>
         </section>
 
-        <!-- COMPONENT 3: GROOM PROFILE -->
+        <!-- GROOM -->
         <section class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center border-y border-stone-100 bg-[#FBFBFA]">
             <div class="md:col-span-6 h-[65vh] overflow-hidden">
                 <img id="pria-foto" src="" class="w-full h-full object-cover parallax-bg grayscale hover:grayscale-0 transition-all duration-[2.5s]">
@@ -176,7 +172,7 @@
             </div>
         </section>
 
-        <!-- COMPONENT 4: BRIDE PROFILE -->
+        <!-- BRIDE -->
         <section class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center bg-[#1a1715] text-[#fcfbf7]">
             <div class="md:col-span-6 p-10 sm:p-16 order-2 md:order-1">
                 <span class="text-[8px] tracking-[0.5em] uppercase text-[var(--muted-gold)] font-semibold block mb-4">Mempelai Wanita</span>
@@ -189,26 +185,51 @@
             </div>
         </section>
 
-        <!-- COMPONENT 5: ITINERARY / TIMELINE AGENDA -->
-        <section class="py-28 bg-white">
+        <!-- COUNTDOWN + EVENTS -->
+        <section id="countdown-section" class="py-28 bg-white">
             <div class="text-center mb-20">
                 <p class="text-[9px] tracking-[0.6em] uppercase opacity-40 mb-1">Titik Mangsa</p>
                 <h2 class="font-serif text-3xl font-light italic text-stone-800">Sasmita Adicara</h2>
+                <div id="countdown" class="flex gap-4 justify-center mt-8 text-center">
+                    <div><span id="days" class="text-3xl font-serif">00</span><p class="text-[8px] tracking-widest uppercase">Hari</p></div>
+                    <div><span id="hours" class="text-3xl font-serif">00</span><p class="text-[8px] tracking-widest uppercase">Jam</p></div>
+                    <div><span id="minutes" class="text-3xl font-serif">00</span><p class="text-[8px] tracking-widest uppercase">Menit</p></div>
+                    <div><span id="seconds" class="text-3xl font-serif">00</span><p class="text-[8px] tracking-widest uppercase">Detik</p></div>
+                </div>
             </div>
-            <div id="event-list" class="max-w-md mx-auto space-y-12 px-8">
-                <!-- Injeksi JS Otomatis -->
+            <div id="event-list" class="max-w-md mx-auto space-y-12 px-8"></div>
+        </section>
+
+        <!-- LOVE STORY -->
+        <section id="story-section" class="py-28 bg-[#FAF9F5] border-y border-stone-200/30">
+            <div class="text-center mb-16">
+                <p class="text-[9px] tracking-[0.6em] uppercase opacity-40 mb-1">Kisah</p>
+                <h2 class="font-serif text-3xl font-light italic text-stone-800">Lakon Tresna</h2>
+            </div>
+            <div id="story-list" class="max-w-md mx-auto space-y-10 px-8"></div>
+        </section>
+
+        <!-- GALLERY -->
+        <section class="py-20 px-8 bg-white">
+            <div class="text-center mb-12">
+                <p class="text-[9px] tracking-[0.6em] uppercase opacity-40 mb-1">Galeri</p>
+                <h2 class="font-serif text-3xl font-light italic text-stone-800">Lensa Kenangan</h2>
+            </div>
+            <div class="max-w-2xl mx-auto">
+                <iframe id="youtube-frame" class="w-full aspect-video mb-4" src="" allowfullscreen></iframe>
+                <div id="album-grid" class="grid grid-cols-2 gap-2"></div>
             </div>
         </section>
 
-        <!-- COMPONENT 6: CINEMATIC LIVE STREAM (NEW!) -->
+        <!-- LIVE STREAMING -->
         <section id="live-section" class="py-20 px-8 bg-[#F8F6F2] border-y border-stone-200/40 text-center hidden">
             <p class="text-[8px] tracking-[0.5em] uppercase text-[var(--luxe-gold)] font-semibold mb-3">Siaran Langsung</p>
             <h3 class="font-serif text-2xl font-light text-stone-800 mb-4">Virtual Celebration</h3>
             <p class="text-xs text-stone-500 font-light max-w-xs mx-auto mb-8 leading-relaxed">Sebab jarak hanyalah angka, kami mengundang Anda menyaksikan janji suci kami secara virtual.</p>
-            <a id="live-url" href="#" target="_blank" class="luxe-btn inline-block text-[9px] !px-10">Gabung Live Streaming</a>
+            <a id="live-url" href="#" target="_blank" class="luxe-btn inline-block text-[9px]!px-10">Gabung Live Streaming</a>
         </section>
 
-        <!-- COMPONENT 7: INTERACTIVE RSVP CORE ENGINE (NEW!) -->
+        <!-- RSVP -->
         <section class="py-28 px-8 sm:px-16 bg-white border-b border-stone-100">
             <div class="max-w-md mx-auto">
                 <div class="text-center mb-14">
@@ -242,16 +263,21 @@
             </div>
         </section>
 
-        <!-- COMPONENT 8: DIGITAL ENVELOPE / WEDDING GIFT (NEW!) -->
+        <!-- DIGITAL GIFT -->
         <section id="gift-section" class="py-28 px-8 bg-[#FAF9F5] border-b border-stone-200/30 text-center hidden">
             <p class="text-[8px] tracking-[0.5em] uppercase text-stone-400 mb-2">Tanda Kasih</p>
             <h3 class="font-serif text-3xl font-light text-stone-800 mb-12 tracking-wide">Dompet Digital</h3>
-            <div id="gift-container" class="max-w-xs mx-auto space-y-6">
-                <!-- Rekening Diinjeksi Disini -->
-            </div>
+            <div id="gift-container" class="max-w-xs mx-auto space-y-6"></div>
         </section>
 
-        <!-- COMPONENT 9: KINETIC GUESTBOOK / UCAPAN (NEW!) -->
+        <!-- PROTOCOLS -->
+        <section id="protocol-section" class="py-20 px-8 bg-white text-center hidden">
+            <p class="text-[8px] tracking-[0.5em] uppercase text-stone-400 mb-2">Protokol</p>
+            <h3 class="font-serif text-3xl font-light text-stone-800 mb-12 tracking-wide">Etika Acara</h3>
+            <div id="protocol-list" class="flex justify-center gap-8 flex-wrap max-w-md mx-auto"></div>
+        </section>
+
+        <!-- WISHES -->
         <section class="py-28 px-8 sm:px-16 bg-white">
             <div class="max-w-md mx-auto">
                 <div class="text-center mb-12">
@@ -261,26 +287,24 @@
                 <div class="space-y-4 mb-10">
                     <input type="text" id="wishes-nama" class="luxe-input" placeholder="Nama Anda">
                     <textarea id="wishes-pesan" rows="3" class="luxe-input resize-none" placeholder="Tulis pesan & doa restu mulia..."></textarea>
-                    <button onclick="submitWish()" class="luxe-btn text-[9px] !py-3 !px-8 mt-2">Kirim Pesan</button>
+                    <button onclick="submitWish()" class="luxe-btn text-[9px]!py-3!px-8 mt-2">Kirim Pesan</button>
                 </div>
-                <!-- Guestbook Feed Stream -->
-                <div id="wishes-feed" class="space-y-4 max-h-[350px] overflow-y-auto pr-2 scrollbar-thin">
-                    <!-- Dinamis via LocalStorage / Mock Stream -->
-                </div>
+                <div id="wishes-feed" class="space-y-4 max-h-[350px] overflow-y-auto pr-2 scrollbar-thin"></div>
             </div>
         </section>
 
-        <!-- COMPONENT 10: LUXURY EXCLUSIVE FOOTER -->
+        <!-- FOOTER -->
         <footer class="py-36 text-center bg-[#111411] text-white px-8">
             <div class="w-px h-14 bg-stone-800 mx-auto mb-8"></div>
             <p class="text-[8px] tracking-[0.6em] text-stone-500 uppercase font-mono">Purna Serat</p>
             <h2 id="footer-names" class="text-5xl font-serif font-light italic mt-6 text-stone-300 tracking-wide"></h2>
             <div class="h-[0.5px] w-6 bg-stone-800 mx-auto mt-10 mb-4"></div>
+            <p id="dress-code" class="text-[10px] uppercase tracking-[0.3em] text-stone-400 mb-4"></p>
             <p class="text-[8px] uppercase tracking-[0.5em] text-stone-600">Private Digital Presentation by Omah Aksara</p>
         </footer>
     </div>
 
-    <!-- AUDIO FLOATER HARDWARE CONTROLLER -->
+    <!-- AUDIO FLOATER -->
     <div id="musicBtn" class="music-floater hidden">
         <div id="diskWrap" class="disk-wrap">
             <svg class="w-full h-full p-1 text-stone-700 opacity-60" viewBox="0 0 100 100">
@@ -292,161 +316,213 @@
         </div>
     </div>
 
-    <!-- CLIPBOARD TOAST -->
+    <!-- TOAST -->
     <div id="luxe-toast">NOMOR REKENING BERHASIL DISALIN</div>
 
     <audio id="audio" loop preload="auto"></audio>
 
     <script>
-        const params = new URLSearchParams(window.location.search);
-        const slug = params.get('c') || 'default-sample';
-        const guestName = params.get('to')?.replace(/\+/g, ' ') || 'Tamu Undangan';
-        const path = `../../public/clients/${slug}/`;
+        let D = {}; // Global data
+        let music = document.getElementById('audio');
+        let isPlaying = false;
 
-        // Atur Informasi Nama Tamu pada Halaman Depan
-        document.getElementById('guest-name').innerText = guestName;
-        document.getElementById('rsvp-nama').value = guestName !== 'Tamu Undangan' ? guestName : '';
+        async function init() {
+            try {
+                const res = await fetch('data.json');
+                D = await res.json();
+                applySettings();
+                renderAll();
+                startCountdown();
+                setInterval(updateCountdown, 1000);
+                getGuestName();
+                loadWishes();
+            } catch (e) {
+                console.error("Error load data.json:", e);
+            }
+        }
 
-        fetch(`${path}data.json`)
-            .then(res => res.json())
-            .then(data => {
-                // Ekstraksi Data Pasangan
-                const groomNick = data.mempelai.pria.panggilan;
-                const brideNick = data.mempelai.wanita.panggilan;
-                document.getElementById('couple-title').innerHTML = `${groomNick} <span class="text-2xl font-light italic text-stone-400 mx-1">&</span> ${brideNick}`;
-                document.getElementById('footer-names').innerHTML = `${groomNick} <span class="font-serif font-light text-3xl text-stone-500">/</span> ${brideNick}`;
-                
-                // Distribusi Aset Gambar Utama & Musik
-                document.getElementById('main-photo').src = path + data.galeri.cover;
-                document.getElementById('hero-date').textContent = new Date(data.acara[0].tanggal).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-                document.getElementById('pria-foto').src = path + data.mempelai.pria.foto;
-                document.getElementById('wanita-foto').src = path + data.mempelai.wanita.foto;
-                document.getElementById('audio').src = path + data.info.music;
+        function applySettings() {
+            const s = D.settings;
+            document.documentElement.style.setProperty('--luxe-gold', s.accentColor);
+            document.documentElement.style.setProperty('--soft-cream', s.bgColor);
+            document.documentElement.style.setProperty('--deep-mocca', s.textColor);
+            document.querySelector('meta[name="theme-color"]').content = s.themeColor;
+            music.src = D.logistics.music;
 
-                // Teks Kutipan Keagamaan
-                document.getElementById('arab-text').textContent = data.content_religius.quote_arab || '';
-                document.getElementById('indo-text').textContent = data.content_religius.quote_indo || '';
-                document.getElementById('quote-source').textContent = data.content_religius.sumber || '';
+            if (!s.islami) document.getElementById('quote-section').classList.add('hide');
+            if (!s.showCountdown) document.getElementById('countdown-section').classList.add('hide');
+            if (!s.showLoveStory) document.getElementById('story-section').classList.add('hide');
+            if (!s.showProtocols) document.getElementById('protocol-section').classList.add('hide');
+        }
 
-                // Struktur Data Detil Mempelai
-                document.getElementById('pria-nama').textContent = data.mempelai.pria.nama;
-                document.getElementById('pria-ortu').textContent = `Putra utama dari Bapak ${data.mempelai.pria.ayah} & Ibu ${data.mempelai.pria.ibu}`;
-                document.getElementById('wanita-nama').textContent = data.mempelai.wanita.nama;
-                document.getElementById('wanita-ortu').textContent = `Putri utama dari Bapak ${data.mempelai.wanita.ayah} & Ibu ${data.mempelai.wanita.ibu}`;
+        function renderAll() {
+            const { couple, guest, quote, gallery, events, countdown, loveStory, liveStreaming, digitalGift, protocols, logistics } = D;
 
-                if(data.mempelai.pria.instagram) {
-                    document.getElementById('pria-ig-box').innerHTML = `<a href="https://instagram.com/${data.mempelai.pria.instagram}" target="_blank" class="inline-block mt-4 text-[9px] tracking-[0.2em] text-[var(--luxe-gold)] uppercase font-medium">@${data.mempelai.pria.instagram}</a>`;
-                }
-                if(data.mempelai.wanita.instagram) {
-                    document.getElementById('wanita-ig-box').innerHTML = `<a href="https://instagram.com/${data.mempelai.wanita.instagram}" target="_blank" class="inline-block mt-4 text-[9px] tracking-[0.2em] text-[var(--muted-gold)] uppercase font-medium">@${data.mempelai.wanita.instagram}</a>`;
-                }
+            // COVER & HERO
+            document.getElementById('couple-title').innerHTML = `${couple.groom.nickname} <span class="text-2xl font-light italic text-stone-400 mx-1">&</span> ${couple.bride.nickname}`;
+            document.getElementById('guest-name').innerText = guest.name;
+            document.getElementById('main-photo').src = gallery.heroImage;
+            document.getElementById('hero-date').textContent = formatDate(events[0].date);
+            document.getElementById('footer-names').innerHTML = `${couple.groom.nickname} <span class="font-serif font-light text-3xl text-stone-500">/</span> ${couple.bride.nickname}`;
+            document.getElementById('dress-code').innerText = `Dress Code: ${logistics.dressCode}`;
 
-                // Loop Daftar Agenda Acara Editorial
-                data.acara.forEach((e, i) => {
-                    document.getElementById('event-list').innerHTML += `
-                        <div class="reveal-up bg-stone-50/50 border border-stone-200/30 p-8 rounded-sm relative shadow-xs">
-                            <span class="text-[8px] text-[var(--luxe-gold)] font-bold tracking-[0.4em] uppercase">Bagian 0${i+1} — ${e.label}</span>
-                            <h4 class="text-3xl font-serif font-light text-stone-800 mt-4 mb-2 tracking-wide">${e.tanggal}</h4>
-                            <p class="text-xs italic text-stone-500 mb-5 font-mono">${e.waktu}</p>
-                            <p class="text-[11px] leading-relaxed tracking-[0.1em] text-stone-600 font-light mb-6">${e.lokasi}</p>
-                            <a href="${e.maps_link || '#'}" target="_blank" class="inline-block text-[9px] tracking-[0.3em] uppercase border-b border-[var(--luxe-gold)] pb-1 text-stone-700 font-medium">Petunjuk Navigasi</a>
+            // QUOTE
+            document.getElementById('arab-text').textContent = quote.arab;
+            document.getElementById('indo-text').textContent = quote.text;
+            document.getElementById('quote-source').textContent = quote.source;
+
+            // COUPLE
+            document.getElementById('pria-foto').src = couple.groom.image;
+            document.getElementById('pria-nama').textContent = couple.groom.name;
+            document.getElementById('pria-ortu').textContent = `Putra dari ${couple.groom.father} & ${couple.groom.mother}`;
+            document.getElementById('pria-ig-box').innerHTML = `<a href="https://instagram.com/${couple.groom.instagram}" target="_blank" class="inline-block mt-4 text-[9px] tracking-[0.2em] text-[var(--luxe-gold)] uppercase font-medium">@${couple.groom.instagram}</a>`;
+
+            document.getElementById('wanita-foto').src = couple.bride.image;
+            document.getElementById('wanita-nama').textContent = couple.bride.name;
+            document.getElementById('wanita-ortu').textContent = `Putri dari ${couple.bride.father} & ${couple.bride.mother}`;
+            document.getElementById('wanita-ig-box').innerHTML = `<a href="https://instagram.com/${couple.bride.instagram}" target="_blank" class="inline-block mt-4 text-[9px] tracking-[0.2em] text-[var(--muted-gold)] uppercase font-medium">@${couple.bride.instagram}</a>`;
+
+            // EVENTS
+            const eventList = document.getElementById('event-list');
+            events.forEach((e, i) => {
+                eventList.innerHTML += `
+                    <div class="reveal-up bg-stone-50/50 border border-stone-200/30 p-8 rounded-sm relative shadow-xs">
+                        <span class="text-[8px] text-[var(--luxe-gold)] font-bold tracking-[0.4em] uppercase">Bagian 0${i+1} — ${e.title}</span>
+                        <h4 class="text-3xl font-serif font-light text-stone-800 mt-4 mb-2 tracking-wide">${formatDate(e.date)}</h4>
+                        <p class="text-xs italic text-stone-500 mb-5 font-mono">${e.startTime} - ${e.endTime} ${e.timezone}</p>
+                        <p class="text-[11px] leading-relaxed tracking-[0.1em] text-stone-600 font-light mb-6">${e.address}</p>
+                        <a href="${e.googleMaps}" target="_blank" class="inline-block text-[9px] tracking-[0.3em] uppercase border-b border-[var(--luxe-gold)] pb-1 text-stone-700 font-medium">Petunjuk Navigasi</a>
+                    </div>`;
+            });
+
+            // LOVE STORY
+            const storyList = document.getElementById('story-list');
+            loveStory.forEach(s => {
+                storyList.innerHTML += `
+                    <div class="reveal-up border-l-[0.5px] border-[var(--luxe-gold)] pl-6">
+                        <span class="text-[10px] font-mono text-[var(--luxe-gold)]">${s.year}</span>
+                        <h4 class="text-2xl font-serif font-light mt-2 mb-3">${s.title}</h4>
+                        <p class="text-xs text-stone-600 font-light leading-relaxed">${s.description}</p>
+                    </div>`;
+            });
+
+            // GALLERY
+            document.getElementById('youtube-frame').src = `https://www.youtube.com/embed/${gallery.videoYoutubeId}`;
+            const albumGrid = document.getElementById('album-grid');
+            gallery.album.forEach(img => {
+                albumGrid.innerHTML += `<img src="${img}" class="w-full aspect-square object-cover">`;
+            });
+
+            // LIVE
+            if (liveStreaming.enabled) {
+                document.getElementById('live-section').classList.remove('hidden');
+                document.getElementById('live-url').href = liveStreaming.url;
+            }
+
+            // GIFT
+            if (digitalGift.length > 0) {
+                document.getElementById('gift-section').classList.remove('hidden');
+                const giftContainer = document.getElementById('gift-container');
+                digitalGift.forEach(rek => {
+                    giftContainer.innerHTML += `
+                        <div class="bg-white border border-stone-200/40 p-6 text-center rounded-sm shadow-2xs">
+                            <p class="text-[10px] font-medium tracking-widest text-stone-400 uppercase mb-1">${rek.provider}</p>
+                            <p class="font-mono text-sm tracking-wider text-stone-800 font-medium my-2">${rek.accountNumber}</p>
+                            <p class="text-[10px] text-stone-500 uppercase tracking-wide mb-4">a.n ${rek.accountHolder}</p>
+                            ${rek.provider.includes('Bank')? `<button onclick="copyToClipboard('${rek.accountNumber}')" class="text-[8px] uppercase tracking-[0.2em] border border-stone-300 px-4 py-2 hover:bg-stone-900 hover:text-white transition-all">Salin Rekening</button>` : ''}
                         </div>`;
                 });
+            }
 
-                // Integrasi Fitur Live Streaming Virtual (Jika Tersedia)
-                if(data.info?.live_streaming_url) {
-                    document.getElementById('live-section').classList.remove('hidden');
-                    document.getElementById('live-url').href = data.info.live_streaming_url;
-                }
+            // PROTOCOLS
+            if (protocols.length > 0) {
+                document.getElementById('protocol-section').classList.remove('hidden');
+                const protocolList = document.getElementById('protocol-list');
+                protocols.forEach(p => {
+                    protocolList.innerHTML += `
+                        <div class="text-center">
+                            <span class="text-3xl">${p.icon}</span>
+                            <p class="text-[10px] text-stone-600 mt-2 uppercase tracking-wider">${p.label}</p>
+                        </div>`;
+                });
+            }
 
-                // Integrasi Fitur Digital Envelope / Rekening Bank (Jika Tersedia)
-                if(data.info?.rekening && data.info.rekening.length > 0) {
-                    document.getElementById('gift-section').classList.remove('hidden');
-                    data.info.rekening.forEach(rek => {
-                        document.getElementById('gift-container').innerHTML += `
-                            <div class="bg-white border border-stone-200/40 p-6 text-center rounded-sm shadow-2xs">
-                                <p class="text-[10px] font-medium tracking-widest text-stone-400 uppercase mb-1">${rek.bank}</p>
-                                <p class="font-mono text-sm tracking-wider text-stone-800 font-medium my-2" id="rek-${rek.nomor}">${rek.nomor}</p>
-                                <p class="text-[10px] text-stone-500 uppercase tracking-wide mb-4">a.n ${rek.pemilik}</p>
-                                <button onclick="copyToClipboard('${rek.nomor}')" class="text-[8px] uppercase tracking-[0.2em] border border-stone-300 px-4 py-2 hover:bg-stone-900 hover:text-white transition-all">Salin Rekening</button>
-                            </div>`;
-                    });
-                }
+            // RSVP WA
+            document.getElementById('rsvpForm').onsubmit = (e) => {
+                e.preventDefault();
+                const nama = document.getElementById('rsvp-nama').value;
+                const status = document.getElementById('rsvp-status').value;
+                const pax = document.getElementById('rsvp-pax').value;
+                const text = `Halo ${couple.groom.nickname} & ${couple.bride.nickname}, saya *${nama}* ingin konfirmasi:\n\nStatus: *${status}*\nJumlah: *${pax} orang*\n\nTerima kasih.`;
+                window.open(`https://wa.me/${logistics.rsvpWaNumber}?text=${encodeURIComponent(text)}`, '_blank');
+            };
+        }
 
-                // Inisialisasi Feed Alur Komentar Awal Mockup
-                loadWishes();
-
-                // Handler Pengiriman Form RSVP langsung via Integrasi WhatsApp API
-                document.getElementById('rsvpForm').onsubmit = (event) => {
-                    event.preventDefault();
-                    const rName = document.getElementById('rsvp-nama').value;
-                    const rStatus = document.getElementById('rsvp-status').value;
-                    const rPax = document.getElementById('rsvp-pax').value;
-                    const waText = `Halo, saya *${rName}* ingin mengonfirmasi Kehadiran Berdasarkan Undangan Digital.\n\nStatus: *${rStatus}*\nJumlah Tamu: *${rPax} Orang*\n\nTerima kasih.`;
-                    window.open(`https://wa.me/${data.info.whatsapp_rsvp || ''}?text=${encodeURIComponent(waText)}`, '_blank');
-                };
-            })
-            .catch(err => console.error("Konstruksi Parsing Data Gagal: ", err));
-
-        // Fungsi Membuka Undangan & Memicu Musik Latar Belakang
         function startExperience() {
-            const audio = document.getElementById('audio');
-            const diskWrap = document.getElementById('diskWrap');
-            const musicBtn = document.getElementById('musicBtn');
-            
-            audio.volume = 0.4;
-            audio.play().then(() => {
-                diskWrap.classList.remove('paused');
-            }).catch(() => console.log("Audio ditangguhkan browser"));
+            music.volume = 0.4;
+            music.play().then(() => {
+                document.getElementById('diskWrap').classList.remove('paused');
+                isPlaying = true;
+            }).catch(e => console.log("Autoplay blocked"));
 
-            gsap.to("#cover", { 
-                y: "-100%", 
-                duration: 1.8, 
+            gsap.to("#cover", {
+                y: "-100%",
+                duration: 1.8,
                 ease: "expo.inOut",
                 onComplete: () => {
                     document.getElementById('cover').style.display = 'none';
                     document.getElementById('main-content').classList.remove('opacity-0');
                     document.getElementById('hero-reveal').classList.add('active');
-                    musicBtn.classList.remove('hidden');
-                    initLuxuryAnimations();
+                    document.getElementById('musicBtn').classList.remove('hidden');
+                    initAnimations();
                 }
             });
 
-            musicBtn.onclick = () => {
-                if(audio.paused) {
-                    audio.play();
-                    diskWrap.classList.remove('paused');
+            document.getElementById('musicBtn').onclick = () => {
+                if (isPlaying) {
+                    music.pause();
+                    document.getElementById('diskWrap').classList.add('paused');
                 } else {
-                    audio.pause();
-                    diskWrap.classList.add('paused');
+                    music.play();
+                    document.getElementById('diskWrap').classList.remove('paused');
                 }
+                isPlaying =!isPlaying;
             };
         }
 
-        // Animasi GSAP Engine Kelas Premium
-        function initLuxuryAnimations() {
+        function initAnimations() {
             gsap.registerPlugin(ScrollTrigger);
-            
             gsap.utils.toArray(".reveal-up").forEach(el => {
-                gsap.fromTo(el, 
+                gsap.fromTo(el,
                     { opacity: 0, y: 40 },
-                    { 
+                    {
                         scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" },
                         opacity: 1, y: 0, duration: 1.6, ease: "power3.out"
                     }
                 );
             });
-
             gsap.utils.toArray(".parallax-bg").forEach(img => {
                 gsap.to(img, {
                     scrollTrigger: { trigger: img, scrub: 1.2 },
-                    scale: 1.12,
-                    y: -15
+                    scale: 1.12, y: -15
                 });
             });
         }
 
-        // Fungsi Salin Rekening Pintar Instan
+        function startCountdown() {
+            window.targetDate = new Date(D.countdown.targetDate).getTime();
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = window.targetDate - now;
+            if (diff < 0) return;
+            document.getElementById('days').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+            document.getElementById('hours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+        }
+
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 const toast = document.getElementById('luxe-toast');
@@ -455,38 +531,29 @@
             });
         }
 
-        // Engine Buku Tamu / Kolom Ucapan Digital Lokal
+        function getGuestName() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestName = urlParams.get('to');
+            if (guestName) {
+                document.getElementById('guest-name').innerText = guestName.replace(/\+/g, ' ');
+                document.getElementById('rsvp-nama').value = guestName.replace(/\+/g, ' ');
+            }
+        }
+
         function submitWish() {
-            const nameInput = document.getElementById('wishes-nama');
-            const msgInput = document.getElementById('wishes-pesan');
-            if(!nameInput.value || !msgInput.value) return;
-
-            let currentWishes = JSON.parse(localStorage.getItem(`wishes_${slug}`)) || [];
-            currentWishes.unshift({ name: nameInput.value, msg: msgInput.value, date: 'Baru saja' });
-            localStorage.setItem(`wishes_${slug}`, JSON.stringify(currentWishes));
-
-            nameInput.value = '';
-            msgInput.value = '';
+            const name = document.getElementById('wishes-nama').value;
+            const msg = document.getElementById('wishes-pesan').value;
+            if (!name ||!msg) return;
+            let wishes = JSON.parse(localStorage.getItem('wishes')) || [];
+            wishes.unshift({ name, msg, date: 'Baru saja' });
+            localStorage.setItem('wishes', JSON.stringify(wishes));
+            document.getElementById('wishes-nama').value = '';
+            document.getElementById('wishes-pesan').value = '';
             loadWishes();
         }
 
         function loadWishes() {
             const feed = document.getElementById('wishes-feed');
-            let currentWishes = JSON.parse(localStorage.getItem(`wishes_${slug}`)) || [
-                { name: "Ki Bagus Jatmiko", msg: "Selamat menempuh hidup baru untuk kedua mempelai mulia. Semoga senantiasa diberkahi kebahagiaan tak bertepi.", date: "2 jam yang lalu" },
-                { name: "Siti Rahmawati", msg: "Barakallahu lakuma wa baraka 'alaikuma wa jama'a bainakuma fii khair. Turut berbahagia!", date: "5 jam yang lalu" }
-            ];
-            
-            feed.innerHTML = currentWishes.map(w => `
-                <div class="p-4 bg-stone-50 border border-stone-200/40 rounded-sm text-left">
-                    <div class="flex justify-between items-center mb-1">
-                        <span class="text-[10px] font-medium tracking-wide text-stone-800">${w.name}</span>
-                        <span class="text-[8px] text-stone-400 font-mono">${w.date}</span>
-                    </div>
-                    <p class="text-xs text-stone-500 font-light italic leading-relaxed">${w.msg}</p>
-                </div>
-            `).join('');
-        }
-    </script>
-</body>
-</html>
+            let wishes = JSON.parse(localStorage.getItem('wishes')) || [
+                { name: "Ki Bagus Jatmiko", msg: "Selamat menempuh hidup baru untuk kedua mempelai mulia. Semoga senantiasa diberkahi kebahagiaan tak bertepi.", date: "2 jam lalu" },
+                { name: "Siti Rahmawati", msg: "Barakallahu lakuma wa baraka 'alaikuma wa jama'a bainakuma fii khair. Turut berbahagia!", date: "5 jam lalu" }
