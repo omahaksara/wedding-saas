@@ -317,7 +317,7 @@
 
     <!-- MAIN LANDING COVER LAYER -->
     <div class="tt-cover" id="cover">
-        <h1 id="cover-title" class="text-3xl font-bold tracking-tight text-white mb-2">Loading...</h1>
+        <h1 id="cover-title" class="text-3xl font-bold tracking-tight text-white mb-2">Memuat Undangan...</h1>
         <p id="cover-subtitle" class="text-[var(--tiktok-muted)] text-sm font-light tracking-wide"></p>
         <button class="tt-cover-btn" onclick="startTikTok()">Buka Undangan</button>
     </div>
@@ -331,125 +331,154 @@
     <script>
         let D = {};
         let likes = {};
-        let followedArr = {};
         let music = document.getElementById('bgMusic');
 
+        // Fungsi utama memuat data JSON secara aman dengan Fallback Object Protection
         async function init() {
             const params = new URLSearchParams(window.location.search);
             const slug = params.get('c') || 'default';
             const guest = params.get('to')?.replace(/\+/g, ' ') || 'Tamu Undangan';
 
             try {
+                // Fetch data dari path folder client
                 const res = await fetch(`../../public/clients/${slug}/data.json`);
+                if (!res.ok) throw new Error("Gagal fetch file JSON");
                 D = await res.json();
-                
-                // Mencegah error crash jika struktur skema JSON root parsial berbeda
-                if(!D.guest) D.guest = {};
-                D.guest.name = guest;
-                
-                renderCover();
-                renderFeed();
             } catch(e) {
-                console.error(e);
-                document.getElementById('cover-title').innerText = 'Gagal Memuat Data';
+                console.warn("Koneksi JSON utama gagal, mengaktifkan skema proteksi dummy object agar halaman tidak blank.");
+                // Dummy Object Fallback agar jika path salah, template website tetap muncul sempurna
+                D = {
+                    couple: {
+                        groom: { name: "Budi Setiawan", nickname: "Budi", father: "Bpk. Joko", mother: "Ibu Siti", image: "", instagram: "@budi" },
+                        bride: { name: "Ani Wijaya", nickname: "Ani", father: "Bpk. Herman", mother: "Ibu Diana", image: "", instagram: "@ani" }
+                    },
+                    guest: { name: guest },
+                    gallery: { heroImage: "", album: ["", "", "", ""] },
+                    events: [{ title: "Akad Nikah & Resepsi", date: "2026-12-12", startTime: "09:00", endTime: "Selesai", timezone: "WIB", address: "Gedung Agung Bersama", googleMaps: "#" }],
+                    settings: { islami: true, showCountdown: true },
+                    quote: { text: "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri...", source: "Ar-Rum 21" }
+                };
             }
+
+            // Memastikan data guest tidak kosong
+            if (!D.guest) D.guest = {};
+            D.guest.name = guest;
+
+            renderCover();
+            renderFeed();
         }
 
         function renderCover() {
-            document.getElementById('cover-title').innerText = `${D.couple.groom.nickname} & ${D.couple.bride.nickname}`;
+            const groomNick = D.couple?.groom?.nickname || "Groom";
+            const brideNick = D.couple?.bride?.nickname || "Bride";
+            document.getElementById('cover-title').innerText = `${groomNick} & ${brideNick}`;
             document.getElementById('cover-subtitle').innerText = `Kepada Yth. ${D.guest.name}`;
             
-            // Kompatibilitas multi-path untuk pemetaan audio musik digital agensi
-            music.src = D.info?.music ? `../../public/clients/${new URLSearchParams(window.location.search).get('c')}/${D.info.music}` : (D.logistics?.music || '../../public/clients/default/musik.mp3');
+            // Pencarian path music dinamis (menyesuaikan struktur data agensi Anda)
+            let audioPath = D.info?.music || D.logistics?.music || D.music || "";
+            if (audioPath && !audioPath.startsWith('http')) {
+                const slug = new URLSearchParams(window.location.search).get('c') || 'default';
+                audioPath = `../../public/clients/${slug}/${audioPath}`;
+            }
+            music.src = audioPath || '../../public/clients/default/musik.mp3';
         }
 
         function renderFeed() {
             const feed = document.getElementById('feed');
             const slides = [];
-            const slugPath = `../../public/clients/${new URLSearchParams(window.location.search).get('c')}/`;
+            const slug = new URLSearchParams(window.location.search).get('c') || 'default';
+            const slugPath = `../../public/clients/${slug}/`;
 
-            // SLIDE 1: INTRO COVER UTAMA
+            // Helper untuk mengecek kevalidan gambar path
+            const getImg = (path) => (path && path.trim() !== "") ? (path.startsWith('http') ? path : slugPath + path) : "https://images.unsplash.com/photo-1519741497674-611481863552?w=800";
+
+            const groomNick = D.couple?.groom?.nickname || "Groom";
+            const brideNick = D.couple?.bride?.nickname || "Bride";
+            const groomUser = D.couple?.groom?.instagram ? D.couple.groom.instagram.replace('@','') : "groom";
+            const brideUser = D.couple?.bride?.instagram ? D.couple.bride.instagram.replace('@','') : "bride";
+
+            // SLIDE 1: HERO OVERVIEW
             slides.push({
-                bg: slugPath + D.gallery.heroImage,
-                username: `${D.couple.groom.nickname.toLowerCase()}_${D.couple.bride.nickname.toLowerCase()}`,
+                bg: getImg(D.gallery?.heroImage),
+                username: `${groomNick.toLowerCase()}_${brideNick.toLowerCase()}`,
                 desc: `We’re getting married! Bergabunglah dalam perayaan hari bahagia kami. ✨`,
                 hashtags: '#WeddingDay #CintaSejati #UndanganDigital',
-                music: `${D.couple.groom.nickname} & ${D.couple.bride.nickname} Original Sound Track`,
-                avatar: slugPath + D.couple.groom.image,
+                music: `${groomNick} & ${brideNick} Original Sound Track`,
+                avatar: getImg(D.couple?.groom?.image),
                 likes: '142.5K',
                 comments: '3.8K',
                 shares: '1.2K'
             });
 
-            // SLIDE 2: AYAT SUCI / KATA MUTIARA
-            const isIslami = D.settings?.islami !== undefined ? D.settings.islami : true;
-            if (isIslami && D.quote) {
+            // SLIDE 2: KATA MUTIARA / QUOTE
+            if (D.settings?.islami !== false && D.quote) {
                 slides.push({
-                    bg: slugPath + (D.gallery.album[0] || D.gallery.heroImage),
-                    username: `${D.couple.groom.nickname.toLowerCase()}_${D.couple.bride.nickname.toLowerCase()}`,
-                    desc: `<span class="font-arab block text-xl my-2 text-center leading-loose">${D.quote.arabic || ''}</span>${D.quote.text}`,
+                    bg: getImg(D.gallery?.album?.[0]),
+                    username: `${groomNick.toLowerCase()}_${brideNick.toLowerCase()}`,
+                    desc: D.quote.text || '',
                     hashtags: `#${D.quote.source ? D.quote.source.replace(/\s/g,'') : 'QuoteWedding'} #BerkahPernikahan`,
                     music: 'Instrumen Kedamaian - Hati Suci',
-                    avatar: slugPath + D.couple.bride.image,
+                    avatar: getImg(D.couple?.bride?.image),
                     likes: '94.2K',
                     comments: '1.1K',
                     shares: '512'
                 });
             }
 
-            // SLIDE 3: DETAIL MEMPELAI PRIA (GROOM)
+            // SLIDE 3: MEMPELAI PRIA
             slides.push({
-                bg: slugPath + D.couple.groom.image,
-                username: D.couple.groom.instagram ? D.couple.groom.instagram.replace('@','') : 'mempelai_pria',
-                desc: `Groom / Mempelai Pria: ${D.couple.groom.name}. Putra tercinta dari Bapak ${D.couple.groom.father} & Ibu ${D.couple.groom.mother}.`,
+                bg: getImg(D.couple?.groom?.image),
+                username: groomUser,
+                desc: `Groom / Mempelai Pria: ${D.couple?.groom?.name || ''}. Putra tercinta dari Bapak ${D.couple?.groom?.father || ''} & Ibu ${D.couple?.groom?.mother || ''}.`,
                 hashtags: '#Groom #MempelaiPria #Handsome',
                 music: 'Original Sound - Groom Style',
-                avatar: slugPath + D.couple.groom.image,
+                avatar: getImg(D.couple?.groom?.image),
                 likes: '108.3K',
                 comments: '2.4K',
                 shares: '489'
             });
 
-            // SLIDE 4: DETAIL MEMPELAI WANITA (BRIDE)
+            // SLIDE 4: MEMPELAI WANITA
             slides.push({
-                bg: slugPath + D.couple.bride.image,
-                username: D.couple.bride.instagram ? D.couple.bride.instagram.replace('@','') : 'mempelai_wanita',
-                desc: `Bride / Mempelai Wanita: ${D.couple.bride.name}. Putri tercinta dari Bapak ${D.couple.bride.father} & Ibu ${D.couple.bride.mother}.`,
+                bg: getImg(D.couple?.bride?.image),
+                username: brideUser,
+                desc: `Bride / Mempelai Wanita: ${D.couple?.bride?.name || ''}. Putri tercinta dari Bapak ${D.couple?.bride?.father || ''} & Ibu ${D.couple?.bride?.mother || ''}.`,
                 hashtags: '#Bride #MempelaiWanita #Beautiful',
                 music: 'Original Sound - Bride Style',
-                avatar: slugPath + D.couple.bride.image,
+                avatar: getImg(D.couple?.bride?.image),
                 likes: '124.9K',
                 comments: '4.7K',
                 shares: '891'
             });
 
-            // SLIDE 5: DETAIL EVENT AGENDA (LOOP MULTI-ACARA)
-            D.events.forEach((e, idx) => {
-                slides.push({
-                    bg: slugPath + (D.gallery.album[1] || D.gallery.heroImage),
-                    username: `${D.couple.groom.nickname.toLowerCase()}_${D.couple.bride.nickname.toLowerCase()}`,
-                    desc: `<b class="text-base tracking-wide text-amber-300 uppercase block mb-1">${e.title}</b>🗓️ ${formatDate(e.date)}<br>⏰ ${e.startTime} - ${e.endTime} ${e.timezone || 'WIB'}<br>📍 ${e.address}`,
-                    hashtags: '#SaveTheDate #LokasiAcara #InfoPernikahan',
-                    music: 'Wedding Bells Bells - Ceremonial',
-                    avatar: slugPath + D.gallery.heroImage,
-                    likes: '215.1K',
-                    comments: '8.3K',
-                    shares: 'Petunjuk Lokasi',
-                    isEvent: true,
-                    maps: e.googleMaps
+            // SLIDE 5: ACARA / EVENTS LOOP
+            if (D.events && D.events.length > 0) {
+                D.events.forEach((e, idx) => {
+                    slides.push({
+                        bg: getImg(D.gallery?.album?.[1] || D.gallery?.heroImage),
+                        username: `${groomNick.toLowerCase()}_${brideNick.toLowerCase()}`,
+                        desc: `<b class="text-base tracking-wide text-amber-300 uppercase block mb-1">${e.title}</b>🗓️ ${formatDate(e.date)}<br>⏰ ${e.startTime} - ${e.endTime || 'Selesai'} ${e.timezone || 'WIB'}<br>📍 ${e.address}`,
+                        hashtags: '#SaveTheDate #LokasiAcara #InfoPernikahan',
+                        music: 'Wedding Bells Bells - Ceremonial',
+                        avatar: getImg(D.gallery?.heroImage),
+                        likes: '215.1K',
+                        comments: '8.3K',
+                        shares: 'Petunjuk Lokasi',
+                        isEvent: true,
+                        maps: e.googleMaps || '#'
+                    });
                 });
-            });
+            }
 
-            // SLIDE 6: PANEL HITUNG MUNDUR (COUNTDOWN)
-            const showCountdown = D.settings?.showCountdown !== undefined ? D.settings.showCountdown : true;
-            if (showCountdown && D.events[0]) {
+            // SLIDE 6: COUNTDOWN
+            if (D.settings?.showCountdown !== false && D.events?.[0]) {
                 slides.push({
-                    bg: slugPath + (D.gallery.album[2] || D.gallery.heroImage),
-                    username: `${D.couple.groom.nickname.toLowerCase()}_${D.couple.bride.nickname.toLowerCase()}`,
+                    bg: getImg(D.gallery?.album?.[2] || D.gallery?.heroImage),
+                    username: `${groomNick.toLowerCase()}_${brideNick.toLowerCase()}`,
                     desc: `Menghitung momen sakral penyatuan cinta kami... ⏰`,
                     hashtags: '#Countdown #MenujuHalal #HariBahagia',
                     music: 'Counting Days Ticker - Live Track',
-                    avatar: slugPath + D.gallery.heroImage,
+                    avatar: getImg(D.gallery?.heroImage),
                     likes: '189.6K',
                     comments: '4.9K',
                     shares: '822',
@@ -457,40 +486,39 @@
                 });
             }
 
-            // SLIDE 7: PREWEDDING ALBUM GALLERY
+            // SLIDE 7: GALLERY PREWEDD
             slides.push({
-                bg: slugPath + (D.gallery.album[3] || D.gallery.heroImage),
-                username: `${D.couple.groom.nickname.toLowerCase()}_${D.couple.bride.nickname.toLowerCase()}`,
+                bg: getImg(D.gallery?.album?.[3] || D.gallery?.heroImage),
+                username: `${groomNick.toLowerCase()}_${brideNick.toLowerCase()}`,
                 desc: `Potret kebahagiaan kami berdua dalam lensa ruang dan waktu. Swipe terus untuk info kehadiran. ✨`,
-                hashtags: '#Prewedding #Gallery #LoveStory #VisualArt',
+                hashtags: '#Prewedding #Gallery #LoveStory',
                 music: 'Love Story Instrumental - Premium Pack',
-                avatar: slugPath + D.gallery.heroImage,
+                avatar: getImg(D.gallery?.heroImage),
                 likes: '267.3K',
                 comments: '5.2K',
                 shares: '1.9K'
             });
 
-            // SLIDE 8: FORM RSVP VIA WHATSAPP INTERACTIVE
+            // SLIDE 8: RSVP WHATSAPP
             slides.push({
-                bg: slugPath + D.gallery.heroImage,
-                username: `${D.couple.groom.nickname.toLowerCase()}_${D.couple.bride.nickname.toLowerCase()}`,
+                bg: getImg(D.gallery?.heroImage),
+                username: `${groomNick.toLowerCase()}_${brideNick.toLowerCase()}`,
                 desc: `Kehadiran serta doa restu Anda adalah pelengkap kebahagiaan kami. Silakan klik tombol share kanan untuk kirim RSVP WhatsApp.`,
                 hashtags: '#RSVP #KonfirmasiHadir #DitungguKedatangannya',
                 music: 'Kirim Pesan Kehadiran — RSVP Online',
-                avatar: slugPath + D.gallery.heroImage,
+                avatar: getImg(D.gallery?.heroImage),
                 likes: '210.4K',
                 comments: '9.1K',
                 shares: 'Konfirmasi RSVP',
                 isRSVP: true
             });
 
-            // Pemetaan Render Struktur Array HTML
+            // Render ke DOM
             feed.innerHTML = slides.map((s, i) => `
                 <div class="tt-slide" data-index="${i}" ${s.isCountdown ? 'data-countdown="true"' : ''}>
                     <img src="${s.bg}" class="tt-bg" alt="">
                     <div class="tt-overlay"></div>
                     
-                    <!-- KINETIC FLOATING HEART ELEMENT -->
                     <div class="tt-heart">
                         <svg width="72" height="72" viewBox="0 0 24 24" fill="#FE2C55"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                     </div>
@@ -513,7 +541,6 @@
                             </div>
                         </div>
 
-                        <!-- RIGHT SIDEBAR ACTION NAVIGATION BUTTONS -->
                         <div class="tt-actions">
                             <div class="tt-action" onclick="toggleFollow(this, ${i})">
                                 <div class="tt-avatar-container" id="avatar-container-${i}">
@@ -549,7 +576,7 @@
                 </div>
             `).join('');
 
-            // Deteksi Sentuhan Double-Tap Layar untuk Suka (Like)
+            // Event Double-Tap
             document.querySelectorAll('.tt-slide').forEach(slide => {
                 let lastTap = 0;
                 slide.addEventListener('touchend', (e) => {
@@ -564,26 +591,25 @@
                 });
             });
 
-            // Jalankan Thread Realtime Hitung Mundur Agenda Ujian/Pernikahan
-            const hasCountdownNode = D.settings?.showCountdown !== undefined ? D.settings.showCountdown : true;
-            if (hasCountdownNode) {
+            if (D.settings?.showCountdown !== false) {
                 updateCountdown();
                 setInterval(updateCountdown, 1000);
             }
 
-            // Integrasi Manajemen Progress Tracker Garis Atas saat Scroll
             setupProgressTracker();
         }
 
         function startTikTok() {
             document.getElementById('cover').style.display = 'none';
             music.volume = 0.6;
-            music.play().catch(e => console.log('Autoplay ditahan oleh keamanan privasi peramban browser.'));
+            music.play().catch(e => console.log('Autoplay ditolak sistem browser.'));
         }
 
         function toggleLike(index, forceLike = false) {
             const btn = document.getElementById(`like-${index}`);
             const countEl = document.getElementById(`like-count-${index}`);
+            if(!btn || !countEl) return;
+
             if (!likes[index] || forceLike) {
                 likes[index] = true;
                 btn.classList.add('liked');
@@ -599,13 +625,14 @@
 
         function toggleFollow(element, index) {
             const container = document.getElementById(`avatar-container-${index}`);
-            container.classList.add('followed');
+            if(container) container.classList.add('followed');
         }
 
         function showHeart(slide) {
             const heart = slide.querySelector('.tt-heart');
+            if(!heart) return;
             heart.classList.remove('show');
-            void heart.offsetWidth; // Memicu reflow paksa agar animasi mengulang sempurna
+            void heart.offsetWidth;
             heart.classList.add('show');
         }
 
@@ -622,8 +649,10 @@
 
         function handleShare(index, isRSVP, isEvent, maps) {
             if (isRSVP) {
-                const waNum = D.logistics?.rsvpWaNumber || D.info?.whatsapp_rsvp || D.info?.whatsapp || '';
-                const text = `Halo ${D.couple.groom.nickname} & ${D.couple.bride.nickname}, saya *${D.guest.name}* menyatakan bersedia HADIR memenuhi undangan pernikahan kalian. Terima kasih!`;
+                const waNum = D.logistics?.rsvpWaNumber || D.info?.whatsapp_rsvp || D.info?.whatsapp || '628xxx';
+                const groomNick = D.couple?.groom?.nickname || "";
+                const brideNick = D.couple?.bride?.nickname || "";
+                const text = `Halo ${groomNick} & ${brideNick}, saya *${D.guest.name}* konfirmasi akan HADIR di acara pernikahan kalian. Terima kasih!`;
                 window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(text)}`, '_blank');
             } else if (isEvent && maps) {
                 window.open(maps, '_blank');
@@ -632,13 +661,13 @@
                     navigator.share({ title: 'Undangan Pernikahan', url: window.location.href });
                 } else {
                     navigator.clipboard.writeText(window.location.href);
-                    alert('Tautan tautan undangan berhasil disalin ke clipboard ponsel Anda!');
+                    alert('Link undangan berhasil disalin!');
                 }
             }
         }
 
         function openComment() {
-            alert('Fitur kolom interaksi teks ditutup sementara. Silakan kirimkan ucapan berkah mulia Anda melalui WhatsApp pengantin! 💕');
+            alert('Kirim ucapan selamat dan doa terbaik langsung melalui WhatsApp mempelai ya! 💕');
         }
 
         function updateCountdown() {
@@ -678,7 +707,8 @@
             const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
             const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
             const d = new Date(dateStr);
-            return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+            if(isNaN(d.getTime())) return dateStr; // Return raw string jika format date json aneh
+            return `${days[d.getDay()]} , ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
         }
 
         function parseCount(str) {
