@@ -1,125 +1,129 @@
 <!-- ENGINE SYSTEM -->
-    <script>
-        let D = {};
-        let music = document.getElementById('audio');
-        let isMusicPlaying = false;
+<script>
+    let D = {};
+    let music = document.getElementById('audio');
+    let isMusicPlaying = false;
+    
+    // 1. DEFAULT SLUG & PENYESUAIAN JALUR RELATIF KEDALAM REPOSITORY
+    let clientSlug = "budi-ani"; 
+    // Naik 2 tingkat dari templates/luxury/ untuk menuju ke root repository
+    let baseClientPath = `../../public/clients/${clientSlug}/`;
+
+    // DATABASE BACKUP DARURAT - Otomatis terpasang jika fetch data.json gagal
+    const backupData = {
+        "settings": { "accentColor": "#D4AF37", "themeColor": "#0A0A0A", "islami": true, "showLoveStory": true, "showCountdown": true },
+        "couple": {
+            "groom": { "name": "Budi Setiawan", "nickname": "Budi", "father": "Suherman", "mother": "Siti Aminah", "instagram": "@budi.setiawan", "image": "foto-pria.jpg" },
+            "bride": { "name": "Ani Wijaya", "nickname": "Ani", "father": "Bambang Wijaya", "mother": "Endang Sri", "instagram": "@ani.wijaya", "image": "foto-wanita.jpg" }
+        },
+        "quote": { "text": "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya.", "source": "Ar-Rum: 21" },
+        "events": [
+            { "title": "Akad Nikah", "date": "2026-08-08", "startTime": "09:00", "endTime": "10:30", "timezone": "WIB", "address": "Masjid Agung Grand City, Lantai Utama", "googleMaps": "https://maps.google.com" },
+            { "title": "Resepsi Pernikahan", "date": "2026-08-08", "startTime": "11:00", "endTime": "16:00", "timezone": "WIB", "address": "Grand Ballroom Royal Hall, Kav 12", "googleMaps": "https://maps.google.com" }
+        ],
+        "loveStory": [
+            { "year": "2023", "title": "Pertemuan Pertama", "description": "Awal mula kami dipertemukan dalam suatu ruang kerja kelompok yang sama." },
+            { "year": "2025", "title": "Komitmen Bersama", "description": "Memutuskan untuk membawa hubungan ke arah yang lebih serius dan sakral." }
+        ],
+        "gallery": { "heroImage": "foto-sampul.jpg", "album": ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"] },
+        "digitalGift": [
+            { "provider": "Bank BCA", "accountNumber": "1234567890", "accountHolder": "Budi Setiawan" },
+            { "provider": "QRIS BCA", "accountNumber": "qr-bca.jpg", "accountHolder": "Pernikahan Budi Ani" },
+            { "provider": "QRIS Mandiri", "accountNumber": "qr-mandiri.png", "accountHolder": "Pernikahan Budi Ani" }
+        ],
+        "logistics": { "rsvpWaNumber": "628123456789", "music": "musik.mp3" }
+    };
+
+    async function init() {
+        const params = new URLSearchParams(window.location.search);
+        const guest = params.get('to')?.replace(/\+/g, ' ') || 'Tamu Undangan';
+
+        // Ambil nama slug dari URL parameter (?c=...) atau segment path
+        const match = window.location.pathname.match(/\/clients\/([^\/]+)/) || window.location.pathname.match(/\/([^\/]+)\/?$/);
+        if (params.get('c')) {
+            clientSlug = params.get('c');
+        } else if (match && match[1] && match[1] !== 'luxury' && match[1] !== 'templates' && match[1] !== 'invitation') {
+            clientSlug = match[1];
+        }
         
-        // PENTING: Menentukan basis folder tempat menyimpan data & foto klien
-        let clientSlug = "budi-ani"; 
-        let baseClientPath = `public/clients/${clientSlug}/`;
+        // Perbarui base path menggunakan jalur relatif naik 2 folder (../../)
+        baseClientPath = `../../public/clients/${clientSlug}/`;
 
-        // DATABASE BACKUP DARURAT - Otomatis terpasang jika fetch data.json gagal/terblokir browser
-        const backupData = {
-            "settings": { "accentColor": "#D4AF37", "themeColor": "#0A0A0A", "islami": true, "showLoveStory": true, "showCountdown": true },
-            "couple": {
-                "groom": { "name": "Budi Setiawan", "nickname": "Budi", "father": "Suherman", "mother": "Siti Aminah", "instagram": "@budi.setiawan", "image": "foto-pria.jpg" },
-                "bride": { "name": "Ani Wijaya", "nickname": "Ani", "father": "Bambang Wijaya", "mother": "Endang Sri", "instagram": "@ani.wijaya", "image": "foto-wanita.jpg" }
-            },
-            "quote": { "text": "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya.", "source": "Ar-Rum: 21" },
-            "events": [
-                { "title": "Akad Nikah", "date": "2026-08-08", "startTime": "09:00", "endTime": "10:30", "timezone": "WIB", "address": "Masjid Agung Grand City, Lantai Utama", "googleMaps": "https://maps.google.com" },
-                { "title": "Resepsi Pernikahan", "date": "2026-08-08", "startTime": "11:00", "endTime": "16:00", "timezone": "WIB", "address": "Grand Ballroom Royal Hall, Kav 12", "googleMaps": "https://maps.google.com" }
-            ],
-            "loveStory": [
-                { "year": "2023", "title": "Pertemuan Pertama", "description": "Awal mula kami dipertemukan dalam suatu ruang kerja kelompok yang sama." },
-                { "year": "2025", "title": "Komitmen Bersama", "description": "Memutuskan untuk membawa hubungan ke arah yang lebih serius dan sakral." }
-            ],
-            "gallery": { "heroImage": "foto-sampul.jpg", "album": ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"] },
-            "digitalGift": [
-                { "provider": "Bank BCA", "accountNumber": "1234567890", "accountHolder": "Budi Setiawan" },
-                { "provider": "QRIS BCA", "accountNumber": "qr-bca.jpg", "accountHolder": "Pernikahan Budi Ani" },
-                { "provider": "QRIS Mandiri", "accountNumber": "qr-mandiri.png", "accountHolder": "Pernikahan Budi Ani" }
-            ],
-            "logistics": { "rsvpWaNumber": "628123456789", "music": "musik.mp3" }
-        };
-
-        async function init() {
-            const params = new URLSearchParams(window.location.search);
-            const guest = params.get('to')?.replace(/\+/g, ' ') || 'Tamu Undangan';
-
-            // Ambil nama slug dari URL parameter (?c=...) atau dari segment path URL browser
-            const match = window.location.pathname.match(/\/clients\/([^\/]+)/) || window.location.pathname.match(/\/([^\/]+)\/?$/);
-            if (params.get('c')) {
-                clientSlug = params.get('c');
-            } else if (match && match[1] && match[1] !== 'luxury' && match[1] !== 'templates') {
-                clientSlug = match[1];
-            }
+        try {
+            // Mengambil file data.json tanpa menggunakan garis miring / di depan agar aman di GitHub Pages subdirectory
+            let res = await fetch(`${baseClientPath}data.json`);
+            if (!res.ok) throw new Error("Data JSON tidak ditemukan di folder klien.");
             
-            // Definisikan ulang path absolut ke folder aset repository
-            baseClientPath = `public/clients/${clientSlug}/`;
-
-            try {
-                // Mencari file data.json langsung ke lokasi folder klien di public/clients/
-                let res = await fetch(`/${baseClientPath}data.json`);
-                if (!res.ok) {
-                    // Coba fallback tanpa garis miring di depan jika di-host di subdirectory (seperti GitHub Pages)
-                    res = await fetch(`${baseClientPath}data.json`);
-                }
-                if (!res.ok) throw new Error("Data JSON tidak ditemukan di folder klien.");
-                D = await res.json();
-                console.log(`Data JSON untuk [${clientSlug}] sukses dimuat secara online.`);
-            } catch(e) {
-                console.warn("Gagal memuat eksternal JSON. Sistem otomatis mengaktifkan backup lokal.");
-                D = backupData;
-            }
-
-            if (!D.guest) D.guest = {};
-            D.guest.name = guest;
-
-            if (D.settings?.accentColor) {
-                document.documentElement.style.setProperty('--royal-gold', D.settings.accentColor);
-            }
-
-            renderAll();
-            initAnimations();
+            D = await res.json();
+            console.log(`Data JSON untuk [${clientSlug}] sukses dimuat secara online.`);
+        } catch(e) {
+            console.warn("Gagal memuat eksternal JSON. Sistem otomatis mengaktifkan backup lokal.", e);
+            D = backupData;
         }
 
-        // PEMBERSIH & PENYESUAI JALUR GAMBAR (Kunci Utama Perbaikan Foto)
-        function fixImagePath(imgName) {
-            if (!imgName || imgName.trim() === "") return "";
-            if (imgName.startsWith('http') || imgName.startsWith('data:')) return imgName;
-            
-            // Mengambil nama file asli (menghapus embel-embel path lama jika ada di data.json)
-            const cleanName = imgName.split('/').pop();
-            
-            // Integrasikan dengan base path menuju public/clients/budi-ani/
-            return `/${baseClientPath}${cleanName}`;
+        if (!D.guest) D.guest = {};
+        D.guest.name = guest;
+
+        if (D.settings?.accentColor) {
+            document.documentElement.style.setProperty('--royal-gold', D.settings.accentColor);
         }
 
-        function renderAll() {
-            const g = D.couple.groom;
-            const b = D.couple.bride;
+        renderAll();
+        // Cek jika fungsi initAnimations ada sebelum dijalankan agar tidak memicu error script
+        if (typeof initAnimations === "function") initAnimations();
+    }
 
-            // Section Hero
-            document.getElementById('heroImage').src = fixImagePath(D.gallery.heroImage || 'foto-sampul.jpg');
-            document.getElementById('coupleNames').innerHTML = `<span class="gold-foil">${g.nickname} & ${b.nickname}</span>`;
-            document.getElementById('weddingDate').innerText = formatDate(D.events[0].date);
-            document.getElementById('guestName').innerText = D.guest.name;
+    // PEMBERSIH & PENYESUAI JALUR GAMBAR
+    function fixImagePath(imgName) {
+        if (!imgName || imgName.trim() === "") return "";
+        if (imgName.startsWith('http') || imgName.startsWith('data:')) return imgName;
+        
+        // Ambil nama file intinya saja (menghilangkan sisa path jika ada)
+        const cleanName = imgName.split('/').pop();
+        
+        // Gabungkan dengan baseClientPath relatif (../../public/clients/budi-ani/namafile.jpg)
+        return `${baseClientPath}${cleanName}`;
+    }
 
-            // Section Quotes
-            if (D.settings.islami && D.quote) {
-                document.getElementById('quoteText').innerText = D.quote.text;
-                document.getElementById('quoteSource').innerText = D.quote.source;
-                document.getElementById('quote').classList.remove('hide');
-            } else {
-                document.getElementById('quote').classList.add('hide');
-            }
+    function renderAll() {
+        const g = D.couple.groom;
+        const b = D.couple.bride;
 
-            // Section Data Mempelai
-            document.getElementById('groomPhoto').src = fixImagePath(g.image || 'foto-pria.jpg');
-            document.getElementById('groomName').innerText = g.name;
-            document.getElementById('groomParents').innerText = `Putra dari Bapak ${g.father} & Ibu ${g.mother}`;
+        // Section Hero
+        if(document.getElementById('heroImage')) document.getElementById('heroImage').src = fixImagePath(D.gallery.heroImage || 'foto-sampul.jpg');
+        if(document.getElementById('coupleNames')) document.getElementById('coupleNames').innerHTML = `<span class="gold-foil">${g.nickname} & ${b.nickname}</span>`;
+        if(document.getElementById('weddingDate') && D.events && D.events[0]) document.getElementById('weddingDate').innerText = formatDate(D.events[0].date);
+        if(document.getElementById('guestName')) document.getElementById('guestName').innerText = D.guest.name;
+
+        // Section Quotes
+        if (D.settings?.islami && D.quote) {
+            if(document.getElementById('quoteText')) document.getElementById('quoteText').innerText = D.quote.text;
+            if(document.getElementById('quoteSource')) document.getElementById('quoteSource').innerText = D.quote.source;
+            document.getElementById('quote')?.classList.remove('hide');
+        } else {
+            document.getElementById('quote')?.classList.add('hide');
+        }
+
+        // Section Data Mempelai
+        if(document.getElementById('groomPhoto')) document.getElementById('groomPhoto').src = fixImagePath(g.image || 'foto-pria.jpg');
+        if(document.getElementById('groomName')) document.getElementById('groomName').innerText = g.name;
+        if(document.getElementById('groomParents')) document.getElementById('groomParents').innerText = `Putra dari Bapak ${g.father} & Ibu ${g.mother}`;
+        if(document.getElementById('groomIG')) {
             document.getElementById('groomIG').href = `https://instagram.com/${g.instagram?.replace('@','')}`;
             document.getElementById('groomIG').innerText = g.instagram || '';
+        }
 
-            document.getElementById('bridePhoto').src = fixImagePath(b.image || 'foto-wanita.jpg');
-            document.getElementById('brideName').innerText = b.name;
-            document.getElementById('brideParents').innerText = `Putri dari Bapak ${b.father} & Ibu ${b.mother}`;
+        if(document.getElementById('bridePhoto')) document.getElementById('bridePhoto').src = fixImagePath(b.image || 'foto-wanita.jpg');
+        if(document.getElementById('brideName')) document.getElementById('brideName').innerText = b.name;
+        if(document.getElementById('brideParents')) document.getElementById('brideParents').innerText = `Putri dari Bapak ${b.father} & Ibu ${b.mother}`;
+        if(document.getElementById('brideIG')) {
             document.getElementById('brideIG').href = `https://instagram.com/${b.instagram?.replace('@','')}`;
             document.getElementById('brideIG').innerText = b.instagram || '';
+        }
 
-            // Section Jadwal Acara
-            const eventsList = document.getElementById('eventsList');
+        // Section Jadwal Acara
+        const eventsList = document.getElementById('eventsList');
+        if (eventsList && D.events) {
             eventsList.innerHTML = '';
             D.events.forEach((e) => {
                 eventsList.innerHTML += `
@@ -132,11 +136,13 @@
                     </div>
                 `;
             });
+        }
 
-            // Section Histori Cerita
-            const storyList = document.getElementById('storyList');
-            if (D.settings.showLoveStory && D.loveStory) {
-                document.getElementById('story').classList.remove('hide');
+        // Section Histori Cerita
+        const storyList = document.getElementById('storyList');
+        if (D.settings?.showLoveStory && D.loveStory) {
+            document.getElementById('story')?.classList.remove('hide');
+            if (storyList) {
                 storyList.innerHTML = '';
                 D.loveStory.forEach((s) => {
                     storyList.innerHTML += `
@@ -148,14 +154,16 @@
                         </div>
                     `;
                 });
-            } else {
-                document.getElementById('story').classList.add('hide');
             }
+        } else {
+            document.getElementById('story')?.classList.add('hide');
+        }
 
-            // Section Grid Galeri Foto
-            const galleryGrid = document.getElementById('galleryGrid');
+        // Section Grid Galeri Foto
+        const galleryGrid = document.getElementById('galleryGrid');
+        if (galleryGrid) {
             galleryGrid.innerHTML = '';
-            const albumImages = (D.gallery.album && D.gallery.album.length > 0) ? D.gallery.album : ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg'];
+            const albumImages = (D.gallery?.album && D.gallery.album.length > 0) ? D.gallery.album : ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg'];
             albumImages.forEach(img => {
                 galleryGrid.innerHTML += `
                     <div class="masonry-item reveal rounded-sm shadow-md">
@@ -163,9 +171,11 @@
                     </div>
                 `;
             });
+        }
 
-            // Section Kado Digital / QR
-            const giftList = document.getElementById('giftList');
+        // Section Kado Digital / QR
+        const giftList = document.getElementById('giftList');
+        if (giftList && D.digitalGift) {
             giftList.innerHTML = '';
             D.digitalGift.forEach(d => {
                 const isQr = d.accountNumber.toLowerCase().includes('.jpg') || d.accountNumber.toLowerCase().includes('.png');
@@ -183,21 +193,25 @@
                     </div>
                 `;
             });
-
-            // Section Footer
-            document.getElementById('footerNames').innerHTML = `<span class="gold-foil">${g.nickname} & ${b.nickname}</span>`;
-            document.getElementById('footerDate').innerText = formatDate(D.events[0].date);
-
-            // Jalur Musik Akhir
-            music.src = fixImagePath(D.logistics.music || 'musik.mp3');
-
-            if (D.settings.showCountdown) {
-                updateCountdown();
-                setInterval(updateCountdown, 1000);
-            }
         }
 
-        function initAnimations() {
+        // Section Footer
+        if(document.getElementById('footerNames')) document.getElementById('footerNames').innerHTML = `<span class="gold-foil">${g.nickname} & ${b.nickname}</span>`;
+        if(document.getElementById('footerDate') && D.events && D.events[0]) document.getElementById('footerDate').innerText = formatDate(D.events[0].date);
+
+        // Jalur Musik Akhir
+        if (music && D.logistics?.music) {
+            music.src = fixImagePath(D.logistics.music || 'musik.mp3');
+        }
+
+        if (D.settings?.showCountdown) {
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+    }
+
+    function initAnimations() {
+        if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
             gsap.registerPlugin(ScrollTrigger);
             gsap.utils.toArray('.reveal').forEach(el => {
                 gsap.fromTo(el,
@@ -216,74 +230,81 @@
                 );
             });
 
-            ScrollTrigger.create({
-                trigger: "#rsvp",
-                start: "top 65%",
-                onEnter: () => document.getElementById('envelope').classList.add('open')
-            });
-        }
-
-        function openUndangan(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-            if (!isMusicPlaying && music.src) {
-                music.play().then(() => {
-                    isMusicPlaying = true;
-                    document.getElementById('musicBtn').classList.add('playing');
-                }).catch(err => console.log("Autoplay dicegah browser. Menunggu interaksi pengguna."));
-            }
-        }
-
-        function toggleMusic() {
-            const btn = document.getElementById('musicBtn');
-            if (isMusicPlaying) {
-                music.pause();
-                btn.classList.remove('playing');
-            } else {
-                music.play().then(() => {
-                    btn.classList.add('playing');
+            if(document.getElementById('rsvp')) {
+                ScrollTrigger.create({
+                    trigger: "#rsvp",
+                    start: "top 65%",
+                    onEnter: () => document.getElementById('envelope')?.classList.add('open')
                 });
             }
-            isMusicPlaying = !isMusicPlaying;
         }
+    }
 
-        function openRSVP() {
-            const waNum = D.logistics.rsvpWaNumber;
-            const text = `Halo ${D.couple.groom.nickname} & ${D.couple.bride.nickname}, saya *${D.guest.name}* menyatakan akan HADIR di acara pernikahan Anda. Terima kasih!`;
-            window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(text)}`, '_blank');
+    function openUndangan(id) {
+        const el = document.getElementById(id);
+        if(el) el.scrollIntoView({ behavior: 'smooth' });
+        
+        if (music && !isMusicPlaying && music.src) {
+            music.play().then(() => {
+                isMusicPlaying = true;
+                document.getElementById('musicBtn')?.classList.add('playing');
+            }).catch(err => console.log("Autoplay dicegah browser. Menunggu interaksi pengguna."));
         }
+    }
 
-        function copyText(text) {
-            navigator.clipboard.writeText(text);
-            alert('Nomor rekening berhasil disalin!');
+    function toggleMusic() {
+        const btn = document.getElementById('musicBtn');
+        if (!music) return;
+        if (isMusicPlaying) {
+            music.pause();
+            btn?.classList.remove('playing');
+        } else {
+            music.play().then(() => {
+                btn?.classList.add('playing');
+            });
         }
+        isMusicPlaying = !isMusicPlaying;
+    }
 
-        function updateCountdown() {
-            if(!D.events || !D.events[0]) return;
-            const target = new Date(`${D.events[0].date}T${D.events[0].startTime}:00`).getTime();
-            const now = new Date().getTime();
-            const diff = target - now;
+    function openRSVP() {
+        if(!D.logistics || !D.couple) return;
+        const waNum = D.logistics.rsvpWaNumber;
+        const text = `Halo ${D.couple.groom.nickname} & ${D.couple.bride.nickname}, saya *${D.guest.name}* menyatakan akan HADIR di acara pernikahan Anda. Terima kasih!`;
+        window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(text)}`, '_blank');
+    }
 
-            if (diff <= 0) return;
+    function copyText(text) {
+        navigator.clipboard.writeText(text);
+        alert('Nomor rekening berhasil disalin!');
+    }
 
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
+    function updateCountdown() {
+        if(!D.events || !D.events[0]) return;
+        const target = new Date(`${D.events[0].date}T${D.events[0].startTime}:00`).getTime();
+        const now = new Date().getTime();
+        const diff = target - now;
 
-            document.getElementById('days').innerText = String(d).padStart(2, '0');
-            document.getElementById('hours').innerText = String(h).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(m).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(s).padStart(2, '0');
-        }
+        if (diff <= 0) return;
 
-        function formatDate(dateStr) {
-            if(!dateStr) return '';
-            const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-            const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-            const d = new Date(dateStr);
-            if(isNaN(d.getTime())) return dateStr;
-            return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-        }
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-        window.onload = init;
-    </script>
+        if(document.getElementById('days')) document.getElementById('days').innerText = String(d).padStart(2, '0');
+        if(document.getElementById('hours')) document.getElementById('hours').innerText = String(h).padStart(2, '0');
+        if(document.getElementById('minutes')) document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+        if(document.getElementById('seconds')) document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+    }
+
+    function formatDate(dateStr) {
+        if(!dateStr) return '';
+        const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+        const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+        const d = new Date(dateStr);
+        if(isNaN(d.getTime())) return dateStr;
+        return `${days[d.getDay()]} , ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+    }
+
+    window.onload = init;
+</script>
