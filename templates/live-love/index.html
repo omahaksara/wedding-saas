@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>The Wedding of Budi & Ani</title>
+  <title>Wedding Invitation</title>
   <meta name="theme-color" content="#8B7355">
   <style>
     :root {
@@ -61,7 +61,7 @@
     h2 { font-size: 1.8rem; color: var(--accent); margin-bottom: 16px; }
     h3 { font-size: 1.2rem; margin-bottom: 8px; }
     p { line-height: 1.6; margin-bottom: 12px; }
-    .arab { font-size: 1.4rem; line-height: 2; margin-bottom: 16px; }
+    .arab { font-size: 1.4rem; line-height: 2; margin-bottom: 16px; font-family: 'Amiri', serif; }
     .btn {
       background: var(--accent);
       color: white;
@@ -163,6 +163,13 @@
       border-radius: 16px;
       border: none;
     }
+    .gift-card {
+      background: var(--bg);
+      padding: 16px;
+      border-radius: 16px;
+      margin: 16px 0;
+    }
+    .hide { display: none !important; }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -172,183 +179,194 @@
       50% { transform: translateY(-10px); }
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container" id="container">
-    
-    <!-- 1. COVER -->
-    <section id="cover">
-      <img src="foto-sampul.jpg" class="bg-cover" alt="Budi & Ani">
-      <div class="overlay">
-        <p>The Wedding Of</p>
-        <h1>Budi & Ani</h1>
-        <div class="guest-name">Kepada Yth. Tamu Undangan</div>
-        <p>Kamis, 12 November 2026</p>
-        <button class="btn" onclick="openInvitation()">Buka Undangan</button>
-      </div>
-      <div class="swipe-hint">Swipe up ↑</div>
-    </section>
-
-    <!-- 2. QUOTE -->
-    <section id="quote">
-      <img src="foto1.jpg" class="bg-cover" alt="">
-      <div class="overlay">
-        <p class="arab">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا</p>
-        <p><i>"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya."</i></p>
-        <p><b>QS. Ar-Rum: 21</b></p>
-      </div>
-    </section>
-
-    <!-- 3. COUPLE -->
-    <section id="couple">
-      <img src="foto2.jpg" class="bg-cover" alt="">
-      <div class="overlay">
-        <h2>Assalamualaikum Wr. Wb.</h2>
-        <p>Tanpa mengurangi rasa hormat, kami memohon doa restu Bapak/Ibu.</p>
-        <div style="margin: 24px 0;">
-          <img src="foto-pria.jpg" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--accent)">
-          <h3>Budi Santoso, S.T.</h3>
-          <p style="font-size:0.9rem">Putra dari<br>Bapak Ahmad Santoso & Ibu Siti Aminah</p>
-          <p><a href="https://instagram.com/budi_santoso" style="color:var(--accent)">@budi_santoso</a></p>
-        </div>
-        <h2 style="font-size:2rem;">&</h2>
-        <div style="margin: 24px 0;">
-          <img src="foto-wanita.jpg" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--accent)">
-          <h3>Ani Wijaya, S.E.</h3>
-          <p style="font-size:0.9rem">Putri dari<br>Bapak Heru Wijaya & Ibu Ratna Wijaya</p>
-          <p><a href="https://instagram.com/ani_wijaya" style="color:var(--accent)">@ani_wijaya</a></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. COUNTDOWN + EVENTS -->
-    <section id="events">
-      <img src="foto3.jpg" class="bg-cover" alt="">
-      <div class="overlay">
-        <h2>Save The Date</h2>
-        <div class="countdown" id="countdown">
-          <div class="countdown-item"><span id="days">00</span><label>Hari</label></div>
-          <div class="countdown-item"><span id="hours">00</span><label>Jam</label></div>
-          <div class="countdown-item"><span id="minutes">00</span><label>Menit</label></div>
-          <div class="countdown-item"><span id="seconds">00</span><label>Detik</label></div>
-        </div>
-        <h3>Akad Nikah</h3>
-        <p><b>Kamis, 12 Nov 2026</b><br>08:00 - 10:00 WIB<br>Kediaman Mempelai Wanita<br>Jl. Mawar No. 123, Jakarta</p>
-        <button class="btn btn-outline" onclick="window.open('https://maps.google.com')">Lihat Lokasi</button>
-        
-        <h3 style="margin-top:24px">Resepsi Pernikahan</h3>
-        <p><b>Kamis, 12 Nov 2026</b><br>11:00 - 14:00 WIB<br>Gedung Pertemuan Utama<br>Jl. Mawar No. 124, Jakarta</p>
-        <button class="btn btn-outline" onclick="window.open('https://maps.google.com')">Lihat Lokasi</button>
-      </div>
-    </section>
-
-    <!-- 5. LOVE STORY -->
-    <section id="story">
-      <img src="foto4.jpg" class="bg-cover" alt="">
-      <div class="overlay">
-        <h2>Love Story</h2>
-        <div class="timeline">
-          <div class="timeline-item">
-            <h3>2023 - Pertama Bertemu</h3>
-            <p>Awal mula dipertemukan dalam satu ruang lingkup kerja yang sama, membangun komunikasi, dan menemukan banyak kesamaan visi.</p>
-          </div>
-          <div class="timeline-item">
-            <h3>2025 - Khitbah (Lamaran)</h3>
-            <p>Pertemuan dua keluarga besar untuk mengikat komitmen yang lebih serius dan menentukan hari baik menuju pernikahan.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 6. GALLERY + VIDEO -->
-    <section id="gallery">
-      <div class="overlay">
-        <h2>Our Moments</h2>
-        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="autoplay"></iframe>
-        <div class="gallery-grid">
-          <img src="foto1.jpg" alt="">
-          <img src="foto2.jpg" alt="">
-          <img src="foto3.jpg" alt="">
-          <img src="foto4.jpg" alt="">
-        </div>
-      </div>
-    </section>
-
-    <!-- 7. LIVE STREAMING -->
-    <section id="live">
-      <img src="foto-sampul.jpg" class="bg-cover" alt="">
-      <div class="overlay">
-        <h2>Live Streaming</h2>
-        <p>Temui kami secara virtual melalui siaran langsung YouTube Live</p>
-        <button class="btn" onclick="window.open('https://youtube.com')">Tonton Live</button>
-      </div>
-    </section>
-
-    <!-- 8. DIGITAL GIFT -->
-    <section id="gift">
-      <img src="foto2.jpg" class="bg-cover" alt="">
-      <div class="overlay">
-        <h2>Wedding Gift</h2>
-        <p>Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless.</p>
-        <div style="background:var(--bg);padding:16px;border-radius:16px;margin:16px 0;">
-          <h3>Bank BCA</h3>
-          <p id="rek1" style="font-size:1.2rem;font-weight:700;">123456789</p>
-          <p>a.n Budi Santoso</p>
-          <button class="btn btn-outline" onclick="copyRek('123456789')">Copy No. Rekening</button>
-        </div>
-        <div style="background:var(--bg);padding:16px;border-radius:16px;">
-          <h3>Kirim Hadiah Fisik</h3>
-          <p>Rumah Mempelai Wanita (Ani)<br>Jl. Mawar No. 123, Jakarta</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 9. PROTOCOLS + RSVP -->
-    <section id="rsvp">
-      <img src="foto3.jpg" class="bg-cover" alt="">
-      <div class="overlay">
-        <h2>Protokol Kesehatan</h2>
-        <div class="protocols">
-          <div class="protocol-item"><span>😷</span>Gunakan Masker<br>Bila Kurang Fit</div>
-          <div class="protocol-item"><span>🧼</span>Gunakan<br>Hand Sanitizer</div>
-          <div class="protocol-item"><span>🙏</span>Salam Jarak<br>Jauh Disarankan</div>
-        </div>
-        <h2 style="margin-top:32px">Dress Code</h2>
-        <p style="font-size:1.2rem;color:var(--accent);font-weight:600">Earth Tone / Pastel</p>
-        <h2 style="margin-top:32px">RSVP</h2>
-        <p>Konfirmasi kehadiran Anda</p>
-        <button class="btn" onclick="window.open('https://wa.me/628123456789?text=Halo%20Budi%20%26%20Ani%2C%20saya%20akan%20hadir')">Konfirmasi via WhatsApp</button>
-        <p style="margin-top:32px;font-size:0.9rem">Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu</p>
-        <h3 style="color:var(--accent)">Budi & Ani</h3>
-      </div>
-    </section>
-
+  <div class="container" id="app">
+    <!-- Semua section di-render via JS -->
   </div>
 
-  <!-- MUSIC BUTTON -->
   <button class="floating-btn" id="musicBtn" onclick="toggleMusic()">♪</button>
-  <audio id="bgMusic" loop><source src="musik.mp3" type="audio/mpeg"></audio>
+  <audio id="bgMusic" loop></audio>
 
   <script>
-    // SETTINGS FROM JSON
-    const config = {
-      themeColor: "#8B7355",
-      bgColor: "#FAF7F2", 
-      textColor: "#3E3E3E",
-      accentColor: "#B76E79",
-      targetDate: "2026-11-12T08:00:00+07:00"
-    };
-    
-    // APPLY THEME
-    document.documentElement.style.setProperty('--theme', config.themeColor);
-    document.documentElement.style.setProperty('--bg', config.bgColor);
-    document.documentElement.style.setProperty('--text', config.textColor);
-    document.documentElement.style.setProperty('--accent', config.accentColor);
-
-    // MUSIC CONTROL
-    const music = document.getElementById('bgMusic');
+    let D = {}; // Data global
+    let music = document.getElementById('bgMusic');
     let isPlaying = false;
+
+    // 1. FETCH DATA DULU
+    async function init() {
+      try {
+        const res = await fetch('data.json');
+        D = await res.json();
+        applyTheme();
+        renderApp();
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        getGuestName();
+      } catch (e) {
+        document.getElementById('app').innerHTML = `<section><div class="overlay"><h2>Error load data.json</h2></div></section>`;
+      }
+    }
+
+    // 2. APPLY THEME DARI JSON
+    function applyTheme() {
+      const s = D.settings;
+      document.documentElement.style.setProperty('--theme', s.themeColor);
+      document.documentElement.style.setProperty('--bg', s.bgColor);
+      document.documentElement.style.setProperty('--text', s.textColor);
+      document.documentElement.style.setProperty('--accent', s.accentColor);
+      document.querySelector('meta[name="theme-color"]').content = s.themeColor;
+      music.src = D.logistics.music;
+    }
+
+    // 3. RENDER SEMUA SECTION
+    function renderApp() {
+      const app = document.getElementById('app');
+      const { couple, gallery, events, quote, loveStory, liveStreaming, digitalGift, protocols, logistics, settings } = D;
+      
+      app.innerHTML = `
+        <!-- COVER -->
+        <section id="cover">
+          <img src="${gallery.heroImage}" class="bg-cover" alt="">
+          <div class="overlay">
+            <p>The Wedding Of</p>
+            <h1>${couple.groom.nickname} & ${couple.bride.nickname}</h1>
+            <div class="guest-name" id="guestName">Kepada Yth. ${D.guest.name}</div>
+            <p>${formatDate(events[0].date)}</p>
+            <button class="btn" onclick="openInvitation()">Buka Undangan</button>
+          </div>
+          <div class="swipe-hint">Swipe up ↑</div>
+        </section>
+
+        <!-- QUOTE -->
+        <section id="quote" class="${settings.islami ? '' : 'hide'}">
+          <img src="${gallery.album[0]}" class="bg-cover" alt="">
+          <div class="overlay">
+            <p class="arab">${quote.arab}</p>
+            <p><i>"${quote.text}"</i></p>
+            <p><b>${quote.source}</b></p>
+          </div>
+        </section>
+
+        <!-- COUPLE -->
+        <section id="couple">
+          <img src="${gallery.album[1]}" class="bg-cover" alt="">
+          <div class="overlay">
+            <h2>Assalamualaikum Wr. Wb.</h2>
+            <p>${logistics.guestNote}</p>
+            <div style="margin: 24px 0;">
+              <img src="${couple.groom.image}" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--accent)">
+              <h3>${couple.groom.name}</h3>
+              <p style="font-size:0.9rem">Putra dari<br>${couple.groom.father} & ${couple.groom.mother}</p>
+              <p><a href="https://instagram.com/${couple.groom.instagram}" style="color:var(--accent)">@${couple.groom.instagram}</a></p>
+            </div>
+            <h2 style="font-size:2rem;">&</h2>
+            <div style="margin: 24px 0;">
+              <img src="${couple.bride.image}" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--accent)">
+              <h3>${couple.bride.name}</h3>
+              <p style="font-size:0.9rem">Putri dari<br>${couple.bride.father} & ${couple.bride.mother}</p>
+              <p><a href="https://instagram.com/${couple.bride.instagram}" style="color:var(--accent)">@${couple.bride.instagram}</a></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- EVENTS + COUNTDOWN -->
+        <section id="events" class="${settings.showCountdown ? '' : 'hide'}">
+          <img src="${gallery.album[2]}" class="bg-cover" alt="">
+          <div class="overlay">
+            <h2>Save The Date</h2>
+            <div class="countdown" id="countdown">
+              <div class="countdown-item"><span id="days">00</span><label>Hari</label></div>
+              <div class="countdown-item"><span id="hours">00</span><label>Jam</label></div>
+              <div class="countdown-item"><span id="minutes">00</span><label>Menit</label></div>
+              <div class="countdown-item"><span id="seconds">00</span><label>Detik</label></div>
+            </div>
+            ${events.map(e => `
+              <h3>${e.title}</h3>
+              <p><b>${formatDate(e.date)}</b><br>${e.startTime} - ${e.endTime} ${e.timezone}<br>${e.address}</p>
+              <button class="btn btn-outline" onclick="window.open('${e.googleMaps}')">Lihat Lokasi</button>
+            `).join('<div style="margin-top:24px"></div>')}
+          </div>
+        </section>
+
+        <!-- LOVE STORY -->
+        <section id="story" class="${settings.showLoveStory ? '' : 'hide'}">
+          <img src="${gallery.album[3]}" class="bg-cover" alt="">
+          <div class="overlay">
+            <h2>Love Story</h2>
+            <div class="timeline">
+              ${loveStory.map(s => `
+                <div class="timeline-item">
+                  <h3>${s.year} - ${s.title}</h3>
+                  <p>${s.description}</p>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section id="gallery">
+          <div class="overlay">
+            <h2>Our Moments</h2>
+            <iframe src="https://www.youtube.com/embed/${gallery.videoYoutubeId}" allow="autoplay"></iframe>
+            <div class="gallery-grid">
+              ${gallery.album.map(img => `<img src="${img}" alt="">`).join('')}
+            </div>
+          </div>
+        </section>
+
+        <!-- LIVE STREAMING -->
+        <section id="live" class="${liveStreaming.enabled ? '' : 'hide'}">
+          <img src="${gallery.heroImage}" class="bg-cover" alt="">
+          <div class="overlay">
+            <h2>Live Streaming</h2>
+            <p>Temui kami secara virtual melalui siaran langsung ${liveStreaming.platform}</p>
+            <button class="btn" onclick="window.open('${liveStreaming.url}')">Tonton Live</button>
+          </div>
+        </section>
+
+        <!-- DIGITAL GIFT -->
+        <section id="gift">
+          <img src="${gallery.album[1]}" class="bg-cover" alt="">
+          <div class="overlay">
+            <h2>Wedding Gift</h2>
+            <p>Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless.</p>
+            ${digitalGift.map(g => `
+              <div class="gift-card">
+                <h3>${g.provider}</h3>
+                <p style="font-size:1.2rem;font-weight:700;">${g.accountNumber}</p>
+                <p>a.n ${g.accountHolder}</p>
+                ${g.provider.includes('Bank') ? `<button class="btn btn-outline" onclick="copyRek('${g.accountNumber}')">Copy No. Rekening</button>` : ''}
+              </div>
+            `).join('')}
+          </div>
+        </section>
+
+        <!-- PROTOCOLS + RSVP -->
+        <section id="rsvp">
+          <img src="${gallery.album[2]}" class="bg-cover" alt="">
+          <div class="overlay">
+            <div class="${settings.showProtocols ? '' : 'hide'}">
+              <h2>Protokol Kesehatan</h2>
+              <div class="protocols">
+                ${protocols.map(p => `<div class="protocol-item"><span>${p.icon}</span>${p.label}</div>`).join('')}
+              </div>
+            </div>
+            <h2 style="margin-top:32px">Dress Code</h2>
+            <p style="font-size:1.2rem;color:var(--accent);font-weight:600">${logistics.dressCode}</p>
+            <h2 style="margin-top:32px">RSVP</h2>
+            <p>Konfirmasi kehadiran Anda</p>
+            <button class="btn" onclick="window.open('https://wa.me/${logistics.rsvpWaNumber}?text=Halo%20${couple.groom.nickname}%20%26%20${couple.bride.nickname}%2C%20saya%20akan%20hadir')">Konfirmasi via WhatsApp</button>
+            <p style="margin-top:32px;font-size:0.9rem">Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu</p>
+            <h3 style="color:var(--accent)">${couple.groom.nickname} & ${couple.bride.nickname}</h3>
+          </div>
+        </section>
+      `;
+    }
+
+    // 4. HELPER FUNCTIONS
     function openInvitation() {
       document.getElementById('quote').scrollIntoView();
       toggleMusic();
@@ -358,43 +376,45 @@
         music.pause();
         document.getElementById('musicBtn').innerHTML = '♪';
       } else {
-        music.play();
+        music.play().catch(e => console.log('Autoplay blocked'));
         document.getElementById('musicBtn').innerHTML = '❚❚';
       }
       isPlaying = !isPlaying;
     }
-
-    // COUNTDOWN
     function updateCountdown() {
-      const target = new Date(config.targetDate).getTime();
+      const target = new Date(D.countdown.targetDate).getTime();
       const now = new Date().getTime();
       const diff = target - now;
-      
+      if (diff < 0) return;
       const d = Math.floor(diff / (1000 * 60 * 60 * 24));
       const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const s = Math.floor((diff % (1000 * 60)) / 1000);
-      
-      document.getElementById('days').innerText = d.toString().padStart(2, '0');
-      document.getElementById('hours').innerText = h.toString().padStart(2, '0');
-      document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
-      document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+      document.getElementById('days').innerText = String(d).padStart(2, '0');
+      document.getElementById('hours').innerText = String(h).padStart(2, '0');
+      document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+      document.getElementById('seconds').innerText = String(s).padStart(2, '0');
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // COPY REKENING
     function copyRek(text) {
       navigator.clipboard.writeText(text);
       alert('No. rekening berhasil disalin!');
     }
-
-    // GANTI NAMA TAMU DARI URL ?to=Nama+Tamu
-    const urlParams = new URLSearchParams(window.location.search);
-    const guestName = urlParams.get('to');
-    if (guestName) {
-      document.querySelector('.guest-name').innerText = `Kepada Yth. ${guestName}`;
+    function formatDate(dateStr) {
+      const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+      const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+      const d = new Date(dateStr);
+      return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
     }
+    function getGuestName() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const guestName = urlParams.get('to');
+      if (guestName) {
+        document.getElementById('guestName').innerText = `Kepada Yth. ${guestName.replace(/\+/g, ' ')}`;
+      }
+    }
+
+    // JALANKAN
+    init();
   </script>
 </body>
 </html>
