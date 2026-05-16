@@ -1,420 +1,699 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Wedding Invitation</title>
-  <meta name="theme-color" content="#8B7355">
-  <style>
-    :root {
-      --theme: #8B7355;
-      --bg: #FAF7F2;
-      --text: #3E3E3E;
-      --accent: #B76E79;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Poppins', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-    .container {
-      height: 100vh;
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-    }
-    section {
-      height: 100vh;
-      width: 100%;
-      scroll-snap-align: start;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      text-align: center;
-      overflow: hidden;
-    }
-    .bg-cover {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      filter: brightness(0.7);
-    }
-    .overlay {
-      position: relative;
-      z-index: 2;
-      padding: 24px;
-      background: rgba(250, 247, 242, 0.85);
-      backdrop-filter: blur(10px);
-      border-radius: 24px;
-      max-width: 90%;
-      animation: fadeUp 0.8s ease-out;
-    }
-    h1 { font-size: 2.5rem; color: var(--theme); margin-bottom: 8px; }
-    h2 { font-size: 1.8rem; color: var(--accent); margin-bottom: 16px; }
-    h3 { font-size: 1.2rem; margin-bottom: 8px; }
-    p { line-height: 1.6; margin-bottom: 12px; }
-    .arab { font-size: 1.4rem; line-height: 2; margin-bottom: 16px; font-family: 'Amiri', serif; }
-    .btn {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 50px;
-      font-size: 1rem;
-      font-weight: 600;
-      margin: 8px;
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .btn:active { transform: scale(0.95); }
-    .btn-outline {
-      background: transparent;
-      border: 2px solid var(--accent);
-      color: var(--accent);
-    }
-    .countdown {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin: 20px 0;
-    }
-    .countdown-item {
-      background: var(--theme);
-      color: white;
-      padding: 12px;
-      border-radius: 12px;
-      min-width: 60px;
-    }
-    .countdown-item span { display: block; font-size: 1.5rem; font-weight: 700; }
-    .countdown-item label { font-size: 0.7rem; opacity: 0.9; }
-    .timeline { text-align: left; max-width: 320px; }
-    .timeline-item { margin-bottom: 24px; position: relative; padding-left: 20px; }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 6px;
-      width: 10px; height: 10px;
-      background: var(--accent);
-      border-radius: 50%;
-    }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-top: 16px;
-    }
-    .gallery-grid img {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      border-radius: 12px;
-    }
-    .protocols {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .protocol-item { font-size: 0.9rem; }
-    .protocol-item span { font-size: 2rem; display: block; }
-    .floating-btn {
-      position: fixed;
-      bottom: 24px; right: 24px;
-      z-index: 999;
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      border: none;
-    }
-    .swipe-hint {
-      position: absolute;
-      bottom: 30px;
-      z-index: 3;
-      color: white;
-      font-size: 0.8rem;
-      animation: bounce 2s infinite;
-    }
-    .guest-name {
-      background: var(--theme);
-      color: white;
-      padding: 8px 20px;
-      border-radius: 50px;
-      display: inline-block;
-      margin: 16px 0;
-      font-weight: 600;
-    }
-    iframe {
-      width: 100%;
-      aspect-ratio: 9/16;
-      border-radius: 16px;
-      border: none;
-    }
-    .gift-card {
-      background: var(--bg);
-      padding: 16px;
-      border-radius: 16px;
-      margin: 16px 0;
-    }
-    .hide { display: none !important; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Wedding TikTok — Premium Invitation</title>
+    <meta name="theme-color" content="#000000">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --tiktok-bg: #000000;
+            --tiktok-text: #ffffff;
+            --tiktok-accent: #FE2C55;
+            --tiktok-muted: rgba(255,255,255,0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: var(--tiktok-bg);
+            color: var(--tiktok-text);
+            font-family: 'Inter', sans-serif;
+            overscroll-behavior: none;
+        }
+
+        /* TikTok Container Vertical Snap Engine */
+        .tiktok-container {
+            height: 100dvh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+        .tiktok-container::-webkit-scrollbar { display: none; }
+
+        /* TikTok Slide Layout */
+        .tt-slide {
+            height: 100dvh;
+            width: 100%;
+            scroll-snap-align: start;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Background Media Sizing */
+        .tt-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+        .tt-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 0%, transparent 40%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.75) 100%);
+            z-index: 2;
+        }
+
+        /* Content Area Overlay Styling */
+        .tt-content {
+            position: relative;
+            z-index: 3;
+            width: 100%;
+            padding: 0 16px 34px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: env(safe-area-inset-bottom, 16px);
+        }
+
+        /* Left Content: Captions & Music Ticker */
+        .tt-caption {
+            flex: 1;
+            padding-right: 24px;
+        }
+        .tt-username {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+        }
+        .tt-username .verified {
+            width: 14px;
+            height: 14px;
+            background: #20D5EC;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8px;
+            color: #000;
+            font-weight: 900;
+        }
+        .tt-desc {
+            font-size: 13.5px;
+            line-height: 1.45;
+            margin-bottom: 8px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+            font-weight: 400;
+        }
+        .tt-hashtag { color: #ffffff; font-weight: 600; margin-left: 2px; }
+        
+        .tt-music {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12.5px;
+            width: 70%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        .tt-music-ticker {
+            display: inline-block;
+            animation: tickerMarquee 10s linear infinite;
+        }
+        @keyframes tickerMarquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+
+        /* Right Content: Action Column Layout */
+        .tt-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+            padding-bottom: 4px;
+            z-index: 10;
+        }
+        .tt-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            cursor: pointer;
+        }
+        .tt-action-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .tt-action-btn svg { width: 24px; height: 24px; fill: #ffffff; }
+        .tt-action-btn:active { transform: scale(0.85); }
+        .tt-action-btn.liked svg {
+            fill: var(--tiktok-accent);
+        }
+        .tt-action-btn.liked {
+            animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes heartPop {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.25); }
+        }
+        .tt-action-count {
+            font-size: 11.5px;
+            font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Profile Avatar System with Plus Icon */
+        .tt-avatar-container {
+            position: relative;
+            margin-bottom: 8px;
+        }
+        .tt-avatar {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: 1.5px solid #fff;
+            object-fit: cover;
+        }
+        .tt-avatar-plus {
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 17px;
+            height: 17px;
+            background: var(--tiktok-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+        .tt-avatar-container.followed .tt-avatar-plus {
+            transform: translateX(-50%) scale(0);
+            opacity: 0;
+        }
+
+        /* Vinyl Disc Engine Room */
+        .tt-music-disc {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #222 25%, #050505 80%);
+            border: 7px solid #161616;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            animation: spinDisc 4s linear infinite;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tt-music-disc-thumb {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        @keyframes spinDisc { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* Cover Hype Overlay */
+        .tt-cover {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            background: var(--tiktok-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+        }
+        .tt-cover-btn {
+            background: var(--tiktok-accent);
+            color: white;
+            border: none;
+            padding: 14px 50px;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-top: 36px;
+            box-shadow: 0 4px 14px rgba(254, 44, 85, 0.3);
+            transition: opacity 0.2s;
+        }
+        .tt-cover-btn:active { opacity: 0.85; }
+
+        /* Progress Header Tracker Bar */
+        .tt-progress {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: rgba(255,255,255,0.15);
+            z-index: 100;
+        }
+        .tt-progress-bar {
+            height: 100%;
+            background: rgba(255,255,255,0.85);
+            width: 0%;
+        }
+
+        /* Double Tap Kinetic Floating Hearts */
+        .tt-heart {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+        }
+        .tt-heart.show { animation: heartFloat 0.8s ease-out forwards; }
+        @keyframes heartFloat {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(-15deg); opacity: 0; }
+            10% { transform: translate(-50%, -50%) scale(1.2) rotate(10deg); opacity: 0.9; }
+            20% { transform: translate(-50%, -50%) scale(0.9) rotate(-5deg); opacity: 1; }
+            80% { transform: translate(-50%, -50%) scale(1) translateY(-40px) rotate(5deg); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(0.8) translateY(-80px) rotate(15deg); opacity: 0; }
+        }
+
+        .font-arab { font-family: 'Amiri', serif; }
+        .hide { display: none !important; }
+    </style>
 </head>
 <body>
-  <div class="container" id="app">
-    <!-- Semua section di-render via JS -->
-  </div>
 
-  <button class="floating-btn" id="musicBtn" onclick="toggleMusic()">♪</button>
-  <audio id="bgMusic" loop></audio>
+    <!-- PROGRESS LINE BAR -->
+    <div class="tt-progress">
+        <div class="tt-progress-bar" id="progressBar"></div>
+    </div>
 
-  <script>
-    let D = {}; // Data global
-    let music = document.getElementById('bgMusic');
-    let isPlaying = false;
+    <!-- MAIN LANDING COVER LAYER -->
+    <div class="tt-cover" id="cover">
+        <h1 id="cover-title" class="text-3xl font-bold tracking-tight text-white mb-2">Loading...</h1>
+        <p id="cover-subtitle" class="text-[var(--tiktok-muted)] text-sm font-light tracking-wide"></p>
+        <button class="tt-cover-btn" onclick="startTikTok()">Buka Undangan</button>
+    </div>
 
-    // 1. FETCH DATA DULU
-    async function init() {
-      try {
-        const res = await fetch('data.json');
-        D = await res.json();
-        applyTheme();
-        renderApp();
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-        getGuestName();
-      } catch (e) {
-        document.getElementById('app').innerHTML = `<section><div class="overlay"><h2>Error load data.json</h2></div></section>`;
-      }
-    }
+    <!-- MAIN APP FLOW LAYOUT CONTAINER -->
+    <div class="tiktok-container" id="feed"></div>
 
-    // 2. APPLY THEME DARI JSON
-    function applyTheme() {
-      const s = D.settings;
-      document.documentElement.style.setProperty('--theme', s.themeColor);
-      document.documentElement.style.setProperty('--bg', s.bgColor);
-      document.documentElement.style.setProperty('--text', s.textColor);
-      document.documentElement.style.setProperty('--accent', s.accentColor);
-      document.querySelector('meta[name="theme-color"]').content = s.themeColor;
-      music.src = D.logistics.music;
-    }
+    <!-- AUDIO FRAMEWORK SOURCE ELEMENT -->
+    <audio id="bgMusic" loop preload="auto"></audio>
 
-    // 3. RENDER SEMUA SECTION
-    function renderApp() {
-      const app = document.getElementById('app');
-      const { couple, gallery, events, quote, loveStory, liveStreaming, digitalGift, protocols, logistics, settings } = D;
-      
-      app.innerHTML = `
-        <!-- COVER -->
-        <section id="cover">
-          <img src="${gallery.heroImage}" class="bg-cover" alt="">
-          <div class="overlay">
-            <p>The Wedding Of</p>
-            <h1>${couple.groom.nickname} & ${couple.bride.nickname}</h1>
-            <div class="guest-name" id="guestName">Kepada Yth. ${D.guest.name}</div>
-            <p>${formatDate(events[0].date)}</p>
-            <button class="btn" onclick="openInvitation()">Buka Undangan</button>
-          </div>
-          <div class="swipe-hint">Swipe up ↑</div>
-        </section>
+    <script>
+        let D = {};
+        let likes = {};
+        let followedArr = {};
+        let music = document.getElementById('bgMusic');
 
-        <!-- QUOTE -->
-        <section id="quote" class="${settings.islami ? '' : 'hide'}">
-          <img src="${gallery.album[0]}" class="bg-cover" alt="">
-          <div class="overlay">
-            <p class="arab">${quote.arab}</p>
-            <p><i>"${quote.text}"</i></p>
-            <p><b>${quote.source}</b></p>
-          </div>
-        </section>
+        async function init() {
+            const params = new URLSearchParams(window.location.search);
+            const slug = params.get('c') || 'default';
+            const guest = params.get('to')?.replace(/\+/g, ' ') || 'Tamu Undangan';
 
-        <!-- COUPLE -->
-        <section id="couple">
-          <img src="${gallery.album[1]}" class="bg-cover" alt="">
-          <div class="overlay">
-            <h2>Assalamualaikum Wr. Wb.</h2>
-            <p>${logistics.guestNote}</p>
-            <div style="margin: 24px 0;">
-              <img src="${couple.groom.image}" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--accent)">
-              <h3>${couple.groom.name}</h3>
-              <p style="font-size:0.9rem">Putra dari<br>${couple.groom.father} & ${couple.groom.mother}</p>
-              <p><a href="https://instagram.com/${couple.groom.instagram}" style="color:var(--accent)">@${couple.groom.instagram}</a></p>
-            </div>
-            <h2 style="font-size:2rem;">&</h2>
-            <div style="margin: 24px 0;">
-              <img src="${couple.bride.image}" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--accent)">
-              <h3>${couple.bride.name}</h3>
-              <p style="font-size:0.9rem">Putri dari<br>${couple.bride.father} & ${couple.bride.mother}</p>
-              <p><a href="https://instagram.com/${couple.bride.instagram}" style="color:var(--accent)">@${couple.bride.instagram}</a></p>
-            </div>
-          </div>
-        </section>
+            try {
+                const res = await fetch(`../../public/clients/${slug}/data.json`);
+                D = await res.json();
+                
+                // Mencegah error crash jika struktur skema JSON root parsial berbeda
+                if(!D.guest) D.guest = {};
+                D.guest.name = guest;
+                
+                renderCover();
+                renderFeed();
+            } catch(e) {
+                console.error(e);
+                document.getElementById('cover-title').innerText = 'Gagal Memuat Data';
+            }
+        }
 
-        <!-- EVENTS + COUNTDOWN -->
-        <section id="events" class="${settings.showCountdown ? '' : 'hide'}">
-          <img src="${gallery.album[2]}" class="bg-cover" alt="">
-          <div class="overlay">
-            <h2>Save The Date</h2>
-            <div class="countdown" id="countdown">
-              <div class="countdown-item"><span id="days">00</span><label>Hari</label></div>
-              <div class="countdown-item"><span id="hours">00</span><label>Jam</label></div>
-              <div class="countdown-item"><span id="minutes">00</span><label>Menit</label></div>
-              <div class="countdown-item"><span id="seconds">00</span><label>Detik</label></div>
-            </div>
-            ${events.map(e => `
-              <h3>${e.title}</h3>
-              <p><b>${formatDate(e.date)}</b><br>${e.startTime} - ${e.endTime} ${e.timezone}<br>${e.address}</p>
-              <button class="btn btn-outline" onclick="window.open('${e.googleMaps}')">Lihat Lokasi</button>
-            `).join('<div style="margin-top:24px"></div>')}
-          </div>
-        </section>
+        function renderCover() {
+            document.getElementById('cover-title').innerText = `${D.couple.groom.nickname} & ${D.couple.bride.nickname}`;
+            document.getElementById('cover-subtitle').innerText = `Kepada Yth. ${D.guest.name}`;
+            
+            // Kompatibilitas multi-path untuk pemetaan audio musik digital agensi
+            music.src = D.info?.music ? `../../public/clients/${new URLSearchParams(window.location.search).get('c')}/${D.info.music}` : (D.logistics?.music || '../../public/clients/default/musik.mp3');
+        }
 
-        <!-- LOVE STORY -->
-        <section id="story" class="${settings.showLoveStory ? '' : 'hide'}">
-          <img src="${gallery.album[3]}" class="bg-cover" alt="">
-          <div class="overlay">
-            <h2>Love Story</h2>
-            <div class="timeline">
-              ${loveStory.map(s => `
-                <div class="timeline-item">
-                  <h3>${s.year} - ${s.title}</h3>
-                  <p>${s.description}</p>
+        function renderFeed() {
+            const feed = document.getElementById('feed');
+            const slides = [];
+            const slugPath = `../../public/clients/${new URLSearchParams(window.location.search).get('c')}/`;
+
+            // SLIDE 1: INTRO COVER UTAMA
+            slides.push({
+                bg: slugPath + D.gallery.heroImage,
+                username: `${D.couple.groom.nickname.toLowerCase()}_${D.couple.bride.nickname.toLowerCase()}`,
+                desc: `We’re getting married! Bergabunglah dalam perayaan hari bahagia kami. ✨`,
+                hashtags: '#WeddingDay #CintaSejati #UndanganDigital',
+                music: `${D.couple.groom.nickname} & ${D.couple.bride.nickname} Original Sound Track`,
+                avatar: slugPath + D.couple.groom.image,
+                likes: '142.5K',
+                comments: '3.8K',
+                shares: '1.2K'
+            });
+
+            // SLIDE 2: AYAT SUCI / KATA MUTIARA
+            const isIslami = D.settings?.islami !== undefined ? D.settings.islami : true;
+            if (isIslami && D.quote) {
+                slides.push({
+                    bg: slugPath + (D.gallery.album[0] || D.gallery.heroImage),
+                    username: `${D.couple.groom.nickname.toLowerCase()}_${D.couple.bride.nickname.toLowerCase()}`,
+                    desc: `<span class="font-arab block text-xl my-2 text-center leading-loose">${D.quote.arabic || ''}</span>${D.quote.text}`,
+                    hashtags: `#${D.quote.source ? D.quote.source.replace(/\s/g,'') : 'QuoteWedding'} #BerkahPernikahan`,
+                    music: 'Instrumen Kedamaian - Hati Suci',
+                    avatar: slugPath + D.couple.bride.image,
+                    likes: '94.2K',
+                    comments: '1.1K',
+                    shares: '512'
+                });
+            }
+
+            // SLIDE 3: DETAIL MEMPELAI PRIA (GROOM)
+            slides.push({
+                bg: slugPath + D.couple.groom.image,
+                username: D.couple.groom.instagram ? D.couple.groom.instagram.replace('@','') : 'mempelai_pria',
+                desc: `Groom / Mempelai Pria: ${D.couple.groom.name}. Putra tercinta dari Bapak ${D.couple.groom.father} & Ibu ${D.couple.groom.mother}.`,
+                hashtags: '#Groom #MempelaiPria #Handsome',
+                music: 'Original Sound - Groom Style',
+                avatar: slugPath + D.couple.groom.image,
+                likes: '108.3K',
+                comments: '2.4K',
+                shares: '489'
+            });
+
+            // SLIDE 4: DETAIL MEMPELAI WANITA (BRIDE)
+            slides.push({
+                bg: slugPath + D.couple.bride.image,
+                username: D.couple.bride.instagram ? D.couple.bride.instagram.replace('@','') : 'mempelai_wanita',
+                desc: `Bride / Mempelai Wanita: ${D.couple.bride.name}. Putri tercinta dari Bapak ${D.couple.bride.father} & Ibu ${D.couple.bride.mother}.`,
+                hashtags: '#Bride #MempelaiWanita #Beautiful',
+                music: 'Original Sound - Bride Style',
+                avatar: slugPath + D.couple.bride.image,
+                likes: '124.9K',
+                comments: '4.7K',
+                shares: '891'
+            });
+
+            // SLIDE 5: DETAIL EVENT AGENDA (LOOP MULTI-ACARA)
+            D.events.forEach((e, idx) => {
+                slides.push({
+                    bg: slugPath + (D.gallery.album[1] || D.gallery.heroImage),
+                    username: `${D.couple.groom.nickname.toLowerCase()}_${D.couple.bride.nickname.toLowerCase()}`,
+                    desc: `<b class="text-base tracking-wide text-amber-300 uppercase block mb-1">${e.title}</b>🗓️ ${formatDate(e.date)}<br>⏰ ${e.startTime} - ${e.endTime} ${e.timezone || 'WIB'}<br>📍 ${e.address}`,
+                    hashtags: '#SaveTheDate #LokasiAcara #InfoPernikahan',
+                    music: 'Wedding Bells Bells - Ceremonial',
+                    avatar: slugPath + D.gallery.heroImage,
+                    likes: '215.1K',
+                    comments: '8.3K',
+                    shares: 'Petunjuk Lokasi',
+                    isEvent: true,
+                    maps: e.googleMaps
+                });
+            });
+
+            // SLIDE 6: PANEL HITUNG MUNDUR (COUNTDOWN)
+            const showCountdown = D.settings?.showCountdown !== undefined ? D.settings.showCountdown : true;
+            if (showCountdown && D.events[0]) {
+                slides.push({
+                    bg: slugPath + (D.gallery.album[2] || D.gallery.heroImage),
+                    username: `${D.couple.groom.nickname.toLowerCase()}_${D.couple.bride.nickname.toLowerCase()}`,
+                    desc: `Menghitung momen sakral penyatuan cinta kami... ⏰`,
+                    hashtags: '#Countdown #MenujuHalal #HariBahagia',
+                    music: 'Counting Days Ticker - Live Track',
+                    avatar: slugPath + D.gallery.heroImage,
+                    likes: '189.6K',
+                    comments: '4.9K',
+                    shares: '822',
+                    isCountdown: true
+                });
+            }
+
+            // SLIDE 7: PREWEDDING ALBUM GALLERY
+            slides.push({
+                bg: slugPath + (D.gallery.album[3] || D.gallery.heroImage),
+                username: `${D.couple.groom.nickname.toLowerCase()}_${D.couple.bride.nickname.toLowerCase()}`,
+                desc: `Potret kebahagiaan kami berdua dalam lensa ruang dan waktu. Swipe terus untuk info kehadiran. ✨`,
+                hashtags: '#Prewedding #Gallery #LoveStory #VisualArt',
+                music: 'Love Story Instrumental - Premium Pack',
+                avatar: slugPath + D.gallery.heroImage,
+                likes: '267.3K',
+                comments: '5.2K',
+                shares: '1.9K'
+            });
+
+            // SLIDE 8: FORM RSVP VIA WHATSAPP INTERACTIVE
+            slides.push({
+                bg: slugPath + D.gallery.heroImage,
+                username: `${D.couple.groom.nickname.toLowerCase()}_${D.couple.bride.nickname.toLowerCase()}`,
+                desc: `Kehadiran serta doa restu Anda adalah pelengkap kebahagiaan kami. Silakan klik tombol share kanan untuk kirim RSVP WhatsApp.`,
+                hashtags: '#RSVP #KonfirmasiHadir #DitungguKedatangannya',
+                music: 'Kirim Pesan Kehadiran — RSVP Online',
+                avatar: slugPath + D.gallery.heroImage,
+                likes: '210.4K',
+                comments: '9.1K',
+                shares: 'Konfirmasi RSVP',
+                isRSVP: true
+            });
+
+            // Pemetaan Render Struktur Array HTML
+            feed.innerHTML = slides.map((s, i) => `
+                <div class="tt-slide" data-index="${i}" ${s.isCountdown ? 'data-countdown="true"' : ''}>
+                    <img src="${s.bg}" class="tt-bg" alt="">
+                    <div class="tt-overlay"></div>
+                    
+                    <!-- KINETIC FLOATING HEART ELEMENT -->
+                    <div class="tt-heart">
+                        <svg width="72" height="72" viewBox="0 0 24 24" fill="#FE2C55"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </div>
+
+                    <div class="tt-content">
+                        <div class="tt-caption">
+                            <div class="tt-username">
+                                @${s.username}
+                                <span class="verified">✓</span>
+                            </div>
+                            <div class="tt-desc text-stone-100" id="desc-node-${i}">${s.desc}</div>
+                            <div class="tt-desc tt-hashtag">${s.hashtags}</div>
+                            <div class="tt-music">
+                                <svg class="w-3 h-3 shrink-0 fill-current" viewBox="0 0 24 24">
+                                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                </svg>
+                                <div class="w-full overflow-hidden relative h-4">
+                                    <span class="tt-music-ticker absolute whitespace-nowrap pr-8">${s.music} &nbsp;&bull;&nbsp; ${s.music}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT SIDEBAR ACTION NAVIGATION BUTTONS -->
+                        <div class="tt-actions">
+                            <div class="tt-action" onclick="toggleFollow(this, ${i})">
+                                <div class="tt-avatar-container" id="avatar-container-${i}">
+                                    <img src="${s.avatar}" class="tt-avatar" alt="Avatar">
+                                    <div class="tt-avatar-plus">+</div>
+                                </div>
+                            </div>
+                            <div class="tt-action" onclick="toggleLike(${i})">
+                                <div class="tt-action-btn" id="like-${i}">
+                                    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </div>
+                                <div class="tt-action-count" id="like-count-${i}">${s.likes}</div>
+                            </div>
+                            <div class="tt-action" onclick="openComment()">
+                                <div class="tt-action-btn">
+                                    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                                </div>
+                                <div class="tt-action-count">${s.comments}</div>
+                            </div>
+                            <div class="tt-action" onclick="handleShare(${i}, ${s.isRSVP || false}, ${s.isEvent || false}, '${s.maps || ''}')">
+                                <div class="tt-action-btn">
+                                    <svg viewBox="0 0 24 24"><path d="M10 9V5l7 7-7 7v-4.1c-5 0-8.5 1.6-11 5.1 1-5 4-10 11-11z"/></svg>
+                                </div>
+                                <div class="tt-action-count text-center">${s.shares}</div>
+                            </div>
+                            <div class="tt-action" onclick="toggleMusicState()">
+                                <div class="tt-music-disc">
+                                    <img src="${s.avatar}" class="tt-music-disc-thumb" alt="Disc">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              `).join('')}
-            </div>
-          </div>
-        </section>
+            `).join('');
 
-        <!-- GALLERY -->
-        <section id="gallery">
-          <div class="overlay">
-            <h2>Our Moments</h2>
-            <iframe src="https://www.youtube.com/embed/${gallery.videoYoutubeId}" allow="autoplay"></iframe>
-            <div class="gallery-grid">
-              ${gallery.album.map(img => `<img src="${img}" alt="">`).join('')}
-            </div>
-          </div>
-        </section>
+            // Deteksi Sentuhan Double-Tap Layar untuk Suka (Like)
+            document.querySelectorAll('.tt-slide').forEach(slide => {
+                let lastTap = 0;
+                slide.addEventListener('touchend', (e) => {
+                    const currentTime = new Date().getTime();
+                    const tapLength = currentTime - lastTap;
+                    if (tapLength < 300 && tapLength > 0) {
+                        const index = slide.dataset.index;
+                        showHeart(slide);
+                        toggleLike(index, true);
+                    }
+                    lastTap = currentTime;
+                });
+            });
 
-        <!-- LIVE STREAMING -->
-        <section id="live" class="${liveStreaming.enabled ? '' : 'hide'}">
-          <img src="${gallery.heroImage}" class="bg-cover" alt="">
-          <div class="overlay">
-            <h2>Live Streaming</h2>
-            <p>Temui kami secara virtual melalui siaran langsung ${liveStreaming.platform}</p>
-            <button class="btn" onclick="window.open('${liveStreaming.url}')">Tonton Live</button>
-          </div>
-        </section>
+            // Jalankan Thread Realtime Hitung Mundur Agenda Ujian/Pernikahan
+            const hasCountdownNode = D.settings?.showCountdown !== undefined ? D.settings.showCountdown : true;
+            if (hasCountdownNode) {
+                updateCountdown();
+                setInterval(updateCountdown, 1000);
+            }
 
-        <!-- DIGITAL GIFT -->
-        <section id="gift">
-          <img src="${gallery.album[1]}" class="bg-cover" alt="">
-          <div class="overlay">
-            <h2>Wedding Gift</h2>
-            <p>Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless.</p>
-            ${digitalGift.map(g => `
-              <div class="gift-card">
-                <h3>${g.provider}</h3>
-                <p style="font-size:1.2rem;font-weight:700;">${g.accountNumber}</p>
-                <p>a.n ${g.accountHolder}</p>
-                ${g.provider.includes('Bank') ? `<button class="btn btn-outline" onclick="copyRek('${g.accountNumber}')">Copy No. Rekening</button>` : ''}
-              </div>
-            `).join('')}
-          </div>
-        </section>
+            // Integrasi Manajemen Progress Tracker Garis Atas saat Scroll
+            setupProgressTracker();
+        }
 
-        <!-- PROTOCOLS + RSVP -->
-        <section id="rsvp">
-          <img src="${gallery.album[2]}" class="bg-cover" alt="">
-          <div class="overlay">
-            <div class="${settings.showProtocols ? '' : 'hide'}">
-              <h2>Protokol Kesehatan</h2>
-              <div class="protocols">
-                ${protocols.map(p => `<div class="protocol-item"><span>${p.icon}</span>${p.label}</div>`).join('')}
-              </div>
-            </div>
-            <h2 style="margin-top:32px">Dress Code</h2>
-            <p style="font-size:1.2rem;color:var(--accent);font-weight:600">${logistics.dressCode}</p>
-            <h2 style="margin-top:32px">RSVP</h2>
-            <p>Konfirmasi kehadiran Anda</p>
-            <button class="btn" onclick="window.open('https://wa.me/${logistics.rsvpWaNumber}?text=Halo%20${couple.groom.nickname}%20%26%20${couple.bride.nickname}%2C%20saya%20akan%20hadir')">Konfirmasi via WhatsApp</button>
-            <p style="margin-top:32px;font-size:0.9rem">Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu</p>
-            <h3 style="color:var(--accent)">${couple.groom.nickname} & ${couple.bride.nickname}</h3>
-          </div>
-        </section>
-      `;
-    }
+        function startTikTok() {
+            document.getElementById('cover').style.display = 'none';
+            music.volume = 0.6;
+            music.play().catch(e => console.log('Autoplay ditahan oleh keamanan privasi peramban browser.'));
+        }
 
-    // 4. HELPER FUNCTIONS
-    function openInvitation() {
-      document.getElementById('quote').scrollIntoView();
-      toggleMusic();
-    }
-    function toggleMusic() {
-      if (isPlaying) {
-        music.pause();
-        document.getElementById('musicBtn').innerHTML = '♪';
-      } else {
-        music.play().catch(e => console.log('Autoplay blocked'));
-        document.getElementById('musicBtn').innerHTML = '❚❚';
-      }
-      isPlaying = !isPlaying;
-    }
-    function updateCountdown() {
-      const target = new Date(D.countdown.targetDate).getTime();
-      const now = new Date().getTime();
-      const diff = target - now;
-      if (diff < 0) return;
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((diff % (1000 * 60)) / 1000);
-      document.getElementById('days').innerText = String(d).padStart(2, '0');
-      document.getElementById('hours').innerText = String(h).padStart(2, '0');
-      document.getElementById('minutes').innerText = String(m).padStart(2, '0');
-      document.getElementById('seconds').innerText = String(s).padStart(2, '0');
-    }
-    function copyRek(text) {
-      navigator.clipboard.writeText(text);
-      alert('No. rekening berhasil disalin!');
-    }
-    function formatDate(dateStr) {
-      const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-      const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-      const d = new Date(dateStr);
-      return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
-    }
-    function getGuestName() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const guestName = urlParams.get('to');
-      if (guestName) {
-        document.getElementById('guestName').innerText = `Kepada Yth. ${guestName.replace(/\+/g, ' ')}`;
-      }
-    }
+        function toggleLike(index, forceLike = false) {
+            const btn = document.getElementById(`like-${index}`);
+            const countEl = document.getElementById(`like-count-${index}`);
+            if (!likes[index] || forceLike) {
+                likes[index] = true;
+                btn.classList.add('liked');
+                let count = parseCount(countEl.innerText);
+                countEl.innerText = formatCount(count + 1);
+            } else if (!forceLike) {
+                likes[index] = false;
+                btn.classList.remove('liked');
+                let count = parseCount(countEl.innerText);
+                countEl.innerText = formatCount(count - 1);
+            }
+        }
 
-    // JALANKAN
-    init();
-  </script>
+        function toggleFollow(element, index) {
+            const container = document.getElementById(`avatar-container-${index}`);
+            container.classList.add('followed');
+        }
+
+        function showHeart(slide) {
+            const heart = slide.querySelector('.tt-heart');
+            heart.classList.remove('show');
+            void heart.offsetWidth; // Memicu reflow paksa agar animasi mengulang sempurna
+            heart.classList.add('show');
+        }
+
+        function toggleMusicState() {
+            const discs = document.querySelectorAll('.tt-music-disc');
+            if (music.paused) {
+                music.play();
+                discs.forEach(d => d.style.animationPlayState = 'running');
+            } else {
+                music.pause();
+                discs.forEach(d => d.style.animationPlayState = 'paused');
+            }
+        }
+
+        function handleShare(index, isRSVP, isEvent, maps) {
+            if (isRSVP) {
+                const waNum = D.logistics?.rsvpWaNumber || D.info?.whatsapp_rsvp || D.info?.whatsapp || '';
+                const text = `Halo ${D.couple.groom.nickname} & ${D.couple.bride.nickname}, saya *${D.guest.name}* menyatakan bersedia HADIR memenuhi undangan pernikahan kalian. Terima kasih!`;
+                window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(text)}`, '_blank');
+            } else if (isEvent && maps) {
+                window.open(maps, '_blank');
+            } else {
+                if(navigator.share) {
+                    navigator.share({ title: 'Undangan Pernikahan', url: window.location.href });
+                } else {
+                    navigator.clipboard.writeText(window.location.href);
+                    alert('Tautan tautan undangan berhasil disalin ke clipboard ponsel Anda!');
+                }
+            }
+        }
+
+        function openComment() {
+            alert('Fitur kolom interaksi teks ditutup sementara. Silakan kirimkan ucapan berkah mulia Anda melalui WhatsApp pengantin! 💕');
+        }
+
+        function updateCountdown() {
+            if(!D.events || !D.events[0]) return;
+            
+            const target = new Date(`${D.events[0].date}T${D.events[0].startTime || '08:00:00'}`).getTime();
+            const now = new Date().getTime();
+            const diff = target - now;
+            
+            const countdownSlide = document.querySelector('[data-countdown="true"]');
+            if (!countdownSlide) return;
+            const descNode = countdownSlide.querySelector('.tt-desc');
+            
+            if (diff <= 0) {
+                descNode.innerHTML = `Hari Bahagia Telah Tiba! ✨<br><b>Acara sedang / sudah berlangsung.</b>`;
+                return;
+            }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            descNode.innerHTML = `Menghitung hari menuju hari sakral kebersamaan kami ⏰<br><span class="block bg-white/10 px-3 py-1.5 rounded-lg border border-white/10 mt-2 text-sm font-mono text-center"><b>${d}d &bull; ${h}h &bull; ${m}m &bull; ${s}s</b></span>`;
+        }
+
+        function setupProgressTracker() {
+            const feed = document.getElementById('feed');
+            feed.addEventListener('scroll', () => {
+                const scrollPercent = (feed.scrollTop / (feed.scrollHeight - feed.clientHeight)) * 100;
+                document.getElementById('progressBar').style.width = scrollPercent + '%';
+            });
+        }
+
+        function formatDate(dateStr) {
+            if(!dateStr) return '';
+            const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+            const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            const d = new Date(dateStr);
+            return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+        }
+
+        function parseCount(str) {
+            if (str.includes('K')) return parseFloat(str) * 1000;
+            if (str.includes('M')) return parseFloat(str) * 1000000;
+            return parseInt(str) || 0;
+        }
+
+        function formatCount(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num.toString();
+        }
+
+        init();
+    </script>
 </body>
 </html>
