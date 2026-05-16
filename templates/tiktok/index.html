@@ -26,36 +26,46 @@
             -webkit-tap-highlight-color: transparent;
             user-select: none;
         }
-        html, body {
+        html {
             height: 100%;
-            overflow: hidden;
+            overflow: hidden; /* cegah bounce iOS */
+        }
+        body {
+            height: 100%;
             background: var(--tiktok-bg);
             color: var(--tiktok-text);
             font-family: 'Inter', sans-serif;
             overscroll-behavior: none;
+            margin: 0;
+            padding: 0;
         }
 
-     .tiktok-container {
-            height: 100dvh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
-            scrollbar-width: none;
-        }
-     .tiktok-container::-webkit-scrollbar { display: none; }
-
-     .tt-slide {
+    .tiktok-container {
             height: 100dvh;
             width: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch; /* smooth di iOS */
+            scrollbar-width: none;
+        }
+    .tiktok-container::-webkit-scrollbar { display: none; }
+
+    .tt-slide {
+            height: 100dvh;
+            width: 100vw;
             scroll-snap-align: start;
+            scroll-snap-stop: always;
             position: relative;
             display: flex;
             align-items: flex-end;
             justify-content: center;
             overflow: hidden;
+            flex-shrink: 0;
         }
 
-     .tt-bg {
+    .tt-bg {
             position: absolute;
             inset: 0;
             width: 100%;
@@ -63,14 +73,14 @@
             object-fit: cover;
             z-index: 1;
         }
-     .tt-overlay {
+    .tt-overlay {
             position: absolute;
             inset: 0;
             background: linear-gradient(180deg, transparent 0%, transparent 40%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.75) 100%);
             z-index: 2;
         }
 
-     .tt-content {
+    .tt-content {
             position: relative;
             z-index: 3;
             width: 100%;
@@ -81,11 +91,11 @@
             margin-bottom: env(safe-area-inset-bottom, 16px);
         }
 
-     .tt-caption {
+    .tt-caption {
             flex: 1;
             padding-right: 24px;
         }
-     .tt-username {
+    .tt-username {
             font-size: 15px;
             font-weight: 700;
             margin-bottom: 6px;
@@ -94,7 +104,7 @@
             gap: 4px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.6);
         }
-     .tt-username.verified {
+    .tt-username.verified {
             width: 14px;
             height: 14px;
             background: #20D5EC;
@@ -106,16 +116,16 @@
             color: #000;
             font-weight: 900;
         }
-     .tt-desc {
+    .tt-desc {
             font-size: 13.5px;
             line-height: 1.45;
             margin-bottom: 8px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.7);
             font-weight: 400;
         }
-     .tt-hashtag { color: #ffffff; font-weight: 600; margin-left: 2px; }
+    .tt-hashtag { color: #ffffff; font-weight: 600; margin-left: 2px; }
 
-     .tt-music {
+    .tt-music {
             display: flex;
             align-items: center;
             gap: 6px;
@@ -125,7 +135,7 @@
             white-space: nowrap;
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
-     .tt-music-ticker {
+    .tt-music-ticker {
             display: inline-block;
             animation: tickerMarquee 10s linear infinite;
         }
@@ -134,7 +144,7 @@
             100% { transform: translate3d(-50%, 0, 0); }
         }
 
-     .tt-actions {
+    .tt-actions {
             display: flex;
             flex-direction: column;
             gap: 16px;
@@ -142,18 +152,18 @@
             padding-bottom: 4px;
             z-index: 10;
         }
-     .tt-action {
+    .tt-action {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 2px;
             cursor: pointer;
         }
-     .tt-action-btn {
+    .tt-action-btn {
             width: 44px;
             height: 44px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,0.15);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             display: flex;
@@ -161,37 +171,37 @@
             justify-content: center;
             transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
         }
-     .tt-action-btn svg { width: 24px; height: 24px; fill: #ffffff; }
-     .tt-action-btn:active { transform: scale(0.85); }
-     .tt-action-btn.liked svg {
+    .tt-action-btn svg { width: 24px; height: 24px; fill: #ffffff; }
+    .tt-action-btn:active { transform: scale(0.85); }
+    .tt-action-btn.liked svg {
             fill: var(--tiktok-accent);
         }
-     .tt-action-btn.liked {
+    .tt-action-btn.liked {
             animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes heartPop {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.25); }
         }
-     .tt-action-count {
+    .tt-action-count {
             font-size: 11.5px;
             font-weight: 600;
             text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,0.9);
         }
 
-     .tt-avatar-container {
+    .tt-avatar-container {
             position: relative;
             margin-bottom: 8px;
         }
-     .tt-avatar {
+    .tt-avatar {
             width: 46px;
             height: 46px;
             border-radius: 50%;
             border: 1.5px solid #fff;
             object-fit: cover;
         }
-     .tt-avatar-plus {
+    .tt-avatar-plus {
             position: absolute;
             bottom: -5px;
             left: 50%;
@@ -209,12 +219,12 @@
             box-shadow: 0 1px 4px rgba(0,0,0,0.3);
             transition: all 0.3s;
         }
-     .tt-avatar-container.followed.tt-avatar-plus {
+    .tt-avatar-container.followed.tt-avatar-plus {
             transform: translateX(-50%) scale(0);
             opacity: 0;
         }
 
-     .tt-music-disc {
+    .tt-music-disc {
             width: 42px;
             height: 42px;
             border-radius: 50%;
@@ -227,7 +237,7 @@
             align-items: center;
             justify-content: center;
         }
-     .tt-music-disc-thumb {
+    .tt-music-disc-thumb {
             width: 100%;
             height: 100%;
             border-radius: 50%;
@@ -235,7 +245,7 @@
         }
         @keyframes spinDisc { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-     .tt-cover {
+    .tt-cover {
             position: fixed;
             inset: 0;
             z-index: 999;
@@ -247,7 +257,7 @@
             text-align: center;
             padding: 24px;
         }
-     .tt-cover-btn {
+    .tt-cover-btn {
             background: var(--tiktok-accent);
             color: white;
             border: none;
@@ -260,22 +270,22 @@
             box-shadow: 0 4px 14px rgba(254, 44, 85, 0.3);
             transition: opacity 0.2s;
         }
-     .tt-cover-btn:active { opacity: 0.85; }
+    .tt-cover-btn:active { opacity: 0.85; }
 
-     .tt-progress {
+    .tt-progress {
             position: fixed;
             top: 0; left: 0; right: 0;
             height: 2px;
             background: rgba(255,255,255,0.15);
             z-index: 100;
         }
-     .tt-progress-bar {
+    .tt-progress-bar {
             height: 100%;
             background: rgba(255,255,255,0.85);
             width: 0%;
         }
 
-     .tt-heart {
+    .tt-heart {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(0);
@@ -284,7 +294,7 @@
             opacity: 0;
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
         }
-     .tt-heart.show { animation: heartFloat 0.8s ease-out forwards; }
+    .tt-heart.show { animation: heartFloat 0.8s ease-out forwards; }
         @keyframes heartFloat {
             0% { transform: translate(-50%, -50%) scale(0) rotate(-15deg); opacity: 0; }
             10% { transform: translate(-50%, -50%) scale(1.2) rotate(10deg); opacity: 0.9; }
@@ -293,8 +303,8 @@
             100% { transform: translate(-50%, -50%) scale(0.8) translateY(-80px) rotate(15deg); opacity: 0; }
         }
 
-    .font-arab { font-family: 'Amiri', serif; }
-    .hide { display: none!important; }
+   .font-arab { font-family: 'Amiri', serif; }
+   .hide { display: none!important; }
     </style>
 </head>
 <body>
@@ -338,7 +348,6 @@
             if (!D.guest) D.guest = {};
             D.guest.name = guest;
 
-            // Apply theme from JSON
             document.documentElement.style.setProperty('--tiktok-accent', D.settings.accentColor || '#FE2C55');
 
             renderCover();
@@ -535,7 +544,7 @@
                             </div>
                             <div class="tt-action" onclick="openComment()">
                                 <div class="tt-action-btn">
-                                    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                                    <svg viewBox="0 0 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
                                 </div>
                                 <div class="tt-action-count">${s.comments}</div>
                             </div>
