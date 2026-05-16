@@ -1,394 +1,400 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FYP Wedding — Omah Aksara TikTok Style</title>
-    
-    <!-- Core Frameworks -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --tiktok-dark: #121212;
-            --marun: #560000;
-            --marun-bright: #8b0000;
-            --gold: #cca45c;
-        }
-        body, html {
-            margin: 0; padding: 0; background-color: #000;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: #fff; overflow: hidden; height: 100%;
-        }
-        .font-aesthetic { font-family: 'Dancing Script', cursive; }
-        
-        /* Simulates TikTok Video Container 9:16 */
-        .tiktok-container {
-            width: 100%; max-width: 450px; height: 100%;
-            margin: 0 auto; position: relative;
-            background: var(--tiktok-dark); overflow: hidden;
-        }
-        
-        /* Slide Navigation Management */
-        .tiktok-slide {
-            position: absolute; inset: 0; width: 100%; height: 100%;
-            opacity: 0; pointer-events: none; visibility: hidden;
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            transform: translateY(100px);
-        }
-        .tiktok-slide.active {
-            opacity: 1; pointer-events: auto; visibility: visible;
-            transform: translateY(0);
-        }
-
-        /* Vinyl Spin Interaction Like TikTok Sound Track */
-        .music-disc {
-            animation: spin 6s linear infinite;
-        }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        
-        /* Floating Side Control Bars */
-        .side-icon-shadow {
-            filter: drop-shadow(0px 2px 8px rgba(0,0,0,0.5));
-        }
-
-        /* Custom Soft Input for TikTok Forms */
-        .tt-input {
-            width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-            padding: 12px 16px; font-size: 13px; border-radius: 8px; color: white; outline: none;
-        }
-        .tt-input:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>The Wedding of Budi & Ani</title>
+  <meta name="theme-color" content="#8B7355">
+  <style>
+    :root {
+      --theme: #8B7355;
+      --bg: #FAF7F2;
+      --text: #3E3E3E;
+      --accent: #B76E79;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .container {
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+    section {
+      height: 100vh;
+      width: 100%;
+      scroll-snap-align: start;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .bg-cover {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      filter: brightness(0.7);
+    }
+    .overlay {
+      position: relative;
+      z-index: 2;
+      padding: 24px;
+      background: rgba(250, 247, 242, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      max-width: 90%;
+      animation: fadeUp 0.8s ease-out;
+    }
+    h1 { font-size: 2.5rem; color: var(--theme); margin-bottom: 8px; }
+    h2 { font-size: 1.8rem; color: var(--accent); margin-bottom: 16px; }
+    h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    p { line-height: 1.6; margin-bottom: 12px; }
+    .arab { font-size: 1.4rem; line-height: 2; margin-bottom: 16px; }
+    .btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 8px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .btn:active { transform: scale(0.95); }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+    .countdown {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .countdown-item {
+      background: var(--theme);
+      color: white;
+      padding: 12px;
+      border-radius: 12px;
+      min-width: 60px;
+    }
+    .countdown-item span { display: block; font-size: 1.5rem; font-weight: 700; }
+    .countdown-item label { font-size: 0.7rem; opacity: 0.9; }
+    .timeline { text-align: left; max-width: 320px; }
+    .timeline-item { margin-bottom: 24px; position: relative; padding-left: 20px; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px;
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .gallery-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .protocols {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .protocol-item { font-size: 0.9rem; }
+    .protocol-item span { font-size: 2rem; display: block; }
+    .floating-btn {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 999;
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      border: none;
+    }
+    .swipe-hint {
+      position: absolute;
+      bottom: 30px;
+      z-index: 3;
+      color: white;
+      font-size: 0.8rem;
+      animation: bounce 2s infinite;
+    }
+    .guest-name {
+      background: var(--theme);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      display: inline-block;
+      margin: 16px 0;
+      font-weight: 600;
+    }
+    iframe {
+      width: 100%;
+      aspect-ratio: 9/16;
+      border-radius: 16px;
+      border: none;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="container" id="container">
+    
+    <!-- 1. COVER -->
+    <section id="cover">
+      <img src="foto-sampul.jpg" class="bg-cover" alt="Budi & Ani">
+      <div class="overlay">
+        <p>The Wedding Of</p>
+        <h1>Budi & Ani</h1>
+        <div class="guest-name">Kepada Yth. Tamu Undangan</div>
+        <p>Kamis, 12 November 2026</p>
+        <button class="btn" onclick="openInvitation()">Buka Undangan</button>
+      </div>
+      <div class="swipe-hint">Swipe up ↑</div>
+    </section>
 
-    <div class="tiktok-container shadow-2xl">
-        
-        <!-- COVER / ENTER EXPERIENCE LAYER -->
-        <div id="cover-screen" class="absolute inset-0 z-50 bg-gradient-to-b from-[#2a0000] to-black flex flex-col items-center justify-center p-8 text-center">
-            <div class="w-20 h-20 rounded-full border-2 border-[var(--gold)] p-1 mb-6 animate-bounce">
-                <img id="avatar-preload" class="w-full h-full object-cover rounded-full" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=150">
-            </div>
-            <p class="text-[10px] tracking-[.4em] uppercase text-stone-400 mb-2">You have 1 new invitation</p>
-            <h1 id="cover-pair" class="text-4xl font-aesthetic text-[var(--gold)] mb-8"></h1>
-            
-            <div class="bg-white/5 border border-white/10 p-4 rounded-xl mb-12 w-full max-w-xs">
-                <p class="text-[9px] text-stone-400 uppercase tracking-widest mb-1">Special Guest:</p>
-                <p id="txt-guest" class="text-lg font-bold text-white tracking-wide"></p>
-            </div>
-            
-            <button onclick="startTikTokExperience()" class="bg-gradient-to-r from-[var(--marun-bright)] to-[var(--marun)] text-white font-bold text-xs uppercase tracking-widest px-8 py-4 rounded-full shadow-lg">
-                Watch Invitation
-            </button>
+    <!-- 2. QUOTE -->
+    <section id="quote">
+      <img src="foto1.jpg" class="bg-cover" alt="">
+      <div class="overlay">
+        <p class="arab">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا</p>
+        <p><i>"Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya."</i></p>
+        <p><b>QS. Ar-Rum: 21</b></p>
+      </div>
+    </section>
+
+    <!-- 3. COUPLE -->
+    <section id="couple">
+      <img src="foto2.jpg" class="bg-cover" alt="">
+      <div class="overlay">
+        <h2>Assalamualaikum Wr. Wb.</h2>
+        <p>Tanpa mengurangi rasa hormat, kami memohon doa restu Bapak/Ibu.</p>
+        <div style="margin: 24px 0;">
+          <img src="foto-pria.jpg" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--accent)">
+          <h3>Budi Santoso, S.T.</h3>
+          <p style="font-size:0.9rem">Putra dari<br>Bapak Ahmad Santoso & Ibu Siti Aminah</p>
+          <p><a href="https://instagram.com/budi_santoso" style="color:var(--accent)">@budi_santoso</a></p>
         </div>
-
-        <!-- AUDIO ENGINE -->
-        <audio id="tt-audio" loop></audio>
-
-        <!-- FLOATING SIDEBAR ACTIONS (TIKTOK STYLE) -->
-        <div id="side-controls" class="absolute right-4 bottom-32 z-40 flex flex-col items-center space-y-6 hidden side-icon-shadow">
-            <!-- Profil Mempelai Bulat -->
-            <div class="relative">
-                <div class="w-11 h-11 rounded-full border-2 border-white overflow-hidden">
-                    <img id="side-avatar" class="w-full h-full object-cover" src="">
-                </div>
-                <div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold">+</div>
-            </div>
-            <!-- Tombol Like -->
-            <div class="text-center cursor-pointer" onclick="toggleLike(this)">
-                <svg class="w-7 h-7 text-white transition-colors" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                <p class="text-[10px] text-stone-300 mt-1" id="like-count">99.7K</p>
-            </div>
-            <!-- Tombol Navigasi Share Peta -->
-            <div class="text-center cursor-pointer" id="btn-share-maps">
-                <a href="#" id="link-maps" target="_blank" class="text-white block">
-                    <svg class="w-7 h-7 mx-auto" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
-                    <p class="text-[10px] text-stone-300 mt-1">Maps</p>
-                </a>
-            </div>
-            <!-- Piringan Musik Berputar -->
-            <div class="w-10 h-10 rounded-full bg-stone-900 border-4 border-stone-700 flex items-center justify-center music-disc cursor-pointer" id="btn-music-toggle">
-                <div class="w-3 h-3 bg-[var(--gold)] rounded-full"></div>
-            </div>
+        <h2 style="font-size:2rem;">&</h2>
+        <div style="margin: 24px 0;">
+          <img src="foto-wanita.jpg" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--accent)">
+          <h3>Ani Wijaya, S.E.</h3>
+          <p style="font-size:0.9rem">Putri dari<br>Bapak Heru Wijaya & Ibu Ratna Wijaya</p>
+          <p><a href="https://instagram.com/ani_wijaya" style="color:var(--accent)">@ani_wijaya</a></p>
         </div>
+      </div>
+    </section>
 
-        <!-- ================= SLIDE 1: HERO HOME ================= -->
-        <section id="slide-home" class="tiktok-slide active flex flex-col justify-between p-6 pb-28 pt-12">
-            <div class="absolute inset-0 z-0">
-                <img id="bg-hero" class="w-full h-full object-cover brightness-[0.4] contrast-[1.05]" src="">
-                <div class="absolute inset-0 bg-gradient-to-t from-[var(--tiktok-dark)] via-transparent to-black/50"></div>
-            </div>
-            
-            <div class="relative z-10 text-center pt-8">
-                <p class="text-[9px] tracking-[.5em] uppercase text-stone-400 font-bold">The Wedding Celebration</p>
-            </div>
-            
-            <div class="relative z-10 pl-2 pr-14 mb-4">
-                <h2 id="txt-pair-main" class="text-5xl font-aesthetic text-[var(--gold)] mb-3"></h2>
-                <p id="txt-main-date" class="text-xs font-semibold tracking-wider text-white/90"></p>
-                <p class="text-[11px] text-stone-400 mt-2 line-clamp-2">Swipe up atau klik menu bawah untuk info lokasi adicara & RSVP.</p>
-                <div class="flex items-center space-x-2 mt-4 bg-white/10 backdrop-blur-xs py-1.5 px-3 rounded-full w-fit">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                    <p class="text-[9px] font-mono tracking-widest text-emerald-300 font-bold uppercase">• FYP WEDDING LIVE</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= SLIDE 2: COUPLE DETAILS ================= -->
-        <section id="slide-couple" class="tiktok-slide flex flex-col justify-center p-6 pb-28">
-            <div class="text-center mb-6">
-                <p class="text-[9px] tracking-widest uppercase text-stone-400 font-bold">Mempelai Pasangan</p>
-            </div>
-            <div class="space-y-6 pr-10">
-                <!-- Groom Card -->
-                <div class="flex items-center space-x-4 bg-white/5 border border-white/10 p-3 rounded-2xl">
-                    <img id="img-groom" class="w-20 h-24 object-cover rounded-xl border border-white/20" src="">
-                    <div>
-                        <h4 id="name-groom" class="text-base font-bold text-[var(--gold)]"></h4>
-                        <p id="parent-groom" class="text-[10px] text-stone-400 mt-1"></p>
-                    </div>
-                </div>
-                <!-- Bride Card -->
-                <div class="flex items-center space-x-4 bg-white/5 border border-white/10 p-3 rounded-2xl">
-                    <img id="img-bride" class="w-20 h-24 object-cover rounded-xl border border-white/20" src="">
-                    <div>
-                        <h4 id="name-bride" class="text-base font-bold text-[var(--gold)]"></h4>
-                        <p id="parent-bride" class="text-[10px] text-stone-400 mt-1"></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ================= SLIDE 3: AGENDA / EVENTS ================= -->
-        <section id="slide-events" class="tiktok-slide flex flex-col justify-center p-6 pb-28">
-            <div class="text-center mb-6">
-                <p class="text-[9px] tracking-widest uppercase text-stone-400 font-bold">Agenda Adicara</p>
-            </div>
-            <div id="box-events" class="space-y-4 pr-10">
-                <!-- Data Diinjeksi Via JavaScript -->
-            </div>
-        </section>
-
-        <!-- ================= SLIDE 4: RSVP & WISHES ================= -->
-        <section id="slide-rsvp" class="tiktok-slide flex flex-col justify-between p-6 pb-28 pt-8 overflow-y-auto">
-            <div class="text-center mt-4">
-                <p class="text-[9px] tracking-widest uppercase text-stone-400 font-bold mb-4">Presensi & Doa Restu</p>
-            </div>
-            
-            <form id="tt-rsvp-form" class="space-y-3 bg-white/5 p-4 rounded-xl border border-white/10 mb-4">
-                <input type="text" id="in-nama" class="tt-input" placeholder="Nama Lengkap" required>
-                <select id="in-status" class="tt-input">
-                    <option value="Hadir" class="text-black">Saya Hadir</option>
-                    <option value="Berhalangan" class="text-black">Berhalangan</option>
-                </select>
-                <button type="submit" class="w-full bg-[var(--marun-bright)] text-white text-[10px] font-bold uppercase tracking-widest py-3 rounded-lg">Konfirmasi RSVP</button>
-            </form>
-
-            <div class="bg-white/5 p-4 rounded-xl border border-white/10 flex-1 flex flex-col min-h-[150px]">
-                <p class="text-[9px] text-stone-400 uppercase font-bold tracking-wider mb-2">Gift Digital</p>
-                <div id="box-gifts" class="space-y-2 overflow-y-auto max-h-[140px] text-left">
-                    <!-- Gift diinjeksi via JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- BOTTOM TIKTOK NAVIGATION DOCK BAR -->
-        <nav class="absolute bottom-0 inset-x-0 bg-black/90 backdrop-blur-md border-t border-white/10 h-20 flex items-center justify-around z-40 text-center">
-            <div onclick="switchSlide(0)" id="nav-0" class="flex-1 text-white cursor-pointer opacity-100 font-bold">
-                <p class="text-xs">Home</p>
-                <div class="w-4 h-0.5 bg-white mx-auto mt-1 rounded-full"></div>
-            </div>
-            <div onclick="switchSlide(1)" id="nav-1" class="flex-1 text-stone-400 cursor-pointer">
-                <p class="text-xs">Couple</p>
-            </div>
-            <!-- Center Button Add (TikTok Style) -->
-            <div onclick="switchSlide(2)" class="relative w-12 h-7 mx-2 cursor-pointer flex items-center justify-center">
-                <div class="absolute inset-0 bg-[#00f2fe] rounded-lg translate-x-[-3px]"></div>
-                <div class="absolute inset-0 bg-[#fe2c55] rounded-lg translate-x-[3px]"></div>
-                <div class="absolute inset-0 bg-white rounded-lg flex items-center justify-center text-black font-extrabold text-base">+</div>
-            </div>
-            <div onclick="switchSlide(2)" id="nav-2" class="flex-1 text-stone-400 cursor-pointer">
-                <p class="text-xs">Event</p>
-            </div>
-            <div onclick="switchSlide(3)" id="nav-3" class="flex-1 text-stone-400 cursor-pointer">
-                <p class="text-xs">RSVP</p>
-            </div>
-        </nav>
-
-    </div>
-
-    <!-- NOTIFICATION CLIPBOARD SYSTEM -->
-    <div id="tt-toast" class="fixed top-12 left-1/2 -translate-x-1/2 bg-black/80 text-white border border-white/20 text-[10px] tracking-widest font-bold py-2.5 px-6 rounded-full z-50 opacity-0 pointer-events-none transition-all duration-300">SALIN REKENING BERHASIL</div>
-
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const slug = params.get('c') || 'budi-ani';
-        const guest = params.get('to')?.replace(/\+/g, ' ') || 'Tamu Undangan';
-        const path = `../../public/clients/${slug}/`;
-
-        let currentActiveIdx = 0;
-        const slides = ['slide-home', 'slide-couple', 'slide-events', 'slide-rsvp'];
-
-        document.getElementById('txt-guest').textContent = guest;
-        document.getElementById('in-nama').value = guest !== 'Tamu Undangan' ? guest : '';
-
-        fetch(`${path}data.json`)
-            .then(res => res.json())
-            .then(data => {
-                const pairStr = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
-                
-                // Judul & Preload Data
-                document.getElementById('cover-pair').textContent = pairStr;
-                document.getElementById('txt-pair-main').textContent = pairStr;
-                document.getElementById('avatar-preload').src = path + data.couple.bride.image;
-                document.getElementById('side-avatar').src = path + data.couple.groom.image;
-                document.getElementById('bg-hero').src = path + data.gallery.heroImage;
-                document.getElementById('tt-audio').src = data.info?.music ? path + data.info.music : path + 'musik.mp3';
-                
-                document.getElementById('txt-main-date').textContent = new Date(data.events[0].date).toLocaleDateString('id-ID', {weekday: 'long', day:'numeric', month:'long', year:'numeric'});
-                document.getElementById('link-maps').href = data.events[0].googleMaps;
-
-                // Mempelai Profil Data
-                document.getElementById('img-groom').src = path + data.couple.groom.image;
-                document.getElementById('name-groom').textContent = data.couple.groom.name;
-                document.getElementById('parent-groom').textContent = `Putra dari Bpk. ${data.couple.groom.father} & Ibu ${data.couple.groom.mother}`;
-
-                document.getElementById('img-bride').src = path + data.couple.bride.image;
-                document.getElementById('name-bride').textContent = data.couple.bride.name;
-                document.getElementById('parent-bride').textContent = `Putri dari Bpk. ${data.couple.bride.father} & Ibu ${data.couple.bride.mother}`;
-
-                // Injeksi Daftar Susunan Acara
-                data.events.forEach(e => {
-                    document.getElementById('box-events').innerHTML += `
-                        <div class="bg-white/5 border border-white/10 p-4 rounded-xl">
-                            <span class="text-[8px] font-bold text-[var(--gold)] bg-white/10 border border-[var(--gold)]/20 px-3 py-1 rounded-full uppercase tracking-wider">${e.title}</span>
-                            <p class="text-base font-bold mt-3">${new Date(e.date).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'})}</p>
-                            <p class="text-[10px] text-stone-400 font-medium">${e.startTime} - ${e.endTime}</p>
-                            <p class="text-[11px] text-stone-500 mt-2 italic leading-relaxed line-clamp-2">${e.address}</p>
-                        </div>`;
-                });
-
-                // Injeksi Hadiah Digital
-                data.digitalGift.forEach(g => {
-                    document.getElementById('box-gifts').innerHTML += `
-                        <div class="p-3 bg-white/5 border border-white/5 rounded-lg flex justify-between items-center">
-                            <div>
-                                <p class="text-[9px] text-[var(--gold)] font-bold tracking-widest uppercase">${g.provider}</p>
-                                <p class="text-xs font-mono font-bold mt-0.5 text-white">${g.accountNumber}</p>
-                                <p class="text-[9px] text-stone-400 uppercase">A.N ${g.accountHolder}</p>
-                            </div>
-                            <button onclick="copyClip('${g.accountNumber}')" class="bg-white/10 text-white text-[8px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-md hover:bg-white/20">Copy</button>
-                        </div>`;
-                });
-
-                // RSVP WhatsApp Engine
-                document.getElementById('tt-rsvp-form').onsubmit = (eventObj) => {
-                    eventObj.preventDefault();
-                    const n = document.getElementById('in-nama').value;
-                    const s = document.getElementById('in-status').value;
-                    const txt = `Halo, saya *${n}* menyatakan *${s}* pada acara pernikahan Anda. Terima kasih.`;
-                    window.open(`https://wa.me/${data.info?.whatsapp_rsvp || data.info?.whatsapp || ''}?text=${encodeURIComponent(txt)}`, '_blank');
-                };
-            });
-
-        // Start Experience
-        function startTikTokExperience() {
-            const trackAudio = document.getElementById('tt-audio');
-            trackAudio.play().catch(() => console.log('Interaksi media browser tertahan.'));
-            
-            gsap.to('#cover-screen', {
-                y: '-100%', duration: 1, ease: 'power4.inOut', onComplete: () => {
-                    document.getElementById('cover-screen').style.display = 'none';
-                    document.getElementById('side-controls').classList.remove('hidden');
-                }
-            });
-
-            // Music Button Handler Toggle
-            document.getElementById('btn-music-toggle').onclick = () => {
-                const disc = document.getElementById('btn-music-toggle');
-                if(trackAudio.paused) {
-                    trackAudio.play();
-                    disc.style.animationPlayState = 'running';
-                } else {
-                    trackAudio.pause();
-                    disc.style.animationPlayState = 'paused';
-                }
-            };
-        }
-
-        // Switch Slide TikTok Style Logic
-        function switchSlide(targetIndex) {
-            if(targetIndex === currentActiveIdx) return;
-            
-            // Hapus kelas aktif lama
-            document.getElementById(slides[currentActiveIdx]).classList.remove('active');
-            
-            // Perbarui Indeks Aktif
-            currentActiveIdx = targetIndex;
-            
-            // Tambahkan kelas aktif baru
-            document.getElementById(slides[currentActiveIdx]).classList.add('active');
-
-            // Perbarui Tampilan Status Warna Dok Navigasi Menu Bawah
-            [0, 1, 2, 3].forEach(i => {
-                const navEl = document.getElementById(`nav-${i}`);
-                if(!navEl) return;
-                if(i === targetIndex) {
-                    navEl.className = "flex-1 text-white cursor-pointer opacity-100 font-bold";
-                    navEl.innerHTML = `<p class="text-xs">${getMenuName(i)}</p><div class="w-4 h-0.5 bg-white mx-auto mt-1 rounded-full"></div>`;
-                } else {
-                    navEl.className = "flex-1 text-stone-400 cursor-pointer";
-                    navEl.innerHTML = `<p class="text-xs">${getMenuName(i)}</p>`;
-                }
-            });
-        }
-
-        function getMenuName(idx) {
-            return idx === 0 ? 'Home' : idx === 1 ? 'Couple' : idx === 2 ? 'Event' : 'RSVP';
-        }
-
-        // Like Button Interaction Simulator
-        function toggleLike(elBtn) {
-            const svg = elBtn.querySelector('svg');
-            const cnt = document.getElementById('like-count');
-            if(svg.getAttribute('fill') === 'currentColor' && !svg.classList.contains('text-red-500')) {
-                svg.classList.add('text-red-500');
-                cnt.textContent = "99.8K";
-            } else {
-                svg.classList.remove('text-red-500');
-                cnt.textContent = "99.7K";
-            }
-        }
-
-        // Clipboard Copy System
-        function copyClip(numString) {
-            navigator.clipboard.writeText(numString).then(() => {
-                const toast = document.getElementById('tt-toast');
-                toast.style.opacity = '1';
-                setTimeout(() => toast.style.opacity = '0', 2000);
-            });
-        }
-
-        // Gesture Swipe Up/Down Detection For Mobile Screens
-        let touchStartPos = 0;
-        let touchEndPos = 0;
+    <!-- 4. COUNTDOWN + EVENTS -->
+    <section id="events">
+      <img src="foto3.jpg" class="bg-cover" alt="">
+      <div class="overlay">
+        <h2>Save The Date</h2>
+        <div class="countdown" id="countdown">
+          <div class="countdown-item"><span id="days">00</span><label>Hari</label></div>
+          <div class="countdown-item"><span id="hours">00</span><label>Jam</label></div>
+          <div class="countdown-item"><span id="minutes">00</span><label>Menit</label></div>
+          <div class="countdown-item"><span id="seconds">00</span><label>Detik</label></div>
+        </div>
+        <h3>Akad Nikah</h3>
+        <p><b>Kamis, 12 Nov 2026</b><br>08:00 - 10:00 WIB<br>Kediaman Mempelai Wanita<br>Jl. Mawar No. 123, Jakarta</p>
+        <button class="btn btn-outline" onclick="window.open('https://maps.google.com')">Lihat Lokasi</button>
         
-        document.addEventListener('touchstart', e => { touchStartPos = e.changedTouches[0].screenY; });
-        document.addEventListener('touchend', e => {
-            touchEndPos = e.changedTouches[0].screenY;
-            handleSwipeGesture();
-        });
+        <h3 style="margin-top:24px">Resepsi Pernikahan</h3>
+        <p><b>Kamis, 12 Nov 2026</b><br>11:00 - 14:00 WIB<br>Gedung Pertemuan Utama<br>Jl. Mawar No. 124, Jakarta</p>
+        <button class="btn btn-outline" onclick="window.open('https://maps.google.com')">Lihat Lokasi</button>
+      </div>
+    </section>
 
-        function handleSwipeGesture() {
-            if (touchStartPos - touchEndPos > 50) { // Swipe Up
-                if(currentActiveIdx < slides.length - 1) switchSlide(currentActiveIdx + 1);
-            }
-            if (touchEndPos - touchStartPos > 50) { // Swipe Down
-                if(currentActiveIdx > 0) switchSlide(currentActiveIdx - 1);
-            }
-        }
-    </script>
+    <!-- 5. LOVE STORY -->
+    <section id="story">
+      <img src="foto4.jpg" class="bg-cover" alt="">
+      <div class="overlay">
+        <h2>Love Story</h2>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h3>2023 - Pertama Bertemu</h3>
+            <p>Awal mula dipertemukan dalam satu ruang lingkup kerja yang sama, membangun komunikasi, dan menemukan banyak kesamaan visi.</p>
+          </div>
+          <div class="timeline-item">
+            <h3>2025 - Khitbah (Lamaran)</h3>
+            <p>Pertemuan dua keluarga besar untuk mengikat komitmen yang lebih serius dan menentukan hari baik menuju pernikahan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. GALLERY + VIDEO -->
+    <section id="gallery">
+      <div class="overlay">
+        <h2>Our Moments</h2>
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allow="autoplay"></iframe>
+        <div class="gallery-grid">
+          <img src="foto1.jpg" alt="">
+          <img src="foto2.jpg" alt="">
+          <img src="foto3.jpg" alt="">
+          <img src="foto4.jpg" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. LIVE STREAMING -->
+    <section id="live">
+      <img src="foto-sampul.jpg" class="bg-cover" alt="">
+      <div class="overlay">
+        <h2>Live Streaming</h2>
+        <p>Temui kami secara virtual melalui siaran langsung YouTube Live</p>
+        <button class="btn" onclick="window.open('https://youtube.com')">Tonton Live</button>
+      </div>
+    </section>
+
+    <!-- 8. DIGITAL GIFT -->
+    <section id="gift">
+      <img src="foto2.jpg" class="bg-cover" alt="">
+      <div class="overlay">
+        <h2>Wedding Gift</h2>
+        <p>Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Jika memberi adalah ungkapan tanda kasih, Anda dapat memberi kado secara cashless.</p>
+        <div style="background:var(--bg);padding:16px;border-radius:16px;margin:16px 0;">
+          <h3>Bank BCA</h3>
+          <p id="rek1" style="font-size:1.2rem;font-weight:700;">123456789</p>
+          <p>a.n Budi Santoso</p>
+          <button class="btn btn-outline" onclick="copyRek('123456789')">Copy No. Rekening</button>
+        </div>
+        <div style="background:var(--bg);padding:16px;border-radius:16px;">
+          <h3>Kirim Hadiah Fisik</h3>
+          <p>Rumah Mempelai Wanita (Ani)<br>Jl. Mawar No. 123, Jakarta</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. PROTOCOLS + RSVP -->
+    <section id="rsvp">
+      <img src="foto3.jpg" class="bg-cover" alt="">
+      <div class="overlay">
+        <h2>Protokol Kesehatan</h2>
+        <div class="protocols">
+          <div class="protocol-item"><span>😷</span>Gunakan Masker<br>Bila Kurang Fit</div>
+          <div class="protocol-item"><span>🧼</span>Gunakan<br>Hand Sanitizer</div>
+          <div class="protocol-item"><span>🙏</span>Salam Jarak<br>Jauh Disarankan</div>
+        </div>
+        <h2 style="margin-top:32px">Dress Code</h2>
+        <p style="font-size:1.2rem;color:var(--accent);font-weight:600">Earth Tone / Pastel</p>
+        <h2 style="margin-top:32px">RSVP</h2>
+        <p>Konfirmasi kehadiran Anda</p>
+        <button class="btn" onclick="window.open('https://wa.me/628123456789?text=Halo%20Budi%20%26%20Ani%2C%20saya%20akan%20hadir')">Konfirmasi via WhatsApp</button>
+        <p style="margin-top:32px;font-size:0.9rem">Merupakan suatu kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu</p>
+        <h3 style="color:var(--accent)">Budi & Ani</h3>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- MUSIC BUTTON -->
+  <button class="floating-btn" id="musicBtn" onclick="toggleMusic()">♪</button>
+  <audio id="bgMusic" loop><source src="musik.mp3" type="audio/mpeg"></audio>
+
+  <script>
+    // SETTINGS FROM JSON
+    const config = {
+      themeColor: "#8B7355",
+      bgColor: "#FAF7F2", 
+      textColor: "#3E3E3E",
+      accentColor: "#B76E79",
+      targetDate: "2026-11-12T08:00:00+07:00"
+    };
+    
+    // APPLY THEME
+    document.documentElement.style.setProperty('--theme', config.themeColor);
+    document.documentElement.style.setProperty('--bg', config.bgColor);
+    document.documentElement.style.setProperty('--text', config.textColor);
+    document.documentElement.style.setProperty('--accent', config.accentColor);
+
+    // MUSIC CONTROL
+    const music = document.getElementById('bgMusic');
+    let isPlaying = false;
+    function openInvitation() {
+      document.getElementById('quote').scrollIntoView();
+      toggleMusic();
+    }
+    function toggleMusic() {
+      if (isPlaying) {
+        music.pause();
+        document.getElementById('musicBtn').innerHTML = '♪';
+      } else {
+        music.play();
+        document.getElementById('musicBtn').innerHTML = '❚❚';
+      }
+      isPlaying = !isPlaying;
+    }
+
+    // COUNTDOWN
+    function updateCountdown() {
+      const target = new Date(config.targetDate).getTime();
+      const now = new Date().getTime();
+      const diff = target - now;
+      
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      document.getElementById('days').innerText = d.toString().padStart(2, '0');
+      document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+      document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+      document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // COPY REKENING
+    function copyRek(text) {
+      navigator.clipboard.writeText(text);
+      alert('No. rekening berhasil disalin!');
+    }
+
+    // GANTI NAMA TAMU DARI URL ?to=Nama+Tamu
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestName = urlParams.get('to');
+    if (guestName) {
+      document.querySelector('.guest-name').innerText = `Kepada Yth. ${guestName}`;
+    }
+  </script>
 </body>
 </html>
