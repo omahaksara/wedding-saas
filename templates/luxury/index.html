@@ -6,13 +6,15 @@
     <title>Royal Wedding Invitation</title>
     <meta name="theme-color" content="#0A0A0A">
 
+    <!-- CSS & JS library -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
+    <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght=0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght=0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght=0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght=200;300;400;500&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -43,6 +45,7 @@
         .font-serif { font-family: 'Cormorant Garamond', serif; }
         .font-display { font-family: 'Playfair Display', serif; }
 
+        /* Shimmer Mask Animation */
         .gold-foil {
             background: linear-gradient(135deg, #D4AF37 0%, #F4E4BC 25%, #D4AF37 50%, #B8860B 75%, #D4AF37 100%);
             background-size: 200% 200%;
@@ -150,7 +153,7 @@
 
         .countdown-royal {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             justify-content: center;
             margin: 48px 0;
         }
@@ -158,13 +161,13 @@
             text-align: center;
             background: rgba(26, 26, 26, 0.5);
             border: 1px solid rgba(212, 175, 55, 0.1);
-            padding: 12px 20px;
-            min-width: 80px;
+            padding: 12px 16px;
+            min-width: 75px;
             border-radius: 4px;
         }
         .countdown-number {
             font-family: 'Playfair Display', serif;
-            font-size: 36px;
+            font-size: 32px;
             font-weight: 400;
             line-height: 1;
             color: var(--royal-gold);
@@ -200,7 +203,7 @@
             transform: scale(1.05);
         }
 
-        /* Envelope Royal Reset & Fix */
+        /* Envelope */
         .envelope-wrapper {
             position: relative;
             width: 100%;
@@ -285,14 +288,14 @@
 </head>
 <body>
 
-    <!-- MUSIC PLAYER -->
+    <!-- AUDIO CONTROLLER -->
     <div class="music-royal" id="musicBtn" onclick="toggleMusic()">
         <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
     </div>
 
-    <!-- HERO SECTION -->
+    <!-- MAIN HERO VIEW -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
-        <img src="" class="hero-video" id="heroImage" alt="Cover">
+        <img src="" class="hero-video" id="heroImage" alt="Cover Utama">
         <div class="hero-overlay"></div>
 
         <div class="relative z-10 text-center px-6">
@@ -301,7 +304,8 @@
                 <span class="gold-foil">Loading...</span>
             </h1>
             <div class="royal-ornament-large reveal"></div>
-            <p class="text-sm tracking-[0.4em] uppercase mb-6 opacity-80 id='weddingDate'" id="weddingDate"></p>
+            <p class="text-sm tracking-[0.4em] uppercase mb-6 opacity-80" id="weddingDate"></p>
+            
             <div class="bg-black/40 backdrop-blur-sm p-4 rounded border border-white/10 max-w-sm mx-auto reveal">
                 <p class="text-[10px] tracking-[0.3em] uppercase opacity-50 mb-1">Kepada Yth:</p>
                 <p class="text-sm font-medium tracking-wide text-[var(--royal-gold-light)]" id="guestName">-</p>
@@ -311,7 +315,7 @@
         </div>
     </section>
 
-    <!-- QUOTE SECTION -->
+    <!-- QUOTES -->
     <section class="velvet-bg py-24 px-6" id="quote">
         <div class="max-w-3xl mx-auto text-center">
             <div class="reveal">
@@ -322,7 +326,7 @@
         </div>
     </section>
 
-    <!-- COUPLE SECTION -->
+    <!-- MEMPELAI DATA -->
     <section class="py-24 px-6 bg-black" id="couple">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16 reveal">
@@ -331,20 +335,20 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-16 items-center">
-                <!-- GROOM -->
+                <!-- PRIA -->
                 <div class="text-center reveal">
                     <div class="royal-border inline-block mb-6 overflow-hidden rounded-sm">
-                        <img src="" id="groomPhoto" class="w-60 h-72 object-cover hover:scale-105 transition duration-700" alt="Groom">
+                        <img src="" id="groomPhoto" class="w-60 h-72 object-cover hover:scale-105 transition duration-700" alt="Mempelai Pria">
                     </div>
                     <h3 class="font-serif text-3xl font-light mb-3 gold-foil" id="groomName"></h3>
                     <p class="text-xs tracking-[0.1em] opacity-70 leading-relaxed" id="groomParents"></p>
                     <a href="" id="groomIG" target="_blank" class="inline-block mt-3 text-xs tracking-[0.2em] uppercase text-[var(--royal-gold)] opacity-80 hover:opacity-100"></a>
                 </div>
 
-                <!-- BRIDE -->
+                <!-- WANITA -->
                 <div class="text-center reveal">
                     <div class="royal-border inline-block mb-6 overflow-hidden rounded-sm">
-                        <img src="" id="bridePhoto" class="w-60 h-72 object-cover hover:scale-105 transition duration-700" alt="Bride">
+                        <img src="" id="bridePhoto" class="w-60 h-72 object-cover hover:scale-105 transition duration-700" alt="Mempelai Wanita">
                     </div>
                     <h3 class="font-serif text-3xl font-light mb-3 gold-foil" id="brideName"></h3>
                     <p class="text-xs tracking-[0.1em] opacity-70 leading-relaxed" id="brideParents"></p>
@@ -354,7 +358,7 @@
         </div>
     </section>
 
-    <!-- EVENTS -->
+    <!-- COUNTDOWN & ACARA -->
     <section class="velvet-bg py-24 px-6" id="events">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-12 reveal">
@@ -385,7 +389,7 @@
         </div>
     </section>
 
-    <!-- LOVE STORY -->
+    <!-- STORIES -->
     <section class="bg-black py-24 px-6" id="story">
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-16 reveal">
@@ -396,7 +400,7 @@
         </div>
     </section>
 
-    <!-- GALLERY -->
+    <!-- ALBUM GALERI -->
     <section class="velvet-bg py-24 px-6" id="gallery">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-16 reveal">
@@ -407,7 +411,7 @@
         </div>
     </section>
 
-    <!-- RSVP -->
+    <!-- RSVP BOX -->
     <section class="bg-black py-24 px-6" id="rsvp">
         <div class="max-w-xl mx-auto text-center">
             <div class="reveal">
@@ -417,9 +421,10 @@
                 <div class="envelope-wrapper">
                     <div class="envelope" id="envelope">
                         <div class="envelope-flap"></div>
+                        <div class="envelope-flap"></div>
                         <div class="envelope-card">
-                            <p class="font-serif text-xl font-bold tracking-wider mb-1">RSVP CARD</p>
-                            <p class="text-[10px] uppercase tracking-widest text-gray-400">Budi & Ani Wedding</p>
+                            <p class="font-serif text-xl font-bold tracking-wider mb-1 text-black">RSVP CARD</p>
+                            <p class="text-[10px] uppercase tracking-widest text-gray-400">Royal Wedding</p>
                         </div>
                     </div>
                 </div>
@@ -429,7 +434,7 @@
         </div>
     </section>
 
-    <!-- GIFT -->
+    <!-- GIFTS -->
     <section class="velvet-bg py-24 px-6" id="gift">
         <div class="max-w-3xl mx-auto text-center">
             <div class="reveal">
@@ -443,7 +448,7 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- FOOTER VIEW -->
     <footer class="bg-black py-16 px-6 text-center border-t border-white/5">
         <div class="royal-ornament-large mb-6"></div>
         <h3 class="font-display text-3xl font-light mb-3 gold-foil" id="footerNames"></h3>
@@ -453,34 +458,64 @@
 
     <audio id="audio" loop preload="auto"></audio>
 
+    <!-- ENGINE SYSTEM -->
     <script>
         let D = {};
         let music = document.getElementById('audio');
         let isMusicPlaying = false;
-        let baseClientPath = '';
+        let baseClientPath = './';
+
+        // DATABASE BACKUP DARURAT - Otomatis terpasang jika fetch data.json gagal/terblokir browser
+        const backupData = {
+            "settings": { "accentColor": "#D4AF37", "themeColor": "#0A0A0A", "islami": true, "showLoveStory": true, "showCountdown": true },
+            "couple": {
+                "groom": { "name": "Budi Setiawan", "nickname": "Budi", "father": "Suherman", "mother": "Siti Aminah", "instagram": "@budi.setiawan", "image": "foto-pria.jpg" },
+                "bride": { "name": "Ani Wijaya", "nickname": "Ani", "father": "Bambang Wijaya", "mother": "Endang Sri", "instagram": "@ani.wijaya", "image": "foto-wanita.jpg" }
+            },
+            "quote": { "text": "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya.", "source": "Ar-Rum: 21" },
+            "events": [
+                { "title": "Akad Nikah", "date": "2026-08-08", "startTime": "09:00", "endTime": "10:30", "timezone": "WIB", "address": "Masjid Agung Grand City, Lantai Utama", "googleMaps": "https://maps.google.com" },
+                { "title": "Resepsi Pernikahan", "date": "2026-08-08", "startTime": "11:00", "endTime": "16:00", "timezone": "WIB", "address": "Grand Ballroom Royal Hall, Kav 12", "googleMaps": "https://maps.google.com" }
+            ],
+            "loveStory": [
+                { "year": "2023", "title": "Pertemuan Pertama", "description": "Awal mula kami dipertemukan dalam suatu ruang kerja kelompok yang sama." },
+                { "year": "2025", "title": "Komitmen Bersama", "description": "Memutuskan untuk membawa hubungan ke arah yang lebih serius dan sakral." }
+            ],
+            "gallery": { "heroImage": "foto-sampul.jpg", "album": ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg"] },
+            "digitalGift": [
+                { "provider": "Bank BCA", "accountNumber": "1234567890", "accountHolder": "Budi Setiawan" },
+                { "provider": "QRIS BCA", "accountNumber": "qr-bca.jpg", "accountHolder": "Pernikahan Budi Ani" },
+                { "provider": "QRIS Mandiri", "accountNumber": "qr-mandiri.png", "accountHolder": "Pernikahan Budi Ani" }
+            ],
+            "logistics": { "rsvpWaNumber": "628123456789", "music": "musik.mp3" }
+        };
 
         async function init() {
             const params = new URLSearchParams(window.location.search);
-            // Otomatis deteksi folder saat ini berdasarkan URL browser atau fallback ke budi-ani
-            const slug = params.get('c') || window.location.pathname.split('/').filter(Boolean).pop() || 'budi-ani';
             const guest = params.get('to')?.replace(/\+/g, ' ') || 'Tamu Undangan';
-            
-            // JALUR REPOSITORI FIX: Menyesuaikan letak file index.html ke folder klien
-            baseClientPath = `./`; 
+
+            // PERBAIKAN STRUKTUR URL: Regex untuk mendeteksi folder klien secara akurat (Menghindari bug .pop())
+            const match = window.location.pathname.match(/\/clients\/([^\/]+)/) || window.location.pathname.match(/\/([^\/]+)\/?$/);
+            const slug = params.get('c') || (match ? match[1] : 'budi-ani');
 
             try {
-                const res = await fetch(`${baseClientPath}data.json`);
-                if (!res.ok) throw new Error("Gagal memuat data.json");
+                // Cek apakah file data.json berada di folder lokal yang sama dengan index.html
+                let res = await fetch(`${baseClientPath}data.json`);
+                if (!res.ok) throw new Error("Local Fetch Error");
                 D = await res.json();
+                console.log("Data JSON lokal sukses dimuat.");
             } catch(e) {
-                console.error("Fetch data.json gagal, mencoba alternatif path...", e);
                 try {
+                    // Jika gagal, coba temukan lewat fallback struktur absolut sub-folder klien
                     baseClientPath = `public/clients/${slug}/`;
-                    const resAlt = await fetch(`${baseClientPath}data.json`);
+                    let resAlt = await fetch(`${baseClientPath}data.json`);
+                    if (!resAlt.ok) throw new Error("Fallback Path Error");
                     D = await resAlt.json();
+                    console.log("Data JSON dari fallback path berhasil dimuat.");
                 } catch(err) {
-                    document.body.innerHTML = '<div class="flex items-center justify-center h-screen text-xs tracking-widest text-center px-4">GAGAL MEMUAT DATA DATA.JSON. PASTIKAN FILE SUDAH SESUAI STRUKTUR REPOSITORI.</div>';
-                    return;
+                    console.warn("Gagal memuat file data.json secara eksternal. Sistem otomatis beralih menggunakan Auto-Backup Data.");
+                    baseClientPath = './'; // Kembalikan ke path lokal dasar untuk aset gambar default
+                    D = backupData;
                 }
             }
 
@@ -498,7 +533,6 @@
         function fixImagePath(imgName) {
             if (!imgName || imgName.trim() === "") return "";
             if (imgName.startsWith('http') || imgName.startsWith('data:')) return imgName;
-            // Menghilangkan redundansi jika di JSON tertulis path panjang
             const cleanName = imgName.split('/').pop();
             return `${baseClientPath}${cleanName}`;
         }
@@ -507,13 +541,13 @@
             const g = D.couple.groom;
             const b = D.couple.bride;
 
-            // Hero
+            // Section Hero
             document.getElementById('heroImage').src = fixImagePath(D.gallery.heroImage || 'foto-sampul.jpg');
             document.getElementById('coupleNames').innerHTML = `<span class="gold-foil">${g.nickname} & ${b.nickname}</span>`;
             document.getElementById('weddingDate').innerText = formatDate(D.events[0].date);
             document.getElementById('guestName').innerText = D.guest.name;
 
-            // Quote
+            // Section Quotes
             if (D.settings.islami && D.quote) {
                 document.getElementById('quoteText').innerText = D.quote.text;
                 document.getElementById('quoteSource').innerText = D.quote.source;
@@ -521,7 +555,7 @@
                 document.getElementById('quote').classList.add('hide');
             }
 
-            // Couple Photos & Data
+            // Section Data Mempelai
             document.getElementById('groomPhoto').src = fixImagePath(g.image || 'foto-pria.jpg');
             document.getElementById('groomName').innerText = g.name;
             document.getElementById('groomParents').innerText = `Putra dari Bapak ${g.father} & Ibu ${g.mother}`;
@@ -534,7 +568,7 @@
             document.getElementById('brideIG').href = `https://instagram.com/${b.instagram?.replace('@','')}`;
             document.getElementById('brideIG').innerText = b.instagram || '';
 
-            // Events List
+            // Section Jadwal Acara
             const eventsList = document.getElementById('eventsList');
             eventsList.innerHTML = '';
             D.events.forEach((e) => {
@@ -549,7 +583,7 @@
                 `;
             });
 
-            // Love Story List
+            // Section Histori Cerita
             const storyList = document.getElementById('storyList');
             if (D.settings.showLoveStory && D.loveStory) {
                 storyList.innerHTML = '';
@@ -567,19 +601,19 @@
                 document.getElementById('story').classList.add('hide');
             }
 
-            // Gallery Masonry Layout
+            // Section Grid Galeri Foto
             const galleryGrid = document.getElementById('galleryGrid');
             galleryGrid.innerHTML = '';
             const albumImages = (D.gallery.album && D.gallery.album.length > 0) ? D.gallery.album : ['foto1.jpg', 'foto2.jpg', 'foto3.jpg', 'foto4.jpg'];
             albumImages.forEach(img => {
                 galleryGrid.innerHTML += `
                     <div class="masonry-item reveal rounded-sm shadow-md">
-                        <img src="${fixImagePath(img)}" alt="Gallery Image" loading="lazy">
+                        <img src="${fixImagePath(img)}" alt="Foto Galeri" loading="lazy">
                     </div>
                 `;
             });
 
-            // Gift & Bank QR Cards
+            // Section Kado Digital / QR
             const giftList = document.getElementById('giftList');
             giftList.innerHTML = '';
             D.digitalGift.forEach(d => {
@@ -589,7 +623,7 @@
                         <div class="w-full">
                             <p class="text-[10px] tracking-[0.2em] uppercase opacity-50 mb-2">${d.provider}</p>
                             ${isQr ? 
-                                `<img src="${fixImagePath(d.accountNumber)}" class="w-36 h-36 object-contain mx-auto my-3 border border-white/10 p-2 bg-white" alt="QR Code">` :
+                                `<img src="${fixImagePath(d.accountNumber)}" class="w-36 h-36 object-contain mx-auto my-3 border border-white/10 p-2 bg-white" alt="QR Code Transaksi">` :
                                 `<p class="font-display text-xl tracking-wider my-4 gold-foil font-semibold">${d.accountNumber}</p>`
                             }
                             <p class="text-xs tracking-wider opacity-70">a.n ${d.accountHolder}</p>
@@ -599,14 +633,14 @@
                 `;
             });
 
-            // Footer
+            // Section Footer
             document.getElementById('footerNames').innerHTML = `<span class="gold-foil">${g.nickname} & ${b.nickname}</span>`;
             document.getElementById('footerDate').innerText = formatDate(D.events[0].date);
 
-            // Music Source
+            // Pengaturan Jalur Musik
             music.src = fixImagePath(D.logistics.music || 'musik.mp3');
 
-            // Countdown Trigger
+            // Jalankan Kalkulator Hitung Mundur
             if (D.settings.showCountdown) {
                 updateCountdown();
                 setInterval(updateCountdown, 1000);
@@ -645,7 +679,7 @@
                 music.play().then(() => {
                     isMusicPlaying = true;
                     document.getElementById('musicBtn').classList.add('playing');
-                }).catch(err => console.log("Interaksi musik diaktifkan."));
+                }).catch(err => console.log("Bypass proteksi autoplay browser aktif."));
             }
         }
 
@@ -664,7 +698,7 @@
 
         function openRSVP() {
             const waNum = D.logistics.rsvpWaNumber;
-            const text = `Halo ${D.couple.groom.nickname} & ${D.couple.bride.nickname}, saya *${D.guest.name}* mengonfirmasi bahwa saya akan HADIR di acara pernikahan Anda. Terima kasih atas undangannya!`;
+            const text = `Halo ${D.couple.groom.nickname} & ${D.couple.bride.nickname}, saya *${D.guest.name}* mengonfirmasi bahwa saya akan HADIR di acara pernikahan Anda. Terima kasih!`;
             window.open(`https://wa.me/${waNum}?text=${encodeURIComponent(text)}`, '_blank');
         }
 
