@@ -4,187 +4,337 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Omah Aksara — Private Invitation</title>
+    
+    <!-- Scripts & Frameworks -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Montserrat:wght@100;300;400&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@100;200;300;400;500&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --accent: #6F806A; --bg: #F5F1EA; --text: #2D352E; }
-        body { font-family: 'Montserrat', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
-        .font-serif { font-family: 'Cormorant Garamond', serif; }
-        
-        /* Layout Aesthetic */
-        .editorial-frame { position: fixed; inset: 0; border: 20px solid var(--bg); pointer-events: none; z-index: 100; }
-        .inner-line { position: fixed; inset: 35px; border: 0.5px solid rgba(111, 128, 106, 0.3); pointer-events: none; z-index: 101; }
-
-        .btn-luxe {
-            border: 1px solid var(--accent); padding: 16px 40px; font-size: 11px;
-            letter-spacing: 0.4em; text-transform: uppercase; transition: all 0.5s ease;
+        :root { 
+            --accent: #6F806A; 
+            --bg: #F5F1EA; 
+            --text: #2D352E; 
+            --white-soft: #FDFDFB;
         }
-        .btn-luxe:hover { background: var(--accent); color: white; }
+        
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            overflow-x: hidden; 
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
+        .font-arab { font-family: 'Scheherazade New', serif; }
+        
+        /* Layout Editorial Border */
+        .editorial-frame { position: fixed; inset: 0; border: 16px solid var(--bg); pointer-events: none; z-index: 100; transition: border-color 0.5s ease; }
+        .inner-line { position: fixed; inset: 28px; border: 0.5px solid rgba(111, 128, 106, 0.2); pointer-events: none; z-index: 101; }
 
+        @media (max-width: 640px) {
+            .editorial-frame { border-width: 12px; }
+            .inner-line { inset: 20px; }
+        }
+
+        /* Luxury Button Standard */
+        .btn-luxe {
+            border: 1px solid var(--accent); 
+            padding: 18px 44px; 
+            font-size: 10px;
+            letter-spacing: 0.5em; 
+            text-transform: uppercase; 
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: transparent;
+            color: var(--text);
+        }
+        .btn-luxe:hover { background: var(--accent); color: var(--bg); letter-spacing: 0.6em; }
+
+        /* Smooth Image Masking Reveal */
         .reveal-mask {
             clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-            transition: clip-path 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: clip-path 1.8s cubic-bezier(0.76, 0, 0.24, 1);
         }
         .reveal-mask.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+
+        /* Fine Art Frame Studio */
+        .art-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            background: #E6E1D8;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.04);
+        }
+        .art-frame img { width: 100%; height: 100%; object-fit: cover; transition: transform 3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .art-frame:hover img { transform: scale(1.05); }
+
+        /* Floating Kinetic Audio Player */
+        .music-floater {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 90;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        @media (max-width: 640px) { .music-floater { bottom: 30px; right: 30px; } }
+
+        .disk-wrap {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 0.5px solid rgba(0,0,0,0.05);
+            border-radius: 50%;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+            animation: spinDisk 10s linear infinite;
+        }
+        .disk-wrap.paused { animation-play-state: paused; }
+        @keyframes spinDisk { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
+
+    <!-- BORDER ART DECORATION -->
     <div class="editorial-frame"></div>
     <div class="inner-line"></div>
 
-    <!-- PRELOADER / OPENING -->
-    <section id="opening" class="fixed inset-0 z-[200] bg-[#F5F1EA] flex flex-col items-center justify-center text-center">
-        <div class="mb-10">
-            <h2 class="font-serif italic text-2xl opacity-60">The Wedding of</h2>
-            <div class="w-px h-16 bg-[#6F806A]/40 mx-auto my-6"></div>
-            <h1 id="coupleNameHeader" class="text-6xl md:text-8xl font-serif tracking-tighter italic"></h1>
+    <!-- PRELOADER / OPENING LAYER -->
+    <section id="opening" class="fixed inset-0 z-[200] bg-[#F5F1EA] flex flex-col items-center justify-center text-center p-6">
+        <div class="mb-14 max-w-md">
+            <p class="font-serif italic text-xl text-stone-500 tracking-wide mb-3">The Wedding Celebration of</p>
+            <div class="w-12 h-[0.5px] bg-stone-400 mx-auto my-6"></div>
+            <h1 id="coupleNameHeader" class="text-5xl md:text-7xl font-serif font-light italic text-stone-800 leading-tight tracking-wide"></h1>
+            
+            <div class="mt-12 mb-4 text-[9px] uppercase tracking-[0.4em] text-stone-400">Kangge Bapak/Ibu/Saudara/i:</div>
+            <h3 id="guestNameLabel" class="font-serif text-2xl font-light text-stone-700 italic tracking-wide mb-2">Tamu Undangan</h3>
         </div>
-        <button onclick="unlockInvitation()" class="btn-luxe">Buka Undangan</button>
+        <button onclick="unlockInvitation()" class="btn-luxe">Aparing Karsa</button>
     </section>
 
-    <!-- CONTENT -->
-    <main id="mainContent" class="hidden">
-        <!-- HERO -->
-        <section class="min-h-screen flex flex-col items-center pt-32 pb-20 px-6">
-            <div id="heroMask" class="reveal-mask w-full max-w-2xl">
-                <img id="heroImg" src="" class="w-full h-[75vh] object-cover contrast-[1.05]">
+    <!-- MAIN APP WRAPPER -->
+    <main id="mainContent" class="hidden max-w-screen-md mx-auto bg-[var(--white-soft)] min-h-screen relative shadow-2xl">
+        
+        <!-- HERO COMPONENT -->
+        <section class="min-h-screen flex flex-col items-center justify-center pt-24 pb-20 px-8">
+            <div id="heroMask" class="reveal-mask w-full max-w-xl">
+                <div class="art-frame">
+                    <img id="heroImg" src="" class="contrast-[1.02]">
+                </div>
             </div>
             <div class="mt-12 text-center">
-                <p class="text-[10px] tracking-[0.6em] uppercase opacity-50 mb-4">Official Invitation</p>
-                <h2 id="mainDate" class="text-4xl font-serif italic"></h2>
+                <p class="text-[9px] tracking-[0.6em] uppercase opacity-40 mb-3">Serat Kilas Resmi</p>
+                <h2 id="mainDate" class="text-3xl font-serif font-light italic text-stone-700 tracking-wide"></h2>
             </div>
         </section>
 
-        <!-- QUOTE -->
-        <section class="py-32 px-10 text-center max-w-4xl mx-auto">
-            <p id="quoteArab" class="text-3xl font-serif text-[#6F806A] mb-8 leading-relaxed"></p>
-            <p id="quoteText" class="italic opacity-70 font-serif text-lg leading-relaxed mb-4"></p>
-            <span id="quoteSource" class="text-[10px] tracking-widest uppercase opacity-40"></span>
+        <!-- SACRED POETRY / QUOTE -->
+        <section class="py-32 px-10 text-center max-w-2xl mx-auto border-t border-stone-200/40">
+            <p id="quoteArab" class="font-arab text-3xl text-[var(--accent)] mb-8 leading-loose tracking-wide"></p>
+            <p id="quoteText" class="font-serif italic font-light text-stone-700 text-lg leading-relaxed mb-6"></p>
+            <div class="h-[0.5px] w-8 bg-stone-300 mx-auto mb-4"></div>
+            <span id="quoteSource" class="text-[9px] tracking-[0.3em] uppercase opacity-50 block font-medium"></span>
         </section>
 
-        <!-- BRIDE & GROOM -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-0 border-y border-[#6F806A]/10">
-            <div class="p-16 md:p-24 flex flex-col justify-center border-b md:border-b-0 md:border-r border-[#6F806A]/10">
-                <span class="text-[9px] tracking-[0.5em] uppercase text-[#6F806A] mb-6">The Groom</span>
-                <img id="groomImg" src="" class="w-32 h-32 rounded-full object-cover mb-8 grayscale">
-                <h3 id="groomFullName" class="text-4xl font-serif mb-4"></h3>
-                <p id="groomParents" class="text-[10px] opacity-60 leading-loose uppercase tracking-widest"></p>
+        <!-- HIGH-END BIOGRAPHY GRID (COUPLE) -->
+        <section class="grid grid-cols-1 border-y border-stone-200/50 bg-[#FBFBFA]">
+            <!-- Groom Column -->
+            <div class="p-12 sm:p-20 flex flex-col justify-center items-start border-b border-stone-200/40">
+                <span class="text-[8px] tracking-[0.5em] uppercase text-[var(--accent)] font-semibold mb-6">Mempelai Pria</span>
+                <div class="w-full max-w-xs mb-8">
+                    <div class="art-frame"><img id="groomImg" src=""></div>
+                </div>
+                <h3 id="groomFullName" class="text-4xl font-serif font-light tracking-wide text-stone-800 mb-3"></h3>
+                <p id="groomParents" class="text-[10px] opacity-60 leading-relaxed uppercase tracking-[0.2em] font-light text-stone-600"></p>
             </div>
-            <div class="p-16 md:p-24 flex flex-col justify-center bg-[#2D352E] text-[#F5F1EA]">
-                <span class="text-[9px] tracking-[0.5em] uppercase text-[#6F806A] mb-6">The Bride</span>
-                <img id="brideImg" src="" class="w-32 h-32 rounded-full object-cover mb-8">
-                <h3 id="brideFullName" class="text-4xl font-serif mb-4"></h3>
-                <p id="brideParents" class="text-[10px] opacity-60 leading-loose uppercase tracking-widest"></p>
-            </div>
-        </section>
-
-        <!-- EVENTS -->
-        <section class="py-32 px-6">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16" id="eventContainer">
-                <!-- Events via JS -->
-            </div>
-        </section>
-
-        <!-- STORY -->
-        <section class="py-32 bg-white/50">
-            <h2 class="text-center font-serif text-5xl mb-20 italic">Our Story</h2>
-            <div class="max-w-2xl mx-auto px-10 space-y-16" id="storyContainer">
-                <!-- Story via JS -->
+            
+            <!-- Bride Column (Asymmetric Contrast Style) -->
+            <div class="p-12 sm:p-20 flex flex-col justify-center items-end text-right bg-[#2D352E] text-[#F5F1EA]">
+                <span class="text-[8px] tracking-[0.5em] uppercase text-stone-400 font-semibold mb-6">Mempelai Wanita</span>
+                <div class="w-full max-w-xs mb-8">
+                    <div class="art-frame"><img id="brideImg" src=""></div>
+                </div>
+                <h3 id="brideFullName" class="text-4xl font-serif font-light tracking-wide text-stone-100 mb-3"></h3>
+                <p id="brideParents" class="text-[10px] opacity-70 leading-relaxed uppercase tracking-[0.2em] font-light text-stone-300"></p>
             </div>
         </section>
 
-        <footer class="py-40 text-center">
-            <div class="w-px h-20 bg-[#6F806A]/30 mx-auto mb-10"></div>
-            <p class="text-[10px] tracking-[0.8em] opacity-40 uppercase">Thank You</p>
-            <h2 id="footerCouple" class="text-7xl font-serif italic mt-8 opacity-80"></h2>
+        <!-- EVENTS TIMELINE -->
+        <section class="py-32 px-8 sm:px-16">
+            <p class="text-[9px] tracking-[0.5em] uppercase opacity-40 text-center mb-2">Titik Mangsa</p>
+            <h2 class="text-center font-serif text-4xl font-light italic mb-20 text-stone-800">Sasmita Adicara</h2>
+            <div class="space-y-12 max-w-md mx-auto" id="eventContainer">
+                <!-- Data Terinjeksi via JavaScript -->
+            </div>
+        </section>
+
+        <!-- MEMOIR / LOVE STORY -->
+        <section class="py-32 bg-stone-100/60 border-t border-stone-200/30">
+            <p class="text-[9px] tracking-[0.5em] uppercase opacity-40 text-center mb-2">Jalur Kisah</p>
+            <h2 class="text-center font-serif text-4xl font-light italic mb-24 text-stone-800">Riwayat Sanubari</h2>
+            <div class="max-w-md mx-auto px-6 space-y-16 relative border-l border-stone-300/60 ml-8 sm:mx-auto pl-8" id="storyContainer">
+                <!-- Data Terinjeksi via JavaScript -->
+            </div>
+        </section>
+
+        <!-- PREMIUM BRANDED FOOTER -->
+        <footer class="py-40 text-center bg-[#111411] text-white px-8">
+            <div class="w-px h-16 bg-stone-700 mx-auto mb-8"></div>
+            <p class="text-[9px] tracking-[0.6em] text-stone-500 uppercase font-mono">Sampun Puput</p>
+            <h2 id="footerCouple" class="text-5xl font-serif font-light italic mt-6 text-stone-300 tracking-wide"></h2>
+            <div class="h-[0.5px] w-6 bg-stone-800 mx-auto mt-10 mb-4"></div>
+            <p class="text-[8px] uppercase tracking-[0.5em] text-stone-600 font-sans">Omah Aksara Exclusive Digital Paper</p>
         </footer>
     </main>
+
+    <!-- FLOATING KINETIC AUDIO PLAYER COMPONENT -->
+    <div id="musicBtn" class="music-floater hidden">
+        <div id="diskWrap" class="disk-wrap">
+            <svg class="w-full h-full p-1 text-stone-700 opacity-60" viewBox="0 0 100 100">
+                <path id="textPath" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none"></path>
+                <text font-size="8.5" font-family="Cormorant Garamond" letter-spacing="3.5" fill="currentColor">
+                    <textPath href="#textPath"> • SENANDUNG AKSARA • GENDING RAMPAK </textPath>
+                </text>
+            </svg>
+        </div>
+    </div>
 
     <audio id="bgm" loop></audio>
 
     <script>
+        // Mengambil Data dari URL Parameter
         const params = new URLSearchParams(window.location.search);
         const slug = params.get('c') || 'default'; 
+        const guestName = params.get('to')?.replace(/\+/g, ' ') || 'Tamu Undangan';
         const path = `../../public/clients/${slug}/`;
+
+        // Atur Teks Nama Tamu di Cover Terlebih Dahulu
+        document.getElementById('guestNameLabel').innerText = guestName;
 
         fetch(`${path}data.json`)
             .then(res => res.json())
             .then(data => {
-                // Settings & Global
-                document.documentElement.style.setProperty('--accent', data.settings.themeColor);
-                document.documentElement.style.setProperty('--bg', data.settings.bgColor);
-                document.documentElement.style.setProperty('--text', data.settings.textColor);
+                // Konfigurasi Manajemen Warna Dinamis dari File JSON
+                if(data.settings?.themeColor) document.documentElement.style.setProperty('--accent', data.settings.themeColor);
+                if(data.settings?.bgColor) document.documentElement.style.setProperty('--bg', data.settings.bgColor);
+                if(data.settings?.textColor) document.documentElement.style.setProperty('--text', data.settings.textColor);
 
-                // Names
+                // Memasang Nama Gabungan Pasangan
                 const pair = `${data.couple.groom.nickname} & ${data.couple.bride.nickname}`;
                 document.getElementById('coupleNameHeader').innerText = pair;
                 document.getElementById('footerCouple').innerText = pair;
 
-                // Media
+                // Penyandangan Media Jalur Public
                 document.getElementById('heroImg').src = path + data.gallery.heroImage;
                 document.getElementById('groomImg').src = path + data.couple.groom.image;
                 document.getElementById('brideImg').src = path + data.couple.bride.image;
                 document.getElementById('bgm').src = path + data.logistics.music;
 
-                // Couple Details
+                // Detail Profil Lengkap Kedua Mempelai
                 document.getElementById('groomFullName').innerText = data.couple.groom.name;
-                document.getElementById('groomParents').innerText = `Son of ${data.couple.groom.father} & ${data.couple.groom.mother}`;
+                document.getElementById('groomParents').innerText = `Putra Kandung dari Bapak ${data.couple.groom.father} & Ibu ${data.couple.groom.mother}`;
                 document.getElementById('brideFullName').innerText = data.couple.bride.name;
-                document.getElementById('brideParents').innerText = `Daughter of ${data.couple.bride.father} & ${data.couple.bride.mother}`;
+                document.getElementById('brideParents').innerText = `Putri Kandung dari Bapak ${data.couple.bride.father} & Ibu ${data.couple.bride.mother}`;
 
-                // Quote
-                document.getElementById('quoteArab').innerText = data.quote.arab;
-                document.getElementById('quoteText').innerText = data.quote.text;
-                document.getElementById('quoteSource').innerText = data.quote.source;
-                document.getElementById('mainDate').innerText = data.events[0].date;
+                // Komponen Kutipan Suci (Quote)
+                document.getElementById('quoteArab').innerText = data.quote.arab || '';
+                document.getElementById('quoteText').innerText = data.quote.text ? `“ ${data.quote.text} ”` : '';
+                document.getElementById('quoteSource').innerText = data.quote.source || '';
+                
+                // Formatisasi Tanggal Utama di Hero Halaman Depan
+                if(data.events && data.events.length > 0) {
+                    const mainEventDate = new Date(data.events[0].date).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+                    document.getElementById('mainDate').innerText = mainEventDate;
+                }
 
-                // Map Events
+                // Pengolahan Perulangan List Acara / Events Agenda
                 const eventHtml = data.events.map((ev, i) => `
-                    <div class="border-l border-[#6F806A]/20 pl-10 pb-10">
-                        <span class="text-[9px] text-[#6F806A] font-bold tracking-[0.4em] uppercase">Part 0${i+1}</span>
-                        <h4 class="text-4xl font-serif mt-4 mb-2">${ev.title}</h4>
-                        <p class="text-sm italic opacity-60 mb-6">${ev.date} | ${ev.startTime} - ${ev.endTime} ${ev.timezone}</p>
-                        <p class="text-[11px] leading-relaxed tracking-widest uppercase font-medium max-w-xs">${ev.address}</p>
-                        <a href="${ev.googleMaps}" target="_blank" class="inline-block mt-8 text-[9px] tracking-[0.3em] uppercase border-b border-[#6F806A] pb-1">View Location</a>
+                    <div class="bg-white border border-stone-200/50 p-8 shadow-sm rounded-sm relative group">
+                        <span class="text-[8px] text-[var(--accent)] font-bold tracking-[0.4em] uppercase block mb-2">Bagian 0${i+1}</span>
+                        <h4 class="text-3xl font-serif font-light text-stone-800 mb-3 tracking-wide">${ev.title}</h4>
+                        <p class="text-xs italic text-amber-800/90 font-medium mb-4">
+                            ${new Date(ev.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })} 
+                            <span class="text-stone-300 mx-1">|</span> ${ev.startTime} - ${ev.endTime} ${ev.timezone || 'WIB'}
+                        </p>
+                        <p class="text-xs text-stone-500 font-light font-serif italic leading-relaxed mb-6">${ev.address}</p>
+                        <a href="${ev.googleMaps}" target="_blank" class="inline-block text-[9px] tracking-[0.3em] uppercase border-b border-[var(--accent)] pb-1 font-medium text-stone-700 hover:text-[var(--accent)] transition-colors">Buka Peta Navigasi</a>
                     </div>
                 `).join('');
                 document.getElementById('eventContainer').innerHTML = eventHtml;
 
-                // Map Story
+                // Pengolahan Perulangan Kisah Romansa Jalur Waktu (Love Story)
                 const storyHtml = data.loveStory.map(s => `
-                    <div class="text-center">
-                        <span class="text-[10px] text-[#6F806A] tracking-[0.5em] uppercase">${s.date}</span>
-                        <h4 class="text-2xl font-serif italic mt-2 mb-4">${s.title}</h4>
-                        <p class="text-sm opacity-60 leading-relaxed font-light">${s.description}</p>
+                    <div class="relative group pl-2">
+                        <div class="absolute -left-[37px] top-1.5 w-2 h-2 rounded-full bg-[var(--accent)] border-2 border-white group-hover:scale-125 transition-transform"></div>
+                        <span class="text-[9px] text-amber-800/90 font-mono tracking-widest font-medium uppercase block mb-1">${s.date || s.year}</span>
+                        <h4 class="text-2xl font-serif font-light text-stone-800 tracking-wide mb-3">${s.title}</h4>
+                        <p class="text-xs text-stone-500 font-light leading-relaxed italic">${s.description}</p>
                     </div>
                 `).join('');
                 document.getElementById('storyContainer').innerHTML = storyHtml;
             })
-            .catch(e => console.error("JSON Error: ", e));
+            .catch(e => console.error("Gagal memuat berkas JSON data.json: ", e));
 
+        // Fungsi Membuka Surat Undangan Khusus
         function unlockInvitation() {
             const audio = document.getElementById('bgm');
-            audio.play().catch(() => console.log("Audio play deferred"));
+            const diskWrap = document.getElementById('diskWrap');
+            const musicBtn = document.getElementById('musicBtn');
             
+            audio.play().then(() => {
+                diskWrap.classList.remove('paused');
+            }).catch(() => console.log("Izin audio otomatis browser ditangguhkan"));
+            
+            // Animasi GSAP Penarikan Layar Cover ke Atas Ala Tirai Teater Kemewahan
             gsap.to("#opening", { 
-                y: "-100%", duration: 1.5, ease: "expo.inOut", 
+                y: "-100%", 
+                duration: 1.6, 
+                ease: "expo.inOut", 
                 onComplete: () => {
                     document.getElementById('opening').style.display = 'none';
                     document.getElementById('mainContent').classList.remove('hidden');
                     document.getElementById('heroMask').classList.add('active');
+                    musicBtn.classList.remove('hidden');
                     initScrollAnims();
                 } 
             });
+
+            // Handler Kendali Putar-Jeda Musik Latar Belakang
+            musicBtn.onclick = () => {
+                if(audio.paused) {
+                    audio.play();
+                    diskWrap.classList.remove('paused');
+                } else {
+                    audio.pause();
+                    diskWrap.classList.add('paused');
+                }
+            };
         }
 
+        // Inisialisasi Detektor Animasi Gulir Layar GSAP ScrollTrigger Premium
         function initScrollAnims() {
             gsap.registerPlugin(ScrollTrigger);
             gsap.utils.toArray("section").forEach(section => {
                 gsap.from(section, {
-                    scrollTrigger: { trigger: section, start: "top 80%" },
-                    opacity: 0, y: 50, duration: 1.2, ease: "power2.out"
+                    scrollTrigger: { 
+                        trigger: section, 
+                        start: "top 88%",
+                        toggleActions: "play none none none"
+                    },
+                    opacity: 0, 
+                    y: 45, 
+                    duration: 1.5, 
+                    ease: "power3.out"
                 });
             });
         }
