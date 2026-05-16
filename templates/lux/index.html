@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation</title>
+    <title>Wedding Invitation — Art Editorial Edition</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -152,15 +152,25 @@
         <!-- QUOTE -->
         <section id="quote-section" class="bg-white py-28 border-t border-stone-100">
             <div class="max-w-xl mx-auto text-center px-8">
-                <p id="arab-text" class="font-arab text-3xl mb-10 text-[var(--luxe-gold)] leading-loose tracking-wide"></p>
+                <div id="islamic-greeting" class="text-[10px] tracking-[0.3em] text-stone-400 uppercase mb-8 hidden">Assalamu'alaikum Warahmatullahi Wabarakatuh</div>
+                <p id="arab-text" class="font-arab text-3xl mb-10 text-[var(--luxe-gold)] leading-loose tracking-wide" dir="rtl"></p>
                 <p id="indo-text" class="font-serif text-lg italic leading-relaxed text-stone-600 font-light"></p>
                 <div class="w-8 h-[0.5px] bg-[#b39359]/40 mx-auto mt-10 mb-4"></div>
                 <span id="quote-source" class="text-[9px] tracking-[0.3em] uppercase opacity-40 block font-medium"></span>
             </div>
         </section>
 
+        <!-- OPENING INTRO -->
+        <section class="reveal-up px-8 pt-20 text-center bg-[#FBFBFA]">
+            <p class="text-[8px] tracking-[0.5em] uppercase text-[var(--luxe-gold)] font-semibold mb-3">Serat Pembuka</p>
+            <p class="font-serif text-base text-stone-600 max-w-sm mx-auto leading-relaxed font-light italic">
+                Maha Suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Dengan memohon rahmat dan rida-Mu, kami bermaksud mengumumkan ikatan suci pernikahan kami:
+            </p>
+            <div class="w-12 h-[0.5px] bg-stone-200 mx-auto mt-12"></div>
+        </section>
+
         <!-- GROOM -->
-        <section class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center border-y border-stone-100 bg-[#FBFBFA]">
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-0 items-center border-b border-stone-100 bg-[#FBFBFA]">
             <div class="md:col-span-6 h-[65vh] overflow-hidden">
                 <img id="pria-foto" src="" class="w-full h-full object-cover parallax-bg grayscale hover:grayscale-0 transition-all duration-[2.5s]">
             </div>
@@ -216,7 +226,7 @@
                 <h2 class="font-serif text-3xl font-light italic text-stone-800">Lensa Kenangan</h2>
             </div>
             <div class="max-w-2xl mx-auto">
-                <iframe id="youtube-frame" class="w-full aspect-video mb-4" src="" allowfullscreen></iframe>
+                <iframe id="youtube-frame" class="w-full aspect-video mb-4 rounded-xs shadow-xs" src="" allowfullscreen></iframe>
                 <div id="album-grid" class="grid grid-cols-2 gap-2"></div>
             </div>
         </section>
@@ -226,7 +236,7 @@
             <p class="text-[8px] tracking-[0.5em] uppercase text-[var(--luxe-gold)] font-semibold mb-3">Siaran Langsung</p>
             <h3 class="font-serif text-2xl font-light text-stone-800 mb-4">Virtual Celebration</h3>
             <p class="text-xs text-stone-500 font-light max-w-xs mx-auto mb-8 leading-relaxed">Sebab jarak hanyalah angka, kami mengundang Anda menyaksikan janji suci kami secara virtual.</p>
-            <a id="live-url" href="#" target="_blank" class="luxe-btn inline-block text-[9px]!px-10">Gabung Live Streaming</a>
+            <a id="live-url" href="#" target="_blank" class="luxe-btn inline-block text-[9px] !px-10">Gabung Live Streaming</a>
         </section>
 
         <!-- RSVP -->
@@ -287,7 +297,7 @@
                 <div class="space-y-4 mb-10">
                     <input type="text" id="wishes-nama" class="luxe-input" placeholder="Nama Anda">
                     <textarea id="wishes-pesan" rows="3" class="luxe-input resize-none" placeholder="Tulis pesan & doa restu mulia..."></textarea>
-                    <button onclick="submitWish()" class="luxe-btn text-[9px]!py-3!px-8 mt-2">Kirim Pesan</button>
+                    <button onclick="submitWish()" class="luxe-btn text-[9px] !py-3 !px-8 mt-2">Kirim Pesan</button>
                 </div>
                 <div id="wishes-feed" class="space-y-4 max-h-[350px] overflow-y-auto pr-2 scrollbar-thin"></div>
             </div>
@@ -300,6 +310,7 @@
             <h2 id="footer-names" class="text-5xl font-serif font-light italic mt-6 text-stone-300 tracking-wide"></h2>
             <div class="h-[0.5px] w-6 bg-stone-800 mx-auto mt-10 mb-4"></div>
             <p id="dress-code" class="text-[10px] uppercase tracking-[0.3em] text-stone-400 mb-4"></p>
+            <p id="footer-note" class="text-xs text-stone-400 italic mb-10 max-w-sm mx-auto leading-relaxed font-light"></p>
             <p class="text-[8px] uppercase tracking-[0.5em] text-stone-600">Private Digital Presentation by Omah Aksara</p>
         </footer>
     </div>
@@ -326,8 +337,14 @@
         let music = document.getElementById('audio');
         let isPlaying = false;
 
+        // Inisialisasi awal aplikasi saat dokumen siap
+        document.addEventListener("DOMContentLoaded", () => {
+            init();
+        });
+
         async function init() {
             try {
+                // Mencari file data.json di folder yang sama sesuai jalur pemanggilan sistem
                 const res = await fetch('data.json');
                 D = await res.json();
                 applySettings();
@@ -346,13 +363,23 @@
             document.documentElement.style.setProperty('--luxe-gold', s.accentColor);
             document.documentElement.style.setProperty('--soft-cream', s.bgColor);
             document.documentElement.style.setProperty('--deep-mocca', s.textColor);
-            document.querySelector('meta[name="theme-color"]').content = s.themeColor;
             music.src = D.logistics.music;
 
             if (!s.islami) document.getElementById('quote-section').classList.add('hide');
             if (!s.showCountdown) document.getElementById('countdown-section').classList.add('hide');
             if (!s.showLoveStory) document.getElementById('story-section').classList.add('hide');
             if (!s.showProtocols) document.getElementById('protocol-section').classList.add('hide');
+            
+            // Menampilkan ucapan salam islami secara opsional sesuai pengaturan JSON
+            if (s.islami) {
+                document.getElementById('islamic-greeting').classList.remove('hidden');
+            }
+        }
+
+        // Fungsi pembantu untuk memformat tampilan teks tanggal lokal Indonesia
+        function formatDate(dateStr) {
+            const options = { day: 'numeric', month: 'long', year: 'numeric' };
+            return new Date(dateStr).toLocaleDateString('id-ID', options);
         }
 
         function renderAll() {
@@ -365,25 +392,30 @@
             document.getElementById('hero-date').textContent = formatDate(events[0].date);
             document.getElementById('footer-names').innerHTML = `${couple.groom.nickname} <span class="font-serif font-light text-3xl text-stone-500">/</span> ${couple.bride.nickname}`;
             document.getElementById('dress-code').innerText = `Dress Code: ${logistics.dressCode}`;
+            
+            if (logistics.guestNote) {
+                document.getElementById('footer-note').textContent = logistics.guestNote;
+            }
 
             // QUOTE
             document.getElementById('arab-text').textContent = quote.arab;
             document.getElementById('indo-text').textContent = quote.text;
             document.getElementById('quote-source').textContent = quote.source;
 
-            // COUPLE
+            // COUPLE & PARENTS (Memperbaiki tampilan agar nama orang tua muncul lengkap)
             document.getElementById('pria-foto').src = couple.groom.image;
             document.getElementById('pria-nama').textContent = couple.groom.name;
-            document.getElementById('pria-ortu').textContent = `Putra dari ${couple.groom.father} & ${couple.groom.mother}`;
+            document.getElementById('pria-ortu').innerHTML = `Putra Tercinta dari:<br><span class="font-medium text-stone-800">${couple.groom.father}</span><br>dan<br><span class="font-medium text-stone-800">${couple.groom.mother}</span>`;
             document.getElementById('pria-ig-box').innerHTML = `<a href="https://instagram.com/${couple.groom.instagram}" target="_blank" class="inline-block mt-4 text-[9px] tracking-[0.2em] text-[var(--luxe-gold)] uppercase font-medium">@${couple.groom.instagram}</a>`;
 
             document.getElementById('wanita-foto').src = couple.bride.image;
             document.getElementById('wanita-nama').textContent = couple.bride.name;
-            document.getElementById('wanita-ortu').textContent = `Putri dari ${couple.bride.father} & ${couple.bride.mother}`;
+            document.getElementById('wanita-ortu').innerHTML = `Putri Tercinta dari:<br><span class="font-medium text-stone-200">${couple.bride.father}</span><br>dan<br><span class="font-medium text-stone-200">${couple.bride.mother}</span>`;
             document.getElementById('wanita-ig-box').innerHTML = `<a href="https://instagram.com/${couple.bride.instagram}" target="_blank" class="inline-block mt-4 text-[9px] tracking-[0.2em] text-[var(--muted-gold)] uppercase font-medium">@${couple.bride.instagram}</a>`;
 
             // EVENTS
             const eventList = document.getElementById('event-list');
+            eventList.innerHTML = ''; // Clear template
             events.forEach((e, i) => {
                 eventList.innerHTML += `
                     <div class="reveal-up bg-stone-50/50 border border-stone-200/30 p-8 rounded-sm relative shadow-xs">
@@ -397,6 +429,7 @@
 
             // LOVE STORY
             const storyList = document.getElementById('story-list');
+            storyList.innerHTML = ''; // Clear template
             loveStory.forEach(s => {
                 storyList.innerHTML += `
                     <div class="reveal-up border-l-[0.5px] border-[var(--luxe-gold)] pl-6">
@@ -409,45 +442,49 @@
             // GALLERY
             document.getElementById('youtube-frame').src = `https://www.youtube.com/embed/${gallery.videoYoutubeId}`;
             const albumGrid = document.getElementById('album-grid');
+            albumGrid.innerHTML = ''; // Clear template
             gallery.album.forEach(img => {
-                albumGrid.innerHTML += `<img src="${img}" class="w-full aspect-square object-cover">`;
+                albumGrid.innerHTML += `<img src="${img}" class="w-full aspect-square object-cover shadow-2xs rounded-xs">`;
             });
 
-            // LIVE
-            if (liveStreaming.enabled) {
+            // LIVE STREAMING
+            if (liveStreaming && liveStreaming.enabled) {
                 document.getElementById('live-section').classList.remove('hidden');
                 document.getElementById('live-url').href = liveStreaming.url;
             }
 
-            // GIFT
-            if (digitalGift.length > 0) {
+            // DIGITAL GIFT
+            if (digitalGift && digitalGift.length > 0) {
                 document.getElementById('gift-section').classList.remove('hidden');
                 const giftContainer = document.getElementById('gift-container');
+                giftContainer.innerHTML = ''; // Clear template
                 digitalGift.forEach(rek => {
+                    const isBank = rek.provider.toLowerCase().includes('bank');
                     giftContainer.innerHTML += `
                         <div class="bg-white border border-stone-200/40 p-6 text-center rounded-sm shadow-2xs">
                             <p class="text-[10px] font-medium tracking-widest text-stone-400 uppercase mb-1">${rek.provider}</p>
                             <p class="font-mono text-sm tracking-wider text-stone-800 font-medium my-2">${rek.accountNumber}</p>
                             <p class="text-[10px] text-stone-500 uppercase tracking-wide mb-4">a.n ${rek.accountHolder}</p>
-                            ${rek.provider.includes('Bank')? `<button onclick="copyToClipboard('${rek.accountNumber}')" class="text-[8px] uppercase tracking-[0.2em] border border-stone-300 px-4 py-2 hover:bg-stone-900 hover:text-white transition-all">Salin Rekening</button>` : ''}
+                            ${isBank ? `<button onclick="copyToClipboard('${rek.accountNumber}')" class="text-[8px] uppercase tracking-[0.2em] border border-stone-300 px-4 py-2 hover:bg-stone-900 hover:text-white transition-all">Salin Rekening</button>` : ''}
                         </div>`;
                 });
             }
 
             // PROTOCOLS
-            if (protocols.length > 0) {
+            if (protocols && protocols.length > 0) {
                 document.getElementById('protocol-section').classList.remove('hidden');
                 const protocolList = document.getElementById('protocol-list');
+                protocolList.innerHTML = ''; // Clear template
                 protocols.forEach(p => {
                     protocolList.innerHTML += `
-                        <div class="text-center">
+                        <div class="text-center min-w-[80px]">
                             <span class="text-3xl">${p.icon}</span>
                             <p class="text-[10px] text-stone-600 mt-2 uppercase tracking-wider">${p.label}</p>
                         </div>`;
                 });
             }
 
-            // RSVP WA
+            // RSVP FORM SUBMISSION LOGIC
             document.getElementById('rsvpForm').onsubmit = (e) => {
                 e.preventDefault();
                 const nama = document.getElementById('rsvp-nama').value;
@@ -463,7 +500,7 @@
             music.play().then(() => {
                 document.getElementById('diskWrap').classList.remove('paused');
                 isPlaying = true;
-            }).catch(e => console.log("Autoplay blocked"));
+            }).catch(e => console.log("Autoplay blocked by browser policy"));
 
             gsap.to("#cover", {
                 y: "-100%",
@@ -486,7 +523,7 @@
                     music.play();
                     document.getElementById('diskWrap').classList.remove('paused');
                 }
-                isPlaying =!isPlaying;
+                isPlaying = !isPlaying;
             };
         }
 
@@ -535,15 +572,16 @@
             const urlParams = new URLSearchParams(window.location.search);
             const guestName = urlParams.get('to');
             if (guestName) {
-                document.getElementById('guest-name').innerText = guestName.replace(/\+/g, ' ');
-                document.getElementById('rsvp-nama').value = guestName.replace(/\+/g, ' ');
+                const cleanName = guestName.replace(/\+/g, ' ');
+                document.getElementById('guest-name').innerText = cleanName;
+                document.getElementById('rsvp-nama').value = cleanName;
             }
         }
 
         function submitWish() {
             const name = document.getElementById('wishes-nama').value;
             const msg = document.getElementById('wishes-pesan').value;
-            if (!name ||!msg) return;
+            if (!name || !msg) return;
             let wishes = JSON.parse(localStorage.getItem('wishes')) || [];
             wishes.unshift({ name, msg, date: 'Baru saja' });
             localStorage.setItem('wishes', JSON.stringify(wishes));
@@ -557,3 +595,20 @@
             let wishes = JSON.parse(localStorage.getItem('wishes')) || [
                 { name: "Ki Bagus Jatmiko", msg: "Selamat menempuh hidup baru untuk kedua mempelai mulia. Semoga senantiasa diberkahi kebahagiaan tak bertepi.", date: "2 jam lalu" },
                 { name: "Siti Rahmawati", msg: "Barakallahu lakuma wa baraka 'alaikuma wa jama'a bainakuma fii khair. Turut berbahagia!", date: "5 jam lalu" }
+            ];
+            
+            feed.innerHTML = ''; // Clear feeds
+            wishes.forEach(w => {
+                feed.innerHTML += `
+                    <div class="bg-stone-50/60 p-5 rounded-xs border border-stone-100 text-left">
+                        <div class="flex justify-between items-center mb-1">
+                            <h5 class="text-xs font-semibold text-stone-800">${w.name}</h5>
+                            <span class="text-[8px] font-mono opacity-40 uppercase">${w.date}</span>
+                        </div>
+                        <p class="text-[11px] text-stone-600 font-light leading-relaxed">${w.msg}</p>
+                    </div>`;
+            });
+        }
+    </script>
+</body>
+</html>
