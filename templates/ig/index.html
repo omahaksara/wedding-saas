@@ -4,78 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instagram Wedding Preview</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
     <style>
         :root {
-            --bg: #ffffff; --card: #ffffff; --text: #262626; --muted: #737373; --border: #dbdbdb;
+            --bg: #ffffff; --card: #ffffff; --text: #262626; --muted: #737373; --border: #f0f0f0;
             --blue: #0095f6; --red: #ff3040; --ig-gradient: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #fafafa; color: var(--text); }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f8f9fa; color: var(--text); }
         
-        /* Kontainer Utama Mirip Bingkai HP */
-        .phone-container { max-width: 420px; margin: 0 auto; min-height: 100vh; background: var(--bg); position: relative; box-shadow: 0 0 30px rgba(0,0,0,0.05); display: flex; flex-col; }
+        /* Bingkai HP Mockup Premium */
+        .phone-container { max-width: 420px; margin: 0 auto; min-height: 100vh; background: var(--bg); position: relative; box-shadow: 0 12px 40px rgba(0,0,0,0.08); display: flex; flex-direction: column; opacity: 1; }
         
-        /* COVER LUXURY SCREEN */
-        .cover { position: absolute; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; background: #000; transition: all 1s cubic-bezier(0.85, 0, 0.15, 1); }
-        .cover.hidden { transform: translateY(-110%); opacity: 0; pointer-events: none; }
-        .cover-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: blur(2px); }
-        .cover-card { position: relative; z-index: 10; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.2); border-radius: 24px; padding: 35px 25px; text-align: center; color: #fff; width: 85%; }
+        /* COVER SCREEN LUXURY */
+        .cover { position: absolute; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; background: #0b0b0b; transition: all 1.2s cubic-bezier(0.85, 0, 0.15, 1); }
+        .cover.hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+        .cover-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45; filter: grayscale(20%) brightness(0.7); }
         
-        /* INSTAGRAM RING STORY ANIMATION */
-        .story-ring { width: 66px; height: 66px; border-radius: 50%; background: var(--ig-gradient); padding: 2px; margin: 0 auto 4px; transition: transform 0.3s; }
+        /* Tombol Buka Undangan Premium */
+        .cover-btn { background: #ffffff; color: #111111; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 14px 32px; border-radius: 30px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255, 255, 255, 0.25); }
+        .cover-btn:hover { background: #f0f0f0; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4); }
+        .cover-btn:active { transform: translateY(0); }
+        
+        /* INSTAGRAM STORIES ELEMENT */
+        .story-ring { width: 64px; height: 64px; border-radius: 50%; background: var(--ig-gradient); padding: 2.5px; margin: 0 auto 6px; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .story-ring:active { transform: scale(0.92); }
-        .story-ring img { width: 100%; height: 100%; border-radius: 50%; border: 2px solid #fff; object-fit: cover; }
+        .story-ring img { width: 100%; height: 100%; border-radius: 50%; border: 2.5px solid #fff; object-fit: cover; }
         .stories::-webkit-scrollbar { display: none; }
 
-        /* POST INTERACTION EFFECT */
-        .post-img-container { position: relative; width: 100%; aspect-ratio: 1/1; background: #f5f5f5; overflow: hidden; }
+        /* POST IMAGE INTERACTION */
+        .post-img-container { position: relative; width: 100%; aspect-ratio: 1/1; background: #fafafa; overflow: hidden; }
         .post-img-container img { width: 100%; height: 100%; object-fit: cover; }
-        .big-heart { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); color: #ffffff; font-size: 75px; opacity: 0; pointer-events: none; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3)); }
+        .big-heart { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); color: #ffffff; font-size: 80px; opacity: 0; pointer-events: none; filter: drop-shadow(0 8px 15px rgba(0,0,0,0.25)); }
         .animate-heart { animation: heartPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes heartPop { 
             0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-            30% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.9; }
-            50% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+            35% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.95; }
+            55% { transform: translate(-50%, -50%) scale(1); opacity: 0.95; }
             100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
         }
 
-        /* LIVE WATERMARK LUXURY EFFECT */
-        .live-badge { background: var(--red); color: white; font-weight: bold; font-size: 9px; padding: 2px 5px; border-radius: 3px; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); border: 2px solid white; letter-spacing: 0.5px; }
+        .live-badge { background: var(--red); color: white; font-weight: 700; font-size: 9px; padding: 1.5px 5px; border-radius: 4px; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); border: 2px solid white; letter-spacing: 0.5px; }
+        .tab-icon { color: var(--muted); cursor: pointer; padding-bottom: 12px; border-bottom: 2px solid transparent; width: 33.33%; text-align: center; transition: all 0.2s; }
+        .tab-icon.active { color: var(--text); border-bottom: 2px solid #262626; }
 
-        /* TAB SELECTION EFFECT */
-        .tab-icon { color: #737373; cursor: pointer; padding-bottom: 12px; border-bottom: 2px solid transparent; width: 33.33%; text-align: center; }
-        .tab-icon.active { color: #262626; border-bottom: 2px solid #262626; }
-
-        /* FLOATING COMPACT DISC PLAYER */
-        .music-floater { position: fixed; bottom: 70px; right: calc(50% - 190px); width: 40px; height: 40px; background: rgba(255,255,255,0.95); border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; z-index: 90; cursor: pointer; border: 1px solid var(--border); transition: all 0.3s; }
+        /* MUSIC CONTROLLER FLOATER */
+        .music-floater { position: fixed; bottom: 76px; right: calc(50% - 195px); width: 44px; height: 44px; background: rgba(255,255,255,0.95); border-radius: 50%; box-shadow: 0 6px 16px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; z-index: 90; cursor: pointer; border: 1px solid rgba(0,0,0,0.05); transition: all 0.3s; }
         @media (max-width: 420px) { .music-floater { right: 20px; } }
-        .rotating { animation: rotate 3.5s linear infinite; }
+        .rotating { animation: rotate 4s linear infinite; }
         @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
-<body class="bg-zinc-100">
+<body>
 
 <div class="phone-container">
 
-    <!-- COVER SCREEN (BLUR & DOPAMINE POP EFFECT) -->
+    <!-- COVER SCREEN -->
     <div id="cover" class="cover">
         <img id="cover-bg-img" class="cover-bg" src="">
-        <div class="cover-card mx-auto">
-            <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 mx-auto mb-4">
+        <div class="relative z-10 w-[88%] text-center px-4 py-8 rounded-3xl bg-black/20 backdrop-blur-md border border-white/10 shadow-2xl">
+            <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 mx-auto mb-4 shadow-md">
                 <div class="w-full h-full rounded-full bg-white p-0.5"><img id="avatar-cover" class="w-full h-full rounded-full object-cover" src=""></div>
             </div>
-            <p class="text-[10px] uppercase tracking-[0.3em] text-stone-300 font-medium mb-1">Exclusive Invitation</p>
-            <h1 id="coverNames" class="font-bold text-2xl tracking-tight mb-6"></h1>
-            <div class="h-[1px] w-12 bg-white/30 mx-auto my-4"></div>
-            <div class="my-4">
-                <p class="text-xs text-stone-300 italic opacity-80">Dear Honorable Guest:</p>
-                <p id="guestName" class="text-lg font-semibold tracking-wide mt-1 text-white"></p>
-                <p id="guestGroup" class="text-[10px] uppercase text-amber-300 font-mono tracking-widest mt-0.5 opacity-90"></p>
+            <p class="text-[10px] uppercase tracking-[0.25em] text-zinc-300 font-semibold mb-1">Exclusive Invitation</p>
+            <h1 id="coverNames" class="font-serif italic text-3xl tracking-wide text-white mb-6"></h1>
+            <div class="h-[1px] w-12 bg-white/20 mx-auto my-4"></div>
+            <div class="my-5">
+                <p class="text-xs text-zinc-400 italic opacity-90">Dear Honorable Guest:</p>
+                <p id="guestName" class="text-xl font-medium tracking-wide mt-1 text-white"></p>
+                <p id="guestGroup" class="text-[9px] uppercase text-amber-400 font-mono tracking-widest mt-1 opacity-90"></p>
             </div>
             <button class="cover-btn" onclick="startInvitation()">Buka Undangan</button>
         </div>
@@ -83,86 +84,107 @@
 
     <!-- APP NAVBAR -->
     <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-zinc-100 px-4 py-3 flex items-center justify-between">
-        <div class="font-serif text-xl font-bold tracking-tight italic select-none">Instagram</div>
+        <div class="font-serif italic text-2xl font-bold tracking-tight select-none cursor-default">Instagram</div>
         <div class="flex items-center gap-5 text-xl text-zinc-800">
-            <div class="relative cursor-pointer" onclick="openSection('dm-gift')"><i class="fa-regular fa-paper-plane"></i><span class="absolute -top-1.5 -right-1.5 bg-red-500 text-white font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center animate-bounce">1</span></div>
+            <div class="relative cursor-pointer" onclick="openSection('dm-gift')">
+                <i class="fa-regular fa-paper-plane"></i>
+                <span class="absolute -top-1.5 -right-1.5 bg-red-500 text-white font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center animate-pulse">1</span>
+            </div>
         </div>
     </nav>
 
-    <!-- CONTENT SCROLL AREA -->
-    <div class="flex-1 overflow-y-auto pb-16 bg-white" id="main-scroll-engine">
+    <!-- MAIN SCROLL ENGINE -->
+    <div class="flex-1 overflow-y-auto pb-16 bg-white opacity-0 transition-opacity duration-1000" id="main-scroll-engine">
         
-        <!-- INSTAGRAM STORIES (DYNAMIC POPULATION FROM ALBUM) -->
+        <!-- INSTAGRAM STORIES -->
         <div id="stories" class="stories flex gap-4 px-4 py-3.5 overflow-x-auto border-b border-zinc-100">
             <!-- Injeksi Story Otomatis -->
         </div>
 
-        <!-- PROFILE MINI BAR STATS -->
-        <div class="px-4 py-4 flex items-center justify-between border-b border-zinc-50 bg-zinc-50/40">
-            <div class="relative w-20 h-20 p-[2px] bg-gradient-to-tr from-yellow-400 to-purple-600 rounded-full">
-                <img id="profile-main-avatar" class="w-full h-full rounded-full object-cover border-2 solid bg-white" src="">
-                <div class="live-badge" id="live-badge-btn" style="display:none">LIVE</div>
+        <!-- PROFILE STATS HEADER -->
+        <div class="px-4 pt-4 pb-2 flex items-center justify-between bg-white">
+            <div class="relative w-20 h-20 p-[2px] bg-gradient-to-tr from-yellow-400 to-purple-600 rounded-full shadow-inner">
+                <img id="profile-main-avatar" class="w-full h-full rounded-full object-cover border-2 border-white bg-white" src="">
+                <div class="live-badge cursor-pointer" id="live-badge-btn" style="display:none">LIVE</div>
             </div>
             <div class="flex gap-6 text-center pr-4">
-                <div><p class="font-bold text-sm" id="stats-posts">0</p><p class="text-xs text-zinc-500">Postingan</p></div>
-                <div><p class="font-bold text-sm">2.026</p><p class="text-xs text-zinc-500">Pengikut</p></div>
-                <div><p class="font-bold text-sm">1</p><p class="text-xs text-zinc-500">Mengikuti</p></div>
+                <div><p class="font-bold text-sm text-zinc-800" id="stats-posts">0</p><p class="text-[11px] text-zinc-500">Postingan</p></div>
+                <div><p class="font-bold text-sm text-zinc-800">2.026</p><p class="text-[11px] text-zinc-500">Pengikut</p></div>
+                <div><p class="font-bold text-sm text-zinc-800">1</p><p class="text-[11px] text-zinc-500">Mengikuti</p></div>
             </div>
         </div>
-        <div class="px-4 pb-4 pt-2 border-b border-zinc-100 bg-zinc-50/40">
-            <h2 class="text-xs font-bold" id="ig-username-bio">budi_ani_wedding</h2>
-            <p class="text-xs text-zinc-600 whitespace-pre-line mt-0.5 font-light" id="ig-bio-text"></p>
+        <div class="px-4 pb-4 pt-1 border-b border-zinc-100">
+            <h2 class="text-xs font-bold text-zinc-800" id="ig-username-bio">wedding_couple</h2>
+            <p class="text-xs text-zinc-600 whitespace-pre-line mt-1 font-normal leading-relaxed" id="ig-bio-text"></p>
         </div>
 
-        <!-- APP TABS TYPE NAVIGATION -->
-        <div class="flex pt-3 border-b border-zinc-100 text-base">
-            <div class="tab-icon active" id="tab-posts" onclick="switchTab('feed-area')"><i class="fa-solid fa-grid"></i></div>
-            <div class="tab-icon" id="tab-reels" onclick="switchTab('reels-area')"><i class="fa-solid fa-clapperboard"></i></div>
-            <div class="tab-icon" id="tab-tagged" onclick="switchTab('tagged-area')"><i class="fa-regular fa-id-badge"></i></div>
+        <!-- TAB NAVIGATION -->
+        <div class="flex pt-3 border-b border-zinc-100 text-sm font-medium">
+            <div class="tab-icon active" id="tab-posts" onclick="switchTab('feed-area')"><i class="fa-solid fa-grid-letter text-lg"></i></div>
+            <div class="tab-icon" id="tab-reels" onclick="switchTab('reels-area')"><i class="fa-solid fa-clapperboard text-lg"></i></div>
+            <div class="tab-icon" id="tab-tagged" onclick="switchTab('tagged-area')"><i class="fa-regular fa-id-badge text-lg"></i></div>
         </div>
 
-        <!-- AREA TAB 1: FEEDS TIMELINE -->
+        <!-- TAB 1: FEEDS TIMELINE -->
         <div id="feed-area" class="tab-content block">
             <div id="feed-container"></div>
         </div>
 
-        <!-- AREA TAB 2: REELS (LOVE STORY INTERACTION) -->
+        <!-- TAB 2: REELS LOVE STORY -->
         <div id="reels-area" class="tab-content hidden p-4 space-y-4">
-            <div class="text-center py-2 border-b border-dashed border-zinc-200"><p class="text-xs font-bold text-zinc-400 uppercase tracking-widest"><i class="fa-solid fa-clapperboard mr-1"></i> Our Love Reels Timeline</p></div>
+            <div class="text-center py-2 border-b border-dashed border-zinc-200"><p class="text-xs font-bold text-zinc-400 uppercase tracking-widest"><i class="fa-solid fa-clapperboard mr-1"></i> Our Love Journey Reels</p></div>
             <div id="reels-container" class="space-y-4"></div>
         </div>
 
-        <!-- AREA TAB 3: TAGGED (EVENT SCHEDULE & RSVP CARD) -->
-        <div id="tagged-area" class="tab-content hidden p-4">
-            <div class="bg-zinc-50 border border-zinc-200/60 p-5 rounded-2xl shadow-sm mb-4">
+        <!-- TAB 3: SCHEDULE & RSVP -->
+        <div id="tagged-area" class="tab-content hidden p-4 space-y-4">
+            <div class="bg-zinc-50 border border-zinc-100 p-5 rounded-2xl shadow-sm">
                 <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-200 pb-2 mb-4"><i class="fa-solid fa-calendar-check text-zinc-700 mr-1.5"></i> Agenda Resmi Pernikahan</h3>
                 <div id="eventList" class="space-y-5"></div>
             </div>
             
-            <div class="bg-zinc-50 border border-zinc-200/60 p-5 rounded-2xl shadow-sm">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-200 pb-2 mb-3"><i class="fa-solid fa-envelope-open-text text-zinc-700 mr-1.5"></i> RSVP Konfirmasi Kehadiran</h3>
-                <p id="dresscode-text" class="text-[10px] inline-block font-medium text-amber-700 bg-amber-50 px-3 py-1 rounded-full mb-3"></p>
+            <div class="bg-zinc-50 border border-zinc-100 p-5 rounded-2xl shadow-sm">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-200 pb-2 mb-3"><i class="fa-solid fa-envelope-open-text text-zinc-700 mr-1.5"></i> RSVP & Doa Restu</h3>
+                <p id="dresscode-text" class="text-[10px] inline-block font-medium text-amber-800 bg-amber-50 px-3 py-1 rounded-full mb-3"></p>
                 <p id="guest-note-area" class="text-xs text-zinc-500 font-light leading-relaxed mb-4"></p>
-                <a id="rsvp-wa-btn" href="" target="_blank" class="w-full py-2.5 bg-[#0095f6] text-white font-medium text-xs rounded-lg flex items-center justify-center gap-1.5 shadow-sm hover:bg-blue-600 transition-colors"><i class="fa-brands fa-whatsapp text-sm"></i> Kirim Konfirmasi WhatsApp</a>
+                
+                <!-- INTEGRASI FORM UCAPAN & DOA SAGE STYLE -->
+                <form id="wishes-form" class="space-y-3 bg-white p-4 rounded-xl border border-zinc-200/60 shadow-inner mb-4">
+                    <input type="text" id="wish-name" placeholder="Nama Anda" class="w-full text-xs p-2.5 border border-zinc-200 rounded-md focus:outline-none focus:border-zinc-400" required>
+                    <textarea id="wish-message" rows="3" placeholder="Tulis ucapan ucapan selamat & doa restu..." class="w-full text-xs p-2.5 border border-zinc-200 rounded-md focus:outline-none focus:border-zinc-400" required></textarea>
+                    <select id="wish-status" class="w-full text-xs p-2.5 border border-zinc-200 rounded-md focus:outline-none focus:border-zinc-400 bg-white">
+                        <option value="Hadir">InsyaAllah Hadir</option>
+                        <option value="Tidak Hadir">Maaf, Berhalangan Hadir</option>
+                    </select>
+                    <button type="submit" class="w-full bg-[#0095f6] text-white text-xs font-medium py-2 rounded-md shadow-sm hover:bg-blue-600 transition-colors">Kirim Ucapan Anda</button>
+                </form>
+
+                <!-- Container Daftar Ucapan Masuk -->
+                <div id="wishes-box" class="space-y-2.5 max-h-60 overflow-y-auto pr-1">
+                    <!-- Ucapan terisi otomatis -->
+                </div>
+
+                <div class="h-[1px] bg-zinc-200 my-4"></div>
+                <a id="rsvp-wa-btn" href="" target="_blank" class="w-full py-2.5 bg-zinc-800 text-white font-medium text-xs rounded-lg flex items-center justify-center gap-1.5 shadow-sm hover:bg-zinc-900 transition-colors"><i class="fa-brands fa-whatsapp text-sm"></i> Konfirmasi via WhatsApp</a>
             </div>
         </div>
 
-        <!-- MODAL DIRECT MESSAGE SEBAGAI TEMPAT GIFT/KADO DIGITAL -->
-        <div id="dm-gift" class="hidden p-4 border-t border-zinc-100 bg-zinc-50/60">
+        <!-- MODAL DIRECT MESSAGE / GIFT CARD -->
+        <div id="dm-gift" class="hidden p-4 border-t border-zinc-100 bg-zinc-50/50">
             <div class="flex items-center gap-3 border-b border-zinc-200 pb-3 mb-4">
                 <div class="w-10 h-10 rounded-full p-[1px] bg-zinc-300"><img id="dm-avatar" class="w-full h-full rounded-full object-cover" src=""></div>
                 <div><p class="text-xs font-bold" id="dm-user-title"></p><p class="text-[10px] text-zinc-400">Aktif baru saja</p></div>
                 <i class="fa-solid fa-circle-info text-zinc-400 ml-auto text-lg"></i>
             </div>
             <div class="space-y-3" id="gift-cards-area">
-                <div class="bg-blue-50 text-blue-900 text-xs p-3.5 rounded-2xl max-w-[85%] rounded-tl-none font-light shadow-sm">Halo! Tanpa mengurangi rasa hormat, bagi keluarga dan kerabat yang ingin memberikan tanda kasih berupa kado digital, berikut informasi rekening resmi kami:</div>
+                <div class="bg-zinc-100 text-zinc-800 text-xs p-3.5 rounded-2xl max-w-[85%] rounded-tl-none font-normal shadow-sm leading-relaxed">Halo! Tanpa mengurangi rasa hormat, bagi keluarga dan kerabat yang ingin memberikan tanda kasih berupa kado digital, berikut informasi rekening resmi kami:</div>
             </div>
         </div>
 
     </div>
 
-    <!-- APP NAVIGATION BAR FOOTER -->
-    <div class="absolute bottom-0 w-full bg-white border-t border-zinc-100 flex justify-around py-3.5 text-xl z-50">
+    <!-- APP BOTTOM BAR FIXED -->
+    <div class="absolute bottom-0 w-full bg-white/95 backdrop-blur-md border-t border-zinc-100 flex justify-around py-3.5 text-xl z-50">
         <i class="fa-solid fa-house cursor-pointer text-zinc-800" onclick="switchTab('feed-area')"></i>
         <i class="fa-solid fa-magnifying-glass cursor-pointer text-zinc-400" onclick="switchTab('reels-area')"></i>
         <i class="fa-regular fa-square-plus cursor-pointer text-zinc-400" onclick="openSection('dm-gift')"></i>
@@ -172,7 +194,7 @@
 
 </div>
 
-<!-- COMPACT MUSIC PLAYER -->
+<!-- FLOATING AUDIO CONTROLLER -->
 <div class="music-floater" id="musicBtn" onclick="toggleMusic()">
     <i class="fa-solid fa-compact-disc text-zinc-700 text-base rotating"></i>
 </div>
@@ -187,6 +209,7 @@
     let audioEngine = document.getElementById('myAudio');
 
     document.getElementById('guestName').innerText = to;
+    document.getElementById('wish-name').value = to;
 
     fetch(`${path}data.json`).then(r => r.json()).then(data => {
         const { couple: cp, events: evs, gallery: gl, quote, logistics: lg, loveStory: ls, liveStreaming: live, digitalGift: gifts, settings: st } = data;
@@ -199,7 +222,7 @@
         document.getElementById('cover-bg-img').src = path + gl.heroImage;
         document.getElementById('profile-main-avatar').src = path + gl.heroImage;
         document.getElementById('dm-avatar').src = path + cp.bride.image;
-        document.getElementById('dm-user-title').innerText = `${cp.bride.nickname} Wedding Bot`;
+        document.getElementById('dm-user-title').innerText = `${cp.bride.nickname} Wedding Assistant`;
         
         document.getElementById('ig-username-bio').innerText = igUser;
         document.getElementById('stats-posts').innerText = gl.album.length;
@@ -209,54 +232,49 @@
             document.getElementById('guestGroup').innerText = data.guest.group;
         }
 
-        // FORMAT BIO ALA INSTAGRAM PREMIUM
-        document.getElementById('ig-bio-text').innerText = `💍 The Official Wedding of ${cp.groom.name} & ${cp.bride.name}\n🗓️ ${new Date(evs[0].date).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'})}\n📍 ${evs[0].address.split(',')[0]}\n\n"${quote.text}" — ${quote.source}`;
+        document.getElementById('ig-bio-text').innerText = `💍 The Wedding of ${cp.groom.name} & ${cp.bride.name}\n🗓️ ${new Date(evs[0].date).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'})}\n📍 ${evs[0].address.split(',')[0]}\n\n"${quote.text}" — ${quote.source}`;
 
-        // AUDIO AUTOPLAY MANAGER BINDING
         if(live && live.enabled) {
             const liveBtn = document.getElementById('live-badge-btn');
             liveBtn.style.display = 'block';
             liveBtn.onclick = () => window.open(live.url, '_blank');
         }
 
-        // 1. RENDER INSTAGRAM STORIES SYSTEM
+        // 1. STORIES SYSTEM
         const storyBox = document.getElementById('stories');
-        const storyTitles = ['The Profile', 'Prewedding', 'Moments', 'Venue', 'Our Legacy'];
+        const storyTitles = ['Groom', 'Bride', 'Prewed', 'Moments', 'Venue'];
         
-        // Mempelai Pria Story
         storyBox.innerHTML += `
-            <div class="story flex-shrink-0 text-center w-[72px]" onclick="alert('Instagram Groom Profile: @${cp.groom.instagram}')">
+            <div class="story flex-shrink-0 text-center w-[68px]" onclick="if('${cp.groom.instagram}') window.open('https://instagram.com/${cp.groom.instagram}', '_blank')">
                 <div class="story-ring"><img src="${path + cp.groom.image}"></div>
                 <p class="text-[10px] text-zinc-500 overflow-hidden text-ellipsis whitespace-nowrap font-normal">${cp.groom.nickname}</p>
             </div>`;
-        // Mempelai Wanita Story
         storyBox.innerHTML += `
-            <div class="story flex-shrink-0 text-center w-[72px]" onclick="alert('Instagram Bride Profile: @${cp.bride.instagram}')">
+            <div class="story flex-shrink-0 text-center w-[68px]" onclick="if('${cp.bride.instagram}') window.open('https://instagram.com/${cp.bride.instagram}', '_blank')">
                 <div class="story-ring"><img src="${path + cp.bride.image}"></div>
                 <p class="text-[10px] text-zinc-500 overflow-hidden text-ellipsis whitespace-nowrap font-normal">${cp.bride.nickname}</p>
             </div>`;
             
-        // Album Galeri Gallery Items
         gl.album.slice(0, 3).forEach((img, i) => {
             storyBox.innerHTML += `
-                <div class="story flex-shrink-0 text-center w-[72px]">
+                <div class="story flex-shrink-0 text-center w-[68px]">
                     <div class="story-ring"><img src="${path + img}"></div>
-                    <p class="text-[10px] text-zinc-500 overflow-hidden text-ellipsis whitespace-nowrap font-normal">${storyTitles[i] || 'Moments'}</p>
+                    <p class="text-[10px] text-zinc-500 overflow-hidden text-ellipsis whitespace-nowrap font-normal">${storyTitles[i+2] || 'Moments'}</p>
                 </div>`;
         });
 
-        // 2. RENDER FEEDS (TIMELINE POSTS)
+        // 2. FEEDS
         const feedContainer = document.getElementById('feed-container');
         gl.album.forEach((img, i) => {
-            const initialLikes = (1520 + i * 85).toLocaleString('id');
+            const initialLikes = (1120 + i * 45).toLocaleString('id');
             feedContainer.innerHTML += `
-                <div class="post bg-white border-b border-zinc-100 py-2">
-                    <div class="flex items-center justify-between px-4 py-2">
+                <div class="post bg-white border-b border-zinc-100 py-1">
+                    <div class="flex items-center justify-between px-4 py-2.5">
                         <div class="flex items-center gap-2.5">
-                            <div class="w-8 h-8 rounded-full p-[1.5deg] bg-gradient-to-tr from-amber-400 to-fuchsia-600"><img src="${path + (i % 2 === 0 ? cp.groom.image : cp.bride.image)}" class="w-full h-full rounded-full border-2 solid border-white object-cover"></div>
-                            <div><p class="text-xs font-bold">${i % 2 === 0 ? cp.groom.nickname.toLowerCase() : cp.bride.nickname.toLowerCase()}</p><p class="text-[10px] text-zinc-500">${evs[0].address.split(',')[1] || 'Jakarta'}</p></div>
+                            <div class="w-8 h-8 rounded-full p-[1.5deg] bg-gradient-to-tr from-amber-400 to-fuchsia-600"><img src="${path + (i % 2 === 0 ? cp.groom.image : cp.bride.image)}" class="w-full h-full rounded-full border-2 border-white object-cover"></div>
+                            <div><p class="text-xs font-bold text-zinc-800">${i % 2 === 0 ? cp.groom.nickname.toLowerCase() : cp.bride.nickname.toLowerCase()}</p><p class="text-[10px] text-zinc-500">${evs[0].address.split(',')[1] || 'Wedding Venue'}</p></div>
                         </div>
-                        <i class="fa-solid fa-ellipsis text-zinc-700"></i>
+                        <i class="fa-solid fa-ellipsis text-zinc-600 text-sm"></i>
                     </div>
                     <div class="post-img-container" onclick="handleSingleTap(this, ${i})">
                         <img src="${path + img}" class="w-full h-full object-cover" loading="lazy">
@@ -264,68 +282,68 @@
                     </div>
                     <div class="flex items-center justify-between px-4 py-2.5 text-xl text-zinc-800">
                         <div class="flex gap-4">
-                            <i class="fa-regular fa-heart cursor-pointer" id="btn-like-${i}" onclick="toggleLikeIcon(${i})"></i>
-                            <i class="fa-regular fa-comment" onclick="switchTab('tagged-area')"></i>
-                            <i class="fa-regular fa-paper-plane" onclick="openSection('dm-gift')"></i>
+                            <i class="fa-regular fa-heart cursor-pointer transition-transform duration-200 active:scale-125" id="btn-like-${i}" onclick="toggleLikeIcon(${i})"></i>
+                            <i class="fa-regular fa-comment cursor-pointer" onclick="switchTab('tagged-area')"></i>
+                            <i class="fa-regular fa-paper-plane cursor-pointer" onclick="openSection('dm-gift')"></i>
                         </div>
-                        <i class="fa-regular fa-bookmark"></i>
+                        <i class="fa-regular fa-bookmark cursor-pointer"></i>
                     </div>
                     <div class="px-4 pb-3 text-xs">
-                        <p class="font-bold mb-1" id="likes-text-${i}">${initialLikes} suka</p>
-                        <p class="leading-relaxed"><b class="font-bold mr-1.5">${i % 2 === 0 ? cp.groom.nickname.toLowerCase() : cp.bride.nickname.toLowerCase()}</b>${i === 0 ? quote.text : 'Melangkah bersama menuju masa depan baru penuh berkah. Mohon doa restunya kawan-kawan semuanya. ✨💍 #PernikahanAgung #' + cp.groom.nickname + cp.bride.nickname}</p>
-                        <p class="text-[9px] text-zinc-400 font-medium uppercase tracking-wider mt-2">${i + 1} HARI YANG LALU</p>
+                        <p class="font-bold mb-1 text-zinc-800" id="likes-text-${i}">${initialLikes} suka</p>
+                        <p class="leading-relaxed text-zinc-700"><b class="font-bold mr-1.5 text-zinc-900">${i % 2 === 0 ? cp.groom.nickname.toLowerCase() : cp.bride.nickname.toLowerCase()}</b>${i === 0 ? quote.text : 'Melangkah bersama di bawah ridho-Nya menuju petualangan baru yang penuh berkah. Kami sangat mengharapkan kehadiran serta doa restu Anda sekalian. ✨💍 #' + cp.groom.nickname + cp.bride.nickname}</p>
+                        <p class="text-[9px] text-zinc-400 font-semibold uppercase tracking-wider mt-2.5">${i + 1} HARI YANG LALU</p>
                     </div>
                 </div>`;
         });
 
-        // 3. RENDER REELS TAB (LOVE STORY GENERATOR)
+        // 3. REELS (LOVE STORY)
         if(st.showLoveStory && ls) {
             const reelsContainer = document.getElementById('reels-container');
             ls.forEach((story, idx) => {
                 reelsContainer.innerHTML += `
                     <div class="bg-zinc-900 text-white rounded-2xl overflow-hidden shadow-md relative aspect-[9/16] max-w-[280px] mx-auto">
-                        <img src="${path + (gl.album[idx] || gl.heroImage)}" class="w-full h-full object-cover opacity-60 filter grayscale-[20%]">
+                        <img src="${path + (gl.album[idx] || gl.heroImage)}" class="w-full h-full object-cover opacity-60">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-4">
-                            <div class="flex items-center gap-2 mb-2"><span class="bg-amber-500 text-black font-mono font-bold text-[10px] px-2 py-0.5 rounded-full">${story.year}</span><h4 class="text-sm font-bold tracking-wide">${story.title}</h4></div>
-                            <p class="text-[11px] text-zinc-300 font-light leading-relaxed">${story.description}</p>
-                            <div class="flex gap-3 mt-3 pt-2.5 border-t border-white/10 text-xs text-zinc-400"><span class="flex items-center gap-1"><i class="fa-solid fa-heart text-red-500"></i> 4.2k</span><span class="flex items-center gap-1"><i class="fa-solid fa-comment"></i> ${12 + idx}</span></div>
+                            <div class="flex items-center gap-2 mb-2"><span class="bg-amber-400 text-black font-mono font-bold text-[10px] px-2 py-0.5 rounded-full">${story.year}</span><h4 class="text-sm font-bold tracking-wide">${story.title}</h4></div>
+                            <p class="text-[11px] text-zinc-300 font-normal leading-relaxed">${story.description}</p>
+                            <div class="flex gap-3 mt-3 pt-2.5 border-t border-white/10 text-xs text-zinc-400"><span class="flex items-center gap-1"><i class="fa-solid fa-heart text-red-500"></i> 1.8k</span><span class="flex items-center gap-1"><i class="fa-solid fa-comment"></i> ${5 + idx}</span></div>
                         </div>
                     </div>`;
             });
         }
 
-        // 4. RENDER EVENTS DI TAB TAGGED
+        // 4. EVENTS
         const eventList = document.getElementById('eventList');
         evs.forEach(e => {
             eventList.innerHTML += `
-                <div class="flex gap-4 items-start border-b border-zinc-200/60 pb-3 last:border-0 last:pb-0">
-                    <div class="text-xl p-2.5 bg-white border border-zinc-100 rounded-xl shadow-inner">${e.title.includes('Akad') ? '💍' : '🥂'}</div>
+                <div class="flex gap-4 items-start border-b border-zinc-200/60 pb-3.5 last:border-0 last:pb-0">
+                    <div class="text-lg p-2.5 bg-white border border-zinc-200 rounded-xl shadow-sm">${e.title.includes('Akad') ? '💍' : '🥂'}</div>
                     <div class="flex-1">
                         <p class="text-xs font-bold text-zinc-800">${e.title}</p>
                         <p class="text-[11px] text-zinc-500 mt-0.5"><i class="fa-regular fa-clock text-[10px]"></i> ${new Date(e.date).toLocaleDateString('id-ID', {weekday: 'long', day:'numeric', month:'long', year:'numeric'})}</p>
-                        <p class="text-[11px] text-zinc-400 font-mono">${e.startTime} - ${e.endTime} ${e.timezone}</p>
-                        <p class="text-[11px] text-zinc-500 font-light leading-snug mt-1.5 bg-white p-2 rounded-lg border border-zinc-100">${e.address}</p>
-                        <a href="${e.googleMaps}" target="_blank" class="text-[10px] text-blue-500 font-medium inline-block mt-2 hover:underline">Petunjuk Lokasi Google Maps →</a>
+                        <p class="text-[11px] text-zinc-400 font-mono font-medium">${e.startTime} - ${e.endTime} ${e.timezone}</p>
+                        <p class="text-[11px] text-zinc-600 font-light leading-relaxed mt-1.5 bg-white p-2.5 rounded-lg border border-zinc-200/60 shadow-sm">${e.address}</p>
+                        ${e.googleMaps ? `<a href="${e.googleMaps}" target="_blank" class="text-[10px] text-blue-500 font-semibold inline-block mt-2 hover:underline">Petunjuk Lokasi Google Maps →</a>` : ''}
                     </div>
                 </div>`;
         });
 
-        // 5. DEKORASI LOGISTIK (RSVP + DRESSCODE)
-        if(lg.dressCode) document.getElementById('dresscode-text').innerHTML = `<i class="fa-solid fa-shirt"></i> Code Pakaian: ${lg.dressCode}`;
+        if(lg.dressCode) document.getElementById('dresscode-text').innerHTML = `<i class="fa-solid fa-shirt mr-1"></i> Dresscode: ${lg.dressCode}`;
         document.getElementById('guest-note-area').innerText = lg.guestNote || '';
         
         const completeRSVPUrl = `https://wa.me/${lg.rsvpWaNumber}?text=Halo%20${encodeURIComponent(pairNick)},%20Saya%20${encodeURIComponent(to)}%20ingin%20mengonfirmasi%20kehadiran%20di%20acara%20spesial%20kalian...`;
         document.getElementById('rsvp-wa-btn').href = completeRSVPUrl;
 
-        // 6. DIRECT MESSAGE GIFT CARD GENERATOR
+        // 5. GIFT MANAGEMENT
         if(gifts) {
             const giftCardsArea = document.getElementById('gift-cards-area');
             gifts.forEach(g => {
                 giftCardsArea.innerHTML += `
                     <div class="bg-white border border-zinc-200/60 p-4 rounded-2xl max-w-[80%] ml-auto rounded-tr-none shadow-sm text-right">
-                        <p class="text-[9px] font-bold text-amber-600 tracking-widest uppercase">${g.provider}</p>
+                        <p class="text-[9px] font-bold text-amber-700 tracking-wider uppercase">${g.provider}</p>
                         <p class="text-sm font-mono font-bold text-zinc-800 my-0.5 select-all">${g.accountNumber}</p>
                         <p class="text-[9px] text-zinc-400">a.n ${g.accountHolder}</p>
+                        <button onclick="navigator.clipboard.writeText('${g.accountNumber}').then(() => alert('Salin nomor rekening berhasil!'))" class="text-[9px] text-blue-500 font-semibold mt-1.5 inline-block hover:underline">Salin No. Rekening</button>
                     </div>`;
             });
         }
@@ -333,25 +351,25 @@
 
     function startInvitation() {
         document.getElementById('cover').classList.add('hidden');
+        const mainEngine = document.getElementById('main-scroll-engine');
+        mainEngine.classList.remove('opacity-0');
+        
         if(audioEngine) {
-            audioEngine.play().then(() => { isPlaying = true; }).catch(e => console.log("Autoplay policy bypass applied."));
+            audioEngine.play().then(() => { isPlaying = true; }).catch(e => console.log("Interaksi user diperlukan untuk audio."));
         }
     }
 
-    // TAB SWITCH CONTROLLER NAVIGATION
     function switchTab(tabId) {
         document.querySelectorAll('.tab-content').forEach(el => { el.classList.add('hidden'); el.classList.remove('block'); });
         document.getElementById(tabId).classList.remove('hidden');
         document.getElementById(tabId).classList.add('block');
         
-        // Atur Status Ikon Tab Aktif
         document.querySelectorAll('.tab-icon').forEach(icon => icon.classList.remove('active'));
         if(tabId === 'feed-area') document.getElementById('tab-posts').classList.add('active');
         if(tabId === 'reels-area') document.getElementById('tab-reels').classList.add('active');
         if(tabId === 'tagged-area') document.getElementById('tab-tagged').classList.add('active');
     }
 
-    // OPEN SPECIFIC SECTION (DM / GIFT MANAGER)
     function openSection(secId) {
         const target = document.getElementById(secId);
         if(target.classList.contains('hidden')) {
@@ -362,12 +380,10 @@
         }
     }
 
-    // INTERAKSI DETEKSI DOUBLE TAP/SINGLE TAP MEWAH
     let lastTap = 0;
     function handleSingleTap(container, id) {
         const now = Date.now();
         if ((now - lastTap) < 300) {
-            // JIKA DOUBLE TAP (LIKE ACTION TRIGGERED)
             const heart = document.getElementById(`heart-anim-${id}`);
             heart.classList.add('animate-heart');
             setTimeout(() => heart.classList.remove('animate-heart'), 800);
@@ -408,6 +424,52 @@
             isPlaying = false;
         }
     }
+
+    // SYSTEM ARSIP UCAPAN LOCAL STORAGE (MIMIC REAL KOMENTAR INSTAGRAM)
+    const storageKey = `comments_${slug}`;
+    const wishesForm = document.getElementById('wishes-form');
+    const wishesBox = document.getElementById('wishes-box');
+
+    let placeholderWishes = [
+        { name: "Andini Putri", text: "Selamat menempuh hidup baru ya kalian! Semoga dilancarkan sampai hari-H.", status: "Hadir" },
+        { name: "Rian Sanusi", text: "Selamat bro! Ikut berbahagia melihat perjalanan kalian sampai ke titik ini.", status: "Hadir" }
+    ];
+
+    function loadWishes() {
+        wishesBox.innerHTML = '';
+        const savedData = localStorage.getItem(storageKey);
+        const listData = savedData ? JSON.parse(savedData) : placeholderWishes;
+
+        listData.forEach(item => {
+            const statusBadge = item.status === 'Hadir' ? 'bg-green-50 text-green-700 border-green-100' : 'bg-zinc-100 text-zinc-500 border-zinc-200';
+            wishesBox.innerHTML += `
+                <div class="bg-white border border-zinc-100 p-3 rounded-xl shadow-sm text-xs">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-zinc-800">${item.name}</span>
+                        <span class="px-2 py-0.5 border text-[9px] font-medium rounded-full ${statusBadge}">${item.status}</span>
+                    </div>
+                    <p class="text-zinc-600 leading-normal font-light">${item.text}</p>
+                </div>`;
+        });
+    }
+
+    wishesForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const inputName = document.getElementById('wish-name').value;
+        const inputMsg = document.getElementById('wish-message').value;
+        const inputStatus = document.getElementById('wish-status').value;
+
+        const savedData = localStorage.getItem(storageKey);
+        let listData = savedData ? JSON.parse(savedData) : placeholderWishes;
+
+        listData.unshift({ name: inputName, text: inputMsg, status: inputStatus });
+        localStorage.setItem(storageKey, JSON.stringify(listData));
+        
+        document.getElementById('wish-message').value = '';
+        loadWishes();
+    });
+
+    loadWishes();
 </script>
 </body>
 </html>
